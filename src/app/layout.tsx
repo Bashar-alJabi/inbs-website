@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import '../styles/navigation.css';
+import '../styles/home.css';
 
 export const metadata: Metadata = {
   title: { default: 'INBS | Businessmen Services in Dubai', template: '%s | INBS' },
