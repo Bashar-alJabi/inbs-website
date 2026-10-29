@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# INBS Website
 
-## Getting Started
+Official frontend website for **International Network Businessmen Services (INBS)**, Dubai.
 
-First, run the development server:
+## Project status
+
+The repository is being rebuilt from scratch. `main` is the untouched application baseline. Work is reviewed through pull requests into `redesign`.
+
+- `main`: original project scaffold, stable until launch.
+- `redesign`: accepted redesign work.
+- `feature/*`: isolated, reviewable changes (one feature or page per PR).
+
+## Technology
+
+- Next.js 16 (App Router), React 19, TypeScript
+- Tailwind CSS 4
+- Arabic and English, including right-to-left support
+- Vercel previews for pull requests
+- No custom backend
+
+Other packages, including `next-intl`, are introduced only when configured and committed with a reproducible lockfile.
+
+## Run locally
+
+Requirements: current Node.js LTS and npm.
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Before a change is merged:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npm run build
+```
 
-## Learn More
+## Where to change content
 
-To learn more about Next.js, take a look at the following resources:
+When the corresponding pages are implemented:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `src/content/`: factual company information and service catalog
+- `messages/en.json`, `messages/ar.json`: translated UI text
+- `public/brand/`: official company logo
+- `public/images/`: approved image assets
+- `src/components/`: reusable layout and interface components
+- `src/app/[locale]/`: page routes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Do not edit services directly inside UI components.** Content must stay separate from presentation.
 
-## Deploy on Vercel
+## Source of truth
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The existing [INBS site repository](https://github.com/Bashar-alJabi/inbs) is the primary source for company copy and services. External profiles are not authoritative. Preserve approved facts, do not invent metrics, testimonials or legal claims. The official logo must remain unchanged.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Handoff and development guidelines
+
+See [docs/PROJECT-GUIDE.md](docs/PROJECT-GUIDE.md) for architecture, languages, page map, design tokens, and how the site is maintained. See [AGENTS.md](AGENTS.md) for coding conventions.
+
+## Pull-request workflow
+
+1. Create a fresh `feature/<page-or-task>` branch from `redesign`.
+2. Keep the PR limited to one page or a shared foundation change.
+3. Include screenshots, translation checks, navigation checks and build results.
+4. Review the Vercel preview.
+5. Merge into `redesign` only after approval. Do not merge into `main` before final launch.
