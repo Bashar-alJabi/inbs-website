@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { alternateLocale, pages, type Locale } from '@/lib/site';
+import { pages, type Locale } from '@/lib/site';
+import { LanguageSwitcher } from './language-switcher';
 export function SiteHeader({locale, segments=[]}:{locale:Locale; segments?:string[]}) {
  const home=locale==='ar'?'الرئيسية':'Home';
  const current=segments.join('/');
