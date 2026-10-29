@@ -11,3 +11,5 @@
 @media(max-width:1100px){.site-nav{display:none}.mobile-nav{display:block}}
 @media(max-width:650px){.header-inner{min-height:74px}.wordmark small{display:none}.coming-soon{min-height:600px}.coming-content{padding-block:75px}.coming-soon h1{font-size:clamp(47px,11vw,75px)}.coming-decor{opacity:.16}.footer-grid{grid-template-columns:1fr;gap:20px}.footer-bottom{flex-direction:column}.coming-actions{gap:15px;flex-wrap:wrap}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+.official-logo{width:125px;height:auto;max-height:65px;object-fit:contain}
