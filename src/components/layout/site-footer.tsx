@@ -27,7 +27,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         <FooterReveal delay={0.05}>
           <div className="inbs-footer-about">
             <Image src="/brand/inbs-logo.png" width={195} height={96} alt="INBS" />
-            <p>{locale === 'ar' ? 'تأسست الشبكة العالمية لخدمات رجال الأعمال في دبي عام 2003.' : 'Founded in Dubai in 2003, International Network Businessmen Services supports clients across a diverse range of services.'}</p>
+            <p>{locale === 'ar' ? 'تأسست الشبكة العالمية لخدمات رجال الأعمال في دبي عام 2003، وتقدم لعملائها مجموعة متنوعة من الخدمات التي تلبي احتياجاتهم.' : 'Founded in Dubai in 2003, International Network Businessmen Services supports clients across a diverse range of services.'}</p>
             <div className="inbs-socials" aria-label="Social media">{socials.map(({ label, href, Icon }) => <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}><Icon /></a>)}</div>
           </div>
         </FooterReveal>
@@ -41,7 +41,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           <div className="inbs-footer-contact">
             <h3>{locale === 'ar' ? 'تواصل معنا' : 'Contact details'}</h3>
             <a href="mailto:info@inbs-uae.com"><Mail size={18} aria-hidden="true" /><span>info@inbs-uae.com</span></a>
-            <a href="tel:+971508866555"><Phone size={18} aria-hidden="true" /><span dir="ltr">+971 50 886 6555</span></a>
+            <a href="tel:+971508866555"><Phone size={18} aria-hidden="true" /><span className="inbs-phone-number" dir="ltr">+971 50 886 6555</span></a>
             <a href={mapUrl} target="_blank" rel="noopener noreferrer"><MapPin size={18} aria-hidden="true" /><span>{locale === 'ar' ? 'مكتب 1720، برج بارك لين، الخليج التجاري، دبي' : 'Office 1720, ParkLane Tower, Business Bay, Dubai'} <ArrowUpRight size={14} className="map-external" /></span></a>
           </div>
         </FooterReveal>
