@@ -15,7 +15,6 @@ export function SiteHeader({locale}:{locale:Locale}){
  const drawerRef=useRef<HTMLElement>(null);
  const [scrolled,setScrolled]=useState(false);
  const [open,setOpen]=useState(false);
- const [theme,setTheme]=useState<'light'|'dark'>('light');
  const home=locale==='ar'?'الرئيسية':'Home';
  const other=alternateLocale(locale);
  const otherPath='/'+[other,...pathname.split('/').filter(Boolean).slice(1)].join('/');
@@ -24,7 +23,7 @@ export function SiteHeader({locale}:{locale:Locale}){
    onScroll();window.addEventListener('scroll',onScroll,{passive:true});
    return ()=>window.removeEventListener('scroll',onScroll);
  },[]);
- useEffect(()=>{const stored=localStorage.getItem('inbs-theme');const next=stored==='dark'||stored==='light'?stored:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=next;setTheme(next)},[]);
+ useEffect(()=>{const stored=localStorage.getItem('inbs-theme');const next=stored==='dark'||stored==='light'?stored:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=next},[]);
  useEffect(()=>{
   if(!open)return;
   const drawer=drawerRef.current;
@@ -43,7 +42,7 @@ export function SiteHeader({locale}:{locale:Locale}){
   document.addEventListener('keydown',key);
   return()=>{document.removeEventListener('keydown',key);(previous??menuButton)?.focus();};
  },[open]);
- const toggleTheme=()=>{const current=document.documentElement.dataset.theme==='dark'?'dark':'light';const next=current==='dark'?'light':'dark';setTheme(next);document.documentElement.dataset.theme=next;localStorage.setItem('inbs-theme',next)};
+ const toggleTheme=()=>{const current=document.documentElement.dataset.theme==='dark'?'dark':'light';const next=current==='dark'?'light':'dark';document.documentElement.dataset.theme=next;localStorage.setItem('inbs-theme',next)};
  const onHome=pathname===`/${locale}`;const transparent=onHome&&!scrolled&&!open;
  return <header className={`inbs-header ${transparent?'is-transparent':'is-solid'}`}><div className="site-shell inbs-header-inner">
   <Link href={`/${locale}`} className="inbs-brand" aria-label="INBS home"><Image src="/brand/inbs-logo.png" alt="INBS" width={152} height={76} priority/></Link>
@@ -54,7 +53,7 @@ export function SiteHeader({locale}:{locale:Locale}){
   <div className="inbs-header-actions">
    <Link className="inbs-contact-button" href={`/${locale}/contact`}>{locale==='ar'?'تواصل معنا':'Contact us'}<ArrowUpRight size={17}/></Link>
    <Link href={otherPath} className="inbs-icon-button" aria-label={locale==='ar'?'Switch to English':'التبديل إلى العربية'} title={locale==='ar'?'English':'العربية'}><motion.span whileHover={{rotate:-13,scale:1.13}}><Languages size={20}/></motion.span></Link>
-   <button type="button" className="inbs-icon-button" onClick={toggleTheme} aria-label={theme==='dark'?'Switch to light mode':'Switch to dark mode'} title={theme==='dark'?'Light mode':'Dark mode'}>{theme==='dark'?<motion.span key="sun" initial={{rotate:70,opacity:0,scale:.5}} animate={{rotate:0,opacity:1,scale:1}}><Sun size={21}/></motion.span>:<motion.span key="moon" initial={{rotate:-70,opacity:0,scale:.5}} animate={{rotate:0,opacity:1,scale:1}}><Moon size={21}/></motion.span>}</button>
+   <button type="button" className="inbs-icon-button" onClick={toggleTheme} aria-label={locale==='ar'?'تبديل المظهر الفاتح والداكن':'Toggle light and dark mode'} title={locale==='ar'?'تبديل المظهر':'Toggle theme'}><motion.span className="inbs-theme-show-dark" whileHover={{rotate:15,scale:1.1}}><Sun size={21}/></motion.span><motion.span className="inbs-theme-show-light" whileHover={{rotate:-15,scale:1.1}}><Moon size={21}/></motion.span></button>
    <button type="button" ref={menuButtonRef} className="inbs-icon-button inbs-menu-trigger" onClick={()=>setOpen(!open)} aria-expanded={open} aria-controls="inbs-drawer" aria-label={locale==='ar'?(open?'إغلاق القائمة':'فتح القائمة'):(open?'Close menu':'Open menu')}>{open?<X size={23}/>:<Menu size={23}/>}</button>
   </div>
  </div>
