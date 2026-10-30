@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowDownRight, ArrowLeft, ArrowUpRight } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import { homeContent } from '@/content/home';
 import { serviceSlugs, type Locale } from '@/lib/site';
 import { Reveal, SmoothScroll } from './motion-elements';
