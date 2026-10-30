@@ -10,8 +10,9 @@
 - [ ] Accessibility audit: keyboard, focus, RTL, motion, contrast, desktop/mobile, both themes.
 - [ ] Performance: measure Lighthouse and LCP/CLS/INP on realistic deployment.
 - [ ] Add smoke tests for navigation, localization, theme, important links.
-- [ ] Loading screen: no forced loading delay or layout blocking.
-- [ ] Custom cursor: fine pointers only; reduced-motion/keyboard fallback.
+- [x] Lightweight route-loading fallback: displayed only when a segment is really pending; no forced loading delay.
+- [x] Non-blocking decorative cursor accent: fine mouse only, native pointer preserved, reduced-motion fallback.
+- [ ] Review loading and cursor appearance in Arabic/English and both themes on real devices.
 
 ## With each page
 - [ ] Keep Arabic and English complete and equivalent; headings, metadata, image alt, accessibility, canonical/hreflang, and links.
