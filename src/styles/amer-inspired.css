@@ -146,3 +146,6 @@ html[data-theme=dark] .inbs-drawer-top img{filter:brightness(0) invert(1)}
  .inbs-footer-watermark{top:clamp(295px,38vh,405px);inset-inline-end:auto;left:50%;right:auto;transform:translateX(-50%);text-align:center;font-size:clamp(105px,21vw,190px);letter-spacing:0}
  [dir=rtl] .inbs-footer-watermark{left:50%;right:auto;transform:translateX(-50%)}
 }
+
+/* Desktop-only refinement of the decorative INBS wordmark. */
+@media(min-width:761px){.inbs-footer-watermark{font-size:clamp(125px,18vw,310px);letter-spacing:-.055em}}
