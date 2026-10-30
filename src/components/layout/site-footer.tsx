@@ -27,7 +27,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         <FooterReveal delay={0.05}>
           <div className="inbs-footer-about">
             <Image src="/brand/inbs-logo.png" width={195} height={96} alt="INBS" />
-            <p>{locale === 'ar' ? 'تأسست الشبكة العالمية لخدمات رجال الأعمال في دبي عام 2003.' : 'Founded in Dubai in 2003, International Network Businessmen Services supports clients across a diverse range of services.'}</p>
+            <p>{locale === 'ar' ? 'تأسست الشبكة العالمية لخدمات رجال الأعمال في دبي عام 2003، وتقدم لعملائها مجموعة متنوعة من الخدمات التي تلبي احتياجاتهم.' : 'Founded in Dubai in 2003, International Network Businessmen Services supports clients across a diverse range of services.'}</p>
             <div className="inbs-socials" aria-label="Social media">{socials.map(({ label, href, Icon }) => <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}><Icon /></a>)}</div>
           </div>
         </FooterReveal>
