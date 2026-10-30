@@ -138,3 +138,11 @@ html[data-theme=dark] .inbs-drawer-top img{filter:brightness(0) invert(1)}
 .inbs-footer-watermark{font-size:clamp(155px,23vw,410px);letter-spacing:0;inset-inline-end:clamp(14px,4vw,64px)}
 .inbs-footer-glow:before{inset-inline-end:-470px;bottom:-490px;top:auto}
 @media(max-width:760px){.inbs-footer-watermark{font-size:clamp(105px,21vw,190px);letter-spacing:0;inset-inline-end:14px}.inbs-footer-glow:before{inset-inline-end:-510px;bottom:-490px;top:auto}}
+
+/* Mobile footer: center the official logo and anchor the signature to the section divider. */
+@media(max-width:760px){
+ .inbs-footer-about{display:flex;flex-direction:column;align-items:center;text-align:center}
+ .inbs-footer-about img{display:block;margin-inline:auto}
+ .inbs-footer-watermark{top:clamp(215px,29vh,310px);inset-inline-end:auto;left:50%;right:auto;transform:translateX(-50%);text-align:center;font-size:clamp(105px,21vw,190px);letter-spacing:0}
+ [dir=rtl] .inbs-footer-watermark{left:50%;right:auto;transform:translateX(-50%)}
+}
