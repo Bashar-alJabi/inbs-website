@@ -29,6 +29,7 @@ export function SiteHeader({locale}:{locale:Locale}){
   if(!open)return;
   const drawer=drawerRef.current;
   const previous=document.activeElement instanceof HTMLElement?document.activeElement:null;
+  const menuButton=menuButtonRef.current;
   const focusable=()=>Array.from(drawer?.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')??[]);
   focusable()[0]?.focus();
   const key=(event:KeyboardEvent)=>{
@@ -40,7 +41,7 @@ export function SiteHeader({locale}:{locale:Locale}){
    else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
   };
   document.addEventListener('keydown',key);
-  return()=>{document.removeEventListener('keydown',key);(previous??menuButtonRef.current)?.focus();};
+  return()=>{document.removeEventListener('keydown',key);(previous??menuButton)?.focus();};
  },[open]);
  const toggleTheme=()=>{const next=theme==='dark'?'light':'dark';setTheme(next);document.documentElement.dataset.theme=next;localStorage.setItem('inbs-theme',next)};
  const onHome=pathname===`/${locale}`;const transparent=onHome&&!scrolled&&!open;
