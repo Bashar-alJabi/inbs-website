@@ -12,7 +12,7 @@ export function SiteHeader({locale}:{locale:Locale}){
  const pathname=usePathname();
  const [scrolled,setScrolled]=useState(false);
  const [open,setOpen]=useState(false);
- const [theme,setTheme]=useState<'light'|'dark'>('light');
+ const [theme,setTheme]=useState<'light'|'dark'>(()=>typeof window==='undefined'?'light':localStorage.getItem('inbs-theme')==='dark'?'dark':'light');
  const home=locale==='ar'?'الرئيسية':'Home';
  const other=alternateLocale(locale);
  const otherPath='/'+[other,...pathname.split('/').filter(Boolean).slice(1)].join('/');
@@ -21,9 +21,8 @@ export function SiteHeader({locale}:{locale:Locale}){
    onScroll();window.addEventListener('scroll',onScroll,{passive:true});
    return ()=>window.removeEventListener('scroll',onScroll);
  },[]);
- useEffect(()=>{const stored=localStorage.getItem('inbs-theme');const next=stored==='dark'||stored==='light'?stored:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');setTheme(next);document.documentElement.dataset.theme=next},[]);
+ useEffect(()=>{const stored=localStorage.getItem('inbs-theme');const next=stored==='dark'||stored==='light'?stored:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=next},[]);
  useEffect(()=>{if(!open)return;const key=(event:KeyboardEvent)=>{if(event.key==='Escape')setOpen(false)};document.addEventListener('keydown',key);return()=>document.removeEventListener('keydown',key)},[open]);
- useEffect(()=>setOpen(false),[pathname]);
  const toggleTheme=()=>{const next=theme==='dark'?'light':'dark';setTheme(next);document.documentElement.dataset.theme=next;localStorage.setItem('inbs-theme',next)};
  const onHome=pathname===`/${locale}`;const transparent=onHome&&!scrolled&&!open;
  return <header className={`inbs-header ${transparent?'is-transparent':'is-solid'}`}><div className="site-shell inbs-header-inner">
