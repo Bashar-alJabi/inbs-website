@@ -10,9 +10,9 @@ export default async function Icon() {
  const logo = await readFile(join(process.cwd(), 'public', 'brand', 'inbs-logo.png'));
  const source = `data:image/png;base64,${logo.toString('base64')}`;
  return new ImageResponse(
-  <div style={{ display:'flex', width:'100%', height:'100%', alignItems:'center', justifyContent:'center', background:'#ffffff', borderRadius:20, padding:8 }}>
+  <div style={{ display:'flex', width:'100%', height:'100%', alignItems:'center', justifyContent:'center', background:'transparent', padding:0 }}>
    {/* eslint-disable-next-line @next/next/no-img-element */}
-   <img src={source} alt="" width={112} height={112} style={{objectFit:'contain'}} />
+   <img src={source} alt="" width={128} height={128} style={{objectFit:'contain'}} />
   </div>,
   size,
  );
