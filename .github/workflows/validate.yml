@@ -18,3 +18,11 @@ jobs:
       - run: npm run lint
       - run: npx tsc --noEmit
       - run: npm run build
+      - name: Smoke-test production build
+        run: |
+          npm run start -- --port 3000 > /tmp/inbs-server.log 2>&1 &
+          for i in $(seq 1 30); do
+            if curl --fail --silent http://localhost:3000/en > /dev/null; then break; fi
+            sleep 1
+          done
+          npm run test:smoke
