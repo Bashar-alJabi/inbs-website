@@ -14,3 +14,7 @@
 
 .official-logo{width:125px;height:auto;max-height:65px;object-fit:contain}
 
+
+/* Visible keyboard focus for shared icon controls and links. */
+:where(button, a, [role="button"]):focus-visible{outline:3px solid var(--inbs-sky);outline-offset:4px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
