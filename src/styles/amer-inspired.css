@@ -133,3 +133,8 @@ html[data-theme=dark] .inbs-drawer-top img{filter:brightness(0) invert(1)}
 /* Preserve previous INBS signature; move only the orbital accent to bottom-right. */
 .inbs-footer-glow:before{top:auto;bottom:-350px}
 @media(max-width:760px){.inbs-footer-glow:before{top:auto;bottom:-350px}}
+
+/* Footer ornament proportions: smaller signature, more recessed orbital accent. */
+.inbs-footer-watermark{font-size:clamp(90px,13.5vw,245px)}
+.inbs-footer-glow:before{inset-inline-end:-470px;bottom:-490px;top:auto}
+@media(max-width:760px){.inbs-footer-watermark{font-size:clamp(85px,14vw,135px)}.inbs-footer-glow:before{inset-inline-end:-510px;bottom:-490px;top:auto}}
