@@ -153,3 +153,6 @@ html[data-theme=dark] .inbs-drawer-top img{filter:brightness(0) invert(1)}
 
 /* Lower the desktop INBS decoration slightly without affecting mobile. */
 @media(min-width:761px){.inbs-footer-watermark{top:55px}}
+
+/* Keep the official mark legible on the solid dark navigation bar. */
+html[data-theme=dark] .inbs-header.is-solid .inbs-brand img{filter:brightness(0) invert(1)}

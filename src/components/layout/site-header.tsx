@@ -15,7 +15,7 @@ export function SiteHeader({locale}:{locale:Locale}){
  const drawerRef=useRef<HTMLElement>(null);
  const [scrolled,setScrolled]=useState(false);
  const [open,setOpen]=useState(false);
- const [theme,setTheme]=useState<'light'|'dark'>(()=>typeof window==='undefined'?'light':localStorage.getItem('inbs-theme')==='dark'?'dark':'light');
+ const [theme,setTheme]=useState<'light'|'dark'>('light');
  const home=locale==='ar'?'الرئيسية':'Home';
  const other=alternateLocale(locale);
  const otherPath='/'+[other,...pathname.split('/').filter(Boolean).slice(1)].join('/');
@@ -24,7 +24,7 @@ export function SiteHeader({locale}:{locale:Locale}){
    onScroll();window.addEventListener('scroll',onScroll,{passive:true});
    return ()=>window.removeEventListener('scroll',onScroll);
  },[]);
- useEffect(()=>{const stored=localStorage.getItem('inbs-theme');const next=stored==='dark'||stored==='light'?stored:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=next},[]);
+ useEffect(()=>{const stored=localStorage.getItem('inbs-theme');const next=stored==='dark'||stored==='light'?stored:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=next;setTheme(next)},[]);
  useEffect(()=>{
   if(!open)return;
   const drawer=drawerRef.current;
@@ -43,7 +43,7 @@ export function SiteHeader({locale}:{locale:Locale}){
   document.addEventListener('keydown',key);
   return()=>{document.removeEventListener('keydown',key);(previous??menuButton)?.focus();};
  },[open]);
- const toggleTheme=()=>{const next=theme==='dark'?'light':'dark';setTheme(next);document.documentElement.dataset.theme=next;localStorage.setItem('inbs-theme',next)};
+ const toggleTheme=()=>{const current=document.documentElement.dataset.theme==='dark'?'dark':'light';const next=current==='dark'?'light':'dark';setTheme(next);document.documentElement.dataset.theme=next;localStorage.setItem('inbs-theme',next)};
  const onHome=pathname===`/${locale}`;const transparent=onHome&&!scrolled&&!open;
  return <header className={`inbs-header ${transparent?'is-transparent':'is-solid'}`}><div className="site-shell inbs-header-inner">
   <Link href={`/${locale}`} className="inbs-brand" aria-label="INBS home"><Image src="/brand/inbs-logo.png" alt="INBS" width={152} height={76} priority/></Link>
