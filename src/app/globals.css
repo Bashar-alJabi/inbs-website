@@ -14,3 +14,12 @@
 
 .official-logo{width:125px;height:auto;max-height:65px;object-fit:contain}
 
+
+/* Visible keyboard focus for shared icon controls and links. */
+:where(button, a, [role="button"]):focus-visible{outline:3px solid var(--inbs-sky);outline-offset:4px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+/* Decorative cursor accent. Do not replace the native pointer. */
+.inbs-custom-cursor{position:fixed;top:0;left:0;width:26px;height:26px;border:1px solid #81cffa;border-radius:50%;background:#4099d51c;z-index:110;pointer-events:none;opacity:0;transform:translate3d(-200px,-200px,0);transition:width .2s,height .2s,opacity .18s,background .2s;will-change:transform}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){.inbs-custom-cursor[data-visible=true]{opacity:.75}.inbs-custom-cursor[data-active=true]{width:42px;height:42px;background:#87d2ff24}}
+@media(hover:none),(pointer:coarse),(prefers-reduced-motion:reduce){.inbs-custom-cursor{display:none}}
