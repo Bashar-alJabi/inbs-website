@@ -41,7 +41,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           <div className="inbs-footer-contact">
             <h3>{locale === 'ar' ? 'تواصل معنا' : 'Contact details'}</h3>
             <a href="mailto:info@inbs-uae.com"><Mail size={18} aria-hidden="true" /><span>info@inbs-uae.com</span></a>
-            <a href="tel:+971508866555"><Phone size={18} aria-hidden="true" /><span dir="ltr">+971 50 886 6555</span></a>
+            <a href="tel:+971508866555"><Phone size={18} aria-hidden="true" /><span className="inbs-phone-number" dir="ltr">+971 50 886 6555</span></a>
             <a href={mapUrl} target="_blank" rel="noopener noreferrer"><MapPin size={18} aria-hidden="true" /><span>{locale === 'ar' ? 'مكتب 1720، برج بارك لين، الخليج التجاري، دبي' : 'Office 1720, ParkLane Tower, Business Bay, Dubai'} <ArrowUpRight size={14} className="map-external" /></span></a>
           </div>
         </FooterReveal>
