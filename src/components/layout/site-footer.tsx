@@ -1,12 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
-import { pages,type Locale } from '@/lib/site';
-
+import { ArrowUpRight, Mail, MapPin, Phone } from 'lucide-react';
+import { pages,serviceSlugs,serviceNames,type Locale } from '@/lib/site';
 export function SiteFooter({locale}:{locale:Locale}){
- return <footer className="site-footer"><div className="site-shell"><div className="footer-top"><div><p className="footer-kicker">INBS / DUBAI</p><h2>{locale==='ar'?'نصنع روابط تدفع أعمالك إلى الأمام.':'Connections that move business forward.'}</h2></div><Link className="footer-inquiry" href={`/${locale}/contact`}>{locale==='ar'?'تواصل معنا':'Get in touch'}<ArrowUpRight size={20}/></Link></div>
- <div className="footer-grid"><div className="footer-about"><Image src="/brand/inbs-logo.png" alt="INBS" width={150} height={75} className="footer-logo"/><p>{locale==='ar'?'الشبكة العالمية لخدمات رجال الأعمال، دبي منذ عام 2003.':'International Network Businessmen Services, Dubai. Established in 2003.'}</p></div>
- <div><h3>{locale==='ar'?'استكشف':'Explore'}</h3>{pages.slice(0,7).map(p=><Link key={p.slug} href={`/${locale}/${p.slug}`}>{p[locale]}</Link>)}</div>
- <div><h3>{locale==='ar'?'التواصل':'Contact'}</h3><a href="mailto:info@inbs-uae.com">info@inbs-uae.com</a><a href="tel:+971508866555" dir="ltr">+971 50 886 6555</a><p>ParkLane Tower, Office 1720<br/>Business Bay, Dubai</p></div></div>
- <div className="footer-bottom"><span>© {new Date().getFullYear()} INBS</span><span>INTERNATIONAL NETWORK BUSINESSMEN SERVICES</span><div>{pages.slice(-2).map(p=><Link key={p.slug} href={`/${locale}/${p.slug}`}>{p[locale]}</Link>)}</div></div></div></footer>
+ return <footer className="inbs-footer"><div className="site-shell"><div className="inbs-footer-top"><div><p>{locale==='ar'?'الشبكة العالمية لخدمات رجال الأعمال':'INTERNATIONAL NETWORK BUSINESSMEN SERVICES'}</p><h2>{locale==='ar'?'شريكك في عالم الأعمال.':'Your partner in business.'}</h2></div><Link href={`/${locale}/contact`}>{locale==='ar'?'تواصل معنا':'Contact us'}<ArrowUpRight size={19}/></Link></div>
+ <div className="inbs-footer-grid"><div className="inbs-footer-about"><Image src="/brand/inbs-logo.png" width={160} height={80} alt="INBS"/><p>{locale==='ar'?'تأسست الشبكة العالمية لخدمات رجال الأعمال في دبي عام 2003.':'Founded in Dubai in 2003, International Network Businessmen Services supports clients across a diverse range of services.'}</p></div><div><h3>{locale==='ar'?'روابط مهمة':'Quick links'}</h3>{pages.slice(0,7).map(p=><Link key={p.slug} href={`/${locale}/${p.slug}`}>{p[locale]}</Link>)}</div><div><h3>{locale==='ar'?'خدماتنا':'Services'}</h3>{serviceSlugs.slice(0,6).map(s=><Link key={s} href={`/${locale}/services/${s}`}>{serviceNames[s][locale]}</Link>)}</div><div><h3>{locale==='ar'?'تواصل معنا':'Contact details'}</h3><a href="mailto:info@inbs-uae.com"><Mail size={15}/> info@inbs-uae.com</a><a href="tel:+971508866555"><Phone size={15}/> <span dir="ltr">+971 50 886 6555</span></a><p><MapPin size={15}/> {locale==='ar'?'مكتب 1720، برج بارك لين، الخليج التجاري، دبي':'Office 1720, ParkLane Tower, Business Bay, Dubai'}</p></div></div>
+ <div className="inbs-footer-bottom"><span>© {new Date().getFullYear()} INBS</span><span>{locale==='ar'?'جميع الحقوق محفوظة':'All rights reserved'}</span><div>{pages.slice(-2).map(p=><Link key={p.slug} href={`/${locale}/${p.slug}`}>{p[locale]}</Link>)}</div></div></div></footer>
 }
