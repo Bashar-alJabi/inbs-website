@@ -12,7 +12,7 @@ html[data-theme=dark] body{background:var(--inbs-paper);color:var(--inbs-ink)}
 
 /* Unified controls and typography are defined in tokens.css */
 .inbs-contact-button,.inbs-hero-cta,.inbs-footer-top>a{border-radius:var(--radius-button)}
-.inbs-header{transition:background .45s ease,box-shadow .45s ease,color .45s ease;animation:header-enter .75s both}
+.inbs-header{transition:background .45s ease,box-shadow .45s ease,color .45s ease;animation:header-fade .65s both}
 @keyframes header-enter{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
 .inbs-hero-media{position:absolute;inset:0;z-index:-3;overflow:hidden}
 .inbs-hero-photo{object-fit:cover;animation:inbs-kenburns 8.5s linear both}
@@ -34,3 +34,30 @@ html[data-theme=dark] body{background:var(--inbs-paper);color:var(--inbs-ink)}
 .inbs-footer-top>a{transition:transform .25s,background .25s}.inbs-footer-top>a:hover{transform:translateY(-3px);background:#d6ecfa}
 [data-theme=dark] .inbs-header.is-solid{background:var(--inbs-panel)}
 @media(prefers-reduced-motion:reduce){.inbs-hero-photo,.inbs-header{animation:none}}
+
+/* Keep the header free of transforms so the fixed drawer fills the viewport. */
+@keyframes header-fade{from{opacity:0}to{opacity:1}}
+.inbs-drawer{height:100dvh;max-height:100dvh;overflow-y:auto;overscroll-behavior:contain}
+.inbs-drawer nav{flex:1 0 auto}
+.inbs-drawer-backdrop{height:100dvh}
+.inbs-footer{isolation:isolate;background:radial-gradient(ellipse 75% 75% at 5% 5%,#225d87 0%,transparent 65%),linear-gradient(135deg,#103c60 0%,#082e4d 42%,#061b31 100%);box-shadow:inset 0 1px 0 #85c9f52b}
+.inbs-footer-glow{position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:inherit;z-index:-1}
+.inbs-footer-glow:before{content:"";position:absolute;inset-inline-end:-300px;top:-350px;width:800px;height:800px;border:1px solid #9ed8ff24;border-radius:50%;box-shadow:0 0 0 90px #90cfff09,0 0 0 180px #9ad3ff08}
+.inbs-footer-container{position:relative}
+.inbs-footer-top{padding-bottom:65px}
+.inbs-footer-grid{grid-template-columns:1.3fr .82fr 1fr 1.2fr;gap:clamp(24px,3vw,55px);padding-top:74px}
+.inbs-footer-grid>div{min-width:0}
+.inbs-footer-about img{width:175px;height:auto;margin:0}
+.inbs-footer-about p{margin:26px 0 0;max-width:320px;line-height:1.85;font-size:15px}
+.inbs-socials{display:flex;align-items:center;gap:10px;margin-top:24px}
+.inbs-socials a{width:40px;height:40px;display:grid;place-items:center;padding:0;border:1px solid #b4daef55;border-radius:var(--radius-control);color:#f1f9ff;transition:background .24s,border-color .24s,transform .24s}
+.inbs-socials a:hover{background:#ffffff24;border-color:#acdfff;transform:translateY(-4px)}
+.inbs-footer-contact>a{align-items:flex-start;gap:11px;overflow-wrap:anywhere}
+.inbs-footer-contact>a>svg{flex:none;margin-top:4px}
+.inbs-footer-contact>a span{flex:1;min-width:0}
+.inbs-footer-contact .map-external{display:inline;vertical-align:middle;margin-inline-start:4px}
+.inbs-footer-bottom{justify-content:space-between}
+.inbs-copyright{white-space:normal;gap:6px;flex-wrap:wrap}
+@media(max-width:850px){.inbs-footer-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:40px}.inbs-footer-about{grid-column:auto}}
+@media(max-width:560px){.inbs-footer-grid{grid-template-columns:1fr}.inbs-footer-top{padding-bottom:50px}.inbs-footer{border-radius:26px 26px 0 0}}
+@media(prefers-reduced-motion:reduce){.inbs-header{animation:none}}
