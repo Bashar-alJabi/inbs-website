@@ -1,0 +1,16 @@
+/* Homepage foundation: the Hero has its own stylesheet. */
+.homepage{background:var(--color-surface,#f4f7f9)}
+.proof-strip{background:#e5edf0;border-bottom:1px solid #cbd9df;transition:background .3s,color .3s}
+.proof-inner{min-height:145px;display:grid;grid-template-columns:1fr 1fr 1.5fr;gap:25px;align-items:center}
+.proof-inner>div{display:flex;flex-direction:column;gap:7px;border-inline-start:1px solid #bdcdd4;padding-inline-start:24px}
+.proof-inner span{font-size:12px;text-transform:uppercase;color:#526b7b;letter-spacing:.08em}
+.proof-inner strong{font-size:29px;letter-spacing:-.03em;color:#0d3047;font-weight:700}
+.proof-inner p{font-size:clamp(14px,1.25vw,18px);font-weight:650;line-height:1.5;letter-spacing:.035em;color:#294f67;max-width:360px;justify-self:end}
+html[data-theme=dark] .proof-strip{background:#15374f;color:#eef8ff;border-color:#35546a}
+html[data-theme=dark] .proof-inner>div{border-color:#4c718b}
+html[data-theme=dark] .proof-inner span{color:#b0cfde}
+html[data-theme=dark] .proof-inner strong{color:#f5fbff}
+html[data-theme=dark] .proof-inner p{color:#d1e7f3}
+[dir=rtl] .proof-inner p{letter-spacing:0}
+@media(max-width:900px){.proof-inner{grid-template-columns:1fr 1fr}.proof-inner p{grid-column:1/-1;justify-self:start;max-width:none;margin:0 0 22px}}
+@media(max-width:600px){.proof-inner{padding-block:24px;gap:20px}.proof-inner>div{padding-inline-start:12px}.proof-inner strong{font-size:24px}.proof-inner p{font-size:15px}}

@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+/* INBS design tokens. Change these values to update the full website. */
+:root{
+ --font-en:'Manrope',Arial,sans-serif;
+ --font-ar:'IBM Plex Sans Arabic',Tahoma,sans-serif;
+ --font-body:var(--font-en);
+ --color-primary:#05478f;
+ --color-primary-hover:#1365af;
+ --color-surface:#f4f7f9;
+ --color-navy:#08243c;
+ --color-sky:#6bb3ec;
+ --radius-button:7px;
+ --radius-control:9px;
+ --font-size-button:14px;
+}
+html[lang=ar]{--font-body:var(--font-ar)}
+body{font-family:var(--font-body)}
+button,input,textarea,select{font:inherit}
+.inbs-slide h1,.inbs-footer-top h2,.homepage h2{font-family:var(--font-body)}
