@@ -1,0 +1,155 @@
+/* Original INBS institutional visual direction; no Amer assets. */
+:root{--inbs-paper:#f4f7f9;--inbs-ink:#092d4a;--inbs-panel:#fff;--inbs-muted:#60758a}
+html[data-theme=dark]{--inbs-paper:#091c2e;--inbs-ink:#e9f4fd;--inbs-panel:#102c44;--inbs-muted:#a8bdce;color-scheme:dark}
+html[data-theme=dark] body{background:var(--inbs-paper);color:var(--inbs-ink)}
+.inbs-header{position:fixed;top:0;left:0;right:0;z-index:70;transition:background .35s,box-shadow .35s,color .35s}.inbs-header.is-transparent{background:transparent;color:#fff}.inbs-header.is-solid{background:var(--inbs-panel);color:var(--inbs-ink);box-shadow:0 7px 30px #001d3820}.inbs-header-inner{height:86px;display:flex;align-items:center;gap:32px}.inbs-brand{display:flex;align-items:center;margin-inline-end:auto}.inbs-brand img{width:128px;height:auto;max-height:69px;object-fit:contain}.is-transparent .inbs-brand img{filter:brightness(0) invert(1)}.inbs-primary-nav{display:flex;align-items:center;gap:clamp(15px,2.3vw,34px)}.inbs-primary-nav a{position:relative;padding:8px 0;font-weight:600;font-size:13px;white-space:nowrap}.inbs-primary-nav a:after{content:"";position:absolute;bottom:2px;inset-inline-start:0;width:100%;height:2px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .28s}.inbs-primary-nav a:hover:after,.inbs-primary-nav a.active:after{transform:scaleX(1)}.inbs-header-actions{display:flex;align-items:center;gap:7px}.inbs-contact-button{display:flex;align-items:center;gap:18px;background:#1260a9;color:#fff;padding:13px 17px;font-weight:650;font-size:12px;white-space:nowrap;margin-inline-end:8px}.inbs-contact-button:hover{background:#3285c8}.inbs-icon-button{width:41px;height:41px;border:0;background:transparent;color:inherit;display:grid;place-items:center;border-radius:50%;cursor:pointer;transition:background .2s,transform .3s}.inbs-icon-button:hover{background:#7bafca35;transform:translateY(-2px)}.inbs-drawer-backdrop{position:fixed;inset:0;background:#041a2db0;border:0;z-index:72;cursor:pointer}.inbs-drawer{position:fixed;top:0;bottom:0;right:0;width:min(430px,90vw);background:#fff;color:#0a2c44;z-index:73;padding:28px clamp(24px,3vw,46px);display:flex;flex-direction:column;overflow-y:auto;box-shadow:-20px 0 50px #081f3240}.inbs-drawer-top{display:flex;align-items:center;justify-content:space-between;padding-bottom:30px;border-bottom:1px solid #dbe4eb;font-size:12px;letter-spacing:.15em}.inbs-drawer-top button{background:none;border:0;cursor:pointer;color:inherit}.inbs-drawer nav{display:flex;flex-direction:column;padding:18px 0}.inbs-drawer nav a{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #e7edf1;font-size:17px}.inbs-drawer nav a:hover{color:#1365af}.inbs-drawer-bottom{margin-top:auto;display:flex;justify-content:space-between;gap:12px;color:#6c8698;font-size:12px;padding-top:30px}
+.inbs-hero{height:min(900px,100svh);min-height:710px;position:relative;background:#103b5e;color:#fff;overflow:hidden;isolation:isolate}.inbs-hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-3}.inbs-hero-shade{position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,#071e36dd 0%,#082d4f87 57%,#061e35a3 100%),linear-gradient(0deg,#03182dc4,transparent 35%)}.inbs-hero-layout{height:100%;display:flex;flex-direction:column;justify-content:space-between;padding-top:clamp(170px,22vh,250px);padding-bottom:34px}.inbs-hero-content{width:min(760px,90%);position:relative;z-index:2}.inbs-hero-eyebrow{font-size:11px;letter-spacing:.14em;font-weight:700;color:#c4e4f5;margin-bottom:35px}.inbs-hero-eyebrow span{opacity:.65}.inbs-slide h1{font-weight:650;font-size:clamp(52px,5.5vw,86px);line-height:1.1;max-width:780px;letter-spacing:-.045em;margin:0 0 22px}.inbs-slide p{max-width:510px;font-size:17px;line-height:1.7;color:#e1ecf3;min-height:58px;margin:0 0 26px}.inbs-hero-cta{display:inline-flex;align-items:center;gap:36px;background:white;color:#093552;padding:17px 20px;font-size:13px;font-weight:700;position:relative;z-index:2;transition:background .25s}.inbs-hero-cta:hover{background:#c8eafb}.inbs-network-trail{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;color:#b6eaff;z-index:1}.inbs-hero-bottom{display:flex;align-items:end;justify-content:space-between;gap:25px;z-index:2;position:relative;border-top:1px solid #ffffff55;padding-top:18px}.inbs-slide-controls{display:flex;align-items:center;gap:12px;white-space:nowrap}.inbs-slide-controls span{font-size:13px;letter-spacing:.15em;margin-inline-end:10px}.inbs-slide-controls i{font-style:normal;opacity:.5}.inbs-slide-controls button{border:1px solid #ffffff75;border-radius:50%;height:34px;width:34px;background:transparent;color:white;cursor:pointer;display:grid;place-items:center}.inbs-slide-controls button:hover{background:#ffffff35}.inbs-hero-service-strip{display:flex;align-items:center;justify-content:flex-end;gap:18px;flex-wrap:wrap;font-size:12px}.inbs-hero-service-strip>span{font-size:10px;letter-spacing:.12em;opacity:.7}.inbs-hero-service-strip a{display:flex;gap:6px;align-items:center;border-bottom:1px solid #ffffff80;padding-bottom:8px}
+.inbs-footer{position:relative;background:#082c49;color:white;border-radius:35px 35px 0 0;padding-top:90px;margin-top:0}.inbs-footer-top{display:flex;align-items:end;justify-content:space-between;gap:30px;border-bottom:1px solid #ffffff3b;padding-bottom:58px}.inbs-footer-top p{font-size:11px;letter-spacing:.12em;color:#bfd6e7}.inbs-footer-top h2{font-weight:550;font-size:clamp(38px,4vw,60px);letter-spacing:-.04em;margin:20px 0 0}.inbs-footer-top>a{display:flex;align-items:center;gap:28px;color:#0b3452;background:#effafb;padding:16px 22px;font-size:13px;font-weight:700;white-space:nowrap}.inbs-footer-grid{display:grid;grid-template-columns:1.35fr .9fr 1fr 1.15fr;gap:38px;padding:62px 0}.inbs-footer-grid h3{font-size:12px;text-transform:uppercase;letter-spacing:.1em;margin:0 0 23px;color:#b0d2e5}.inbs-footer-grid a{display:flex;align-items:center;gap:9px;line-height:1.6;padding:5px 0;font-size:13px;color:#e2edf5}.inbs-footer-grid a:hover{color:#8bd2f4}.inbs-footer-grid p{line-height:1.8;font-size:13px;color:#d1e2ec}.inbs-footer-about img{width:134px;height:auto;filter:brightness(0) invert(1)}.inbs-footer-about p{max-width:285px}.inbs-footer-grid>div:last-child p{display:flex;align-items:flex-start;gap:8px}.inbs-footer-bottom{border-top:1px solid #ffffff3b;padding:22px 0;display:flex;justify-content:space-between;gap:20px;align-items:center;font-size:12px;color:#b9d4e3}.inbs-footer-bottom>div{display:flex;gap:20px}
+[dir=rtl] .inbs-slide h1{letter-spacing:0}[dir=rtl] .inbs-drawer{right:auto;left:0}[dir=rtl] .inbs-primary-nav a:after{transform-origin:right}
+[data-theme=dark] .capabilities{background:#091c2e;color:#e8f5fd}[data-theme=dark] .service-name,[data-theme=dark] .section-heading h2{color:#e8f5fd}[data-theme=dark] .service-row{border-color:#436079}[data-theme=dark] .perspective{background:#112c42}[data-theme=dark] .perspective h2{color:#e8f5fd}[data-theme=dark] .section-heading>div+p,[data-theme=dark] .perspective-copy>div>p:not(.eyebrow-dark){color:#b5cfdf}[data-theme=dark] .proof-strip{background:#14354d}[data-theme=dark] .proof-inner strong{color:#eef8fc}
+@media(max-width:1150px){.inbs-primary-nav{display:none}}@media(max-width:760px){.inbs-header-inner{height:72px}.inbs-brand img{width:98px}.inbs-contact-button{display:none}.inbs-icon-button{width:36px}.inbs-hero{height:auto;min-height:750px}.inbs-hero-layout{padding-top:170px}.inbs-hero-content{width:100%}.inbs-hero-bottom{align-items:stretch;flex-direction:column}.inbs-hero-service-strip{justify-content:flex-start}.inbs-footer-top{flex-direction:column;align-items:start}.inbs-footer-grid{grid-template-columns:1fr 1fr}.inbs-footer-about{grid-column:1/-1}}@media(max-width:520px){.inbs-slide h1{font-size:44px}.inbs-footer-grid{grid-template-columns:1fr}.inbs-footer-bottom{flex-wrap:wrap}.inbs-hero-service-strip{gap:12px}}
+@media(hover:none),(pointer:coarse){.inbs-network-trail{display:none}}@media(prefers-reduced-motion:reduce){.inbs-network-trail{display:none}}
+
+/* Unified controls and typography are defined in tokens.css */
+.inbs-contact-button,.inbs-hero-cta,.inbs-footer-top>a{border-radius:var(--radius-button)}
+.inbs-header{transition:background .45s ease,box-shadow .45s ease,color .45s ease;animation:header-fade .65s both}
+@keyframes header-enter{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
+.inbs-hero-media{position:absolute;inset:0;z-index:-3;overflow:hidden}
+.inbs-hero-photo{object-fit:cover;animation:inbs-kenburns 8.5s linear both}
+@keyframes inbs-kenburns{from{transform:scale(1.025)}to{transform:scale(1.105)}}
+.inbs-slide p{font-size:clamp(18px,1.45vw,22px);line-height:1.65}
+.inbs-hero-cta{font-size:var(--font-size-button);min-height:58px;margin-top:3px}
+.inbs-contact-button,.inbs-footer-top>a{font-size:var(--font-size-button)}
+.inbs-drawer-top{min-height:85px}.inbs-drawer-top>a img{width:140px;height:auto}
+.inbs-drawer nav{gap:5px}
+.inbs-drawer nav a{font-size:16px;border:0;border-radius:var(--radius-control);padding:15px 16px;display:flex;justify-content:flex-start;gap:15px;transition:background .22s,color .22s,transform .22s}
+.inbs-drawer nav a:hover,.inbs-drawer nav a.active{background:#e8f3fa;color:#075094;transform:translateX(3px)}
+[dir=rtl] .inbs-drawer nav a:hover{transform:translateX(-3px)}
+.inbs-footer-about img{margin-bottom:24px}
+.inbs-footer-about p{font-size:15px;line-height:1.85;margin-top:14px}
+.inbs-footer-grid a{font-size:14px}.inbs-footer-grid p{font-size:14px}
+.inbs-copyright{display:inline-flex;align-items:center;gap:9px}
+.inbs-footer-bottom{justify-content:space-between}
+.inbs-footer-bottom>div{margin-inline-start:auto}
+.inbs-footer-top>a{transition:transform .25s,background .25s}.inbs-footer-top>a:hover{transform:translateY(-3px);background:#d6ecfa}
+[data-theme=dark] .inbs-header.is-solid{background:var(--inbs-panel)}
+@media(prefers-reduced-motion:reduce){.inbs-hero-photo,.inbs-header{animation:none}}
+
+/* Keep the header free of transforms so the fixed drawer fills the viewport. */
+@keyframes header-fade{from{opacity:0}to{opacity:1}}
+.inbs-drawer{height:100dvh;max-height:100dvh;overflow-y:auto;overscroll-behavior:contain}
+.inbs-drawer nav{flex:1 0 auto}
+.inbs-drawer-backdrop{height:100dvh}
+.inbs-footer{isolation:isolate;background:radial-gradient(ellipse 75% 75% at 5% 5%,#225d87 0%,transparent 65%),linear-gradient(135deg,#103c60 0%,#082e4d 42%,#061b31 100%);box-shadow:inset 0 1px 0 #85c9f52b}
+.inbs-footer-glow{position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:inherit;z-index:-1}
+.inbs-footer-glow:before{content:"";position:absolute;inset-inline-end:-300px;top:-350px;width:800px;height:800px;border:1px solid #9ed8ff24;border-radius:50%;box-shadow:0 0 0 90px #90cfff09,0 0 0 180px #9ad3ff08}
+.inbs-footer-container{position:relative}
+.inbs-footer-top{padding-bottom:65px}
+.inbs-footer-grid{grid-template-columns:1.3fr .82fr 1fr 1.2fr;gap:clamp(24px,3vw,55px);padding-top:74px}
+.inbs-footer-grid>div{min-width:0}
+.inbs-footer-about img{width:175px;height:auto;margin:0}
+.inbs-footer-about p{margin:26px 0 0;max-width:320px;line-height:1.85;font-size:15px}
+.inbs-socials{display:flex;align-items:center;gap:10px;margin-top:24px}
+.inbs-socials a{width:40px;height:40px;display:grid;place-items:center;padding:0;border:1px solid #b4daef55;border-radius:var(--radius-control);color:#f1f9ff;transition:background .24s,border-color .24s,transform .24s}
+.inbs-socials a:hover{background:#ffffff24;border-color:#acdfff;transform:translateY(-4px)}
+.inbs-footer-contact>a{align-items:flex-start;gap:11px;overflow-wrap:anywhere}
+.inbs-footer-contact>a>svg{flex:none;margin-top:4px}
+.inbs-footer-contact>a span{flex:1;min-width:0}
+.inbs-footer-contact>a .inbs-phone-number{flex:0 0 auto;direction:ltr;unicode-bidi:isolate}
+.inbs-footer-contact .map-external{display:inline;vertical-align:middle;margin-inline-start:4px}
+.inbs-footer-bottom{justify-content:space-between}
+.inbs-copyright{white-space:normal;gap:6px;flex-wrap:wrap}
+@media(max-width:850px){.inbs-footer-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:40px}.inbs-footer-about{grid-column:auto}}
+@media(max-width:560px){.inbs-footer-grid{grid-template-columns:1fr}.inbs-footer-top{padding-bottom:50px}.inbs-footer{border-radius:26px 26px 0 0}}
+@media(prefers-reduced-motion:reduce){.inbs-header{animation:none}}
+
+/* Navigation and footer refinements */
+.inbs-drawer-close{width:42px;height:42px;display:grid;place-items:center;border:1px solid #c5d5e0!important;border-radius:var(--radius-control);transition:background .2s,border-color .2s,transform .2s}
+.inbs-drawer-close:hover{background:#e8f3fa;border-color:#6ba8d1!important;transform:rotate(90deg)}
+html[data-theme=dark] .inbs-drawer{background:#102b43;color:#eaf5fc;box-shadow:-20px 0 60px #0008}
+html[data-theme=dark] .inbs-drawer-top{border-color:#375269}
+html[data-theme=dark] .inbs-drawer-close{border-color:#55728a!important;color:#eaf5fc}
+html[data-theme=dark] .inbs-drawer-close:hover{background:#254b68}
+html[data-theme=dark] .inbs-drawer nav a:hover,html[data-theme=dark] .inbs-drawer nav a.active{background:#204967;color:#b5e5ff}
+html[data-theme=dark] .inbs-drawer-bottom{color:#b1c9d9}
+html[data-theme=dark] .inbs-drawer-top img{filter:brightness(0) invert(1)}
+.inbs-footer-grid h3{font-size:clamp(15px,1.2vw,18px);letter-spacing:.045em;font-weight:700;line-height:1.45}
+@media(max-width:760px){
+ .inbs-hero{height:auto;min-height:100svh}
+ .inbs-hero-layout{min-height:100svh;height:auto;padding-top:clamp(135px,19vh,180px);padding-bottom:28px;gap:50px}
+ .inbs-hero-content{flex:0 0 auto}
+ .inbs-slide h1{font-size:clamp(39px,8.2vw,61px)}
+ .inbs-slide p{min-height:0}
+ .inbs-slide-controls{display:none}
+ .inbs-hero-bottom{margin-top:auto}
+ .inbs-hero-service-strip{justify-content:flex-start}
+ .inbs-footer-grid{text-align:center}
+ .inbs-footer-grid>div{justify-self:stretch}
+ .inbs-footer-grid a{justify-content:center}
+ .inbs-footer-about p{margin-inline:auto}
+ .inbs-socials{justify-content:center}
+ .inbs-footer-contact>a{text-align:center;align-items:center}
+ .inbs-footer-contact>a>svg{margin-top:0}
+ .inbs-footer-contact>a span{flex:initial}
+ .inbs-footer-contact>h3{text-align:center}
+ .inbs-footer-top{text-align:center;align-items:center}
+ .inbs-footer-top>a{align-self:center}
+ .inbs-footer-bottom{justify-content:center;text-align:center}
+ .inbs-footer-bottom>div{margin-inline-start:0;justify-content:center}
+}
+@media(max-width:420px){.inbs-hero-layout{gap:30px}.inbs-hero-eyebrow{margin-bottom:18px}.inbs-hero-service-strip{gap:10px}.inbs-hero-service-strip a{font-size:11px}}
+
+/* Compact navigation drawer on narrow/mobile viewports. */
+@media(max-width:760px){
+ .inbs-drawer{padding:14px 22px 16px}
+ .inbs-drawer-top{min-height:66px;padding-bottom:8px;flex-shrink:0}
+ .inbs-drawer-top>a img{width:110px}
+ .inbs-drawer nav{padding:6px 0;gap:1px;flex:0 1 auto}
+ .inbs-drawer nav a{padding:9px 12px;min-height:43px;font-size:15px;gap:11px}
+ .inbs-drawer-bottom{padding-top:10px;font-size:11px}
+}
+@media(max-height:650px) and (max-width:760px){.inbs-drawer nav a{min-height:38px;padding-block:6px}.inbs-drawer-top{min-height:54px}.inbs-drawer-bottom{padding-top:6px}}
+/* Subtle brand signature brought over from the retired final homepage CTA. */
+.inbs-footer{overflow:hidden}
+.inbs-footer-watermark{position:absolute;top:-.06em;inset-inline-end:-.035em;z-index:0;pointer-events:none;user-select:none;font-size:clamp(180px,27vw,490px);font-weight:800;line-height:1;letter-spacing:-.13em;color:#d4ecff0b;white-space:nowrap}
+.inbs-footer-container{z-index:1}
+[dir=rtl] .inbs-footer-watermark{letter-spacing:0}
+
+/* Comfortable mobile navigation. Keep scroll available on unusually short screens. */
+@media(max-width:760px){
+ .inbs-drawer{padding:clamp(22px,3.3vh,34px) 24px 24px}
+ .inbs-drawer-top{min-height:87px;padding-bottom:18px}
+ .inbs-drawer-top>a img{width:125px}
+ .inbs-drawer nav{padding:clamp(18px,3vh,30px) 0 15px;gap:clamp(7px,1.1vh,12px);flex:1 1 auto;justify-content:flex-start}
+ .inbs-drawer nav a{padding:clamp(12px,1.65vh,17px) 14px;min-height:49px;font-size:17px;gap:14px}
+ .inbs-drawer-bottom{flex:0 0 auto;margin-top:auto;padding-top:18px}
+}
+@media(max-height:680px) and (max-width:760px){
+ .inbs-drawer{padding-block:15px}
+ .inbs-drawer-top{min-height:65px;padding-bottom:10px}
+ .inbs-drawer nav{padding:10px 0 5px;gap:4px}
+ .inbs-drawer nav a{min-height:42px;padding:9px 12px;font-size:15px}
+ .inbs-drawer-bottom{padding-top:8px}
+}
+/* Preserve previous INBS signature; move only the orbital accent to bottom-right. */
+.inbs-footer-glow:before{top:auto;bottom:-350px}
+@media(max-width:760px){.inbs-footer-glow:before{top:auto;bottom:-350px}}
+
+/* Footer ornament proportions: smaller signature, more recessed orbital accent. */
+.inbs-footer-watermark{font-size:clamp(155px,23vw,410px);letter-spacing:0;inset-inline-end:clamp(14px,4vw,64px)}
+.inbs-footer-glow:before{inset-inline-end:-470px;bottom:-490px;top:auto}
+@media(max-width:760px){.inbs-footer-watermark{font-size:clamp(105px,21vw,190px);letter-spacing:0;inset-inline-end:14px}.inbs-footer-glow:before{inset-inline-end:-510px;bottom:-490px;top:auto}}
+
+/* Mobile footer: center the official logo and anchor the signature to the section divider. */
+@media(max-width:760px){
+ .inbs-footer-about{display:flex;flex-direction:column;align-items:center;text-align:center}
+ .inbs-footer-about img{display:block;margin-inline:auto}
+ .inbs-footer-watermark{top:clamp(295px,38vh,405px);inset-inline-end:auto;left:50%;right:auto;transform:translateX(-50%);text-align:center;font-size:clamp(105px,21vw,190px);letter-spacing:0}
+ [dir=rtl] .inbs-footer-watermark{left:50%;right:auto;transform:translateX(-50%)}
+}
+
+/* Desktop-only refinement of the decorative INBS wordmark. */
+@media(min-width:761px){.inbs-footer-watermark{font-size:clamp(125px,18vw,310px);letter-spacing:-.055em}}
+
+/* Lower the desktop INBS decoration slightly without affecting mobile. */
+@media(min-width:761px){.inbs-footer-watermark{top:55px}}

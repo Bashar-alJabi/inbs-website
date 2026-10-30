@@ -1,9 +1,15 @@
-<!-- BEGIN:nextjs-agent-rules -->
+# INBS Coding Agent Guidelines
 
-## This is NOT the Next.js you know
+Read `README.md` and `docs/PROJECT-GUIDE.md` before editing.
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
-
-This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
-
-<!-- END:nextjs-agent-rules -->
+- Only the new `inbs-website` repository is modified. Old `inbs` is read-only source material.
+- Never commit directly to `main`. Base feature branches on `redesign`.
+- Keep changes scoped to the current pull request.
+- Keep content separate from components. Use clear, descriptive naming and a small, consistent folder structure.
+- Support English and Arabic, including `dir="rtl"` where appropriate.
+- Each navigation item must route to its own page; unfinished routes display Coming Soon.
+- Preserve the official INBS logo and company facts. Never fabricate team bios, statistics or testimonials.
+- Build mobile-first, accessible, performant pages. Prefer native Next.js APIs and Server Components.
+- Update documentation if an implementation or content editing workflow changes.
+- Report `npm run lint` and `npm run build` results; do not claim tests passed unless run.
+- Never merge a PR without the owner's explicit approval.
