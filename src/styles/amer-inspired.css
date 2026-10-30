@@ -55,6 +55,7 @@ html[data-theme=dark] body{background:var(--inbs-paper);color:var(--inbs-ink)}
 .inbs-footer-contact>a{align-items:flex-start;gap:11px;overflow-wrap:anywhere}
 .inbs-footer-contact>a>svg{flex:none;margin-top:4px}
 .inbs-footer-contact>a span{flex:1;min-width:0}
+.inbs-footer-contact>a .inbs-phone-number{flex:0 0 auto;direction:ltr;unicode-bidi:isolate}
 .inbs-footer-contact .map-external{display:inline;vertical-align:middle;margin-inline-start:4px}
 .inbs-footer-bottom{justify-content:space-between}
 .inbs-copyright{white-space:normal;gap:6px;flex-wrap:wrap}
