@@ -9,7 +9,8 @@
 ## Before expanding homepage
 - [ ] Accessibility audit: keyboard, focus, RTL, motion, contrast, desktop/mobile, both themes.
 - [ ] Performance: measure Lighthouse and LCP/CLS/INP on realistic deployment.
-- [ ] Add smoke tests for navigation, localization, theme, important links.
+- [x] Basic HTTP smoke script for EN/AR pages, RTL, core images, robots: `SMOKE_BASE_URL=https://preview.example npm run test:smoke`.
+- [ ] Browser interaction tests for theme, menu focus, links, keyboard and mobile (not covered by HTTP smoke checks).
 - [x] Lightweight route-loading fallback: displayed only when a segment is really pending; no forced loading delay.
 - [x] Non-blocking decorative cursor accent: fine mouse only, native pointer preserved, reduced-motion fallback.
 - [ ] Review loading and cursor appearance in Arabic/English and both themes on real devices.
