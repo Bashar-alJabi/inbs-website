@@ -19,26 +19,6 @@
 :where(button, a, [role="button"]):focus-visible{outline:3px solid var(--inbs-sky);outline-offset:4px}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
-/* Route-level loading, themed by the existing html[data-theme] setting. */
-.inbs-loading{position:relative;min-height:65svh;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0;padding:64px 24px;background:radial-gradient(ellipse at 50% 30%,#ffffff 0%,#f4f8fb 70%,#e7f0f6 100%);color:#0c3855;text-align:center}
-.inbs-loading-identity{display:flex;flex-direction:column;align-items:center;gap:15px}
-.inbs-loading-wordmark{font-size:clamp(46px,8vw,74px);font-weight:800;line-height:1;letter-spacing:.09em;padding-inline-start:.09em}
-.inbs-loading-dot{color:#277ab8}
-.inbs-loading-rule{height:1px;width:70px;background:#86b0ca}
-.inbs-loading-subtitle{max-width:300px;font-size:clamp(10px,1.5vw,12px);letter-spacing:.1em;line-height:1.7;color:#4e6b7d}
-.inbs-loading-subtitle-ar{display:none}
-[lang=ar] .inbs-loading-subtitle-en{display:none}
-[lang=ar] .inbs-loading-subtitle-ar{display:block;letter-spacing:0}
-.inbs-loading-progress{width:130px;height:2px;margin-top:34px;overflow:hidden;background:#bad2e1;border-radius:999px}
-.inbs-loading-progress span{display:block;width:35%;height:100%;background:#267bb4;border-radius:inherit;animation:inbs-loading-track 1.8s ease-in-out infinite}
-html[data-theme=dark] .inbs-loading{background:radial-gradient(ellipse at 50% 35%,#174c70 0%,#0a304e 58%,#061d33 100%);color:#edf7ff}
-html[data-theme=dark] .inbs-loading-dot{color:#7cc7ff}
-html[data-theme=dark] .inbs-loading-rule{background:#86bbd588}
-html[data-theme=dark] .inbs-loading-subtitle{color:#b9d6e8}
-html[data-theme=dark] .inbs-loading-progress{background:#b8ddf238}
-html[data-theme=dark] .inbs-loading-progress span{background:#99d9ff}
-@keyframes inbs-loading-track{from{transform:translateX(-110%)}to{transform:translateX(390%)}}
-@media(prefers-reduced-motion:reduce){.inbs-loading-progress span{animation:none;width:100%;opacity:.65}}
 /* Decorative cursor accent. Do not replace the native pointer. */
 .inbs-custom-cursor{position:fixed;top:0;left:0;width:26px;height:26px;border:1px solid #81cffa;border-radius:50%;background:#4099d51c;z-index:110;pointer-events:none;opacity:0;transform:translate3d(-200px,-200px,0);transition:width .2s,height .2s,opacity .18s,background .2s;will-change:transform}
 @media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){.inbs-custom-cursor[data-visible=true]{opacity:.75}.inbs-custom-cursor[data-active=true]{width:42px;height:42px;background:#87d2ff24}}
