@@ -1,14 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowUpRight, Mail, MapPin, Phone, Linkedin, Instagram, Facebook } from 'lucide-react';
+import { ArrowUpRight, Mail, MapPin, Phone } from 'lucide-react';
+import { LinkedinIcon, InstagramIcon, FacebookIcon } from './social-icons';
 import { pages, serviceSlugs, serviceNames, type Locale } from '@/lib/site';
 import { FooterReveal } from './footer-reveal';
 
 const mapUrl = 'https://www.google.com/maps?q=Park+Lane+Tower+-+Business+Bay+-+Dubai';
 const socials = [
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/international-network-businessmen-services/', Icon: Linkedin },
-  { label: 'Instagram', href: 'https://www.instagram.com/inbs_business/', Icon: Instagram },
-  { label: 'Facebook', href: 'https://www.facebook.com/profile.php?id=100089453280961', Icon: Facebook },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/international-network-businessmen-services/', Icon: LinkedinIcon },
+  { label: 'Instagram', href: 'https://www.instagram.com/inbs_business/', Icon: InstagramIcon },
+  { label: 'Facebook', href: 'https://www.facebook.com/profile.php?id=100089453280961', Icon: FacebookIcon },
 ] as const;
 
 export function SiteFooter({ locale }: { locale: Locale }) {
