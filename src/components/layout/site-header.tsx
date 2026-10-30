@@ -3,11 +3,12 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { ArrowUpRight, Languages, Menu, Moon, Sun, X, ChevronRight } from 'lucide-react';
+import { ArrowUpRight, Languages, Menu, Moon, Sun, X, House, Building2, BriefcaseBusiness, Users, Newspaper, UserRoundSearch, Phone, ShieldCheck, FileText, Compass } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { pages, alternateLocale, type Locale } from '@/lib/site';
 
 const featured=['about','services','why-inbs','team'];
+const drawerIcons = [Building2,BriefcaseBusiness,ShieldCheck,Users,Newspaper,UserRoundSearch,Phone,FileText,FileText] as const;
 export function SiteHeader({locale}:{locale:Locale}){
  const pathname=usePathname();
  const [scrolled,setScrolled]=useState(false);
@@ -33,14 +34,14 @@ export function SiteHeader({locale}:{locale:Locale}){
   </nav>
   <div className="inbs-header-actions">
    <Link className="inbs-contact-button" href={`/${locale}/contact`}>{locale==='ar'?'تواصل معنا':'Contact us'}<ArrowUpRight size={17}/></Link>
-   <Link href={otherPath} className="inbs-icon-button" aria-label={locale==='ar'?'Switch to English':'التبديل إلى العربية'} title={locale==='ar'?'English':'العربية'}><Languages size={20}/></Link>
-   <button type="button" className="inbs-icon-button" onClick={toggleTheme} aria-label={theme==='dark'?'Switch to light mode':'Switch to dark mode'} title={theme==='dark'?'Light mode':'Dark mode'}>{theme==='dark'?<Sun size={21}/>:<Moon size={21}/>}</button>
+   <Link href={otherPath} className="inbs-icon-button" aria-label={locale==='ar'?'Switch to English':'التبديل إلى العربية'} title={locale==='ar'?'English':'العربية'}><motion.span whileHover={{rotate:-13,scale:1.13}}><Languages size={20}/></motion.span></Link>
+   <button type="button" className="inbs-icon-button" onClick={toggleTheme} aria-label={theme==='dark'?'Switch to light mode':'Switch to dark mode'} title={theme==='dark'?'Light mode':'Dark mode'}>{theme==='dark'?<motion.span key="sun" initial={{rotate:70,opacity:0,scale:.5}} animate={{rotate:0,opacity:1,scale:1}}><Sun size={21}/></motion.span>:<motion.span key="moon" initial={{rotate:-70,opacity:0,scale:.5}} animate={{rotate:0,opacity:1,scale:1}}><Moon size={21}/></motion.span>}</button>
    <button type="button" className="inbs-icon-button inbs-menu-trigger" onClick={()=>setOpen(!open)} aria-expanded={open} aria-controls="inbs-drawer" aria-label={open?'Close menu':'Open menu'}>{open?<X size={23}/>:<Menu size={23}/>}</button>
   </div>
  </div>
  <AnimatePresence>{open&&<><motion.button className="inbs-drawer-backdrop" type="button" aria-label="Close navigation" onClick={()=>setOpen(false)} initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}/><motion.aside id="inbs-drawer" className="inbs-drawer" role="dialog" aria-modal="true" aria-label={locale==='ar'?'قائمة الصفحات':'Site navigation'} initial={{x:locale==='ar'?'-100%':'100%'}} animate={{x:0}} exit={{x:locale==='ar'?'-100%':'100%'}} transition={{duration:.38,ease:[.22,1,.36,1]}}>
- <div className="inbs-drawer-top"><span>INBS / {locale==='ar'?'القائمة':'MENU'}</span><button onClick={()=>setOpen(false)} type="button" aria-label="Close"><X size={22}/></button></div>
- <nav aria-label={locale==='ar'?'كل الصفحات':'All pages'}><Link href={`/${locale}`}>{home}<ChevronRight size={20}/></Link>{pages.map(p=><Link key={p.slug} href={`/${locale}/${p.slug}`}>{p[locale]}<ChevronRight size={20}/></Link>)}</nav>
+ <div className="inbs-drawer-top"><Link href={`/${locale}`} onClick={()=>setOpen(false)} aria-label="INBS home"><Image src="/brand/inbs-logo.png" alt="INBS" width={142} height={72}/></Link><button onClick={()=>setOpen(false)} type="button" aria-label="Close"><X size={22}/></button></div>
+ <nav aria-label={locale==='ar'?'كل الصفحات':'All pages'}><Link className={onHome?'active':''} onClick={()=>setOpen(false)} href={`/${locale}`}><House size={19}/>{home}</Link>{pages.map((p,i)=>{const Icon=drawerIcons[i]??Compass;return <Link className={pathname===`/${locale}/${p.slug}`?'active':''} onClick={()=>setOpen(false)} key={p.slug} href={`/${locale}/${p.slug}`}><Icon size={19}/>{p[locale]}</Link>})}</nav>
  <div className="inbs-drawer-bottom"><a href="mailto:info@inbs-uae.com">info@inbs-uae.com</a><span>Dubai · UAE</span></div>
  </motion.aside></>}</AnimatePresence></header>
 }

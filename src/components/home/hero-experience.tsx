@@ -1,6 +1,7 @@
 'use client';
 import { useEffect,useRef,useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { AnimatePresence,motion,useReducedMotion } from 'motion/react';
 import { ArrowUpRight,ArrowLeft,ArrowRight,Pause,Play } from 'lucide-react';
 import { heroSlides } from '@/content/hero';
@@ -32,15 +33,15 @@ export function HeroExperience({locale}:{locale:Locale}){
  const slide=slides[active];
  const path=pointer&&anchor?(()=>{const dx=anchor.x-pointer.x,dy=anchor.y-pointer.y;const bx=pointer.x+dx*.47,by=pointer.y+dy*.55;return `M ${pointer.x} ${pointer.y} Q ${bx-26} ${by-22} ${bx} ${by} T ${anchor.x} ${anchor.y}`})():null;
  return <section ref={ref} className="inbs-hero" aria-label={locale==='ar'?'مقدمة خدماتنا':'Welcome to INBS'} onPointerMove={onPointerMove} onPointerLeave={()=>setPointer(null)}>
-  <video className="inbs-hero-video" autoPlay loop muted playsInline preload="none" poster="/images/hero-poster.jpg"><source src="/videos/inbs-hero.mp4" type="video/mp4"/></video>
+  <AnimatePresence initial={false}><motion.div key={active} className="inbs-hero-media" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration:1.15,ease:'easeInOut'}}><Image src={slide.image} alt="" fill priority={active===0} sizes="100vw" className="inbs-hero-photo"/></motion.div></AnimatePresence>
   <div className="inbs-hero-shade" aria-hidden="true"/>
   {path&&<svg className="inbs-network-trail" aria-hidden="true"><path d={path} stroke="currentColor" fill="none" strokeWidth="1.4" strokeOpacity=".7"/><circle cx={pointer!.x} cy={pointer!.y} r="3.5" fill="currentColor"/><circle cx={anchor!.x} cy={anchor!.y} r="5" fill="none" stroke="currentColor" strokeWidth="1.3"/><circle cx={pointer!.x+(anchor!.x-pointer!.x)*.47} cy={pointer!.y+(anchor!.y-pointer!.y)*.55} r="2.5" fill="currentColor" fillOpacity=".75"/></svg>}
   <div className="site-shell inbs-hero-layout"><div className="inbs-hero-content">
    <div className="inbs-hero-eyebrow">{locale==='ar'?'الشبكة العالمية لخدمات رجال الأعمال':'INTERNATIONAL NETWORK BUSINESSMEN SERVICES'} <span>· DUBAI / 2003</span></div>
-   <AnimatePresence mode="wait"><motion.div key={active} initial={reduced?false:{opacity:0,y:9}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-9}} transition={{duration:.55}} className="inbs-slide">
+   <AnimatePresence mode="wait"><motion.div key={active} initial={reduced?false:{opacity:0,y:8}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-8}} transition={{duration:.65}} className="inbs-slide">
     <h1>{slide.title}</h1><p>{slide.description}</p>
+    <Link ref={buttonRef} className="inbs-hero-cta" href={`/${locale}/services/${slide.slug}`}>{slide.button}<ArrowUpRight size={19}/></Link>
    </motion.div></AnimatePresence>
-   <Link ref={buttonRef} className="inbs-hero-cta" href={`/${locale}/services/${slide.slug}`}>{slide.button}<ArrowUpRight size={18}/></Link>
   </div>
   <div className="inbs-hero-bottom"><div className="inbs-slide-controls"><span>{String(active+1).padStart(2,'0')} <i>/</i> 03</span><button type="button" onClick={()=>setActive(n=>(n+slides.length-1)%slides.length)} aria-label="Previous slide"><ArrowLeft size={18}/></button><button type="button" onClick={()=>setActive(n=>(n+1)%slides.length)} aria-label="Next slide"><ArrowRight size={18}/></button><button type="button" onClick={()=>setPaused(!paused)} aria-label={paused?'Play slides':'Pause slides'}>{paused?<Play size={17}/>:<Pause size={17}/>}</button></div>
   <AnimatePresence mode="wait"><motion.div key={active} className="inbs-hero-service-strip" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration:.45}}><span>{locale==='ar'?'خدمات مرتبطة':'RELATED SERVICES'}</span>{slide.related.map(s=><Link key={s.slug} href={`/${locale}/services/${s.slug}`}>{s.label}<ArrowUpRight size={13}/></Link>)}</motion.div></AnimatePresence></div>
