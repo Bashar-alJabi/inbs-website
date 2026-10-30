@@ -14,7 +14,7 @@ const socials = [
 
 export function SiteFooter({ locale }: { locale: Locale }) {
   return <footer className="inbs-footer">
-    <div className="inbs-footer-glow" aria-hidden="true" />
+    <div className="inbs-footer-glow" aria-hidden="true" /><span className="inbs-footer-watermark" aria-hidden="true">INBS</span>
     <div className="site-shell inbs-footer-container">
       <FooterReveal>
         <div className="inbs-footer-top">
