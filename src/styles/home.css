@@ -250,3 +250,6 @@ html[data-theme=dark] .inbs-institutions-name{background:#1c2f42;border-color:#3
 @keyframes inbs-achievements-drop{0%,10%{top:0;opacity:0}18%{opacity:1}80%{opacity:1}100%{top:calc(100% - 6px);opacity:0}}
 @media(max-width:900px){.inbs-achievement:nth-of-type(3) .inbs-achievement-divider-dot{display:none}}
 @media(prefers-reduced-motion:reduce){.inbs-achievements-track-dot,.inbs-achievement-divider-dot{animation:none;display:none}}
+
+/* Keep the plus sign in LTR numeric order while right-aligning Arabic milestones. */
+[dir=rtl] .inbs-achievement strong{align-self:flex-start;text-align:right}
