@@ -10,7 +10,7 @@ export function AboutPreview({ locale }: { locale: Locale }) {
   <div className="site-shell inbs-about-inner">
    <div className="inbs-about-intro">
     <p className="inbs-about-kicker"><span className="inbs-about-kicker-mark" aria-hidden="true" />{content.aboutEyebrow}</p>
-    <h2 id="inbs-about-heading">{content.aboutTitle.split('\\n').map((line, index) => <span key={line} className={index===1?'inbs-about-heading-accent':undefined}>{line}</span>)}</h2>
+    <h2 id="inbs-about-heading">{content.aboutTitle.split('\n').map((line, index) => <span key={line} className={index===1?'inbs-about-heading-accent':undefined}>{line}</span>)}</h2>
    </div>
    <div className="inbs-about-copy">
     <p>{content.aboutText}</p>
