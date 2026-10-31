@@ -17,9 +17,9 @@ export const aboutDetails = {
   supporting: 'Over the years, our experience has grown alongside the needs of the businesses and individuals we serve. We believe that our clients’ success is our success.',
   pillarsLabel: 'What defines INBS',
   pillars: [
-   {title:'Trust & integrity',text:'Our credibility is built on strong, lasting relationships and the confidence our clients place in us.'},
-   {title:'Experience & variety',text:'Our extensive experience and diverse services help us respond to the evolving needs of businesses.'},
-   {title:'Commitment to clients',text:'We strive to deliver tailored, quality solutions and earn our clients’ satisfaction as a reliable business partner.'},
+   {title:'Beyond a single service',text:'Businessmen services, real estate, tourism, financial services, customs and cargo: different needs can be explored through one network.'},
+   {title:'Solutions shaped around you',text:'A company setting up operations and an individual handling paperwork do not need the same approach. We focus on the actual requirement, not a standard package.'},
+   {title:'A connection that continues',text:'Our work is not defined by one request. As clients’ needs change, our range of services gives them more reasons to stay connected with INBS.'},
   ],
  },
  ar: {
@@ -27,9 +27,9 @@ export const aboutDetails = {
   supporting: 'وما وصلنا إليه اليوم هو ثمرة خبراتنا الطويلة وتنوع الخدمات التي قدمناها عبر السنوات. نعتبر رضا عملائنا ونجاحهم جزءاً أساسياً من نجاحنا.',
   pillarsLabel: 'ما يميز الشبكة العالمية لخدمات رجال الأعمال',
   pillars: [
-   {title:'الثقة والمصداقية',text:'نعتز بثقة عملائنا وبالعلاقات المتينة التي بنيناها معهم، ونعتبر المصداقية أساس عملنا.'},
-   {title:'الخبرة وتنوع الخدمات',text:'تعكس خدماتنا المتنوعة خبرتنا الممتدة وقدرتنا على مواكبة احتياجات الأعمال المتغيرة.'},
-   {title:'الالتزام برضا العملاء',text:'نسعى إلى تقديم حلول مناسبة وخدمات عالية الجودة، لنكون شريكاً موثوقاً لعملائنا.'},
+   {title:'أكثر من خدمة واحدة',text:'من خدمات رجال الأعمال والعقارات إلى السياحة والخدمات المالية والجمارك والشحن؛ احتياجات مختلفة تجمعها شبكة واحدة.'},
+   {title:'الحل يبدأ من احتياجك',text:'متطلبات تأسيس الأعمال ليست كمتطلبات إنجاز المعاملات الفردية. لذلك ننطلق من طبيعة الطلب، لا من باقة جاهزة للجميع.'},
+   {title:'علاقة تتجاوز الطلب الأول',text:'احتياجات العملاء تتغير مع الوقت، وتنوّع خدماتنا يتيح لهم العودة إلى INBS لاستكشاف ما يحتاجونه في مراحل مختلفة.'},
   ],
  },
 } as const;

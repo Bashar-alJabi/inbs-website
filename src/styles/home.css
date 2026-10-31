@@ -35,8 +35,8 @@ html[data-theme=dark] .proof-inner p{color:#d1e7f3}
 .inbs-about-footnote{position:absolute;inset-inline:clamp(20px,5vw,68px);bottom:29px;display:flex;justify-content:space-between;border-top:1px solid var(--inbs-about-divider,#d8e4ec);padding-top:17px;color:var(--inbs-about-muted,#50687a);font-size:10px;letter-spacing:.16em}
 [lang=ar] .inbs-about-intro h2{letter-spacing:0;line-height:1.4}[lang=ar] .inbs-about-kicker,[lang=ar] .inbs-about-footnote{letter-spacing:0}
 html[data-theme=dark] .inbs-about-preview{--inbs-about-surface:#0b2338;--inbs-about-ink:#e8f5fd;--inbs-about-accent:#8bcdf5;--inbs-about-muted:#b6cbda;--inbs-about-divider:#35536b}
-@media(max-width:850px){.inbs-about-inner{min-height:0;grid-template-columns:1fr;row-gap:22px;padding-block:83px 100px}.inbs-about-copy{padding-top:0;max-width:670px}.inbs-about-art{inset-inline-start:auto;inset-inline-end:-150px;bottom:-190px}.inbs-about-footnote{bottom:25px}}
-@media(max-width:540px){.inbs-about-inner{padding-block:68px 93px}.inbs-about-intro h2{font-size:clamp(39px,10vw,57px)}.inbs-about-copy>p{font-size:16px;line-height:1.85}.inbs-about-art{width:320px;height:320px;bottom:-165px;inset-inline-end:-160px}.inbs-about-kicker{font-size:11px;margin-bottom:20px}}
+@media(max-width:850px){.inbs-about-inner{min-height:0;grid-template-columns:1fr;row-gap:22px;padding-block:83px 100px}.inbs-about-copy{padding-top:0;max-width:670px}.inbs-about-art{inset-inline-start:auto;inset-inline-end:-125px;top:95px;bottom:auto}.inbs-about-footnote{bottom:25px}}
+@media(max-width:540px){.inbs-about-inner{padding-block:68px 93px}.inbs-about-intro h2{font-size:clamp(39px,10vw,57px)}.inbs-about-copy>p{font-size:16px;line-height:1.85}.inbs-about-art{width:320px;height:320px;top:115px;bottom:auto;inset-inline-end:-150px;opacity:.20}.inbs-about-kicker{font-size:11px;margin-bottom:20px}}
 
 /* About INBS: editorial supporting copy and a structured three-part story. */
 .inbs-about-copy .inbs-about-supporting{font-size:clamp(15px,1.2vw,17px);line-height:1.85;margin-top:-12px;color:var(--inbs-about-muted,#50687a)}
@@ -53,13 +53,21 @@ html[data-theme=dark] .inbs-about-preview{--inbs-about-surface:#0b2338;--inbs-ab
 .inbs-about-link svg{transition:transform .3s cubic-bezier(.22,1,.36,1)}
 .inbs-about-link:hover svg,.inbs-about-link:focus-visible svg{transform:translate(4px,-4px)}
 [dir=rtl] .inbs-about-link:hover svg,[dir=rtl] .inbs-about-link:focus-visible svg{transform:translate(-4px,-4px)}
-.inbs-about-art{animation:inbs-about-orbit 75s linear infinite}
-.inbs-about-art-traveler{position:absolute;inset:0;border-radius:50%;animation:inbs-about-travel 15s linear infinite}
-.inbs-about-art-traveler:before{content:"";position:absolute;top:-4px;left:calc(50% - 4px);width:8px;height:8px;border-radius:50%;background:var(--inbs-about-accent,#2173a7);box-shadow:0 0 0 7px color-mix(in srgb,var(--inbs-about-accent,#2173a7) 18%,transparent)}
-@keyframes inbs-about-orbit{to{transform:rotate(343deg)}}
-@keyframes inbs-about-travel{to{transform:rotate(360deg)}}
+/* Stationary network: staggered signals leave the hub and return along distinct paths. */
+.inbs-about-art{animation:none;transform:none;opacity:.32;bottom:auto;top:112px;inset-inline-start:24%;z-index:1}
+.inbs-about-art-center{inset:calc(50% - 13px);width:26px;height:26px;box-shadow:0 0 0 10px color-mix(in srgb,var(--inbs-about-accent,#2173a7) 14%,transparent)}
+.inbs-about-art-spoke{position:absolute;left:50%;top:50%;height:1px;width:43%;background:var(--inbs-about-accent,#2173a7);transform-origin:left center}
+.inbs-about-art-spoke-a{transform:rotate(-38deg)}
+.inbs-about-art-spoke-b{transform:rotate(40deg)}
+.inbs-about-art-spoke-c{transform:rotate(143deg)}
+.inbs-about-art-spoke-d{transform:rotate(218deg)}
+.inbs-about-art-pulse{position:absolute;left:-4px;top:-4px;width:8px;height:8px;border-radius:50%;background:var(--inbs-about-accent,#2173a7);box-shadow:0 0 0 5px color-mix(in srgb,var(--inbs-about-accent,#2173a7) 16%,transparent);animation:inbs-about-signal 6.8s ease-in-out infinite both}
+.inbs-about-art-spoke-b .inbs-about-art-pulse{animation-delay:-1.7s}
+.inbs-about-art-spoke-c .inbs-about-art-pulse{animation-delay:-3.4s}
+.inbs-about-art-spoke-d .inbs-about-art-pulse{animation-delay:-5.1s}
+@keyframes inbs-about-signal{0%,8%,100%{left:-4px;opacity:0}16%{opacity:1}51%{left:calc(100% - 4px);opacity:1}82%{left:-4px;opacity:1}90%{opacity:0}}
 html[data-theme=dark] .inbs-about-preview{--inbs-about-card:#11334dba}
 [lang=ar] .inbs-about-pillar h3{letter-spacing:0}
 @media(max-width:850px){.inbs-about-inner{row-gap:30px}.inbs-about-pillars{grid-template-columns:1fr;gap:12px}.inbs-about-pillar{padding:24px}.inbs-about-pillar h3{margin:12px 0 8px}}
 @media(min-width:601px) and (max-width:1000px){.inbs-about-pillars{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(prefers-reduced-motion:reduce){.inbs-about-art,.inbs-about-art-traveler{animation:none}.inbs-about-link svg,.inbs-about-link:after,.inbs-about-pillar{transition:none}}
+@media(prefers-reduced-motion:reduce){.inbs-about-art-pulse{animation:none;opacity:0}.inbs-about-link svg,.inbs-about-link:after,.inbs-about-pillar{transition:none}}

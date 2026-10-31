@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowUpRight, MoveUpRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { homeContent, aboutDetails } from '@/content/home';
 import type { Locale } from '@/lib/site';
 
@@ -21,13 +21,14 @@ export function AboutPreview({ locale }: { locale: Locale }) {
    <div className="inbs-about-art" aria-hidden="true">
     <span className="inbs-about-art-orbit inbs-about-art-orbit-outer" />
     <span className="inbs-about-art-orbit inbs-about-art-orbit-inner" />
-    <span className="inbs-about-art-line inbs-about-art-line-first" />
-    <span className="inbs-about-art-line inbs-about-art-line-second" />
     <span className="inbs-about-art-node inbs-about-art-node-one" />
     <span className="inbs-about-art-node inbs-about-art-node-two" />
     <span className="inbs-about-art-node inbs-about-art-node-three" />
-    <span className="inbs-about-art-center"><MoveUpRight size={29} strokeWidth={1.3}/></span>
-    <span className="inbs-about-art-traveler" />
+    <span className="inbs-about-art-spoke inbs-about-art-spoke-a"><span className="inbs-about-art-pulse" /></span>
+    <span className="inbs-about-art-spoke inbs-about-art-spoke-b"><span className="inbs-about-art-pulse" /></span>
+    <span className="inbs-about-art-spoke inbs-about-art-spoke-c"><span className="inbs-about-art-pulse" /></span>
+    <span className="inbs-about-art-spoke inbs-about-art-spoke-d"><span className="inbs-about-art-pulse" /></span>
+    <span className="inbs-about-art-center" />
    </div>
    <div className="inbs-about-pillars" aria-label={details.pillarsLabel}>
     {details.pillars.map((pillar, index) => <article className="inbs-about-pillar" key={pillar.title}>
