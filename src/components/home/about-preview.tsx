@@ -1,0 +1,32 @@
+import Link from 'next/link';
+import { ArrowUpRight, MoveUpRight } from 'lucide-react';
+import { homeContent } from '@/content/home';
+import type { Locale } from '@/lib/site';
+
+/** Company introduction; facts and translations live in src/content/home.ts. */
+export function AboutPreview({ locale }: { locale: Locale }) {
+ const content = homeContent[locale];
+ return <section className="inbs-about-preview" aria-labelledby="inbs-about-heading">
+  <div className="site-shell inbs-about-inner">
+   <div className="inbs-about-intro">
+    <p className="inbs-about-kicker"><span className="inbs-about-kicker-mark" aria-hidden="true" />{content.aboutEyebrow}</p>
+    <h2 id="inbs-about-heading">{content.aboutTitle.split('\\n').map((line, index) => <span key={line} className={index===1?'inbs-about-heading-accent':undefined}>{line}</span>)}</h2>
+   </div>
+   <div className="inbs-about-copy">
+    <p>{content.aboutText}</p>
+    <Link className="inbs-about-link" href={`/${locale}/about`}><span>{content.aboutLink}</span><ArrowUpRight size={20} aria-hidden="true" /></Link>
+   </div>
+   <div className="inbs-about-art" aria-hidden="true">
+    <span className="inbs-about-art-orbit inbs-about-art-orbit-outer" />
+    <span className="inbs-about-art-orbit inbs-about-art-orbit-inner" />
+    <span className="inbs-about-art-line inbs-about-art-line-first" />
+    <span className="inbs-about-art-line inbs-about-art-line-second" />
+    <span className="inbs-about-art-node inbs-about-art-node-one" />
+    <span className="inbs-about-art-node inbs-about-art-node-two" />
+    <span className="inbs-about-art-node inbs-about-art-node-three" />
+    <span className="inbs-about-art-center"><MoveUpRight size={29} strokeWidth={1.3}/></span>
+   </div>
+   <div className="inbs-about-footnote" aria-hidden="true"><span>INBS</span><span>2003 — {locale==='ar'?'دبي':'DUBAI'}</span></div>
+  </div>
+ </section>;
+}
