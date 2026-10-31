@@ -23,11 +23,11 @@ export function AboutPreview({ locale }: { locale: Locale }) {
      <circle cx="225" cy="225" r="220" className="inbs-network-ring"/>
      <circle cx="225" cy="225" r="146" className="inbs-network-ring"/>
      <path d="M69.437 69.437L380.563 380.563 M380.563 69.437L69.437 380.563" className="inbs-network-lines"/>
-     <circle cx="225" cy="225" r="16" className="inbs-network-hub"/>
-     <circle cx="225" cy="225" r="26" className="inbs-network-halo"/>
      <circle r="5" className="inbs-network-traveler"><animateMotion dur="15s" begin="-2s" repeatCount="indefinite" path="M225 225 L328.237 121.763 A146 146 0 0 1 328.237 328.237 L380.563 380.563 A220 220 0 0 1 69.437 380.563 L121.763 328.237 A146 146 0 0 1 121.763 121.763 L225 225" /></circle>
      <circle r="5" className="inbs-network-traveler"><animateMotion dur="19s" begin="-8s" repeatCount="indefinite" path="M225 225 L121.763 121.763 A146 146 0 0 0 121.763 328.237 L69.437 380.563 A220 220 0 0 1 69.437 69.437 L121.763 121.763 L225 225" /></circle>
      <circle r="5" className="inbs-network-traveler"><animateMotion dur="23s" begin="-15s" repeatCount="indefinite" path="M225 225 L328.237 328.237 A146 146 0 0 1 121.763 328.237 L69.437 380.563 A220 220 0 0 0 380.563 380.563 L328.237 328.237 A146 146 0 0 0 328.237 121.763 L225 225" /></circle>
+     <circle cx="225" cy="225" r="16" className="inbs-network-hub"/>
+     <circle cx="225" cy="225" r="26" className="inbs-network-halo"/>
     </svg>
    </div>
    <div className="inbs-about-pillars" aria-label={details.pillarsLabel}>
