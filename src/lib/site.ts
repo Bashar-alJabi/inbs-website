@@ -4,7 +4,6 @@ export const isLocale = (value: string): value is Locale => locales.some((locale
 export const pages = [
   { slug: 'about', en: 'About', ar: 'من نحن' },
   { slug: 'services', en: 'Services', ar: 'الخدمات' },
-  { slug: 'why-inbs', en: 'Why INBS', ar: 'لماذا INBS' },
   { slug: 'team', en: 'Our Team', ar: 'الفريق' },
   { slug: 'insights', en: 'Insights', ar: 'مقالات' },
   { slug: 'careers', en: 'Careers', ar: 'الوظائف' },
