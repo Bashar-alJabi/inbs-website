@@ -206,14 +206,14 @@ html[data-theme=dark] .inbs-achievements{background:#041f40}
 .inbs-achievements-heading h2>span{display:inline}
 .inbs-achievements-heading h2>span+span:before{content:" "}
 .inbs-achievements-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1px solid #ffffff40}
-.inbs-achievement,.inbs-achievement:hover{min-height:0;border:0;border-radius:0;border-inline-start:1px solid #ffffff25;background:transparent;transform:none;box-shadow:none;padding:27px clamp(12px,2vw,28px) 12px;gap:13px}
-.inbs-achievement:first-child{border-inline-start:0}
+.inbs-achievement,.inbs-achievement:hover{min-height:0;border:0;border-radius:0;border-inline-start:1px solid #ffffff25;background:transparent;transform:none;box-shadow:none;overflow:visible;padding:27px clamp(12px,2vw,28px) 12px;gap:13px}
+.inbs-achievement:first-of-type{border-inline-start:0}
 .inbs-achievement strong{margin:0;font-size:clamp(33px,3.75vw,58px);font-weight:700}
 .inbs-achievement-caption{font-size:clamp(12px,1.1vw,16px)}
 .inbs-achievement-line{display:block;height:2px;width:32px;background:var(--brand-light);transition:width .4s}
 .inbs-achievement:hover .inbs-achievement-line{width:70px}
 .inbs-achievements:before{width:300px;height:300px;right:-160px;top:-150px}
-@media(max-width:900px){.inbs-achievements-grid{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:25px}.inbs-achievement:nth-child(3){border-inline-start:0}}
+@media(max-width:900px){.inbs-achievements-grid{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:25px}.inbs-achievement:nth-of-type(3){border-inline-start:0}}
 @media(max-width:600px){.inbs-achievements-heading{display:block}.inbs-achievements-heading h2{margin-top:13px}.inbs-achievements-grid{row-gap:8px}.inbs-achievement{padding:22px 12px 10px}.inbs-achievement strong{font-size:clamp(30px,8vw,45px)}}
 /* Smaller institutional section, immediate visible first tile in both locales */
 .inbs-institutions{padding-block:clamp(55px,6vw,85px) clamp(95px,9vw,120px)}
@@ -245,8 +245,8 @@ html[data-theme=dark] .inbs-institutions-name{background:#1c2f42;border-color:#3
 .inbs-achievements-track-dot{position:absolute;z-index:3;top:-3px;inset-inline-start:0;width:6px;height:6px;border-radius:50%;background:#a6dcff;box-shadow:0 0 12px 3px #79bbef77;animation:inbs-achievements-travel 9s linear infinite;pointer-events:none}
 @keyframes inbs-achievements-travel{from{inset-inline-start:0}to{inset-inline-start:calc(100% - 6px)}}
 .inbs-achievement-divider-dot{position:absolute;z-index:2;top:0;inset-inline-start:-3px;width:6px;height:6px;border-radius:50%;background:#a6dcff;box-shadow:0 0 10px #79bbef88;animation:inbs-achievements-drop 6.5s ease-in-out infinite;pointer-events:none}
-.inbs-achievement:nth-child(3) .inbs-achievement-divider-dot{animation-delay:-2.1s}
-.inbs-achievement:nth-child(4) .inbs-achievement-divider-dot{animation-delay:-4.2s}
+.inbs-achievement:nth-of-type(3) .inbs-achievement-divider-dot{animation-delay:-2.1s}
+.inbs-achievement:nth-of-type(4) .inbs-achievement-divider-dot{animation-delay:-4.2s}
 @keyframes inbs-achievements-drop{0%,10%{top:0;opacity:0}18%{opacity:1}80%{opacity:1}100%{top:calc(100% - 6px);opacity:0}}
-@media(max-width:900px){.inbs-achievement:nth-child(3) .inbs-achievement-divider-dot{display:none}}
+@media(max-width:900px){.inbs-achievement:nth-of-type(3) .inbs-achievement-divider-dot{display:none}}
 @media(prefers-reduced-motion:reduce){.inbs-achievements-track-dot,.inbs-achievement-divider-dot{animation:none;display:none}}
