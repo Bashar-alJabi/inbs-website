@@ -64,4 +64,8 @@ html[data-theme=dark] .inbs-about-preview{--inbs-about-card:#11334dba}
 [lang=ar] .inbs-about-pillar h3{letter-spacing:0}
 @media(max-width:850px){.inbs-about-inner{row-gap:30px}.inbs-about-pillars{grid-template-columns:1fr;gap:12px}.inbs-about-pillar{padding:24px}.inbs-about-pillar h3{margin:12px 0 8px}}
 @media(min-width:601px) and (max-width:1000px){.inbs-about-pillars{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* Overrides follow the base artwork declaration so mobile positioning takes effect. */
+[lang=ar] .inbs-about-kicker{font-size:14px}
+@media(max-width:850px){.inbs-about-art{top:auto;bottom:315px}}
+@media(max-width:540px){.inbs-about-art{top:auto;bottom:625px}}
 @media(prefers-reduced-motion:reduce){.inbs-network-traveler{display:none}.inbs-about-link svg,.inbs-about-link:after,.inbs-about-pillar{transition:none}}
