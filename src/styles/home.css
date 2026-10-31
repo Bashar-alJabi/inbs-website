@@ -149,7 +149,8 @@ html[data-theme=dark] .inbs-achievements{background:#071b2b}
 .inbs-institutions-emblem:after{content:"";position:absolute;inset:8px;border-radius:50%;background:#76a5bc}
 .inbs-institutions-disclaimer{font-size:12px;line-height:1.75;color:#668191;margin:26px 0 0}
 @keyframes inbs-institutions-marquee{to{transform:translateX(-50%)}}
-[dir=rtl] .inbs-institutions-track{animation-direction:reverse}
+[dir=rtl] .inbs-institutions-track{animation-name:inbs-institutions-marquee-rtl;animation-direction:normal}
+@keyframes inbs-institutions-marquee-rtl{from{transform:translateX(-50%)}to{transform:translateX(0)}}
 [dir=rtl] .inbs-institutions-heading h2,[dir=rtl] .inbs-institutions-kicker{letter-spacing:0}
 html[data-theme=dark] .inbs-institutions{background:#10283b;color:#e8f5fc}
 html[data-theme=dark] .inbs-institutions-heading p,html[data-theme=dark] .inbs-institutions-disclaimer{color:#b6cbda}
@@ -193,3 +194,7 @@ html[data-theme=dark] .inbs-about-intro h2>span:first-child,html[data-theme=dark
 html[data-theme=dark] .inbs-about-intro h2>span:last-child,html[data-theme=dark] .inbs-services-heading h2>span:last-child,html[data-theme=dark] .inbs-institutions-heading h2>span:last-child{color:var(--brand-light)}
 html[data-theme=dark] .inbs-achievements{background:#041f40}
 @media(prefers-reduced-motion:reduce){.inbs-achievement{transition:none}}
+
+/* Preserve the marquee's full first frame in RTL. */
+[dir=rtl] .inbs-institutions-track{animation-name:inbs-institutions-marquee-rtl}
+@media(prefers-reduced-motion:reduce){[dir=rtl] .inbs-institutions-track{animation:none}}
