@@ -161,3 +161,21 @@ html[data-theme=dark] .inbs-header.is-solid .inbs-brand img{filter:brightness(0)
 .inbs-theme-show-dark{display:none}
 html[data-theme=dark] .inbs-theme-show-dark{display:inline-flex}
 html[data-theme=dark] .inbs-theme-show-light{display:none}
+
+/* Mobile footer follows the page writing direction instead of centering content. */
+@media(max-width:760px){
+ .inbs-footer-top,.inbs-footer-grid,.inbs-footer-about,.inbs-footer-contact>a,.inbs-footer-contact>h3,.inbs-footer-bottom{text-align:start}
+ .inbs-footer-top{align-items:flex-start}
+ .inbs-footer-top>a{align-self:flex-start}
+ .inbs-footer-grid a{justify-content:flex-start}
+ .inbs-footer-about{align-items:flex-start}
+ .inbs-footer-about img{margin-inline:0}
+ .inbs-footer-about p{margin-inline:0}
+ .inbs-socials{justify-content:flex-start}
+ .inbs-footer-contact>a{justify-content:flex-start;align-items:flex-start}
+ .inbs-footer-contact>a span{flex:1}
+ .inbs-footer-bottom{justify-content:space-between}
+ .inbs-footer-bottom>div{justify-content:flex-start}
+ .inbs-footer-watermark{left:auto;right:auto;inset-inline-start:14px;inset-inline-end:auto;transform:none;text-align:start}
+ [dir=rtl] .inbs-footer-watermark{left:auto;right:auto;inset-inline-start:14px;inset-inline-end:auto;transform:none}
+}
