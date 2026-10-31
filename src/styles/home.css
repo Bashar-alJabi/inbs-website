@@ -14,3 +14,50 @@ html[data-theme=dark] .proof-inner p{color:#d1e7f3}
 [dir=rtl] .proof-inner p{letter-spacing:0}
 @media(max-width:900px){.proof-inner{grid-template-columns:1fr 1fr}.proof-inner p{grid-column:1/-1;justify-self:start;max-width:none;margin:0 0 22px}}
 @media(max-width:600px){.proof-inner{padding-block:24px;gap:20px}.proof-inner>div{padding-inline-start:12px}.proof-inner strong{font-size:24px}.proof-inner p{font-size:15px}}
+
+/* About preview layout and SVG network graphic. */
+.inbs-about-preview{position:relative;overflow:hidden;background:var(--inbs-about-surface,#f6f9fc);color:var(--inbs-about-ink,#092c47);border-bottom:1px solid var(--inbs-about-divider,#d8e4ec)}
+.inbs-about-inner{position:relative;display:grid;grid-template-columns:minmax(0,1.16fr) minmax(0,.84fr);column-gap:clamp(35px,7vw,115px);row-gap:40px;min-height:555px;padding-block:clamp(88px,11vw,152px) 95px;align-items:center}
+.inbs-about-intro,.inbs-about-copy{position:relative;z-index:2}
+.inbs-about-kicker{display:flex;align-items:center;gap:12px;color:var(--inbs-about-accent,#2173a7);font-size:12px;font-weight:750;letter-spacing:.15em;text-transform:uppercase;margin:0 0 27px}
+.inbs-about-kicker-mark{width:27px;height:1px;background:currentColor}
+.inbs-about-intro h2{font-size:clamp(44px,5.3vw,81px);letter-spacing:-.055em;line-height:1.16;font-weight:650;margin:0;max-width:720px}
+.inbs-about-intro h2 span{display:block}.inbs-about-heading-accent{color:var(--inbs-about-accent,#2173a7)}
+.inbs-about-copy{padding-top:50px;max-width:455px}
+.inbs-about-copy>p{font-size:clamp(16px,1.35vw,19px);line-height:1.95;color:var(--inbs-about-muted,#50687a);margin:0 0 31px}
+.inbs-about-link{display:inline-flex;align-items:center;justify-content:space-between;gap:34px;min-width:200px;border-bottom:1px solid var(--inbs-about-accent,#2173a7);padding:0 0 14px;color:var(--inbs-about-ink,#092c47);font-size:14px;font-weight:750;transition:color .2s,gap .2s}
+.inbs-about-link:hover{color:var(--inbs-about-accent,#2173a7);gap:46px}
+.inbs-about-art{position:absolute;inset-inline-start:19%;bottom:245px;width:450px;height:450px;opacity:.27;pointer-events:none;transform:rotate(-17deg);z-index:1}
+.inbs-about-footnote{position:absolute;inset-inline:clamp(20px,5vw,68px);bottom:29px;display:flex;justify-content:space-between;border-top:1px solid var(--inbs-about-divider,#d8e4ec);padding-top:17px;color:var(--inbs-about-muted,#50687a);font-size:10px;letter-spacing:.16em}
+[lang=ar] .inbs-about-intro h2{letter-spacing:0;line-height:1.4}[lang=ar] .inbs-about-kicker,[lang=ar] .inbs-about-footnote{letter-spacing:0}
+html[data-theme=dark] .inbs-about-preview{--inbs-about-surface:#0b2338;--inbs-about-ink:#e8f5fd;--inbs-about-accent:#8bcdf5;--inbs-about-muted:#b6cbda;--inbs-about-divider:#35536b}
+@media(max-width:850px){.inbs-about-inner{min-height:0;grid-template-columns:1fr;row-gap:22px;padding-block:83px 100px}.inbs-about-copy{padding-top:0;max-width:670px}.inbs-about-art{inset-inline-start:19%;inset-inline-end:auto;top:auto;bottom:315px}.inbs-about-footnote{bottom:25px}}
+@media(max-width:540px){.inbs-about-inner{padding-block:68px 93px}.inbs-about-intro h2{font-size:clamp(39px,10vw,57px)}.inbs-about-copy>p{font-size:16px;line-height:1.85}.inbs-about-art{width:320px;height:320px;top:auto;bottom:625px;inset-inline-start:19%;inset-inline-end:auto;opacity:.19}.inbs-about-kicker{font-size:11px;margin-bottom:20px}}
+
+/* About INBS: editorial supporting copy and a structured three-part story. */
+.inbs-about-copy .inbs-about-supporting{font-size:clamp(15px,1.2vw,17px);line-height:1.85;margin-top:-12px;color:var(--inbs-about-muted,#50687a)}
+.inbs-about-inner{row-gap:72px;padding-bottom:125px}
+.inbs-about-pillars{grid-column:1/-1;position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.inbs-about-pillar{padding:clamp(24px,3vw,36px);border:1px solid var(--inbs-about-divider,#d8e4ec);background:var(--inbs-about-card,#ffffffb8);border-radius:12px;backdrop-filter:blur(8px);transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
+.inbs-about-pillar:hover{transform:translateY(-5px);border-color:var(--inbs-about-accent,#2173a7);box-shadow:0 14px 38px #08243c0c}
+.inbs-about-pillar-number{font-size:11px;font-weight:750;letter-spacing:.13em;color:var(--inbs-about-accent,#2173a7)}
+.inbs-about-pillar h3{font-size:clamp(18px,1.7vw,23px);font-weight:700;margin:19px 0 13px;letter-spacing:-.025em}
+.inbs-about-pillar p{font-size:clamp(15px,1.2vw,17px);line-height:1.85;color:var(--inbs-about-muted,#50687a);margin:0}
+.inbs-about-link{position:relative;overflow:hidden;transition:color .25s ease,gap .25s ease}
+.inbs-about-link:after{content:"";position:absolute;bottom:0;inset-inline-start:0;width:100%;height:2px;background:var(--inbs-about-accent,#2173a7);transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.inbs-about-link:hover:after,.inbs-about-link:focus-visible:after{transform:scaleX(1)}
+.inbs-about-link svg{transition:transform .3s cubic-bezier(.22,1,.36,1)}
+.inbs-about-link:hover svg,.inbs-about-link:focus-visible svg{transform:translate(4px,-4px)}
+[dir=rtl] .inbs-about-link:hover svg,[dir=rtl] .inbs-about-link:focus-visible svg{transform:translate(-4px,-4px)}
+/* Original two-ring network, with staggered signals travelling from the hub onto both orbits. */
+.inbs-about-network{width:100%;height:100%;overflow:visible;color:var(--inbs-about-accent,#2173a7)}
+.inbs-network-ring,.inbs-network-lines{stroke:currentColor;stroke-width:1;opacity:.75}
+.inbs-network-hub{fill:currentColor}
+.inbs-network-halo{stroke:currentColor;stroke-width:1;opacity:.55}
+.inbs-network-traveler{fill:currentColor;stroke:var(--inbs-about-surface,#f6f9fc);stroke-width:1.5;opacity:.95}
+html[data-theme=dark] .inbs-about-preview{--inbs-about-card:#11334dba}
+[lang=ar] .inbs-about-pillar h3{letter-spacing:0}
+@media(max-width:850px){.inbs-about-inner{row-gap:30px}.inbs-about-pillars{grid-template-columns:1fr;gap:12px}.inbs-about-pillar{padding:24px}.inbs-about-pillar h3{margin:12px 0 8px}}
+@media(min-width:601px) and (max-width:1000px){.inbs-about-pillars{grid-template-columns:repeat(3,minmax(0,1fr))}}
+[lang=ar] .inbs-about-kicker{font-size:14px}
+@media(prefers-reduced-motion:reduce){.inbs-network-traveler{display:none}.inbs-about-link svg,.inbs-about-link:after,.inbs-about-pillar{transition:none}}

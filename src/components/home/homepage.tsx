@@ -2,6 +2,7 @@ import { homeContent } from '@/content/home';
 import type { Locale } from '@/lib/site';
 import { SmoothScroll } from './motion-elements';
 import { HeroExperience } from './hero-experience';
+import { AboutPreview } from './about-preview';
 
 /** Homepage shell. Additional sections will be added after their design is approved. */
 export function Homepage({locale}:{locale:Locale}){
@@ -16,5 +17,6 @@ export function Homepage({locale}:{locale:Locale}){
         <p>{t.intro}</p>
       </div>
     </section>
+    <AboutPreview locale={locale}/>
   </main>;
 }

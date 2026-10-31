@@ -1,4 +1,4 @@
-/* Original INBS institutional visual direction; no Amer assets. */
+/* INBS website layout and visual styles. */
 :root{--inbs-paper:#f4f7f9;--inbs-ink:#092d4a;--inbs-panel:#fff;--inbs-muted:#60758a}
 html[data-theme=dark]{--inbs-paper:#091c2e;--inbs-ink:#e9f4fd;--inbs-panel:#102c44;--inbs-muted:#a8bdce;color-scheme:dark}
 html[data-theme=dark] body{background:var(--inbs-paper);color:var(--inbs-ink)}
@@ -83,19 +83,7 @@ html[data-theme=dark] .inbs-drawer-top img{filter:brightness(0) invert(1)}
  .inbs-slide-controls{display:none}
  .inbs-hero-bottom{margin-top:auto}
  .inbs-hero-service-strip{justify-content:flex-start}
- .inbs-footer-grid{text-align:center}
  .inbs-footer-grid>div{justify-self:stretch}
- .inbs-footer-grid a{justify-content:center}
- .inbs-footer-about p{margin-inline:auto}
- .inbs-socials{justify-content:center}
- .inbs-footer-contact>a{text-align:center;align-items:center}
- .inbs-footer-contact>a>svg{margin-top:0}
- .inbs-footer-contact>a span{flex:initial}
- .inbs-footer-contact>h3{text-align:center}
- .inbs-footer-top{text-align:center;align-items:center}
- .inbs-footer-top>a{align-self:center}
- .inbs-footer-bottom{justify-content:center;text-align:center}
- .inbs-footer-bottom>div{margin-inline-start:0;justify-content:center}
 }
 @media(max-width:420px){.inbs-hero-layout{gap:30px}.inbs-hero-eyebrow{margin-bottom:18px}.inbs-hero-service-strip{gap:10px}.inbs-hero-service-strip a{font-size:11px}}
 
@@ -140,13 +128,6 @@ html[data-theme=dark] .inbs-drawer-top img{filter:brightness(0) invert(1)}
 .inbs-footer-glow:before{inset-inline-end:-470px;bottom:-490px;top:auto}
 @media(max-width:760px){.inbs-footer-watermark{font-size:clamp(105px,21vw,190px);letter-spacing:0;inset-inline-end:14px}.inbs-footer-glow:before{inset-inline-end:-510px;bottom:-490px;top:auto}}
 
-/* Mobile footer: center the official logo and anchor the signature to the section divider. */
-@media(max-width:760px){
- .inbs-footer-about{display:flex;flex-direction:column;align-items:center;text-align:center}
- .inbs-footer-about img{display:block;margin-inline:auto}
- .inbs-footer-watermark{top:clamp(295px,38vh,405px);inset-inline-end:auto;left:50%;right:auto;transform:translateX(-50%);text-align:center;font-size:clamp(105px,21vw,190px);letter-spacing:0}
- [dir=rtl] .inbs-footer-watermark{left:50%;right:auto;transform:translateX(-50%)}
-}
 
 /* Desktop-only refinement of the decorative INBS wordmark. */
 @media(min-width:761px){.inbs-footer-watermark{font-size:clamp(125px,18vw,310px);letter-spacing:-.055em}}
@@ -161,3 +142,24 @@ html[data-theme=dark] .inbs-header.is-solid .inbs-brand img{filter:brightness(0)
 .inbs-theme-show-dark{display:none}
 html[data-theme=dark] .inbs-theme-show-dark{display:inline-flex}
 html[data-theme=dark] .inbs-theme-show-light{display:none}
+
+/* Mobile footer follows the page writing direction instead of centering content. */
+@media(max-width:760px){
+ .inbs-footer-top,.inbs-footer-grid,.inbs-footer-about,.inbs-footer-contact>a,.inbs-footer-contact>h3,.inbs-footer-bottom{text-align:start}
+ .inbs-footer-top{align-items:flex-start}
+ .inbs-footer-top>a{align-self:flex-start}
+ .inbs-footer-grid a{justify-content:flex-start}
+ .inbs-footer-about{display:flex;flex-direction:column;align-items:flex-start;text-align:start}
+ .inbs-footer-about img{display:block;margin-inline:0}
+ .inbs-footer-about p{margin-inline:0}
+ .inbs-socials{justify-content:flex-start}
+ .inbs-footer-grid .inbs-socials a{display:grid;place-items:center;justify-content:center;align-items:center;flex:0 0 40px;width:40px;height:40px;padding:0}
+ .inbs-footer-contact>a{display:flex;justify-content:flex-start;align-items:flex-start;gap:11px;line-height:1.65}
+ .inbs-footer-contact>a>svg{flex:0 0 18px;margin-top:3px}
+ .inbs-footer-contact>a>span{flex:1;min-width:0}
+ .inbs-footer-contact>a>.inbs-phone-number{flex:0 0 auto}
+ .inbs-footer-bottom{justify-content:space-between}
+ .inbs-footer-bottom>div{margin-inline-start:0;justify-content:flex-start}
+ .inbs-footer-watermark{top:clamp(295px,38vh,405px);left:auto;right:auto;inset-inline-start:14px;inset-inline-end:auto;transform:none;text-align:start}
+ [dir=rtl] .inbs-footer-watermark{left:auto;right:auto;inset-inline-start:14px;inset-inline-end:auto;transform:none}
+}
