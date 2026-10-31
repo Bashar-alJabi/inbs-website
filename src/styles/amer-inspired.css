@@ -172,6 +172,7 @@ html[data-theme=dark] .inbs-theme-show-light{display:none}
  .inbs-footer-about img{margin-inline:0}
  .inbs-footer-about p{margin-inline:0}
  .inbs-socials{justify-content:flex-start}
+ .inbs-socials a{display:grid;place-items:center;justify-content:center;align-items:center;flex:0 0 40px}
  .inbs-footer-contact>a{justify-content:flex-start;align-items:flex-start}
  .inbs-footer-contact>a span{flex:1}
  .inbs-footer-bottom{justify-content:space-between}
