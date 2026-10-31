@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { homeContent, aboutDetails } from '@/content/home';
 import type { Locale } from '@/lib/site';
+import { Reveal } from './motion-elements';
 
 /** Company introduction; facts and translations live in src/content/home.ts. */
 export function AboutPreview({ locale }: { locale: Locale }) {
@@ -9,15 +10,15 @@ export function AboutPreview({ locale }: { locale: Locale }) {
  const details = aboutDetails[locale];
  return <section className="inbs-about-preview" aria-labelledby="inbs-about-heading">
   <div className="site-shell inbs-about-inner">
-   <div className="inbs-about-intro">
+   <Reveal className="inbs-about-intro" delay={0.05}>
     <p className="inbs-about-kicker"><span className="inbs-about-kicker-mark" aria-hidden="true" />{content.aboutEyebrow}</p>
     <h2 id="inbs-about-heading">{content.aboutTitle.split('\n').map((line, index) => <span key={line} className={index===1?'inbs-about-heading-accent':undefined}>{line}</span>)}</h2>
-   </div>
-   <div className="inbs-about-copy">
+   </Reveal>
+   <Reveal className="inbs-about-copy" delay={0.16}>
     <p>{details.intro}</p>
     <p className="inbs-about-supporting">{details.supporting}</p>
     <Link className="inbs-about-link" href={`/${locale}/about`}><span>{content.aboutLink}</span><ArrowUpRight size={20} aria-hidden="true" /></Link>
-   </div>
+   </Reveal>
    <div className="inbs-about-art" aria-hidden="true">
     <svg className="inbs-about-network" viewBox="0 0 450 450" fill="none" xmlns="http://www.w3.org/2000/svg">
      <circle cx="225" cy="225" r="220" className="inbs-network-ring"/>
@@ -31,11 +32,11 @@ export function AboutPreview({ locale }: { locale: Locale }) {
     </svg>
    </div>
    <div className="inbs-about-pillars" aria-label={details.pillarsLabel}>
-    {details.pillars.map((pillar, index) => <article className="inbs-about-pillar" key={pillar.title}>
+    {details.pillars.map((pillar, index) => <Reveal key={pillar.title} delay={index*0.12}><article className="inbs-about-pillar">
      <span className="inbs-about-pillar-number" aria-hidden="true">{String(index+1).padStart(2,'0')}</span>
      <h3>{pillar.title}</h3>
      <p>{pillar.text}</p>
-    </article>)}
+    </article></Reveal>)}
    </div>
    <div className="inbs-about-footnote" aria-hidden="true"><span>INBS</span><span>2003 — {locale==='ar'?'دبي':'DUBAI'}</span></div>
   </div>

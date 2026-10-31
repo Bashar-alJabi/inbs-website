@@ -2,18 +2,18 @@
 .homepage{background:var(--color-surface,#f4f7f9)}
 .proof-strip{background:#e5edf0;border-bottom:1px solid #cbd9df;transition:background .3s,color .3s}
 .proof-inner{min-height:145px;display:grid;grid-template-columns:1fr 1fr 1.5fr;gap:25px;align-items:center}
-.proof-inner>div{display:flex;flex-direction:column;gap:7px;border-inline-start:1px solid #bdcdd4;padding-inline-start:24px}
+.proof-item{display:flex;flex-direction:column;gap:7px;border-inline-start:1px solid #bdcdd4;padding-inline-start:24px}
 .proof-inner span{font-size:12px;text-transform:uppercase;color:#526b7b;letter-spacing:.08em}
 .proof-inner strong{font-size:29px;letter-spacing:-.03em;color:#0d3047;font-weight:700}
-.proof-inner p{font-size:clamp(14px,1.25vw,18px);font-weight:650;line-height:1.5;letter-spacing:.035em;color:#294f67;max-width:360px;justify-self:end}
+.proof-inner>div:last-child{justify-self:end}.proof-inner p{font-size:clamp(14px,1.25vw,18px);font-weight:650;line-height:1.5;letter-spacing:.035em;color:#294f67;max-width:360px;justify-self:end}
 html[data-theme=dark] .proof-strip{background:#15374f;color:#eef8ff;border-color:#35546a}
-html[data-theme=dark] .proof-inner>div{border-color:#4c718b}
+html[data-theme=dark] .proof-item{border-color:#4c718b}
 html[data-theme=dark] .proof-inner span{color:#b0cfde}
 html[data-theme=dark] .proof-inner strong{color:#f5fbff}
 html[data-theme=dark] .proof-inner p{color:#d1e7f3}
 [dir=rtl] .proof-inner p{letter-spacing:0}
-@media(max-width:900px){.proof-inner{grid-template-columns:1fr 1fr}.proof-inner p{grid-column:1/-1;justify-self:start;max-width:none;margin:0 0 22px}}
-@media(max-width:600px){.proof-inner{padding-block:24px;gap:20px}.proof-inner>div{padding-inline-start:12px}.proof-inner strong{font-size:24px}.proof-inner p{font-size:15px}}
+@media(max-width:900px){.proof-inner{grid-template-columns:1fr 1fr}.proof-inner>div:last-child{grid-column:1/-1;justify-self:start}.proof-inner p{max-width:none;margin:0 0 22px}}
+@media(max-width:600px){.proof-inner{padding-block:24px;gap:20px}.proof-item{padding-inline-start:12px}.proof-inner strong{font-size:24px}.proof-inner p{font-size:15px}}
 
 /* About preview layout and SVG network graphic. */
 .inbs-about-preview{position:relative;overflow:hidden;background:var(--inbs-about-surface,#f6f9fc);color:var(--inbs-about-ink,#092c47);border-bottom:1px solid var(--inbs-about-divider,#d8e4ec)}
@@ -61,3 +61,195 @@ html[data-theme=dark] .inbs-about-preview{--inbs-about-card:#11334dba}
 @media(min-width:601px) and (max-width:1000px){.inbs-about-pillars{grid-template-columns:repeat(3,minmax(0,1fr))}}
 [lang=ar] .inbs-about-kicker{font-size:14px}
 @media(prefers-reduced-motion:reduce){.inbs-network-traveler{display:none}.inbs-about-link svg,.inbs-about-link:after,.inbs-about-pillar{transition:none}}
+
+
+/* Interactive services showcase */
+.inbs-services{background:#eef4f7;color:#0c3149;border-bottom:1px solid #d6e2e9;overflow:hidden}
+.inbs-services-inner{padding-block:clamp(80px,10vw,145px) clamp(68px,8vw,112px)}
+.inbs-services-overline{display:flex;align-items:center;gap:12px;font-size:12px;font-weight:750;letter-spacing:.13em;text-transform:uppercase;color:#3175a0;margin-bottom:24px}
+.inbs-services-overline-line{width:29px;height:1px;background:currentColor}
+.inbs-services-heading-row{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-bottom:58px}
+.inbs-services-heading h2{font-size:clamp(45px,5.3vw,78px);line-height:1.13;letter-spacing:-.055em;font-weight:650;margin:0}
+.inbs-services-heading h2 span{display:block}
+.inbs-services-heading-row p{font-size:clamp(15px,1.3vw,18px);line-height:1.85;color:#526f82;max-width:370px;margin:0 0 7px}
+.inbs-services-stage{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.95fr);gap:clamp(28px,5vw,78px);align-items:stretch}
+.inbs-services-index{display:flex;flex-direction:column;min-width:0}
+.inbs-services-option{appearance:none;border:0;border-bottom:1px solid #cad9e1;background:transparent;color:#49697b;text-align:start;display:flex;align-items:center;gap:clamp(14px,2vw,27px);min-height:68px;padding:12px 8px;cursor:pointer;transition:color .25s,padding .25s,background .25s}
+.inbs-services-option:first-child{border-top:1px solid #cad9e1}
+.inbs-services-option:hover,.inbs-services-option.is-active{color:#0a3955;padding-inline-start:19px;background:rgba(35,112,158,.075)}
+.inbs-services-option:focus-visible{outline:2px solid #347da9;outline-offset:-2px}
+.inbs-services-option-icon{display:grid;place-items:center;color:#4a89ab;flex:0 0 28px}
+.inbs-services-option-name{font-size:clamp(16px,1.65vw,22px);font-weight:590;flex:1;line-height:1.35}
+.inbs-services-option-arrow{opacity:0;transform:translate(-5px,5px);transition:opacity .25s,transform .25s;flex:none}
+.inbs-services-option.is-active .inbs-services-option-arrow,.inbs-services-option:hover .inbs-services-option-arrow{opacity:1;transform:none}
+.inbs-services-display{position:relative;display:flex;flex-direction:column;min-width:0;background:#0c3048;color:#e8f5fc;min-height:690px;padding:0;overflow:hidden}
+.inbs-services-visual{flex:1;position:relative;display:block;min-height:300px;overflow:hidden}
+.inbs-services-gridlines{z-index:2;pointer-events:none;position:absolute;inset:-35px;opacity:.21;background-image:linear-gradient(#9abdcf 1px,transparent 1px),linear-gradient(90deg,#9abdcf 1px,transparent 1px);background-size:57px 57px;mask-image:radial-gradient(ellipse at center,black,transparent 72%)}
+.inbs-services-orbit{z-index:2;pointer-events:none;position:absolute;width:min(85%,380px);aspect-ratio:1;border:1px solid rgba(167,216,240,.25);border-radius:50%;transform:rotate(-24deg) scaleY(.71)}
+.inbs-services-orbit.orbit-two{width:min(65%,295px);transform:rotate(48deg) scaleY(.8)}
+.inbs-services-photo{position:absolute;inset:0;z-index:1;width:100%;height:100%;overflow:hidden}
+.inbs-services-photo-image{object-fit:cover;filter:saturate(.82) contrast(1.04)}
+.inbs-services-photo:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 65%,rgba(7,35,57,.24))}
+.inbs-services-display{border-radius:12px;background:#123a54}
+.inbs-services-visual-mark{z-index:3;position:absolute;bottom:6%;right:0;font-size:clamp(78px,12vw,180px);font-weight:800;letter-spacing:-.1em;line-height:1;opacity:.055;pointer-events:none}
+.inbs-services-display-bottom{display:flex;justify-content:space-between;gap:20px;align-items:end;position:relative;z-index:2;padding:26px clamp(22px,3vw,36px) 30px}
+.inbs-services-selected-label{font-size:10px;letter-spacing:.13em;color:#97bfd3}
+.inbs-services-display-bottom h3{font-size:clamp(24px,2.6vw,38px);line-height:1.2;letter-spacing:-.025em;margin:10px 0 0;font-weight:550}
+.inbs-services-detail-link{display:grid;place-items:center;width:54px;height:54px;border:1px solid rgba(179,222,245,.55);color:#e8f5fc;flex:none;transition:background .2s,color .2s}
+.inbs-services-detail-link:hover{background:#e8f5fc;color:#0c3048}
+.inbs-services-mobile-controls{display:none}
+.inbs-services-end{margin-top:39px;display:flex;align-items:center;justify-content:space-between;gap:20px;color:#648092;font-size:11px;letter-spacing:.12em}
+.inbs-services-end>.inbs-services-all-link{font-size:14px;color:inherit;letter-spacing:0;min-width:200px}
+html[data-theme=dark] .inbs-services{background:#10283b;color:#e8f5fc;border-color:#365268}
+html[data-theme=dark] .inbs-services-heading-row p{color:#afc8d9}
+html[data-theme=dark] .inbs-services-option{border-color:#3b596c;color:#b5cad7}
+html[data-theme=dark] .inbs-services-option:hover,html[data-theme=dark] .inbs-services-option.is-active{color:#ecf8ff;background:rgba(115,187,226,.11)}
+html[data-theme=dark] .inbs-services-end>.inbs-services-all-link{color:#e8f5fc}
+html[data-theme=dark] .inbs-services-option:first-child{border-color:#3b596c}
+[dir=rtl] .inbs-services-heading h2{letter-spacing:0;line-height:1.4}
+[dir=rtl] .inbs-services-overline,[dir=rtl] .inbs-services-end,[dir=rtl] .inbs-services-selected-label{letter-spacing:0}
+[dir=rtl] .inbs-services-visual-mark{right:auto;left:0}
+@media(max-width:950px){.inbs-services-stage{grid-template-columns:1fr 1fr;gap:24px}.inbs-services-display{min-height:690px}.inbs-services-option{min-height:68px}.inbs-services-heading-row p{max-width:300px}}
+@media(max-width:700px){.inbs-services-inner{padding-block:75px}.inbs-services-heading-row{display:block;margin-bottom:34px}.inbs-services-heading-row p{max-width:100%;margin-top:22px}.inbs-services-stage{display:flex;flex-direction:column;gap:20px}.inbs-services-index{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.inbs-services-option,.inbs-services-option:first-child{min-height:55px;padding:12px;border:1px solid #cbdce5}.inbs-services-option:hover,.inbs-services-option.is-active{padding-inline-start:12px}.inbs-services-option-icon{flex:0 0 20px}.inbs-services-option-icon svg{width:17px;height:17px}.inbs-services-option-name{font-size:13px}.inbs-services-option-arrow{display:none}.inbs-services-display{min-height:460px;padding:0}.inbs-services-visual{min-height:250px}.inbs-services-mobile-controls{display:flex;gap:10px;margin:0 25px 25px;justify-content:flex-end}.inbs-services-mobile-controls button{width:39px;height:39px;border:1px solid rgba(179,222,245,.5);display:grid;place-items:center;color:inherit;background:transparent;cursor:pointer}.inbs-services-end{align-items:flex-start}.inbs-services-end>span{max-width:150px}}
+@media(max-width:400px){.inbs-services-option{gap:7px;padding:9px}.inbs-services-option:hover,.inbs-services-option.is-active{padding-inline-start:9px}.inbs-services-option-name{font-size:12px}.inbs-services-display{min-height:430px}}
+@media(prefers-reduced-motion:reduce){.inbs-services-option,.inbs-services-option-arrow,.inbs-services-detail-link{transition:none}}
+
+.inbs-services-all-link:hover,.inbs-services-all-link:focus-visible{color:var(--inbs-about-accent,#2173a7)}
+html[data-theme=dark] .inbs-services-option-icon{color:#9bcde9}
+.inbs-services-option,.inbs-services-photo,.inbs-services-detail-link{border-radius:12px}
+.inbs-services-option:first-child{border-radius:12px 12px 0 0}
+.inbs-services-option:last-child{border-radius:0 0 12px 12px}
+@media(max-width:700px){.inbs-services-option,.inbs-services-option:first-child,.inbs-services-option:last-child{border-radius:12px}}
+
+
+/* Achievements */
+.inbs-achievements{background:#0c3048;color:#eaf6fd;overflow:hidden}
+.inbs-achievements-inner{padding-block:clamp(85px,10vw,138px)}
+.inbs-achievements-eyebrow,.inbs-institutions-kicker{display:block;font-size:12px;letter-spacing:.15em;text-transform:uppercase;font-weight:750;color:#88c6e9}
+.inbs-achievements-heading h2{font-size:clamp(42px,5vw,73px);font-weight:650;line-height:1.16;letter-spacing:-.05em;margin:22px 0 65px}
+.inbs-achievements-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}
+.inbs-achievement{border-top:1px solid #54778c;padding:24px 8px 10px;display:flex;flex-direction:column;gap:18px;min-width:0}
+.inbs-achievement-index{color:#84b8d5;font-size:11px;letter-spacing:.15em}
+.inbs-achievement strong{font-size:clamp(40px,4.5vw,72px);line-height:1.05;font-weight:600;letter-spacing:-.05em;white-space:nowrap}
+.inbs-achievement-caption{font-size:clamp(14px,1.3vw,18px);color:#b6d0df}
+html[data-theme=dark] .inbs-achievements{background:#071b2b}
+[dir=rtl] .inbs-achievements-heading h2,[dir=rtl] .inbs-achievements-eyebrow{letter-spacing:0}
+@media(max-width:900px){.inbs-achievements-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:35px}}
+@media(max-width:480px){.inbs-achievements-inner{padding-block:70px}.inbs-achievements-heading h2{margin-bottom:42px}.inbs-achievement strong{font-size:clamp(35px,9vw,55px)}}
+/* Institutional services. No partnership implied. */
+.inbs-institutions{overflow:hidden;background:#f6f9fc;color:#0c3149;padding-block:clamp(75px,9vw,125px)}
+.inbs-institutions-kicker{color:#3175a0}
+.inbs-institutions-heading h2{font-size:clamp(40px,4.7vw,68px);font-weight:650;line-height:1.2;letter-spacing:-.045em;margin:20px 0}
+.inbs-institutions-heading p{font-size:clamp(16px,1.3vw,18px);line-height:1.85;color:#526f82;max-width:680px;margin:0 0 55px}
+.inbs-institutions-window{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.inbs-institutions-track{display:flex;width:max-content;gap:18px;animation:inbs-institutions-marquee 42s linear infinite}
+.inbs-institutions-window:hover .inbs-institutions-track{animation-play-state:paused}
+.inbs-institutions-name{display:flex;align-items:center;gap:16px;width:260px;min-height:130px;padding:25px;border:1px solid #d8e4ec;border-radius:12px;background:#fff;color:#244e66;font-size:15px;font-weight:650;line-height:1.55;flex:none}
+.inbs-institutions-emblem{width:28px;height:28px;border:1px solid #76a5bc;border-radius:50%;flex:none;position:relative}
+.inbs-institutions-emblem:after{content:"";position:absolute;inset:8px;border-radius:50%;background:#76a5bc}
+.inbs-institutions-disclaimer{font-size:12px;line-height:1.75;color:#668191;margin:26px 0 0}
+@keyframes inbs-institutions-marquee{to{transform:translateX(-50%)}}
+[dir=rtl] .inbs-institutions-track{animation-name:inbs-institutions-marquee-rtl;animation-direction:normal}
+@keyframes inbs-institutions-marquee-rtl{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+[dir=rtl] .inbs-institutions-heading h2,[dir=rtl] .inbs-institutions-kicker{letter-spacing:0}
+html[data-theme=dark] .inbs-institutions{background:#10283b;color:#e8f5fc}
+html[data-theme=dark] .inbs-institutions-heading p,html[data-theme=dark] .inbs-institutions-disclaimer{color:#b6cbda}
+html[data-theme=dark] .inbs-institutions-name{background:#183b54;border-color:#36556a;color:#e8f5fc}
+.inbs-institutions-track.is-static{animation:none}
+@media(prefers-reduced-motion:reduce){.inbs-institutions-track{animation:none}.inbs-institutions-window{overflow-x:auto;mask-image:none}}
+@media(max-width:600px){.inbs-institutions-name{width:220px;min-height:115px;padding:20px}.inbs-institutions-heading p{margin-bottom:35px}}
+
+/* Brand alignment: two blues from the INBS mark, applied consistently. */
+.inbs-about-preview{--inbs-about-ink:var(--brand-deep);--inbs-about-accent:var(--brand-blue)}
+.inbs-about-intro h2>span:first-child,.inbs-services-heading h2>span:first-child,.inbs-institutions-heading h2>span:first-child{color:var(--brand-deep)}
+.inbs-about-intro h2>span:last-child,.inbs-services-heading h2>span:last-child,.inbs-institutions-heading h2>span:last-child{color:var(--brand-blue)}
+.inbs-services-display,.inbs-achievements{background:var(--brand-deep)}
+.inbs-services{color:var(--brand-deep)}
+.inbs-services-photo{border-radius:12px 12px 0 0}
+.inbs-services-display{border-radius:12px}
+.inbs-services-photo-image{border-radius:0}
+.inbs-achievements{position:relative}
+.inbs-achievements:before{content:"";position:absolute;width:55vw;height:55vw;right:-18vw;top:-25vw;border:1px solid #ffffff14;border-radius:50%;pointer-events:none}
+.inbs-achievements-heading h2>span{display:block}
+.inbs-achievements-heading h2>span:first-child{color:#f2f9ff}
+.inbs-achievements-heading h2>span:last-child{color:var(--brand-light)}
+.inbs-achievements-grid{gap:clamp(12px,2vw,25px)}
+.inbs-achievement{position:relative;overflow:hidden;min-height:260px;padding:clamp(20px,2vw,35px);border:1px solid #ffffff32;border-radius:12px;background:linear-gradient(145deg,#ffffff0c,#ffffff02);gap:20px;transition:background .3s,transform .3s,border-color .3s}
+.inbs-achievement:hover{transform:translateY(-7px);background:linear-gradient(145deg,#ffffff18,#ffffff05);border-color:#79bbef77}
+.inbs-achievement-index{font-size:12px}
+.inbs-achievement strong{margin-top:auto;color:#f4fbff;position:relative;z-index:1}
+.inbs-achievement-caption{position:relative;z-index:1}
+.inbs-achievement-decoration{position:absolute;width:160px;height:160px;border:1px solid #79bbef24;border-radius:50%;right:-65px;top:-70px;box-shadow:0 0 0 30px #79bbef06,0 0 0 65px #79bbef04}
+.inbs-institutions{position:relative;padding-bottom:clamp(115px,12vw,165px);margin-bottom:-24px}
+.inbs-institutions-heading h2>span{display:block}
+.inbs-institutions-track{direction:ltr}
+[dir=rtl] .inbs-institutions-track{animation-direction:normal}
+.inbs-institutions-track .inbs-institutions-name{direction:inherit}
+[dir=rtl] .inbs-institutions-track .inbs-institutions-name{direction:rtl;text-align:right}
+@media(min-width:901px){.inbs-achievement{min-height:300px}}
+@media(max-width:900px){.inbs-achievement{min-height:220px}}
+@media(max-width:480px){.inbs-achievement{min-height:190px;padding:19px}.inbs-achievement strong{font-size:clamp(34px,8vw,52px)}}
+html[data-theme=dark] .inbs-about-preview{--inbs-about-ink:#e8f5fd;--inbs-about-accent:var(--brand-light)}
+html[data-theme=dark] .inbs-about-intro h2>span:first-child,html[data-theme=dark] .inbs-services-heading h2>span:first-child,html[data-theme=dark] .inbs-institutions-heading h2>span:first-child{color:#e8f5fd}
+html[data-theme=dark] .inbs-about-intro h2>span:last-child,html[data-theme=dark] .inbs-services-heading h2>span:last-child,html[data-theme=dark] .inbs-institutions-heading h2>span:last-child{color:var(--brand-light)}
+html[data-theme=dark] .inbs-achievements{background:#041f40}
+@media(prefers-reduced-motion:reduce){.inbs-achievement{transition:none}}
+
+/* Preserve the marquee's full first frame in RTL. */
+[dir=rtl] .inbs-institutions-track{animation-name:inbs-institutions-marquee-rtl}
+@media(prefers-reduced-motion:reduce){[dir=rtl] .inbs-institutions-track{animation:none}}
+
+/* Compact, editorial figures instead of oversized metric cards */
+.inbs-achievements-inner{padding-block:clamp(55px,6vw,82px)}
+.inbs-achievements-heading{display:flex;align-items:baseline;gap:28px;justify-content:space-between;margin-bottom:32px}
+.inbs-achievements-heading h2{margin:0;font-size:clamp(29px,3.2vw,45px)}
+.inbs-achievements-heading h2>span{display:inline}
+.inbs-achievements-heading h2>span+span:before{content:" "}
+.inbs-achievements-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1px solid #ffffff40}
+.inbs-achievement,.inbs-achievement:hover{min-height:0;border:0;border-radius:0;border-inline-start:1px solid #ffffff25;background:transparent;transform:none;box-shadow:none;overflow:visible;padding:27px clamp(12px,2vw,28px) 12px;gap:13px}
+.inbs-achievement:first-of-type{border-inline-start:0}
+.inbs-achievement strong{margin:0;font-size:clamp(33px,3.75vw,58px);font-weight:700}
+.inbs-achievement-caption{font-size:clamp(12px,1.1vw,16px)}
+.inbs-achievement-line{display:block;height:2px;width:32px;background:var(--brand-light);transition:width .4s}
+.inbs-achievement:hover .inbs-achievement-line{width:70px}
+.inbs-achievements:before{width:300px;height:300px;right:-160px;top:-150px}
+@media(max-width:900px){.inbs-achievements-grid{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:25px}.inbs-achievement:nth-of-type(3){border-inline-start:0}}
+@media(max-width:600px){.inbs-achievements-heading{display:block}.inbs-achievements-heading h2{margin-top:13px}.inbs-achievements-grid{row-gap:8px}.inbs-achievement{padding:22px 12px 10px}.inbs-achievement strong{font-size:clamp(30px,8vw,45px)}}
+/* Smaller institutional section, immediate visible first tile in both locales */
+.inbs-institutions{padding-block:clamp(55px,6vw,85px) clamp(95px,9vw,120px)}
+.inbs-institutions-heading h2{font-size:clamp(34px,3.9vw,55px);margin:0 0 13px}
+.inbs-institutions-heading p{margin-bottom:29px}
+.inbs-institutions-name{min-height:100px;padding:18px 22px}
+.inbs-institutions-window{direction:ltr}
+[dir=rtl] .inbs-institutions-track{animation-name:inbs-institutions-marquee;animation-direction:normal}
+[dir=rtl] .inbs-institutions-window{direction:ltr}
+@media(prefers-reduced-motion:reduce){[dir=rtl] .inbs-institutions-track{animation:none}}
+/* Quiet, neutral dark surfaces with brand-blue accents and consistent contrast */
+html[data-theme=dark]{--inbs-about-surface:#101b29;--inbs-about-ink:#f0f5f9;--inbs-about-muted:#b7c7d5;--inbs-about-divider:#344558;--inbs-about-card:#1b2939}
+html[data-theme=dark] .homepage{background:#101b29}
+html[data-theme=dark] .proof-strip{background:#182738;border-color:#354658}
+html[data-theme=dark] .inbs-about-preview{background:#101b29;--inbs-about-surface:#101b29;--inbs-about-card:#1b2939}
+html[data-theme=dark] .inbs-services{background:#172535;color:#e9f0f6;border-color:#354658}
+html[data-theme=dark] .inbs-services-display{background:#132638}
+html[data-theme=dark] .inbs-services-option{color:#c3d0dd;border-color:#3b4b5b}
+html[data-theme=dark] .inbs-services-option.is-active,html[data-theme=dark] .inbs-services-option:hover{background:#24374b;color:#f5f9fc}
+html[data-theme=dark] .inbs-achievements{background:#0d1c2b}
+html[data-theme=dark] .inbs-institutions{background:#142333;color:#e9f0f6}
+html[data-theme=dark] .inbs-institutions-name{background:#1c2f42;border-color:#3c5165;color:#eff5fa}
+
+/* Subtle orbital accents and travelling signals, building on the About network language. */
+.inbs-achievements{isolation:isolate}
+.inbs-achievements:after{content:"";position:absolute;z-index:0;pointer-events:none;width:340px;height:340px;border:1px solid #79bbef14;border-radius:50%;inset-inline-start:-190px;bottom:-240px;box-shadow:0 0 0 55px #79bbef06,0 0 0 115px #79bbef04}
+.inbs-achievements-inner{position:relative;z-index:1}
+.inbs-achievements-grid{position:relative}
+.inbs-achievements-track-dot{position:absolute;z-index:3;top:-3px;inset-inline-start:0;width:6px;height:6px;border-radius:50%;background:#a6dcff;box-shadow:0 0 12px 3px #79bbef77;animation:inbs-achievements-travel 9s linear infinite;pointer-events:none}
+@keyframes inbs-achievements-travel{from{inset-inline-start:0}to{inset-inline-start:calc(100% - 6px)}}
+.inbs-achievement-divider-dot{position:absolute;z-index:2;top:0;inset-inline-start:-3px;width:6px;height:6px;border-radius:50%;background:#a6dcff;box-shadow:0 0 10px #79bbef88;animation:inbs-achievements-drop 6.5s ease-in-out infinite;pointer-events:none}
+.inbs-achievement:nth-of-type(3) .inbs-achievement-divider-dot{animation-delay:-2.1s}
+.inbs-achievement:nth-of-type(4) .inbs-achievement-divider-dot{animation-delay:-4.2s}
+@keyframes inbs-achievements-drop{0%,10%{top:0;opacity:0}18%{opacity:1}80%{opacity:1}100%{top:calc(100% - 6px);opacity:0}}
+@media(max-width:900px){.inbs-achievement:nth-of-type(3) .inbs-achievement-divider-dot{display:none}}
+@media(prefers-reduced-motion:reduce){.inbs-achievements-track-dot,.inbs-achievement-divider-dot{animation:none;display:none}}
+
+/* Keep the plus sign in LTR numeric order while right-aligning Arabic milestones. */
+[dir=rtl] .inbs-achievement strong{align-self:flex-start;text-align:right}

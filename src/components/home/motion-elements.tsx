@@ -4,9 +4,9 @@ import { useEffect } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import type { ReactNode } from 'react';
 
-export function Reveal({children,delay=0}:{children:ReactNode;delay?:number}) {
+export function Reveal({children,delay=0,className}:{children:ReactNode;delay?:number;className?:string}) {
  const reduced = useReducedMotion();
- return <motion.div initial={reduced?false:{opacity:0,y:28}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:0.08}} transition={{duration:.8,delay,ease:[.22,1,.36,1]}}>{children}</motion.div>;
+ return <motion.div className={className} initial={reduced?false:{opacity:0,y:28}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:0.08}} transition={{duration:.8,delay,ease:[.22,1,.36,1]}}>{children}</motion.div>;
 }
 
 /** Progressive enhancement. Native scrolling remains the accessible fallback. */
