@@ -4,9 +4,9 @@ Official frontend website for **International Network Businessmen Services (INBS
 
 ## Project status
 
-The repository is being rebuilt from scratch. `main` is the untouched application baseline. Work is reviewed through pull requests into `redesign`.
+The website is under active development. Approved changes are reviewed through pull requests into `redesign`, then selectively promoted to the company-facing `main` branch.
 
-- `main`: original project scaffold, stable until launch.
+- `main`: company-facing preview of the approved work so far.
 - `redesign`: accepted redesign work.
 - `feature/*`: isolated, reviewable changes (one feature or page per PR).
 
@@ -18,7 +18,7 @@ The repository is being rebuilt from scratch. `main` is the untouched applicatio
 - Vercel previews for pull requests
 - No custom backend
 
-Other packages, including `next-intl`, are introduced only when configured and committed with a reproducible lockfile.
+The project uses `next-intl` for localization and Motion and Lenis for progressive animations.
 
 ## Run locally
 
@@ -65,4 +65,4 @@ See [docs/PROJECT-GUIDE.md](docs/PROJECT-GUIDE.md) for architecture, languages, 
 2. Keep the PR limited to one page or a shared foundation change.
 3. Include screenshots, translation checks, navigation checks and build results.
 4. Review the Vercel preview.
-5. Merge into `redesign` only after approval. Do not merge into `main` before final launch.
+5. Merge into `redesign` after approval. Promote reviewed milestones to `main` when a company preview is needed, after validation.

@@ -9,3 +9,27 @@ export const homeContent = {
   scroll:'اكتشف المزيد',founded:'تأسست عام',foundedValue:'2003',city:'المقر',cityValue:'دبي، الإمارات',offering:'مجالات عملنا',offeringTitle:'شبكة واحدة.\nفرص متعددة.',offeringDescription:'من خدمات رجال الأعمال والاستشارات إلى العقارات والسياحة والشحن، نقدم مجموعة متكاملة من الخدمات لتلبية احتياجاتك.',allServices:'جميع الخدمات',aboutEyebrow:'رؤيتنا',aboutTitle:'الثقة أساسنا.\nوالعلاقات قوتنا.',aboutText:'تأسست الشبكة العالمية لخدمات رجال الأعمال في دبي عام 2003، ونمت عبر علاقات طويلة الأمد ونهج مرن والتزام بفهم احتياجات الشركات والأفراد.',aboutLink:'المزيد عنا',ctaEyebrow:'لنمضِ قدماً',ctaTitle:'كل علاقة عمل ناجحة\nتبدأ بحوار.',ctaText:'شاركنا ما تسعى لتحقيقه، وسنساعدك في تحديد الخطوة المناسبة.',ctaButton:'تواصل معنا',serviceLink:'استكشف الخدمة',services:['خدمات رجال الأعمال','العقارات','المواقع الإلكترونية','الطباعة','السياحة','الخدمات المالية','الاستشارات','الجمارك','الشحن','الجنسية والهجرة']
  }
 } as const;
+
+/** Expanded bilingual introduction, grouped for readability rather than one long paragraph. */
+export const aboutDetails = {
+ en: {
+  intro: 'Founded in 2003 in Dubai, the Pearl of the Arabian Gulf, International Network Businessmen Services (INBS) has proudly served its valued clients with a diverse range of services.',
+  supporting: 'Over the years, our experience has grown alongside the needs of the businesses and individuals we serve. We believe that our clients’ success is our success.',
+  pillarsLabel: 'What defines INBS',
+  pillars: [
+   {title:'Beyond a single service',text:'Businessmen services, real estate, tourism, financial services, customs and cargo: different needs can be explored through one network.'},
+   {title:'Solutions shaped around you',text:'A company setting up operations and an individual handling paperwork do not need the same approach. We focus on the actual requirement, not a standard package.'},
+   {title:'A connection that continues',text:'Our work is not defined by one request. As clients’ needs change, our range of services gives them more reasons to stay connected with INBS.'},
+  ],
+ },
+ ar: {
+  intro: 'تأسست الشبكة العالمية لخدمات رجال الأعمال عام 2003 في لؤلؤة الخليج العربي، دبي، ومنذ ذلك الحين نفخر بخدمة عملائنا الكرام وتقديم مجموعة متنوعة من الخدمات لهم.',
+  supporting: 'وما وصلنا إليه اليوم هو ثمرة خبراتنا الطويلة وتنوع الخدمات التي قدمناها عبر السنوات. نعتبر رضا عملائنا ونجاحهم جزءاً أساسياً من نجاحنا.',
+  pillarsLabel: 'ما يميز الشبكة العالمية لخدمات رجال الأعمال',
+  pillars: [
+   {title:'أكثر من خدمة واحدة',text:'من خدمات رجال الأعمال والعقارات إلى السياحة والخدمات المالية والجمارك والشحن. احتياجات مختلفة تجمعها شبكة واحدة.'},
+   {title:'الحل يبدأ من احتياجك',text:'متطلبات تأسيس الأعمال ليست كمتطلبات إنجاز المعاملات الفردية. لذلك ننطلق من طبيعة الطلب، لا من باقة جاهزة للجميع.'},
+   {title:'علاقة تتجاوز الطلب الأول',text:'احتياجات العملاء تتغير مع الوقت، وتنوّع خدماتنا يتيح لهم العودة إلى INBS لاستكشاف ما يحتاجونه في مراحل مختلفة.'},
+  ],
+ },
+} as const;

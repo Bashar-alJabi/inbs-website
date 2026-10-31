@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
 import { siteUrl, siteIndexable } from '@/lib/seo';
 import './globals.css';
-import '../styles/navigation.css';
 import '../styles/home.css';
-import '../styles/amer-inspired.css';
+import '../styles/site-layout.css';
 import '../styles/tokens.css';
 
 export const metadata: Metadata = {
