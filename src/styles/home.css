@@ -198,3 +198,41 @@ html[data-theme=dark] .inbs-achievements{background:#041f40}
 /* Preserve the marquee's full first frame in RTL. */
 [dir=rtl] .inbs-institutions-track{animation-name:inbs-institutions-marquee-rtl}
 @media(prefers-reduced-motion:reduce){[dir=rtl] .inbs-institutions-track{animation:none}}
+
+/* Compact, editorial figures instead of oversized metric cards */
+.inbs-achievements-inner{padding-block:clamp(55px,6vw,82px)}
+.inbs-achievements-heading{display:flex;align-items:baseline;gap:28px;justify-content:space-between;margin-bottom:32px}
+.inbs-achievements-heading h2{margin:0;font-size:clamp(29px,3.2vw,45px)}
+.inbs-achievements-heading h2>span{display:inline}
+.inbs-achievements-heading h2>span+span:before{content:" "}
+.inbs-achievements-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1px solid #ffffff40}
+.inbs-achievement,.inbs-achievement:hover{min-height:0;border:0;border-radius:0;border-inline-start:1px solid #ffffff25;background:transparent;transform:none;box-shadow:none;padding:27px clamp(12px,2vw,28px) 12px;gap:13px}
+.inbs-achievement:first-child{border-inline-start:0}
+.inbs-achievement strong{margin:0;font-size:clamp(33px,3.75vw,58px);font-weight:700}
+.inbs-achievement-caption{font-size:clamp(12px,1.1vw,16px)}
+.inbs-achievement-line{display:block;height:2px;width:32px;background:var(--brand-light);transition:width .4s}
+.inbs-achievement:hover .inbs-achievement-line{width:70px}
+.inbs-achievements:before{width:300px;height:300px;right:-160px;top:-150px}
+@media(max-width:900px){.inbs-achievements-grid{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:25px}.inbs-achievement:nth-child(3){border-inline-start:0}}
+@media(max-width:600px){.inbs-achievements-heading{display:block}.inbs-achievements-heading h2{margin-top:13px}.inbs-achievements-grid{row-gap:8px}.inbs-achievement{padding:22px 12px 10px}.inbs-achievement strong{font-size:clamp(30px,8vw,45px)}}
+/* Smaller institutional section, immediate visible first tile in both locales */
+.inbs-institutions{padding-block:clamp(55px,6vw,85px) clamp(95px,9vw,120px)}
+.inbs-institutions-heading h2{font-size:clamp(34px,3.9vw,55px);margin:0 0 13px}
+.inbs-institutions-heading p{margin-bottom:29px}
+.inbs-institutions-name{min-height:100px;padding:18px 22px}
+.inbs-institutions-window{direction:ltr}
+[dir=rtl] .inbs-institutions-track{animation-name:inbs-institutions-marquee;animation-direction:normal}
+[dir=rtl] .inbs-institutions-window{direction:ltr}
+@media(prefers-reduced-motion:reduce){[dir=rtl] .inbs-institutions-track{animation:none}}
+/* Quiet, neutral dark surfaces with brand-blue accents and consistent contrast */
+html[data-theme=dark]{--inbs-about-surface:#101b29;--inbs-about-ink:#f0f5f9;--inbs-about-muted:#b7c7d5;--inbs-about-divider:#344558;--inbs-about-card:#1b2939}
+html[data-theme=dark] .homepage{background:#101b29}
+html[data-theme=dark] .proof-strip{background:#182738;border-color:#354658}
+html[data-theme=dark] .inbs-about-preview{background:#101b29;--inbs-about-surface:#101b29;--inbs-about-card:#1b2939}
+html[data-theme=dark] .inbs-services{background:#172535;color:#e9f0f6;border-color:#354658}
+html[data-theme=dark] .inbs-services-display{background:#132638}
+html[data-theme=dark] .inbs-services-option{color:#c3d0dd;border-color:#3b4b5b}
+html[data-theme=dark] .inbs-services-option.is-active,html[data-theme=dark] .inbs-services-option:hover{background:#24374b;color:#f5f9fc}
+html[data-theme=dark] .inbs-achievements{background:#0d1c2b}
+html[data-theme=dark] .inbs-institutions{background:#142333;color:#e9f0f6}
+html[data-theme=dark] .inbs-institutions-name{background:#1c2f42;border-color:#3c5165;color:#eff5fa}
