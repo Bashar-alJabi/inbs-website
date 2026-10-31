@@ -3,12 +3,12 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { ArrowUpRight, Languages, Menu, Moon, Sun, X, House, Building2, BriefcaseBusiness, Users, Newspaper, UserRoundSearch, Phone, ShieldCheck, FileText, Compass } from 'lucide-react';
+import { ArrowUpRight, Languages, Menu, Moon, Sun, X, House, Building2, BriefcaseBusiness, Users, Newspaper, UserRoundSearch, Phone, FileText, Compass } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { pages, alternateLocale, type Locale } from '@/lib/site';
 
-const featured=['about','services','why-inbs','team'];
-const drawerIcons = [Building2,BriefcaseBusiness,ShieldCheck,Users,Newspaper,UserRoundSearch,Phone,FileText,FileText] as const;
+const featured=['about','services','team'];
+const drawerIcons = [Building2,BriefcaseBusiness,Users,Newspaper,UserRoundSearch,Phone,FileText,FileText] as const;
 export function SiteHeader({locale}:{locale:Locale}){
  const pathname=usePathname();
  const menuButtonRef=useRef<HTMLButtonElement>(null);
