@@ -12,7 +12,7 @@ html[data-theme=dark] .proof-inner span{color:#b0cfde}
 html[data-theme=dark] .proof-inner strong{color:#f5fbff}
 html[data-theme=dark] .proof-inner p{color:#d1e7f3}
 [dir=rtl] .proof-inner p{letter-spacing:0}
-@media(max-width:900px){.proof-inner{grid-template-columns:1fr 1fr}.proof-inner p{grid-column:1/-1;justify-self:start;max-width:none;margin:0 0 22px}}
+@media(max-width:900px){.proof-inner{grid-template-columns:1fr 1fr}.proof-inner>div:last-child{grid-column:1/-1;justify-self:start}.proof-inner p{max-width:none;margin:0 0 22px}}
 @media(max-width:600px){.proof-inner{padding-block:24px;gap:20px}.proof-item{padding-inline-start:12px}.proof-inner strong{font-size:24px}.proof-inner p{font-size:15px}}
 
 /* About preview layout and SVG network graphic. */
