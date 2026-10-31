@@ -27,7 +27,7 @@ export function ServicesShowcase({locale}:{locale:Locale}){
      <p>{t.offeringDescription}</p>
     </div>
    </Reveal>
-   <div className="inbs-services-stage">
+   <Reveal className="inbs-services-stage">
     <div className="inbs-services-index" aria-label={locale==='ar'?'اختر خدمة':'Choose a service'}>
      {serviceSlugs.map((item,i)=><Link key={item} href={`/${locale}/services/${item}`} className={'inbs-services-option'+(selected===i?' is-active':'')} onMouseEnter={()=>setSelected(i)} onFocus={()=>setSelected(i)}>
       <span className="inbs-services-option-icon">{(()=>{const ServiceIcon=symbols[i];return <ServiceIcon size={21} strokeWidth={1.65} aria-hidden="true"/>})()}</span>
@@ -60,7 +60,7 @@ export function ServicesShowcase({locale}:{locale:Locale}){
       <button type="button" onClick={()=>move(1)} aria-label={locale==='ar'?'الخدمة التالية':'Next service'}>{locale==='ar'?<ArrowLeft/>:<ArrowRight/>}</button>
      </div>
     </div>
-   </div>
+   </Reveal>
    <Reveal className="inbs-services-end"><span>{locale==='ar'?'استكشف كل ما نقدمه':'DISCOVER THE FULL NETWORK'}</span><Link className="inbs-about-link inbs-services-all-link" href={`/${locale}/services`}><span>{t.allServices}</span><ArrowUpRight size={20}/></Link></Reveal>
   </div>
  </section>;
