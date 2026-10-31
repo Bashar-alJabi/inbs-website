@@ -3,6 +3,7 @@ import type { Locale } from '@/lib/site';
 import { Reveal, SmoothScroll } from './motion-elements';
 import { HeroExperience } from './hero-experience';
 import { AboutPreview } from './about-preview';
+import { ServicesShowcase } from './services-showcase';
 
 /** Homepage shell. Additional sections will be added after their design is approved. */
 export function Homepage({locale}:{locale:Locale}){
@@ -18,5 +19,6 @@ export function Homepage({locale}:{locale:Locale}){
       </div>
     </section>
     <AboutPreview locale={locale}/>
+    <ServicesShowcase locale={locale}/>
   </main>;
 }
