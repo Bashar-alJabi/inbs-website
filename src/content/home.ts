@@ -9,3 +9,27 @@ export const homeContent = {
   scroll:'اكتشف المزيد',founded:'تأسست عام',foundedValue:'2003',city:'المقر',cityValue:'دبي، الإمارات',offering:'مجالات عملنا',offeringTitle:'شبكة واحدة.\nفرص متعددة.',offeringDescription:'من خدمات رجال الأعمال والاستشارات إلى العقارات والسياحة والشحن، نقدم مجموعة متكاملة من الخدمات لتلبية احتياجاتك.',allServices:'جميع الخدمات',aboutEyebrow:'رؤيتنا',aboutTitle:'الثقة أساسنا.\nوالعلاقات قوتنا.',aboutText:'تأسست الشبكة العالمية لخدمات رجال الأعمال في دبي عام 2003، ونمت عبر علاقات طويلة الأمد ونهج مرن والتزام بفهم احتياجات الشركات والأفراد.',aboutLink:'المزيد عنا',ctaEyebrow:'لنمضِ قدماً',ctaTitle:'كل علاقة عمل ناجحة\nتبدأ بحوار.',ctaText:'شاركنا ما تسعى لتحقيقه، وسنساعدك في تحديد الخطوة المناسبة.',ctaButton:'تواصل معنا',serviceLink:'استكشف الخدمة',services:['خدمات رجال الأعمال','العقارات','المواقع الإلكترونية','الطباعة','السياحة','الخدمات المالية','الاستشارات','الجمارك','الشحن','الجنسية والهجرة']
  }
 } as const;
+
+/** Expanded bilingual introduction, grouped for readability rather than one long paragraph. */
+export const aboutDetails = {
+ en: {
+  intro: 'Founded in 2003 in Dubai, the Pearl of the Arabian Gulf, International Network Businessmen Services (INBS) has proudly served its valued clients with a diverse range of services.',
+  supporting: 'Over the years, our experience has grown alongside the needs of the businesses and individuals we serve. We believe that our clients’ success is our success.',
+  pillarsLabel: 'What defines INBS',
+  pillars: [
+   {title:'Trust & integrity',text:'Our credibility is built on strong, lasting relationships and the confidence our clients place in us.'},
+   {title:'Experience & variety',text:'Our extensive experience and diverse services help us respond to the evolving needs of businesses.'},
+   {title:'Commitment to clients',text:'We strive to deliver tailored, quality solutions and earn our clients’ satisfaction as a reliable business partner.'},
+  ],
+ },
+ ar: {
+  intro: 'تأسست الشبكة العالمية لخدمات رجال الأعمال عام 2003 في لؤلؤة الخليج العربي، دبي، ومنذ ذلك الحين نفخر بخدمة عملائنا الكرام وتقديم مجموعة متنوعة من الخدمات لهم.',
+  supporting: 'وما وصلنا إليه اليوم هو ثمرة خبراتنا الطويلة وتنوع الخدمات التي قدمناها عبر السنوات. نعتبر رضا عملائنا ونجاحهم جزءاً أساسياً من نجاحنا.',
+  pillarsLabel: 'ما يميز الشبكة العالمية لخدمات رجال الأعمال',
+  pillars: [
+   {title:'الثقة والمصداقية',text:'نعتز بثقة عملائنا وبالعلاقات المتينة التي بنيناها معهم، ونعتبر المصداقية أساس عملنا.'},
+   {title:'الخبرة وتنوع الخدمات',text:'تعكس خدماتنا المتنوعة خبرتنا الممتدة وقدرتنا على مواكبة احتياجات الأعمال المتغيرة.'},
+   {title:'الالتزام برضا العملاء',text:'نسعى إلى تقديم حلول مناسبة وخدمات عالية الجودة، لنكون شريكاً موثوقاً لعملائنا.'},
+  ],
+ },
+} as const;
