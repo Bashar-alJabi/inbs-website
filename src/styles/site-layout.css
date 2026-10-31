@@ -163,3 +163,11 @@ html[data-theme=dark] .inbs-theme-show-light{display:none}
  .inbs-footer-watermark{top:clamp(295px,38vh,405px);left:auto;right:auto;inset-inline-start:14px;inset-inline-end:auto;transform:none;text-align:start}
  [dir=rtl] .inbs-footer-watermark{left:auto;right:auto;inset-inline-start:14px;inset-inline-end:auto;transform:none}
 }
+
+/* Shared brand colors and consistent nav interactions */
+.inbs-contact-button{background:var(--brand-blue);border-radius:var(--radius-button);transition:background .25s,transform .25s}
+.inbs-contact-button:hover{background:var(--brand-deep);transform:translateY(-2px)}
+.inbs-hero-service-strip a{transition:color .25s,background .25s,transform .25s,border-color .25s}
+.inbs-hero-service-strip a:hover,.inbs-hero-service-strip a:focus-visible{color:#fff;background:var(--brand-blue);transform:translateY(-3px);border-color:var(--brand-light)}
+.inbs-footer{position:relative;z-index:2;background:var(--brand-deep)}
+.inbs-footer{margin-top:0}

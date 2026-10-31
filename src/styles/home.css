@@ -157,3 +157,39 @@ html[data-theme=dark] .inbs-institutions-name{background:#183b54;border-color:#3
 .inbs-institutions-track.is-static{animation:none}
 @media(prefers-reduced-motion:reduce){.inbs-institutions-track{animation:none}.inbs-institutions-window{overflow-x:auto;mask-image:none}}
 @media(max-width:600px){.inbs-institutions-name{width:220px;min-height:115px;padding:20px}.inbs-institutions-heading p{margin-bottom:35px}}
+
+/* Brand alignment: two blues from the INBS mark, applied consistently. */
+.inbs-about-preview{--inbs-about-ink:var(--brand-deep);--inbs-about-accent:var(--brand-blue)}
+.inbs-about-intro h2>span:first-child,.inbs-services-heading h2>span:first-child,.inbs-institutions-heading h2>span:first-child{color:var(--brand-deep)}
+.inbs-about-intro h2>span:last-child,.inbs-services-heading h2>span:last-child,.inbs-institutions-heading h2>span:last-child{color:var(--brand-blue)}
+.inbs-services-display,.inbs-achievements{background:var(--brand-deep)}
+.inbs-services{color:var(--brand-deep)}
+.inbs-services-photo{border-radius:12px 12px 0 0}
+.inbs-services-display{border-radius:12px}
+.inbs-services-photo-image{border-radius:0}
+.inbs-achievements{position:relative}
+.inbs-achievements:before{content:"";position:absolute;width:55vw;height:55vw;right:-18vw;top:-25vw;border:1px solid #ffffff14;border-radius:50%;pointer-events:none}
+.inbs-achievements-heading h2>span{display:block}
+.inbs-achievements-heading h2>span:first-child{color:#f2f9ff}
+.inbs-achievements-heading h2>span:last-child{color:var(--brand-light)}
+.inbs-achievements-grid{gap:clamp(12px,2vw,25px)}
+.inbs-achievement{position:relative;overflow:hidden;min-height:260px;padding:clamp(20px,2vw,35px);border:1px solid #ffffff32;border-radius:12px;background:linear-gradient(145deg,#ffffff0c,#ffffff02);gap:20px;transition:background .3s,transform .3s,border-color .3s}
+.inbs-achievement:hover{transform:translateY(-7px);background:linear-gradient(145deg,#ffffff18,#ffffff05);border-color:#79bbef77}
+.inbs-achievement-index{font-size:12px}
+.inbs-achievement strong{margin-top:auto;color:#f4fbff;position:relative;z-index:1}
+.inbs-achievement-caption{position:relative;z-index:1}
+.inbs-achievement-decoration{position:absolute;width:160px;height:160px;border:1px solid #79bbef24;border-radius:50%;right:-65px;top:-70px;box-shadow:0 0 0 30px #79bbef06,0 0 0 65px #79bbef04}
+.inbs-institutions{position:relative;padding-bottom:clamp(115px,12vw,165px);margin-bottom:-24px}
+.inbs-institutions-heading h2>span{display:block}
+.inbs-institutions-track{direction:ltr}
+[dir=rtl] .inbs-institutions-track{animation-direction:normal}
+.inbs-institutions-track .inbs-institutions-name{direction:inherit}
+[dir=rtl] .inbs-institutions-track .inbs-institutions-name{direction:rtl;text-align:right}
+@media(min-width:901px){.inbs-achievement{min-height:300px}}
+@media(max-width:900px){.inbs-achievement{min-height:220px}}
+@media(max-width:480px){.inbs-achievement{min-height:190px;padding:19px}.inbs-achievement strong{font-size:clamp(34px,8vw,52px)}}
+html[data-theme=dark] .inbs-about-preview{--inbs-about-ink:#e8f5fd;--inbs-about-accent:var(--brand-light)}
+html[data-theme=dark] .inbs-about-intro h2>span:first-child,html[data-theme=dark] .inbs-services-heading h2>span:first-child,html[data-theme=dark] .inbs-institutions-heading h2>span:first-child{color:#e8f5fd}
+html[data-theme=dark] .inbs-about-intro h2>span:last-child,html[data-theme=dark] .inbs-services-heading h2>span:last-child,html[data-theme=dark] .inbs-institutions-heading h2>span:last-child{color:var(--brand-light)}
+html[data-theme=dark] .inbs-achievements{background:#041f40}
+@media(prefers-reduced-motion:reduce){.inbs-achievement{transition:none}}
