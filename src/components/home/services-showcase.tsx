@@ -36,7 +36,6 @@ export function ServicesShowcase({locale}:{locale:Locale}){
      </Link>)}
     </div>
     <div className="inbs-services-display">
-     <div className="inbs-services-display-top"><span>INBS / {locale==='ar'?'الخدمات':'SERVICES'}</span><span>{String(selected+1).padStart(2,'0')} / {String(serviceSlugs.length).padStart(2,'0')}</span></div>
      <div className="inbs-services-visual" aria-hidden="true">
       <div className="inbs-services-gridlines"/>
       <div className="inbs-services-orbit orbit-one"/><div className="inbs-services-orbit orbit-two"/>
