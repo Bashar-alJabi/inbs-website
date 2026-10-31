@@ -1,4 +1,4 @@
-/* Original INBS institutional visual direction; no Amer assets. */
+/* INBS website layout and visual styles. */
 :root{--inbs-paper:#f4f7f9;--inbs-ink:#092d4a;--inbs-panel:#fff;--inbs-muted:#60758a}
 html[data-theme=dark]{--inbs-paper:#091c2e;--inbs-ink:#e9f4fd;--inbs-panel:#102c44;--inbs-muted:#a8bdce;color-scheme:dark}
 html[data-theme=dark] body{background:var(--inbs-paper);color:var(--inbs-ink)}
