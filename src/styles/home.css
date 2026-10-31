@@ -35,8 +35,8 @@ html[data-theme=dark] .proof-inner p{color:#d1e7f3}
 .inbs-about-footnote{position:absolute;inset-inline:clamp(20px,5vw,68px);bottom:29px;display:flex;justify-content:space-between;border-top:1px solid var(--inbs-about-divider,#d8e4ec);padding-top:17px;color:var(--inbs-about-muted,#50687a);font-size:10px;letter-spacing:.16em}
 [lang=ar] .inbs-about-intro h2{letter-spacing:0;line-height:1.4}[lang=ar] .inbs-about-kicker,[lang=ar] .inbs-about-footnote{letter-spacing:0}
 html[data-theme=dark] .inbs-about-preview{--inbs-about-surface:#0b2338;--inbs-about-ink:#e8f5fd;--inbs-about-accent:#8bcdf5;--inbs-about-muted:#b6cbda;--inbs-about-divider:#35536b}
-@media(max-width:850px){.inbs-about-inner{min-height:0;grid-template-columns:1fr;row-gap:22px;padding-block:83px 100px}.inbs-about-copy{padding-top:0;max-width:670px}.inbs-about-art{inset-inline-start:19%;inset-inline-end:auto;top:auto;bottom:255px}.inbs-about-footnote{bottom:25px}}
-@media(max-width:540px){.inbs-about-inner{padding-block:68px 93px}.inbs-about-intro h2{font-size:clamp(39px,10vw,57px)}.inbs-about-copy>p{font-size:16px;line-height:1.85}.inbs-about-art{width:320px;height:320px;top:auto;bottom:310px;inset-inline-start:19%;inset-inline-end:auto;opacity:.19}.inbs-about-kicker{font-size:11px;margin-bottom:20px}}
+@media(max-width:850px){.inbs-about-inner{min-height:0;grid-template-columns:1fr;row-gap:22px;padding-block:83px 100px}.inbs-about-copy{padding-top:0;max-width:670px}.inbs-about-art{inset-inline-start:19%;inset-inline-end:auto;top:auto;bottom:315px}.inbs-about-footnote{bottom:25px}}
+@media(max-width:540px){.inbs-about-inner{padding-block:68px 93px}.inbs-about-intro h2{font-size:clamp(39px,10vw,57px)}.inbs-about-copy>p{font-size:16px;line-height:1.85}.inbs-about-art{width:320px;height:320px;top:auto;bottom:365px;inset-inline-start:19%;inset-inline-end:auto;opacity:.19}.inbs-about-kicker{font-size:11px;margin-bottom:20px}}
 
 /* About INBS: editorial supporting copy and a structured three-part story. */
 .inbs-about-copy .inbs-about-supporting{font-size:clamp(15px,1.2vw,17px);line-height:1.85;margin-top:-12px;color:var(--inbs-about-muted,#50687a)}
@@ -46,7 +46,7 @@ html[data-theme=dark] .inbs-about-preview{--inbs-about-surface:#0b2338;--inbs-ab
 .inbs-about-pillar:hover{transform:translateY(-5px);border-color:var(--inbs-about-accent,#2173a7);box-shadow:0 14px 38px #08243c0c}
 .inbs-about-pillar-number{font-size:11px;font-weight:750;letter-spacing:.13em;color:var(--inbs-about-accent,#2173a7)}
 .inbs-about-pillar h3{font-size:clamp(18px,1.7vw,23px);font-weight:700;margin:19px 0 13px;letter-spacing:-.025em}
-.inbs-about-pillar p{font-size:clamp(16px,1.2vw,18px);line-height:1.8;color:var(--inbs-about-muted,#50687a);margin:0}
+.inbs-about-pillar p{font-size:clamp(15px,1.2vw,17px);line-height:1.85;color:var(--inbs-about-muted,#50687a);margin:0}
 .inbs-about-link{position:relative;overflow:hidden;transition:color .25s ease,gap .25s ease}
 .inbs-about-link:after{content:"";position:absolute;bottom:0;inset-inline-start:0;width:100%;height:2px;background:var(--inbs-about-accent,#2173a7);transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
 .inbs-about-link:hover:after,.inbs-about-link:focus-visible:after{transform:scaleX(1)}
@@ -54,7 +54,7 @@ html[data-theme=dark] .inbs-about-preview{--inbs-about-surface:#0b2338;--inbs-ab
 .inbs-about-link:hover svg,.inbs-about-link:focus-visible svg{transform:translate(4px,-4px)}
 [dir=rtl] .inbs-about-link:hover svg,[dir=rtl] .inbs-about-link:focus-visible svg{transform:translate(-4px,-4px)}
 /* Original two-ring network, with staggered signals travelling from the hub onto both orbits. */
-.inbs-about-art{inset-inline-start:19%;top:auto;bottom:175px;opacity:.27;transform:rotate(-17deg);z-index:1;animation:none}
+.inbs-about-art{inset-inline-start:19%;top:auto;bottom:245px;opacity:.27;transform:rotate(-17deg);z-index:1;animation:none}
 .inbs-about-network{width:100%;height:100%;overflow:visible;color:var(--inbs-about-accent,#2173a7)}
 .inbs-network-ring,.inbs-network-lines{stroke:currentColor;stroke-width:1;opacity:.75}
 .inbs-network-hub{fill:currentColor}

@@ -22,12 +22,12 @@ export function AboutPreview({ locale }: { locale: Locale }) {
     <svg className="inbs-about-network" viewBox="0 0 450 450" fill="none" xmlns="http://www.w3.org/2000/svg">
      <circle cx="225" cy="225" r="220" className="inbs-network-ring"/>
      <circle cx="225" cy="225" r="146" className="inbs-network-ring"/>
-     <path d="M5 225H445 M225 5V445 M69.4 69.4L380.6 380.6 M380.6 69.4L69.4 380.6" className="inbs-network-lines"/>
+     <path d="M69.437 69.437L380.563 380.563 M380.563 69.437L69.437 380.563" className="inbs-network-lines"/>
      <circle cx="225" cy="225" r="16" className="inbs-network-hub"/>
      <circle cx="225" cy="225" r="26" className="inbs-network-halo"/>
-     <circle r="6" className="inbs-network-traveler"><animateMotion dur="15s" begin="-2s" repeatCount="indefinite" path="M225 225 L328 122 A146 146 0 0 1 371 225 L445 225 A220 220 0 0 1 335 415 L298 351 A146 146 0 0 0 225 371 L225 225" /></circle>
-     <circle r="5" className="inbs-network-traveler"><animateMotion dur="19s" begin="-8s" repeatCount="indefinite" path="M225 225 L122 122 A146 146 0 0 0 79 225 L5 225 A220 220 0 0 0 115 415 L152 351 A146 146 0 0 1 225 371 L225 225" /></circle>
-     <circle r="5.5" className="inbs-network-traveler"><animateMotion dur="23s" begin="-15s" repeatCount="indefinite" path="M225 225 L225 79 A146 146 0 0 1 351 152 L416 115 A220 220 0 0 1 335 35 L298 99 A146 146 0 0 0 225 79 L225 225" /></circle>
+     <circle r="6" className="inbs-network-traveler"><animateMotion dur="15s" begin="-2s" repeatCount="indefinite" path="M225 225 L328.237 121.763 A146 146 0 0 1 328.237 328.237 L380.563 380.563 A220 220 0 0 1 69.437 380.563 L121.763 328.237 A146 146 0 0 1 121.763 121.763 L225 225" /></circle>
+     <circle r="5" className="inbs-network-traveler"><animateMotion dur="19s" begin="-8s" repeatCount="indefinite" path="M225 225 L121.763 121.763 A146 146 0 0 0 121.763 328.237 L69.437 380.563 A220 220 0 0 0 69.437 69.437 L121.763 121.763 L225 225" /></circle>
+     <circle r="5.5" className="inbs-network-traveler"><animateMotion dur="23s" begin="-15s" repeatCount="indefinite" path="M225 225 L328.237 328.237 A146 146 0 0 0 121.763 328.237 L69.437 380.563 A220 220 0 0 1 380.563 380.563 L328.237 328.237 A146 146 0 0 1 328.237 121.763 L225 225" /></circle>
     </svg>
    </div>
    <div className="inbs-about-pillars" aria-label={details.pillarsLabel}>
