@@ -4,6 +4,8 @@ import { Reveal, SmoothScroll } from './motion-elements';
 import { HeroExperience } from './hero-experience';
 import { AboutPreview } from './about-preview';
 import { ServicesShowcase } from './services-showcase';
+import { HomeAchievements } from './home-achievements';
+import { HomeInstitutions } from './home-institutions';
 
 /** Homepage shell. Additional sections will be added after their design is approved. */
 export function Homepage({locale}:{locale:Locale}){
@@ -20,5 +22,7 @@ export function Homepage({locale}:{locale:Locale}){
     </section>
     <AboutPreview locale={locale}/>
     <ServicesShowcase locale={locale}/>
+    <HomeAchievements locale={locale}/>
+    <HomeInstitutions locale={locale}/>
   </main>;
 }
