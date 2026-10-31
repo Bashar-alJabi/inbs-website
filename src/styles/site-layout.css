@@ -172,7 +172,7 @@ html[data-theme=dark] .inbs-theme-show-light{display:none}
  .inbs-footer-about img{margin-inline:0}
  .inbs-footer-about p{margin-inline:0}
  .inbs-socials{justify-content:flex-start}
- .inbs-socials a{display:grid;place-items:center;flex:0 0 40px;padding:0}
+ .inbs-footer-grid .inbs-socials a{display:grid;place-items:center;justify-content:center;align-items:center;flex:0 0 40px;width:40px;height:40px;padding:0}
  .inbs-footer-contact>a{display:flex;justify-content:flex-start;align-items:flex-start;gap:11px;line-height:1.65}
  .inbs-footer-contact>a>svg{flex:0 0 18px;margin-top:3px}
  .inbs-footer-contact>a>span{flex:1;min-width:0}
