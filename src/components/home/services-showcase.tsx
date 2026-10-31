@@ -2,12 +2,14 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { ArrowUpRight, ArrowRight, ArrowLeft, BriefcaseBusiness, Building2, Globe2, FileText, Plane, Landmark, MessagesSquare, Container, Ship, Fingerprint } from 'lucide-react';
 import { serviceSlugs, serviceNames, type Locale } from '@/lib/site';
 import { homeContent } from '@/content/home';
 import { Reveal } from './motion-elements';
 
+const images = [3,1,2,9,4,5,6,7,8,10].map(n=>`/images/services/service${n}${n===6?'.jpeg':'.jpg'}`);
 const symbols = [BriefcaseBusiness, Building2, Globe2, FileText, Plane, Landmark, MessagesSquare, Container, Ship, Fingerprint] as const;
 
 export function ServicesShowcase({locale}:{locale:Locale}){
@@ -15,7 +17,6 @@ export function ServicesShowcase({locale}:{locale:Locale}){
  const reduced=useReducedMotion();
  const t=homeContent[locale];
  const slug=serviceSlugs[selected];
- const Icon=symbols[selected];
  const move=(step:number)=>setSelected(n=>(n+step+serviceSlugs.length)%serviceSlugs.length);
  return <section className="inbs-services" aria-labelledby="inbs-services-heading">
   <div className="site-shell inbs-services-inner">
@@ -28,11 +29,11 @@ export function ServicesShowcase({locale}:{locale:Locale}){
    </Reveal>
    <div className="inbs-services-stage">
     <div className="inbs-services-index" aria-label={locale==='ar'?'اختر خدمة':'Choose a service'}>
-     {serviceSlugs.map((item,i)=><button key={item} type="button" className={'inbs-services-option'+(selected===i?' is-active':'')} onMouseEnter={()=>setSelected(i)} onFocus={()=>setSelected(i)} onClick={()=>setSelected(i)} aria-pressed={selected===i}>
-      <span className="inbs-services-option-no">{String(i+1).padStart(2,'0')}</span>
+     {serviceSlugs.map((item,i)=><Link key={item} href={`/${locale}/services/${item}`} className={'inbs-services-option'+(selected===i?' is-active':'')} onMouseEnter={()=>setSelected(i)} onFocus={()=>setSelected(i)}>
+      <span className="inbs-services-option-icon">{(()=>{const ServiceIcon=symbols[i];return <ServiceIcon size={21} strokeWidth={1.65} aria-hidden="true"/>})()}</span>
       <span className="inbs-services-option-name">{serviceNames[item][locale]}</span>
       <ArrowUpRight className="inbs-services-option-arrow" size={19} aria-hidden="true"/>
-     </button>)}
+     </Link>)}
     </div>
     <div className="inbs-services-display">
      <div className="inbs-services-display-top"><span>INBS / {locale==='ar'?'الخدمات':'SERVICES'}</span><span>{String(selected+1).padStart(2,'0')} / {String(serviceSlugs.length).padStart(2,'0')}</span></div>
@@ -40,8 +41,8 @@ export function ServicesShowcase({locale}:{locale:Locale}){
       <div className="inbs-services-gridlines"/>
       <div className="inbs-services-orbit orbit-one"/><div className="inbs-services-orbit orbit-two"/>
       <AnimatePresence mode="wait">
-       <motion.div key={slug} className="inbs-services-symbol" initial={reduced?false:{opacity:0,scale:.85,rotate:-9}} animate={{opacity:1,scale:1,rotate:0}} exit={reduced?{opacity:0}:{opacity:0,scale:1.08,rotate:6}} transition={{duration:.5,ease:[.22,1,.36,1]}}>
-        <Icon size={108} strokeWidth={.9}/>
+       <motion.div key={slug} className="inbs-services-photo" initial={reduced?false:{opacity:0,scale:1.07}} animate={{opacity:1,scale:1}} exit={{opacity:0}} transition={{duration:.5,ease:[.22,1,.36,1]}}>
+        <Image src={images[selected]} alt={serviceNames[slug][locale]} fill sizes="(max-width: 700px) 80vw, 42vw" className="inbs-services-photo-image"/>
        </motion.div>
       </AnimatePresence>
       <span className="inbs-services-visual-mark">INBS</span>
@@ -61,7 +62,7 @@ export function ServicesShowcase({locale}:{locale:Locale}){
      </div>
     </div>
    </div>
-   <Reveal className="inbs-services-end"><span>{locale==='ar'?'استكشف كل ما نقدمه':'DISCOVER THE FULL NETWORK'}</span><Link href={`/${locale}/services`}>{t.allServices}<ArrowUpRight size={18}/></Link></Reveal>
+   <Reveal className="inbs-services-end"><span>{locale==='ar'?'استكشف كل ما نقدمه':'DISCOVER THE FULL NETWORK'}</span><Link className="inbs-about-link inbs-services-all-link" href={`/${locale}/services`}><span>{t.allServices}</span><ArrowUpRight size={20}/></Link></Reveal>
   </div>
  </section>;
 }
