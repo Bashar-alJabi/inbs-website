@@ -189,6 +189,7 @@ html[data-theme=dark] .inbs-drawer nav a.active{background:#29445c;color:#e8f5ff
 .inbs-drawer-network-path{stroke:var(--brand-blue);stroke-width:1.2;opacity:.62;fill:none;vector-effect:non-scaling-stroke}
 .inbs-drawer-network-node{fill:var(--brand-blue);opacity:.65}
 .inbs-drawer-network-traveller{fill:var(--brand-light);filter:drop-shadow(0 0 3px #79bbef);opacity:.98}
+html:not([data-theme=dark]) .inbs-drawer-network-traveller{fill:#4d9ed8}
 html[data-theme=dark] .inbs-drawer-network-path{stroke:#84bfe9;opacity:.55}
 html[data-theme=dark] .inbs-drawer-network-node{fill:#84bfe9}
 @media(prefers-reduced-motion:reduce){.inbs-drawer-network-traveller{display:none}}
