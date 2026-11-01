@@ -253,3 +253,20 @@ html[data-theme=dark] .inbs-institutions-name{background:#1c2f42;border-color:#3
 
 /* Keep the plus sign in LTR numeric order while right-aligning Arabic milestones. */
 [dir=rtl] .inbs-achievement strong{align-self:flex-start;text-align:right}
+
+
+/* Cohesive brand gradients for the milestones section and selected-service panel. */
+.inbs-achievements{
+ background:radial-gradient(ellipse 65% 125% at 0% 15%,rgba(18,108,181,.38),transparent 72%),
+ linear-gradient(115deg,var(--brand-deep) 5%,#0b4d86 55%,#082e5b 100%);
+}
+.inbs-services-display{
+ background:linear-gradient(135deg,var(--brand-blue) 0%,var(--brand-deep) 55%,#042448 100%);
+}
+html[data-theme=dark] .inbs-achievements{
+ background:radial-gradient(ellipse 70% 130% at 0% 15%,rgba(18,108,181,.2),transparent 75%),
+ linear-gradient(115deg,#102a44 0%,#113657 55%,#0c223a 100%);
+}
+html[data-theme=dark] .inbs-services-display{
+ background:linear-gradient(135deg,#17466f 0%,#102d4b 55%,#0b233c 100%);
+}
