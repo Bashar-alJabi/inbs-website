@@ -9,7 +9,7 @@ import { serviceSlugs, serviceNames, type Locale } from '@/lib/site';
 import { homeContent } from '@/content/home';
 import { Reveal } from './motion-elements';
 
-const images = [3,1,2,9,4,5,6,7,8,10].map(n=>`/images/services/service${n}${n===6?'.jpeg':'.jpg'}`);
+const images = ["/images/services/businessmen-services.webp","/images/services/real-estate-services.webp","/images/services/website-services.webp","/images/services/typing-services.webp","/images/services/tourism-services.webp","/images/services/financial-services.webp","/images/services/consultation-services.webp","/images/services/customs-services.webp","/images/services/cargo-services.webp","/images/services/citizenship-immigration-services.webp"];
 const symbols = [BriefcaseBusiness, Building2, Globe2, FileText, Plane, Landmark, MessagesSquare, Container, Ship, Fingerprint] as const;
 
 export function ServicesShowcase({locale}:{locale:Locale}){
