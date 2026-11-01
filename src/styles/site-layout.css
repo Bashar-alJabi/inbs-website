@@ -181,3 +181,14 @@ html[data-theme=dark] .inbs-header.is-solid{background:#182738;box-shadow:0 6px 
 html[data-theme=dark] .inbs-drawer{background:#182738;color:#edf3f8}
 html[data-theme=dark] .inbs-drawer nav a.active{background:#29445c;color:#e8f5ff}
 @media(prefers-reduced-motion:reduce){.inbs-hero-service-strip a svg{transition:none}}
+
+/* Drawer signature: connected-path divider with a restrained moving signal. */
+.inbs-drawer-top{border-bottom:0!important;padding-bottom:0!important}
+.inbs-drawer-network{flex:0 0 auto;width:100%;height:25px;margin-top:7px;position:relative;pointer-events:none}
+.inbs-drawer-network svg{width:100%;height:100%;overflow:visible;display:block}
+.inbs-drawer-network-path{stroke:var(--brand-blue);stroke-width:1.2;opacity:.62;fill:none;vector-effect:non-scaling-stroke}
+.inbs-drawer-network-node{fill:var(--brand-blue);opacity:.65}
+.inbs-drawer-network-traveller{fill:var(--brand-light);filter:drop-shadow(0 0 3px #79bbef);opacity:.98}
+html[data-theme=dark] .inbs-drawer-network-path{stroke:#84bfe9;opacity:.55}
+html[data-theme=dark] .inbs-drawer-network-node{fill:#84bfe9}
+@media(prefers-reduced-motion:reduce){.inbs-drawer-network-traveller{display:none}}
