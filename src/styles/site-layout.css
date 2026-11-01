@@ -192,6 +192,3 @@ html[data-theme=dark] .inbs-drawer nav a.active{background:#29445c;color:#e8f5ff
 html[data-theme=dark] .inbs-drawer-network-path{stroke:#84bfe9;opacity:.55}
 html[data-theme=dark] .inbs-drawer-network-node{fill:#84bfe9}
 @media(prefers-reduced-motion:reduce){.inbs-drawer-network-traveller{display:none}}
-
-/* Brighter travelling network signal in light mode only. */
-html:not([data-theme=dark]) .inbs-drawer-network-traveller{fill:#fff;stroke:#126cb5;stroke-width:1.35;filter:drop-shadow(0 0 2px #126cb5) drop-shadow(0 0 5px #2995e9) drop-shadow(0 0 8px #79bbef)}
