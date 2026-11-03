@@ -2,16 +2,12 @@ name: Homepage browser and accessibility audit
 on:
   pull_request:
     branches: [redesign, main]
-  push:
-    branches: [feature/homepage]
-    paths:
-      - 'src/**'
-      - 'public/**'
-      - 'scripts/homepage-e2e.mjs'
-      - '.github/workflows/homepage-e2e.yml'
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: browser-audit-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 jobs:
   browser-audit:
     runs-on: ubuntu-latest
