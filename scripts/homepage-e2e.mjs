@@ -141,12 +141,16 @@ for(const locale of ['en','ar']){
     assert.equal(await page.locator('html').getAttribute('data-theme'),theme);
     assert.equal(await page.locator('.inbs-about-page h1').count(),1);
     assert.equal(await page.locator('.inbs-story-principle').count(),3);
-    assert.equal(await page.locator('.inbs-story-capability').count(),6);
+    assert.equal(await page.locator('.inbs-story-capability').count(),10);
     assert.equal(await page.locator('.inbs-story-capability').first().getAttribute('href'),
       '/'+locale+'/services/businessmen-services');
-    assert.equal(await page.locator('.inbs-story-outro-primary').getAttribute('href'),'/'+locale+'/contact');
-    await page.locator('.inbs-story-outro').scrollIntoViewIfNeeded();
-    // Wait for the shared Reveal entrance before measuring contrast with axe.
+    assert.equal(await page.locator('.inbs-story-capability').last().getAttribute('href'),
+      '/'+locale+'/services/citizenship-and-immigration-services');
+    assert.equal(await page.locator('.inbs-story-outro').count(),0,'Redundant contact CTA');
+    assert.equal(await page.locator('.inbs-story-all-services.inbs-about-link').count(),1);
+    assert.equal(await page.locator('.inbs-story-hero-art animateMotion').count(),3);
+    await page.locator('.inbs-story-network').scrollIntoViewIfNeeded();
+    // Shared Reveal transitions should finish before the axe contrast audit.
     await page.waitForTimeout(1000);
     const widths=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
     assert.ok(widths.scroll<=widths.inner+3,'Horizontal overflow: '+JSON.stringify(widths));
@@ -166,6 +170,16 @@ for(const locale of ['en','ar']){
   }
  }
 }
+// Hero orbit signals move on a full-motion display but are hidden for reduced motion.
+await test('about hero network motion respects preferences',async()=>{
+ const context=await browser.newContext({viewport:{width:1440,height:900},reducedMotion:'no-preference'});
+ const page=await context.newPage();
+ await page.goto(origin+'/en/about',{waitUntil:'domcontentloaded'});
+ const signals=page.locator('.inbs-story-hero-art .inbs-story-traveler');
+ assert.equal(await signals.count(),3);
+ assert.notEqual(await signals.first().evaluate(e=>getComputedStyle(e).display),'none');
+ await context.close();
+});
 await test('service WebP files and metadata',async()=>{
  assert.equal(serviceSources.length,10,'Expected 10 documented services');
  for(const {slug} of serviceSources){
