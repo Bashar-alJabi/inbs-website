@@ -32,6 +32,17 @@ for(const locale of ['en','ar']){
     assert.equal(await page.locator('.inbs-achievement').count(),4);
     assert.equal(await page.locator('.inbs-institutions-name').count(),12);
     assert.equal(await page.locator('.inbs-institutions-track').getAttribute('dir'),'ltr');
+    const subtitleSizes=await page.locator(
+      '.inbs-about-kicker,.inbs-services-overline,.inbs-achievements-eyebrow,.inbs-institutions-kicker'
+    ).evaluateAll(elements=>elements.map(e=>({
+      name:e.className,
+      px:parseFloat(getComputedStyle(e).fontSize),
+    })));
+    assert.equal(subtitleSizes.length,4,'Expected one subtitle in each Home section');
+    for(const item of subtitleSizes){
+      assert.ok(item.px >= (locale==='ar'?18:17),
+        'Home subtitle smaller than About: '+JSON.stringify(item));
+    }
     await page.locator('.inbs-services').scrollIntoViewIfNeeded();
     await page.waitForTimeout(1100);
     const widths=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:window.innerWidth}));
