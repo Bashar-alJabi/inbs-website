@@ -79,10 +79,6 @@ for(const item of entries){
  console.log(`Prepared ${filename}`);
 }
 await fs.writeFile(path.join(directory,'SOURCES.json'),JSON.stringify(entries,null,2)+'\n');
-const file=path.join(process.cwd(),'src/components/home/services-showcase.tsx');
-const current=await fs.readFile(file,'utf8');
-const previous="const images = [3,1,2,9,4,5,6,7,8,10].map(n=>\`/images/services/service\${n}\${n===6?'.jpeg':'.jpg'}\`);";
-const replacement="const images = "+JSON.stringify(entries.map(e=>"/images/services/"+e.slug+".webp"))+";";
-if(!current.includes(previous)&&!current.includes(replacement))throw new Error('Unexpected services image mapping; refusing to replace');
-if(current.includes(previous))await fs.writeFile(file,current.replace(previous,replacement));
-console.log('All 10 image files prepared; updated service mapping.');
+// Service image paths are declared in src/content/services.ts.
+// Preparing image assets must not rewrite component source code.
+console.log('All 10 service images prepared.');
