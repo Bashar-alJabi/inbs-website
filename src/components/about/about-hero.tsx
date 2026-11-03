@@ -45,7 +45,7 @@ export function AboutHero({ locale }: { locale: Locale }) {
   const t = aboutPageContent[locale];
   return <section className="inbs-story-hero" aria-labelledby="inbs-story-heading">
     <div className="inbs-story-hero-visual" aria-hidden="true">
-      <Image src="/images/services/real-estate-services.webp" alt="" fill
+      <Image src="/images/about/hero-about.webp" alt="" fill
         sizes="(max-width: 760px) 100vw, 58vw" priority className="inbs-story-hero-image"/>
       <span className="inbs-story-hero-veil"/>
     </div>
