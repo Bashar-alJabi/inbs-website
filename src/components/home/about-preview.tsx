@@ -11,7 +11,7 @@ export function AboutPreview({ locale }: { locale: Locale }) {
  return <section className="inbs-about-preview" aria-labelledby="inbs-about-heading">
   <div className="site-shell inbs-about-inner">
    <Reveal className="inbs-about-intro" delay={0.05}>
-    <p className="inbs-about-kicker"><span className="inbs-about-kicker-mark" aria-hidden="true" />{content.aboutEyebrow}</p>
+    <p className="inbs-about-kicker inbs-section-kicker"><span className="inbs-about-kicker-mark" aria-hidden="true" />{content.aboutEyebrow}</p>
     <h2 id="inbs-about-heading">{content.aboutTitle.split('\n').map((line, index) => <span key={line} className={index===1?'inbs-about-heading-accent':undefined}>{line}</span>)}</h2>
    </Reveal>
    <Reveal className="inbs-about-copy" delay={0.16}>
