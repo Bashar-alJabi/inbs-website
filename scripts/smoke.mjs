@@ -1,21 +1,53 @@
-/** Lightweight HTTP smoke checks. Run against a running Next.js deployment. */
+/** Lightweight production HTTP checks; run against a running Next.js server. */
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 
 const origin = (process.env.SMOKE_BASE_URL || 'http://localhost:3000').replace(/\/$/, '');
-const check = async (path, pattern, label) => {
- const response = await fetch(origin + path, { redirect: 'follow' });
- assert.equal(response.status, 200, `${label}: HTTP ${response.status}`);
- const html = await response.text();
- if (pattern) assert.match(html, pattern, `${label}: expected content missing`);
- console.log('PASS', label);
-};
+const sourceEntries = JSON.parse(
+  await readFile(new URL('../public/images/services/SOURCES.json', import.meta.url), 'utf8'),
+);
+
+async function check(path, { status = 200, pattern, contentType, label = path } = {}) {
+  const response = await fetch(origin + path, { redirect: 'follow', signal: AbortSignal.timeout(15000) });
+  assert.equal(response.status, status, `${label}: HTTP ${response.status}`);
+  if (contentType) {
+    assert.match(response.headers.get('content-type') || '', contentType, `${label}: Content-Type`);
+  }
+  if (pattern) {
+    assert.match(await response.text(), pattern, `${label}: expected content missing`);
+  } else {
+    await response.arrayBuffer();
+  }
+  console.log('PASS', label);
+}
+
 try {
- await check('/en', /<html[^>]*lang="en"/, 'English homepage and lang');
- await check('/ar', /<html[^>]*lang="ar"[^>]*dir="rtl"/, 'Arabic homepage and RTL');
- await check('/images/hero-one.webp', null, 'Hero image one');
- await check('/images/hero-two.webp', null, 'Hero image two');
- await check('/images/hero-three.webp', null, 'Hero image three');
- await check('/brand/inbs-logo.png', null, 'Official brand logo');
- await check('/robots.txt', /User-agent:/i, 'Robots policy');
- console.log('Smoke checks passed:', origin);
-} catch(error) { console.error('Smoke checks failed:', error); process.exitCode = 1; }
+  await check('/en', { pattern: /<html[^>]*lang="en"/, label: 'English homepage and lang' });
+  await check('/ar', { pattern: /<html[^>]*lang="ar"[^>]*dir="rtl"/, label: 'Arabic homepage and RTL' });
+
+  for (const locale of ['en', 'ar']) {
+    for (const route of ['about', 'services', 'contact', 'services/cargo-services']) {
+      await check(`/${locale}/${route}`, { label: `${locale} ${route} page` });
+    }
+    await check(`/${locale}/invalid-unlisted-page`, { status: 404, label: `${locale} unknown route` });
+  }
+
+  for (const image of ['hero-one.webp', 'hero-two.webp', 'hero-three.webp']) {
+    await check(`/images/${image}`, { contentType: /image\/webp/i, label: `Hero ${image}` });
+  }
+  assert.equal(sourceEntries.length, 10, 'Expected ten documented service images');
+  for (const { slug } of sourceEntries) {
+    await check(`/images/services/${slug}.webp`, {
+      contentType: /image\/webp/i,
+      label: `Service image ${slug}`,
+    });
+  }
+
+  await check('/brand/inbs-logo.png', { contentType: /image\/png/i, label: 'Official brand logo' });
+  await check('/robots.txt', { pattern: /User-agent:/i, label: 'Robots policy' });
+  await check('/sitemap.xml', { contentType: /(?:xml|text\/plain)/i, label: 'Sitemap' });
+  console.log('Smoke checks passed:', origin);
+} catch (error) {
+  console.error('Smoke checks failed:', error);
+  process.exitCode = 1;
+}
