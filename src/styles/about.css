@@ -16,7 +16,7 @@
 .inbs-about-line{display:block}
 .inbs-story-label,.inbs-story-eyebrow{
   display:flex;align-items:center;gap:14px;
-  font-size:15px;line-height:1.6;letter-spacing:.11em;font-weight:750;text-transform:uppercase;
+  line-height:1.6;letter-spacing:.11em;font-weight:750;text-transform:uppercase;
 }
 .inbs-story-label{color:var(--story-accent);margin-bottom:30px}
 .inbs-story-label>span,.inbs-story-eyebrow>span{width:35px;height:1px;background:currentColor;flex:none}
@@ -50,7 +50,7 @@
   display:flex;flex-direction:column;justify-content:space-between;gap:75px;
 }
 .inbs-story-hero-copy{max-width:850px}
-.inbs-story-eyebrow{color:#a5dbf5;margin:0 0 30px}
+.inbs-story-eyebrow{color:#a5dbf5;margin:0 0 30px;font-size:15px}
 .inbs-story-hero h1{
   font-size:clamp(58px,7vw,108px);line-height:1.07;letter-spacing:-.075em;
   margin:0 0 29px;max-width:900px;
