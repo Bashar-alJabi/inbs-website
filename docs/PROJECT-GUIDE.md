@@ -1,85 +1,163 @@
-# INBS — Project and Handoff Guide
+# INBS — Project Architecture and Handoff Guide
 
-## Purpose
-A premium, trustworthy bilingual company website, built as a frontend-only Next.js application. It must be easy for developers to extend and for company staff to locate and edit textual content.
+_Last reviewed: 2026-11-03. Based on the merged homepage milestone (PR #16 into `redesign`, PR #17 into `main`)._
 
-## Current phase
-The foundation is the **shared infrastructure**, not the design of the homepage. It establishes routing, reusable components, brand tokens, content boundaries and contributor documentation before any full page is designed.
+## Purpose and current status
 
-## Canonical routes
-Every route is available in both languages by replacing `/en` with `/ar`.
+INBS is a bilingual (English/Arabic, RTL/LTR) corporate website built with Next.js 16 App Router, React 19 and TypeScript. The application is frontend-only; it does not contain a custom backend or content management interface.
 
-| Route | Purpose |
+**Implemented:** shared layout (header, footer, navigation, language/theme controls), homepage sections (hero, company facts, about preview, 10-service interactive showcase, achievements and service-centre ticker), locale-aware routes, Coming Soon placeholders, base SEO, responsive styling and automated checks.
+
+**Not yet implemented:** the actual content pages for About, Services, individual services, Team, Insights, Careers, Contact, Privacy and Terms. They currently use the generic Coming Soon route. The homepage milestone is merged; this does **not** mean the full website is launch-ready.
+
+## Branch and release policy
+
+- `feature/*` or `docs/*`: scoped changes based on `redesign`.
+- `redesign`: integration branch for reviewed changes.
+- `main`: company-facing approved milestone; the homepage milestone was promoted here via PR #17.
+- Create PRs, run checks and review previews; never merge without owner approval. Keep `main` protected from direct feature commits.
+- Merge commits can make branch histories differ even when all changes have been promoted. Compare content and PR status, not commit counts alone.
+
+## Route map (current implementation)
+
+Both `/en` and `/ar` are supported; visiting `/` redirects to `/en`.
+
+| URL (replace `[locale]` with `en` or `ar`) | Current state |
 | --- | --- |
-| `/[locale]` | Home |
-| `/[locale]/about` | About |
-| `/[locale]/services` | Service index |
-| `/[locale]/services/[slug]` | Individual service |
-| `/[locale]/why-inbs` | Why INBS |
-| `/[locale]/team` | Real team photos and verified biographies |
-| `/[locale]/insights` | Articles when approved content is available |
-| `/[locale]/careers` | Careers |
-| `/[locale]/contact` | Contact |
-| `/[locale]/privacy-policy` | Privacy |
-| `/[locale]/terms` | Terms |
+| `/[locale]` | Implemented homepage |
+| `/[locale]/about` | Coming Soon |
+| `/[locale]/services` | Coming Soon |
+| `/[locale]/services/[service-slug]` | Coming Soon for the ten registered service slugs |
+| `/[locale]/team` | Coming Soon |
+| `/[locale]/insights` | Coming Soon |
+| `/[locale]/careers` | Coming Soon |
+| `/[locale]/contact` | Coming Soon |
+| `/[locale]/privacy-policy` | Coming Soon |
+| `/[locale]/terms` | Coming Soon |
 
-Unfinished pages must show a branded Coming Soon page at their own URL. **Never use homepage anchor links instead of page navigation.**
+Routes and supported service slugs are defined in `src/lib/site.ts` and rendered through `src/app/[locale]/[...slug]/page.tsx` until replaced with real pages. An earlier roadmap mentioned `why-inbs`, but it is **not registered as a current route**; decide its scope before adding it. Do not use homepage anchors in place of actual page routes.
 
-## Content and brand
-- Primary source: the existing INBS repository (English and Arabic translation data and service pages).
-- Keep all ten existing service categories; review source inconsistencies before publishing rewritten text.
-- Official logo is immutable. Colors sampled from the provided logo include `#05478F`, `#1365AF`, `#6BB3EC`, `#EFFAFB`. Secondary neutrals may support contrast and accessibility.
-- Preserve authentic team images; do not invent staff identities or testimonials.
-- Contact details, working hours and company history must come from the old site unless the company provides updated information.
-- Avoid unsupported guarantees about licensing, visa outcomes, financial results or approvals.
+## Actual folder responsibilities
 
-## Architecture (target)
 ```text
 src/
   app/
-    [locale]/          # page routes and language-specific layout
-    globals.css        # global style and design tokens
+    layout.tsx                  # Global metadata and stylesheet imports
+    page.tsx                    # Redirect / to /en
+    globals.css                 # Global, fallback and placeholder styles
+    [locale]/
+      layout.tsx                # HTML lang/dir, translation provider, site shell
+      page.tsx                  # Homepage route and localized metadata
+      [...slug]/page.tsx        # Temporary Coming Soon route for registered pages
+    icon.tsx                    # Generated icon using official logo
+    not-found.tsx               # 404
+    robots.ts, sitemap.ts      # Search crawler policy / sitemap
   components/
-    layout/            # navigation, header, footer
-    ui/                # accessible reusable primitives
-    sections/          # shared page sections, when justified
-  content/             # typed company and service data
-  i18n/                # locale configuration and translation helpers
-  lib/                 # small pure utilities
+    home/                       # Homepage-only visual sections and motion helpers
+    layout/                     # Shared header, footer, navigation and placeholders
+  content/
+    home.ts                     # Bilingual homepage and About-preview copy
+    hero.ts                     # Bilingual hero slides and image references
+  i18n/request.ts               # next-intl request config
+  lib/
+    site.ts                     # Locales, page routes, service slugs and labels
+    seo.ts                      # SITE_URL, SITE_INDEXABLE, language alternates
+  styles/
+    tokens.css                  # Fonts and shared design variables
+    site-layout.css             # Shared header/footer styles
+    home.css                    # Homepage visual styles
 messages/
-  en.json
-  ar.json
+  en.json, ar.json              # next-intl UI messages (currently Coming Soon)
 public/
-  brand/
-  images/
+  brand/inbs-logo.png           # Official logo
+  images/hero-*.webp            # Homepage hero images
+  images/services/             # Service WebP images, legacy JPEGs, source records
+scripts/
+  smoke.mjs                     # HTTP smoke tests
+  homepage-e2e.mjs              # Playwright / axe browser audit
+  prepare-service-images.mjs    # Asset preparation utility
+.github/workflows/
+  validate.yml                  # Lint, TS, build and smoke checks
+  homepage-e2e.yml              # Browser, RTL, responsiveness and accessibility
+  prepare-service-images.yml    # Legacy branch-specific image preparation
 docs/
   PROJECT-GUIDE.md
+  FOUNDATION-CHECKLIST.md
 ```
 
-**Folders are added only when used.** Avoid creating a large empty architecture.
+Next.js reserved filenames (such as `layout.tsx`, `page.tsx`, `robots.ts` and `sitemap.ts`) must keep their framework-specific locations. Do not create empty folders or split a small component merely for symmetry.
 
-## Coding standards
-- TypeScript strict mode. Prefer Server Components; use Client Components only for interactions.
-- Keep page files concise and presentational. Put shared information in typed data files.
-- Small descriptive components. No giant one-file pages, dead code, duplicate logic, or unnecessary dependencies.
-- Mobile-first CSS. Use semantic landmarks, accessible labels, keyboard navigation, visible focus states, meaningful image alt text and reduced-motion support.
-- Respect RTL layout and language metadata. Do not translate URLs or structured data ad hoc.
-- SEO per page (title, description, canonical/hreflang, sitemap) before production.
-- Never commit keys. Forms must use a vetted free-tier external provider (Formspree is a candidate) and include required privacy text.
-- Prefer Next.js built-in features over extra libraries unless a clear need exists.
+## Where edits belong
 
-## Ownership and review
-- Developer: build, test, maintain dependencies, document changes.
-- Company editor: update approved text and assets in the designated content folders; no need to change layout code.
-- Each PR must document: changed files, new dependencies, pages affected, local checks, preview link and any items awaiting company approval.
+| Change | Primary location |
+| --- | --- |
+| Homepage copy | `src/content/home.ts` |
+| Hero slides, CTA labels and images | `src/content/hero.ts` |
+| Service URLs and displayed service names | `src/lib/site.ts` |
+| Homepage service photos | `public/images/services/*.webp` and image mapping in `src/components/home/services-showcase.tsx` |
+| Homepage achievements figures | `src/components/home/home-achievements.tsx` (currently hardcoded; must be verified before publication) |
+| Institutional-centre names | `src/components/home/home-institutions.tsx` (currently hardcoded) |
+| Contact details and social URLs | `src/components/layout/site-footer.tsx` (currently hardcoded) |
+| Header and navigation behavior | `src/components/layout/site-header.tsx` |
+| Coming Soon messages | `messages/en.json` and `messages/ar.json` |
+| Global palette and typography | `src/styles/tokens.css` (review duplicate older variables in `globals.css`) |
+| Homepage appearance | `src/styles/home.css` |
+| Shared header/footer appearance | `src/styles/site-layout.css` |
+| Indexing configuration | `src/lib/seo.ts` and deployment environment |
 
-## Definition of done for foundation
-- Locale-prefixed routes and correct Arabic/English direction
-- Shared, accessible header/footer and language switcher
-- Dedicated Coming Soon route content for unfinished pages
-- Typed services/content source from the original site
-- Brand tokens and official logo asset
-- Lint, TypeScript and production build checks
-- Clear README and handoff instructions
+**Handoff limitation:** content is not yet completely centralized. Editing TypeScript/TSX files requires a developer; there is no editor-facing CMS. Future cleanup should centralize validated services, metrics, institution and contact data without rewriting working UI unnecessarily.
 
-A documentation-only commit does **not** mean the foundation itself is finished.
+## Content integrity and brand
+
+- The legacy INBS repository (`Bashar-alJabi/inbs`) is the primary reference for company descriptions and services; it is read-only for this redesign.
+- Keep all ten existing service categories and confirm names/copy with the company.
+- Do not modify the official logo or invent partnerships, endorsements, testimonials or staff biographies.
+- The homepage's achievements counters are presently hardcoded (`25+` years, `30+` awards, `85+` projects, `25,320+` clients). **Do not treat these as verified figures.** Obtain written approval/source evidence; reconcile the years figure with the stated 2003 founding date.
+- The institutional ticker depicts service authorities/centres, **not** official logos or proof of partnership.
+- Service WebP image provenance is documented in `public/images/services/SOURCES.json` and its README; review licence restrictions and identifiable-person implications before publication.
+- Validate phone, email, address, opening hours and social profiles against current company records before launch.
+
+## Development and validation
+
+Requirements: supported Node.js LTS and npm. Use `npm ci` before testing.
+
+```bash
+npm ci
+npm run dev
+npm run lint
+npx tsc --noEmit
+npm run build
+```
+
+For local HTTP smoke tests, start the production server (`npm run start`) and run `npm run test:smoke`. `scripts/homepage-e2e.mjs` is executed by `.github/workflows/homepage-e2e.yml` using Playwright and axe on a built production server.
+
+The homepage CI covers EN/AR, desktop/tablet/mobile, light/dark themes, menu interactions, service previews, reduced motion, asset URLs and selected WCAG A/AA checks. This is **automated coverage**, not proof of complete manual-device, Lighthouse, security, legal or production-host testing.
+
+Standards: strict TypeScript, descriptive components, semantic HTML, keyboard access, focus styles, responsive layout, correct Arabic RTL, reduced-motion support, server components by default and no unnecessary dependencies.
+
+## Search indexing and publishing
+
+- `SITE_URL` overrides the configured origin (otherwise `https://inbs-uae.com` is a tentative fallback).
+- `SITE_INDEXABLE` must explicitly equal `true` to allow indexing; otherwise indexing stays disabled.
+- The current sitemap includes only homepage locales when indexing is enabled. Do not add Coming Soon routes.
+- Every finished new page needs localized title, description, canonical/hreflang and suitable indexability before promotion.
+- Verify production domain, hosting compatibility, legal pages, contact submission, SEO, accessibility, performance and security before any public launch.
+
+## Known cleanup / handoff backlog
+
+1. Confirm or correct homepage achievements and company/contact claims.
+2. Consolidate duplicated localization logic (currently in the header and `language-switcher.tsx`); review whether the latter is unused.
+3. Consider reusing shared reveal animation across `motion-elements.tsx` and `footer-reveal.tsx`.
+4. Centralize service metadata and image mapping to avoid parallel arrays; move verified institution/contact facts out of components.
+5. Audit old CSS selectors and duplicated color tokens before deleting; retain styles that are genuinely used.
+6. Check legacy `service*.jpg/jpeg` and default SVG assets for references before removing them.
+7. Review the branch-specific image-generation workflow and its write permissions; avoid scripts that edit UI code as an image-preparation side effect.
+8. Keep this guide and the checklist updated in the same PR whenever file ownership, routing or editorial workflow changes.
+
+## Ownership and PR handoff
+
+- Developer: architecture, CI, accessibility, dependencies, SEO, production release and implementation.
+- Company approver/editor: verify factual copy, metrics, legal claims, media and contact details. Nontechnical edits still need a developer or a separately approved content management system.
+- Every PR should summarize scope, changed files, any dependencies, checks actually run, screenshots/previews, both languages, and outstanding approvals.
+
+See [FOUNDATION-CHECKLIST.md](FOUNDATION-CHECKLIST.md) for current verified checks and launch blockers.
