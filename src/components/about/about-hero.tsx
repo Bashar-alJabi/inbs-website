@@ -4,32 +4,31 @@ import { aboutPageContent } from '@/content/about';
 import type { Locale } from '@/lib/site';
 
 /**
- * The two straight axes intersect each circular orbit exactly at their radii.
- * Travelers follow the drawn axes and circles, never an invisible shortcut.
- * The ellipse traveler follows the visible ellipse from its first frame.
+ * Each moving point uses the exact same SVG path as its visible track.
+ * There are no unpainted transitions or stationary decorative dots.
  */
+const innerTrack = 'M300 300 L488 300 A188 188 0 1 1 112 300 A188 188 0 1 1 488 300';
+const outerTrack = 'M300 300 L300 35 A265 265 0 1 1 300 565 A265 265 0 1 1 300 35';
+const diagonalTrack = 'M300 300 L565 300 A265 96 0 1 1 35 300 A265 96 0 1 1 565 300';
+
 function HeroNetworkArt() {
   return <div className="inbs-story-hero-art" aria-hidden="true">
     <svg viewBox="0 0 600 600" fill="none">
-      <circle cx="300" cy="300" r="265"/>
-      <circle cx="300" cy="300" r="188"/>
-      <ellipse cx="300" cy="300" rx="265" ry="96" transform="rotate(-36 300 300)"/>
-      <path d="M35 300H565 M300 35V565"/>
-      <circle cx="300" cy="300" r="5" className="inbs-story-hub"/>
-      <circle r="4.5" className="inbs-story-traveler">
-        <animateMotion dur="17s" begin="-4s" repeatCount="indefinite"
-          path="M300 300 L488 300 A188 188 0 1 1 112 300 A188 188 0 1 1 488 300 L300 300"/>
-      </circle>
-      <circle r="4" className="inbs-story-traveler">
-        <animateMotion dur="23s" begin="-10s" repeatCount="indefinite"
-          path="M300 300 L300 35 A265 265 0 1 1 300 565 A265 265 0 1 1 300 35 L300 300"/>
-      </circle>
+      <path className="inbs-story-track" d={outerTrack}/>
+      <path className="inbs-story-track" d={innerTrack}/>
+      <path className="inbs-story-track" d="M35 300 H565 M300 35 V565"/>
       <g transform="rotate(-36 300 300)">
+        <path className="inbs-story-track" d={diagonalTrack}/>
         <circle r="4.5" className="inbs-story-traveler">
-          <animateMotion dur="20s" begin="-13s" repeatCount="indefinite"
-            path="M565 300 A265 96 0 1 1 35 300 A265 96 0 1 1 565 300"/>
+          <animateMotion dur="20s" begin="-13s" repeatCount="indefinite" path={diagonalTrack}/>
         </circle>
       </g>
+      <circle r="4.5" className="inbs-story-traveler">
+        <animateMotion dur="17s" begin="-4s" repeatCount="indefinite" path={innerTrack}/>
+      </circle>
+      <circle r="4.5" className="inbs-story-traveler">
+        <animateMotion dur="23s" begin="-10s" repeatCount="indefinite" path={outerTrack}/>
+      </circle>
     </svg>
   </div>;
 }
