@@ -9,7 +9,7 @@ import { pages, type Locale } from '@/lib/site';
 import { LanguageSwitcher } from './language-switcher';
 import { layoutContent } from '@/content/layout';
 
-const featured=['about','services','team'];
+const featured=['about','services'];
 const drawerIcons = [Building2,BriefcaseBusiness,Users,Newspaper,UserRoundSearch,Phone,FileText,FileText] as const;
 export function SiteHeader({locale}:{locale:Locale}){
  const pathname=usePathname();
