@@ -6,6 +6,6 @@ License reference: https://www.pexels.com/license/
 
 Pexels permits free use, including commercial website use, subject to its license restrictions. Do not infer permission to use identifiable people or trademarks for endorsements. No source photograph is presented as a photograph of INBS staff or clients.
 
-Each WebP was resized to 1440 × 1000 pixels, converted at WebP quality 80, and is stored locally. Original JPEGs remain unchanged for rollback. The homepage component uses the new WebP paths.
+The service images are stored locally as optimized WebP files. The website resolves their paths from `src/content/services.ts`; the previous `service1.jpg`–`service10.jpg`/`.jpeg` copies were removed because the current website and preparation script no longer use them. If rollback is needed, the legacy files remain available in Git history.
 
 To regenerate assets from their original source URLs, use `node scripts/prepare-service-images.mjs` in a Node environment with dependencies installed.
