@@ -10,7 +10,7 @@ function findTitle(locale:'en'|'ar',slug:string[]):string|null {
 }
 export function generateStaticParams(){
  return locales.flatMap(locale=>[
- ...pages.map(p=>({locale,slug:[p.slug]})),
+ ...pages.filter(p=>p.slug!=='about').map(p=>({locale,slug:[p.slug]})),
  ...serviceSlugs.map(slug=>({locale,slug:['services',slug]})),
  ]);
 }
