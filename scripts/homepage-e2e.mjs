@@ -227,6 +227,8 @@ for(const locale of ['en','ar']){
     assert.ok(widths.scroll<=widths.inner+3,'Horizontal overflow: '+JSON.stringify(widths));
     assert.equal(await page.locator('.inbs-about-page img').evaluateAll(
       images=>images.filter(i=>i.complete&&i.naturalWidth===0).length),0,'Broken About image');
+    const heroSource=await page.locator('.inbs-story-hero-visual img').getAttribute('src');
+    assert.match(heroSource,/hero-about\\.webp/,'About must use its dedicated photo');
     assert.deepEqual(errors,[],'About JavaScript errors');
    });
    await test(key+' accessibility',async()=>{
