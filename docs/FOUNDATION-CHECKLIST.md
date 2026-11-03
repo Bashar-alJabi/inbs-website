@@ -47,6 +47,10 @@
 - [x] Integrate approved supplied mission/goals/relationships themes in concise bilingual content without adding unsupported figures or affiliations.
 - [x] Display all 10 canonical service entries; remove duplicate footer-adjacent contact CTA, use the homepage-style rounded-footer handoff and section-link interaction.
 - [x] Add traveling SVG hero signals with reduced-motion support while preserving the existing network geometry.
+- [x] Refactor About into independently maintained Hero, Intro, Principles, Network and local visual helper modules (composition-only page entry).
+- [x] Remove off-rail decorative dots, align both SVG axes to the outer circle, and constrain ellipse traveler to the visible path.
+- [x] Increase editorial section labels and principle descriptions, add RTL divider clearance, and reuse the Home About link styling without duplicate underline offsets.
+- [x] Add browser regression assertions for SVG geometry, 10 services, typography, RTL clearance and hover underline baseline.
 - [ ] Verify CI lint, TypeScript, production build, HTTP smoke, Playwright and axe on **final PR head**.
 - [ ] Review deployed preview visually in both languages, light/dark, mobile/desktop, and capture feedback.
 - [ ] Obtain owner approval before merging PR #21 to `redesign`; promote to `main` separately.
