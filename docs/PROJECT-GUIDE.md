@@ -4,7 +4,7 @@
 
 INBS is a bilingual (English/Arabic) company website built with Next.js App Router, React and TypeScript. The goal is accessible, maintainable and performant presentation of verified company services.
 
-**As of November 2026:** the bilingual homepage and shared site shell are implemented and merged through PR #16 into `redesign` and PR #17 into `main`. Other known page URLs display a branded **Coming Soon** screen; they must not be presented as finished pages. This guide documents the **current implementation**, not a hypothetical completed architecture.
+**As of November 2026:** the bilingual homepage and shared site shell are implemented and promoted to `main`, including the cleanup milestone (PR #19 to `redesign`, PR #20 to `main`). The bilingual About page is being developed in draft PR #21 on `feature/about-page`; it is **not merged yet**. Other known URLs still display **Coming Soon**. This guide describes the feature branch implementation separately from the approved production branch.
 
 Current maintenance work is tracked separately from page development. Do not merge or deploy an unfinished change without the owner's approval.
 
@@ -26,7 +26,7 @@ The `[locale]` URL segment is either `en` or `ar`; `/en` and `/ar` are the imple
 | Route (both languages) | Current state |
 | --- | --- |
 | `/[locale]` | **Implemented homepage** |
-| `/[locale]/about` | Coming Soon |
+| `/[locale]/about` | Implemented on feature branch (draft PR #21), not merged |
 | `/[locale]/services` | Coming Soon |
 | `/[locale]/services/[slug]` | Coming Soon for ten recognized service slugs |
 | `/[locale]/team` | Coming Soon |
@@ -36,7 +36,7 @@ The `[locale]` URL segment is either `en` or `ar`; `/en` and `/ar` are the imple
 | `/[locale]/privacy-policy` | Coming Soon |
 | `/[locale]/terms` | Coming Soon |
 
-Known page slugs live in `src/lib/site.ts`; service slugs come from the canonical `src/content/services.ts` catalog and are re-exported by `site.ts`. The dynamic fallback `src/app/[locale]/[...slug]/page.tsx` resolves these URLs and displays `ComingSoon`; unknown paths are 404. A `why-inbs` page was mentioned in the earlier roadmap but is **not** a recognized route in the current `pages` array; explicitly decide whether to add it before documenting it as available.
+Known page slugs live in `src/lib/site.ts`; service slugs come from the canonical `src/content/services.ts` catalog and are re-exported by `site.ts`. The dedicated `src/app/[locale]/about/page.tsx` owns About. The dynamic fallback `src/app/[locale]/[...slug]/page.tsx` resolves unfinished recognized URLs and displays `ComingSoon`; it excludes About from generated params. Unknown paths are 404. A `why-inbs` page was mentioned in the earlier roadmap but is **not** a recognized route in the current `pages` array; explicitly decide whether to add it before documenting it as available.
 
 When a page is developed, give it its own Next.js route and replace the Coming Soon rendering. Link to the actual route, not to a homepage anchor as a substitute.
 
@@ -54,12 +54,13 @@ src/
     [locale]/             translated shell, home route, temporary fallback pages
   components/
     home/                 homepage sections
+    about/                standalone About story sections
     layout/               header, footer, Coming Soon, language and cursor UI
     shared/               reusable Reveal and SmoothScroll
   content/                bilingual copy, service catalog, shared layout and contact data
   i18n/                   next-intl request configuration
   lib/                    site locale/routes and SEO helpers
-  styles/                 design tokens, homepage CSS and site-layout CSS
+  styles/                 design tokens, home/about page CSS and site-layout CSS
 ```
 
 ### Rendering and responsibility
@@ -68,6 +69,7 @@ src/
 - `src/app/[locale]/layout.tsx`: validates locale, sets `html lang/dir`, provides messages and displays shared header/footer.
 - `src/app/[locale]/page.tsx`: homepage route, locale validation and metadata; `src/components/home/homepage.tsx`: homepage section composition.
 - `src/components/home/`: Hero, About preview, Services showcase, Achievements and Institutions; client components are used only where interaction or animation requires them.
+- `src/app/[locale]/about/page.tsx` and `src/components/about/about-page.tsx`: About route/metadata and sections, with dedicated `src/styles/about.css` and bilingual `src/content/about.ts`.
 - `src/components/layout/`: shared chrome and temporary pages.
 - `src/styles/tokens.css`: design variables; `globals.css`, `site-layout.css`, `home.css`: other styles.
 
