@@ -1,5 +1,4 @@
 import type { Locale } from '@/lib/site';
-import { SmoothScroll } from '@/components/shared/smooth-scroll';
 import { CompanyFacts } from './company-facts';
 import { HeroExperience } from './hero-experience';
 import { AboutPreview } from './about-preview';
@@ -10,7 +9,6 @@ import { HomeInstitutions } from './home-institutions';
 /** Homepage shell. Additional sections will be added after their design is approved. */
 export function Homepage({locale}:{locale:Locale}){
   return <main className="homepage">
-    <SmoothScroll />
     <HeroExperience locale={locale}/>
     <CompanyFacts locale={locale}/>
     <AboutPreview locale={locale}/>
