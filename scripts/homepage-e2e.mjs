@@ -149,6 +149,29 @@ for(const locale of ['en','ar']){
     assert.equal(await page.locator('.inbs-story-outro').count(),0,'Redundant contact CTA');
     assert.equal(await page.locator('.inbs-story-all-services.inbs-about-link').count(),1);
     assert.equal(await page.locator('.inbs-story-hero-art animateMotion').count(),3);
+    assert.equal(await page.locator('.inbs-story-hero-art .inbs-story-signal').count(),0,
+      'Floating decorative circles must be absent');
+    assert.equal(await page.locator('.inbs-story-hero-art svg > path').getAttribute('d'),
+      'M35 300H565 M300 35V565','Axes must meet the outer circle at radius 265');
+    const ellipseTraveler=await page.locator('.inbs-story-hero-art g animateMotion').getAttribute('path');
+    assert.equal(ellipseTraveler,
+      'M565 300 A265 96 0 1 1 35 300 A265 96 0 1 1 565 300',
+      'Ellipse traveler must remain on its visible orbit');
+    const type=await page.evaluate(()=>{
+      const label=document.querySelector('.inbs-story-label');
+      const body=document.querySelector('.inbs-story-principle p');
+      const link=document.querySelector('.inbs-story-all-services');
+      return {
+        label:parseFloat(getComputedStyle(label).fontSize),
+        body:parseFloat(getComputedStyle(body).fontSize),
+        underline:getComputedStyle(link,'::after').bottom,
+        rtlPadding:parseFloat(getComputedStyle(body).paddingInlineEnd),
+      };
+    });
+    assert.ok(type.label>=13,'Section kicker too small: '+type.label);
+    assert.ok(type.body>=16,'Principle text too small: '+type.body);
+    assert.equal(type.underline,'0px','CTA line must share the Home underline baseline');
+    if(locale==='ar')assert.ok(type.rtlPadding>=12,'RTL text must clear column divider');
     await page.locator('.inbs-story-network').scrollIntoViewIfNeeded();
     // Shared Reveal transitions should finish before the axe contrast audit.
     await page.waitForTimeout(1000);
