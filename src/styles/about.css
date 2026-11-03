@@ -16,7 +16,7 @@
 .inbs-about-line{display:block}
 .inbs-story-label,.inbs-story-eyebrow{
   display:flex;align-items:center;gap:14px;
-  font-size:11px;line-height:1.5;letter-spacing:.15em;font-weight:750;text-transform:uppercase;
+  font-size:clamp(13px,1.05vw,15px);line-height:1.6;letter-spacing:.11em;font-weight:750;text-transform:uppercase;
 }
 .inbs-story-label{color:var(--story-accent);margin-bottom:30px}
 .inbs-story-label>span,.inbs-story-eyebrow>span{width:35px;height:1px;background:currentColor;flex:none}
@@ -42,8 +42,8 @@
   top:17%;inset-inline-end:-10%;pointer-events:none;opacity:.32;
 }
 .inbs-story-hero-art svg{width:100%;height:100%;stroke:#c1e8ff;stroke-width:1.1}
-.inbs-story-hero-art .inbs-story-signal{fill:#89d8ff;stroke:none}
-.inbs-story-hero-art .inbs-story-hub{fill:#d5f1ff;stroke:none}
+
+.inbs-story-hero-art .inbs-story-hub{fill:#b7ebff;stroke:none}
 .inbs-story-hero-inner{
   position:relative;z-index:1;min-height:min(880px,100svh);
   padding-top:clamp(165px,20vh,230px);padding-bottom:34px;
@@ -94,14 +94,14 @@
 .inbs-story-principle-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--story-line);border-bottom:1px solid var(--story-line)}
 .inbs-story-principle-grid>div{min-width:0}
 .inbs-story-principle{
-  height:100%;padding:33px clamp(24px,3vw,45px) 32px 0;
+  height:100%;padding:33px clamp(24px,2.7vw,42px) 36px 0;
   display:flex;flex-direction:column;align-items:flex-start;
 }
-.inbs-story-principle-grid>div+div .inbs-story-principle{border-inline-start:1px solid var(--story-line);padding-inline-start:clamp(24px,3vw,45px)}
+.inbs-story-principle-grid>div+div .inbs-story-principle{border-inline-start:1px solid var(--story-line);padding-inline-start:clamp(30px,3.2vw,50px)}
 .inbs-story-principle-number{font-size:12px;color:var(--story-accent);font-weight:750;letter-spacing:.13em}
 .inbs-story-principle-glyph{display:grid;place-items:center;color:var(--story-accent);margin:48px 0 17px}
 .inbs-story-principle h3{font-size:clamp(20px,2.1vw,29px);line-height:1.35;margin:0 0 16px;letter-spacing:-.035em}
-.inbs-story-principle p{font-size:15px;line-height:1.9;color:var(--story-muted);margin:0;max-width:340px}
+.inbs-story-principle p{font-size:clamp(16px,1.25vw,18px);line-height:1.95;color:var(--story-muted);margin:0;max-width:360px;padding-inline-end:clamp(14px,2.5vw,34px)}
 
 /* Service directory links use the centralized service catalog, not copied labels. */
 .inbs-story-network{background:var(--story-paper);padding-block:clamp(85px,10vw,145px)}
@@ -122,21 +122,17 @@
 .inbs-story-capability:hover,.inbs-story-capability:focus-visible{background:color-mix(in srgb,var(--story-accent) 7%,transparent);padding-inline-start:18px}
 .inbs-story-capability:nth-child(even):hover,.inbs-story-capability:nth-child(even):focus-visible{padding-inline-start:44px}
 .inbs-story-capability:hover svg{transform:translate(3px,-3px)}
-.inbs-story-all-services{
-  display:inline-flex;align-items:center;gap:30px;margin-top:37px;
-  padding-bottom:13px;border-bottom:1px solid var(--story-accent);
-  color:var(--story-accent);font-weight:750;font-size:14px;
+/* Match the existing Home About CTA, including its exact underline position. */
+.inbs-story-network .inbs-about-link{
+  --inbs-about-accent:var(--story-accent);
+  --inbs-about-ink:var(--story-ink);
+  margin-top:37px;
 }
 
 /* Continue the same light-to-rounded-footer transition as the homepage. */
 .inbs-about-page{position:relative;z-index:1;margin-bottom:-24px}
 .inbs-story-network{padding-bottom:clamp(115px,12vw,165px)}
-.inbs-story-all-services.inbs-about-link{
-  color:var(--story-ink);margin-top:37px;min-width:200px;
-  border-color:var(--story-accent);padding-bottom:14px;
-}
-.inbs-story-all-services.inbs-about-link:hover,
-.inbs-story-all-services.inbs-about-link:focus-visible{color:var(--story-accent)}
+
 .inbs-story-hero-art .inbs-story-traveler{
   fill:#b7ebff;stroke:#143b5a;stroke-width:1;
   filter:drop-shadow(0 0 7px #80d7ff);
@@ -209,9 +205,15 @@ html[data-theme=dark] .inbs-story-year span:first-child{opacity:.25}
   .inbs-story-capability-name{font-size:18px}
 }
 @media(prefers-reduced-motion:reduce){
-  .inbs-story-hero-link,.inbs-story-capability,.inbs-story-capability svg,
-  .inbs-story-all-services{transition:none}
-  .inbs-story-hero-link:hover,.inbs-story-all-services:hover{gap:30px}
+  .inbs-story-hero-link,.inbs-story-capability,.inbs-story-capability svg{transition:none}
+  .inbs-story-hero-link:hover{gap:35px}
   .inbs-story-capability:hover,.inbs-story-capability:nth-child(even):hover{padding-inline-start:0}
   .inbs-story-capability:hover svg{transform:none}
+}
+
+/* Give Arabic text breathing room before the vertical divider. */
+[dir=rtl] .inbs-story-principle p{padding-inline-end:clamp(24px,3vw,44px)}
+[dir=rtl] .inbs-story-label{font-size:clamp(15px,1.2vw,17px)}
+@media(max-width:760px){
+  .inbs-story-principle p,[dir=rtl] .inbs-story-principle p{padding-inline-end:12px}
 }
