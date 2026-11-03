@@ -53,8 +53,8 @@ export function SiteHeader({locale}:{locale:Locale}){
   </nav>
   <div className="inbs-header-actions">
    <Link className="inbs-contact-button" href={`/${locale}/contact`}>{t.contact}<ArrowUpRight size={17}/></Link>
-   <LanguageSwitcher locale={locale}/>
    <button type="button" className="inbs-icon-button" onClick={toggleTheme} aria-label={t.themeToggleAria} title={t.themeToggleTitle}><motion.span className="inbs-theme-show-dark" whileHover={{rotate:15,scale:1.1}}><Sun size={21}/></motion.span><motion.span className="inbs-theme-show-light" whileHover={{rotate:-15,scale:1.1}}><Moon size={21}/></motion.span></button>
+   <LanguageSwitcher locale={locale}/>
    <button type="button" ref={menuButtonRef} className="inbs-icon-button inbs-menu-trigger" onClick={()=>setOpen(!open)} aria-expanded={open} aria-controls="inbs-drawer" aria-label={open ? t.closeMenu : t.openMenu}>{open?<X size={23}/>:<Menu size={23}/>}</button>
   </div>
  </div>
