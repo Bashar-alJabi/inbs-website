@@ -38,7 +38,7 @@ export function AboutPreview({ locale }: { locale: Locale }) {
      <p>{pillar.text}</p>
     </article></Reveal>)}
    </div>
-   <div className="inbs-about-footnote" aria-hidden="true"><span>INBS</span><span>2003 — {locale==='ar'?'دبي':'DUBAI'}</span></div>
+   <div className="inbs-about-footnote" aria-hidden="true"><span>INBS</span><span>2003 — {content.aboutLocation}</span></div>
   </div>
  </section>;
 }
