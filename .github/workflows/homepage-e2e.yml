@@ -1,0 +1,45 @@
+name: Homepage browser and accessibility audit
+on:
+  pull_request:
+    branches: [redesign, main]
+  push:
+    branches: [feature/homepage]
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'scripts/homepage-e2e.mjs'
+      - '.github/workflows/homepage-e2e.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: Install browser audit tooling without changing lockfile
+        run: npm install --no-save --package-lock=false playwright @axe-core/playwright
+      - run: npx playwright install --with-deps chromium
+      - run: npm run lint
+      - run: npx tsc --noEmit
+      - run: npm run build
+      - name: Start production server
+        run: |
+          npm run start -- --port 3000 > /tmp/inbs-browser-server.log 2>&1 &
+          for i in $(seq 1 45); do
+            if curl --fail --silent http://localhost:3000/en > /dev/null; then exit 0; fi
+            sleep 2
+          done
+          cat /tmp/inbs-browser-server.log
+          exit 1
+      - name: Browser, RTL, responsive, theme, accessibility and asset tests
+        run: node scripts/homepage-e2e.mjs
+      - name: Server logs if failed
+        if: failure()
+        run: cat /tmp/inbs-browser-server.log
