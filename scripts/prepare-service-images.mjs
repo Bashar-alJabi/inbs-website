@@ -2,71 +2,25 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import sharp from 'sharp';
 
-const entries = [
-  {
-    "slug": "businessmen-services",
-    "id": 8152735,
-    "url": "https://www.pexels.com/photo/people-doing-paperwork-at-a-desk-8152735/",
-    "license": "https://www.pexels.com/license/"
-  },
-  {
-    "slug": "real-estate-services",
-    "id": 36198129,
-    "url": "https://www.pexels.com/photo/dubai-skyline-with-modern-skyscrapers-and-reflection-36198129/",
-    "license": "https://www.pexels.com/license/"
-  },
-  {
-    "slug": "website-services",
-    "id": 36496927,
-    "url": "https://www.pexels.com/photo/close-up-of-programmer-typing-code-on-laptop-36496927/",
-    "license": "https://www.pexels.com/license/"
-  },
-  {
-    "slug": "typing-services",
-    "id": 8867209,
-    "url": "https://www.pexels.com/photo/a-person-typing-on-a-wireless-keyboard-8867209/",
-    "license": "https://www.pexels.com/license/"
-  },
-  {
-    "slug": "tourism-services",
-    "id": 28730135,
-    "url": "https://www.pexels.com/photo/dubai-desert-safari-adventure-at-sunset-28730135/",
-    "license": "https://www.pexels.com/license/"
-  },
-  {
-    "slug": "financial-services",
-    "id": 8297220,
-    "url": "https://www.pexels.com/photo/a-person-working-on-the-documents-using-a-calculator-8297220/",
-    "license": "https://www.pexels.com/license/"
-  },
-  {
-    "slug": "consultation-services",
-    "id": 7433848,
-    "url": "https://www.pexels.com/photo/business-partners-having-a-meeting-at-the-office-7433848/",
-    "license": "https://www.pexels.com/license/"
-  },
-  {
-    "slug": "customs-services",
-    "id": 8783533,
-    "url": "https://www.pexels.com/photo/cargo-containers-in-a-port-8783533/",
-    "license": "https://www.pexels.com/license/"
-  },
-  {
-    "slug": "cargo-services",
-    "id": 6595777,
-    "url": "https://www.pexels.com/photo/cargo-ship-at-unloading-containers-6595777/",
-    "license": "https://www.pexels.com/license/"
-  },
-  {
-    "slug": "citizenship-immigration-services",
-    "id": 7310015,
-    "url": "https://www.pexels.com/photo/close-up-shot-of-a-passport-and-tickets-on-top-of-a-laptop-7310015/",
-    "license": "https://www.pexels.com/license/"
-  }
-];
+// SOURCES.json is the single source for licensed photo IDs and provenance.
+const sourceFile = path.join(process.cwd(), 'public/images/services/SOURCES.json');
+const entries = JSON.parse(await fs.readFile(sourceFile, 'utf8'));
+if (!Array.isArray(entries) || entries.length !== 10) {
+  throw new Error('Expected ten licensed service image sources');
+}
+const seen = new Set();
+for (const item of entries) {
+  if (
+    !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(item.slug) ||
+    !Number.isSafeInteger(item.id) || item.id <= 0 ||
+    !item.url?.startsWith('https://www.pexels.com/photo/') ||
+    item.license !== 'https://www.pexels.com/license/' ||
+    seen.has(item.slug)
+  ) throw new Error('Invalid or duplicate service image source');
+  seen.add(item.slug);
+}
 const directory = path.join(process.cwd(),'public/images/services');
 await fs.mkdir(directory,{recursive:true});
-const written=[];
 for(const item of entries){
  const url = `https://images.pexels.com/photos/${item.id}/pexels-photo-${item.id}.jpeg?auto=compress&cs=tinysrgb&w=1800`;
  const response=await fetch(url,{headers:{'User-Agent':'INBS-Website-Image-Preparation/1.0'}});
@@ -75,10 +29,8 @@ for(const item of entries){
  if(input.length<10000||input.length>20000000)throw new Error(`Unreasonable image size for ${item.slug}`);
  const filename=`${item.slug}.webp`;
  await sharp(input).rotate().resize(1440,1000,{fit:'cover',position:'attention'}).modulate({brightness:1.12,saturation:1.07}).webp({quality:83,effort:5}).toFile(path.join(directory,filename));
- written.push(filename);
  console.log(`Prepared ${filename}`);
 }
-await fs.writeFile(path.join(directory,'SOURCES.json'),JSON.stringify(entries,null,2)+'\n');
 // Service image paths are declared in src/content/services.ts.
 // Preparing image assets must not rewrite component source code.
-console.log('All 10 service images prepared.');
+console.log(`All ${entries.length} service images prepared; source metadata was left unchanged.`);
