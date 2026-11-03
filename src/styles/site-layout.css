@@ -193,3 +193,17 @@ html:not([data-theme=dark]) .inbs-drawer-network-traveller{fill:#4d9ed8}
 html[data-theme=dark] .inbs-drawer-network-path{stroke:#84bfe9;opacity:.55}
 html[data-theme=dark] .inbs-drawer-network-node{fill:#84bfe9}
 @media(prefers-reduced-motion:reduce){.inbs-drawer-network-traveller{display:none}}
+
+
+/* Dark footer: continue the neutral navy surfaces without the vivid blue opening. */
+html[data-theme=dark] .inbs-footer{
+ background:
+  radial-gradient(ellipse 72% 85% at 8% 0%,rgba(38,82,119,.28) 0%,transparent 70%),
+  linear-gradient(135deg,#192d40 0%,#122337 48%,#0c1c2d 100%);
+ box-shadow:inset 0 1px 0 #b9d5e414;
+}
+html[data-theme=dark] .inbs-footer-glow:before{
+ border-color:#9ed8ff16;
+ box-shadow:0 0 0 90px #90cfff05,0 0 0 180px #9ad3ff04;
+}
+html[data-theme=dark] .inbs-footer-watermark{color:#d4ecff09}
