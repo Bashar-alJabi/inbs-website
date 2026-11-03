@@ -21,19 +21,21 @@
 
 ## B. Open cleanup / maintainability work
 
-- [ ] Centralize contact details, map URL and social links so shared pages use one source.
-- [ ] Consolidate service slugs, names and image mappings without relying on parallel array indexes.
-- [ ] Reduce scattered translations and hard-coded presentation copy; document one consistent editing convention.
-- [ ] Reuse language-switching logic instead of duplicating it in components.
-- [ ] Consolidate shared motion/reveal helpers where appropriate while preserving behavior and reduced-motion support.
-- [ ] Move the homepage company-facts strip into its own section component if approved.
-- [ ] Remove unused old CSS only after checking references and verifying visual output in both locales/themes/viewports.
-- [ ] Remove verified unused legacy service images and default starter SVGs; preserve source/licence records.
-- [ ] Make service-image preparation independent of rewriting UI source and remove or disable obsolete write-enabled image workflow.
-- [ ] Simplify duplicated CI checks while keeping lint, typecheck, production build, HTTP smoke and E2E coverage.
-- [ ] Review site favicon approach and implement an approved professional 404 design.
-- [ ] Verify company metrics with an authorized company owner before final publication; **keep displayed values unchanged unless explicitly approved**.
-- [ ] Review institution names/icons against approved content; **keep unchanged unless explicitly approved**.
+- [x] Centralize contact details, map URL and social links in `src/content/contact.ts` (footer consumes them).
+- [x] Consolidate service slugs, EN/AR names and images in `src/content/services.ts`; map showcase icons by slug.
+- [x] Extract shared header/footer and homepage copy, document translation/content ownership in `docs/CONTENT-MANAGEMENT.md`. Other page-local UI strings can be migrated when each page is implemented.
+- [x] Reuse the shared `LanguageSwitcher` in the header.
+- [x] Use shared `Reveal` and mount `SmoothScroll` once in the locale layout, retaining reduced-motion behavior.
+- [x] Extract the company facts strip into `src/components/home/company-facts.tsx`.
+- [x] Remove verified obsolete CSS selectors for the pre-redesign header/footer and hero video. The final visual regression audit in both locales/themes/viewports is separately pending below.
+- [x] Remove 10 unused legacy service JPEGs and 5 default Next.js SVGs; preserve active WebPs, source metadata and licences.
+- [x] Make service image preparation read verified source metadata and use manual, read-only workflow with downloadable artifacts, no auto-push.
+- [x] Add workflow concurrency, remove obsolete feature-branch triggers, improve smoke logs and retain independent lint/type/build/HTTP/E2E validation. Some checks intentionally run in both CI jobs.
+- [x] Review and retain approved generated favicon; implement bilingual branded 404.
+- [ ] Obtain authorized verification of company metrics before final publication; the 25/30/85/25,320 values and count animation were verified unchanged against `redesign`.
+- [ ] Obtain approved content verification of institution representations before final publication; all institution names/icons were verified unchanged against `redesign`.
+
+**PR #19 cleanup status (3 November 2026):** all 15 agreed work items are implemented or reviewed on `feature/project-cleanup`; no merge performed. This does not mean release-ready. Full CI and preview review are still required on the final PR commit. The image-preparation workflow was made read-only and manual but has not been exercised end to end; do not mark its runtime verification complete. The displayed achievements and institution content were not edited, but are still subject to authorized company verification.
 
 ## C. Repeat after **every page** (copy these tasks to the page PR)
 
