@@ -1,5 +1,5 @@
 import type { Locale } from '@/lib/site';
-import { SmoothScroll } from './motion-elements';
+import { SmoothScroll } from '@/components/shared/smooth-scroll';
 import { CompanyFacts } from './company-facts';
 import { HeroExperience } from './hero-experience';
 import { AboutPreview } from './about-preview';
