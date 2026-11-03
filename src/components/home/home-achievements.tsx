@@ -7,8 +7,8 @@ import type {Locale} from '@/lib/site';
 const facts=[{value:25,en:'Years of experience',ar:'سنوات الخبرة'},{value:30,en:'Awards achieved',ar:'الجوائز المحققة'},{value:85,en:'Projects completed',ar:'المشاريع المنجزة'},{value:25320,en:'Happy clients',ar:'العملاء السعداء'}] as const;
 function Count({value,active,reduced}:{value:number;active:boolean;reduced:boolean|null}){
  const [n,setN]=useState(0);
- useEffect(()=>{if(!active||reduced)return;let frame=0;const start=performance.now();const tick=(now:number)=>{const t=Math.min((now-start)/1800,1);setN(Math.round(value*(1-(1-t)**3)));if(t<1)frame=requestAnimationFrame(tick)};frame=requestAnimationFrame(tick);return()=>cancelAnimationFrame(frame)},[active,reduced,value]);
- return <>{(reduced?value:n).toLocaleString('en-US')}+</>;
+ useEffect(()=>{if(reduced){setN(value);return;}if(!active)return;let frame=0;const start=performance.now();const tick=(now:number)=>{const t=Math.min((now-start)/1800,1);setN(Math.round(value*(1-(1-t)**3)));if(t<1)frame=requestAnimationFrame(tick)};frame=requestAnimationFrame(tick);return()=>cancelAnimationFrame(frame)},[active,reduced,value]);
+ return <>{n.toLocaleString('en-US')}+</>;
 }
 export function HomeAchievements({locale}:{locale:Locale}){
  const ref=useRef<HTMLElement>(null),visible=useInView(ref,{once:true,amount:.2}),reduced=useReducedMotion();

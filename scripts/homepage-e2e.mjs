@@ -13,7 +13,7 @@ for(const locale of ['en','ar']){
   for(const theme of ['light','dark']){
    const key=[locale,size.name,theme].join('/');
    const context=await browser.newContext({viewport:{width:size.width,height:size.height},deviceScaleFactor:1,reducedMotion:'reduce',colorScheme:theme});
-   await context.addInitScript(t=>localStorage.setItem('inbs-theme',t),theme);
+   await context.addInitScript(t=>localStorage.getItem('inbs-theme')||localStorage.setItem('inbs-theme',t),theme);
    const page=await context.newPage();
    const errors=[];
    page.on('pageerror',error=>errors.push(String(error)));

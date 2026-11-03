@@ -278,3 +278,12 @@ html[data-theme=dark] .inbs-services-display{
 html[data-theme=dark] .inbs-institutions-symbol{background:linear-gradient(145deg,#264a68,#1b3650);border-color:#456781;color:#b5dbf5}
 html[data-theme=dark] .inbs-institutions-symbol:after{border-color:#ffffff17}
 @media(max-width:600px){.inbs-institutions-symbol{width:44px;height:44px;flex-basis:44px}.inbs-institutions-name{gap:12px}}
+
+/* Homepage audit: legible supporting text in light/dark and accessible marquee containment. */
+.inbs-services-end{color:#3c5a6d}
+.inbs-services-end>.inbs-services-all-link{color:#274e68}
+html[data-theme=dark] .inbs-services-end{color:#c5d4df}
+html[data-theme=dark] .inbs-services-overline{color:#add6ef}
+html[data-theme=dark] .inbs-services-end>.inbs-services-all-link{color:#e8f5fc}
+.inbs-institutions-window{overflow:clip}
+@media(prefers-reduced-motion:reduce){.inbs-institutions-window{overflow-x:auto;overflow-y:hidden}}
