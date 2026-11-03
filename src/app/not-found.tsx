@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ArrowUpRight, Compass, House } from 'lucide-react';
@@ -9,10 +10,25 @@ export default function NotFound() {
   const locale = pathname?.split('/')[1] === 'ar' ? 'ar' : 'en';
   const arabic = locale === 'ar';
 
+  useEffect(() => {
+    const previousHtmlOverflow = document.documentElement.style.overflow;
+    const previousBodyOverflow = document.body.style.overflow;
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.documentElement.style.overflow = previousHtmlOverflow;
+      document.body.style.overflow = previousBodyOverflow;
+    };
+  }, []);
+
   return (
     <main className="inbs-not-found" lang={locale} dir={arabic ? 'rtl' : 'ltr'}>
       <div className="inbs-not-found-aura" aria-hidden="true" />
-      <div className="inbs-not-found-ring" aria-hidden="true" />
+      <div className="inbs-not-found-ring" aria-hidden="true">
+        <span className="inbs-not-found-orbit"><i /></span>
+        <span className="inbs-not-found-orbit"><i /></span>
+        <span className="inbs-not-found-orbit"><i /></span>
+      </div>
       <div className="site-shell inbs-not-found-content">
         <p className="inbs-not-found-kicker">
           <span className="inbs-not-found-kicker-line" aria-hidden="true" />
