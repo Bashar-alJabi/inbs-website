@@ -23,7 +23,7 @@ export const aboutPageContent = {
       'We support businesses and individuals with a relationship-led approach. We also help investors explore Dubai’s business environment through consultation, market insight and services suited to their needs.',
     ],
     philosophyEyebrow: '02 / WHAT DRIVES US',
-    philosophyTitle: 'Purpose behind\\nevery connection.',
+    philosophyTitle: 'Purpose behind\nevery connection.',
     philosophyLead: 'A strong network is defined by what it makes possible for the people who rely on it.',
     principles: [
       {number: '01', title: 'Our mission', body: 'Build lasting client relationships and a strong investment network, helping businesses navigate Dubai’s commercial landscape and explore regional and global opportunities.'},
@@ -54,7 +54,7 @@ export const aboutPageContent = {
       'نسعى إلى تهيئة تجربة أكثر وضوحاً للمستثمر القادم إلى دبي، من خلال الاستشارات وفهم واقع الأعمال والاستثمار واقتراح الخدمات والمسارات التي تناسب احتياجاته والسوق.',
     ],
     philosophyEyebrow: '02 / ما يحركنا',
-    philosophyTitle: 'غاية وراء\\nكل علاقة.',
+    philosophyTitle: 'غاية وراء\nكل علاقة.',
     philosophyLead: 'قوة الشبكة ليست في عدد خدماتها فقط، بل في القيمة التي تضيفها لمن يعتمد عليها.',
     principles: [
       {number: '01', title: 'مهمتنا', body: 'بناء شبكة استثمارية وعلاقات متينة مع عملائنا، وتقديم مشورة عملية تساعد الشركات ورجال الأعمال على فهم بيئة الاستثمار في دبي واستكشاف الأسواق العربية والعالمية.'},
