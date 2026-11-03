@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { homeContent, aboutDetails } from '@/content/home';
 import type { Locale } from '@/lib/site';
-import { Reveal } from '@/components/shared/reveal';
+import { Reveal } from './motion-elements';
 
 /** Company introduction; facts and translations live in src/content/home.ts. */
 export function AboutPreview({ locale }: { locale: Locale }) {

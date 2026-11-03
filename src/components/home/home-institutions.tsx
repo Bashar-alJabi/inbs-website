@@ -1,6 +1,6 @@
 'use client';
 import {useReducedMotion} from 'motion/react';
-import {Reveal} from '@/components/shared/reveal';
+import {Reveal} from './motion-elements';
 import {FileCheck2, GitBranch, Building2, Fingerprint, HeartPulse, BookOpenCheck} from 'lucide-react';
 import type {Locale} from '@/lib/site';
 const agencies=[{en:'Amer',ar:'آمر'},{en:'Tasheel',ar:'تسهيل'},{en:'Dubai Department of Economy and Tourism',ar:'دائرة الاقتصاد والسياحة بدبي'},{en:'Federal Authority for Identity, Citizenship, Customs & Port Security',ar:'الهيئة الاتحادية للهوية والجنسية والجمارك وأمن المنافذ'},{en:'Dubai Health Authority',ar:'هيئة الصحة بدبي'},{en:'GDRFA Dubai',ar:'الإدارة العامة للإقامة وشؤون الأجانب بدبي'}] as const;

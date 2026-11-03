@@ -1,7 +1,7 @@
 'use client';
 import {useEffect,useRef,useState} from 'react';
 import {useInView,useReducedMotion} from 'motion/react';
-import {Reveal} from '@/components/shared/reveal';
+import {Reveal} from './motion-elements';
 import {motion} from 'motion/react';
 import type {Locale} from '@/lib/site';
 const facts=[{value:25,en:'Years of experience',ar:'سنوات الخبرة'},{value:30,en:'Awards achieved',ar:'الجوائز المحققة'},{value:85,en:'Projects completed',ar:'المشاريع المنجزة'},{value:25320,en:'Happy clients',ar:'العملاء السعداء'}] as const;
