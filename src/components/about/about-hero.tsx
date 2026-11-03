@@ -7,9 +7,9 @@ import type { Locale } from '@/lib/site';
  * Each moving point uses the exact same SVG path as its visible track.
  * There are no unpainted transitions or stationary decorative dots.
  */
-const innerTrack = 'M300 300 L488 300 A188 188 0 1 1 112 300 A188 188 0 1 1 488 300';
-const outerTrack = 'M300 300 L300 35 A265 265 0 1 1 300 565 A265 265 0 1 1 300 35';
-const diagonalTrack = 'M300 300 L565 300 A265 96 0 1 1 35 300 A265 96 0 1 1 565 300';
+const innerTrack = 'M300 300 L488 300 A188 188 0 1 1 112 300 A188 188 0 1 1 488 300 L300 300';
+const outerTrack = 'M300 300 L300 35 A265 265 0 1 1 300 565 A265 265 0 1 1 300 35 L300 300';
+const diagonalTrack = 'M300 300 L565 300 A265 96 0 1 1 35 300 A265 96 0 1 1 565 300 L300 300';
 
 function HeroNetworkArt() {
   return <div className="inbs-story-hero-art" aria-hidden="true">
