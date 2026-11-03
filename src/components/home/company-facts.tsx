@@ -1,6 +1,6 @@
 import { homeContent } from '@/content/home';
 import type { Locale } from '@/lib/site';
-import { Reveal } from './motion-elements';
+import { Reveal } from '@/components/shared/reveal';
 
 /** Compact company facts strip between the hero and About sections. */
 export function CompanyFacts({ locale }: { locale: Locale }) {
