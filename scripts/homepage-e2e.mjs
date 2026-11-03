@@ -229,6 +229,26 @@ for(const locale of ['en','ar']){
       images=>images.filter(i=>i.complete&&i.naturalWidth===0).length),0,'Broken About image');
     const heroSource=await page.locator('.inbs-story-hero-visual img').getAttribute('src');
     assert.match(heroSource,/hero-about\.webp/,'About must use its dedicated photo');
+    const heroBlend=await page.locator('.inbs-story-hero').evaluate(hero=>{
+      const visual=hero.querySelector('.inbs-story-hero-visual');
+      const heroRect=hero.getBoundingClientRect();
+      const photoRect=visual.getBoundingClientRect();
+      const fade=getComputedStyle(hero,'::after').backgroundImage;
+      const vertical=getComputedStyle(hero.querySelector('.inbs-story-hero-veil')).backgroundImage;
+      return {
+        left:Math.abs(heroRect.left-photoRect.left),
+        right:Math.abs(heroRect.right-photoRect.right),
+        fade,vertical,
+      };
+    });
+    assert.ok(heroBlend.left<1&&heroBlend.right<1,
+      'Hero photo must extend edge to edge without an RTL seam: '+JSON.stringify(heroBlend));
+    assert.match(heroBlend.fade,/linear-gradient\(/);
+    assert.ok(heroBlend.fade.includes(locale==='ar'?'270deg':'90deg'),
+      'Hero gradient must fade inward from the text side in both locales');
+    assert.ok(heroBlend.fade.includes('rgba(15, 79, 130, 0.89)'),
+      'Hero fade should carry a subtle INBS blue rather than only dark navy');
+    assert.match(heroBlend.vertical,/linear-gradient\(/);
     assert.deepEqual(errors,[],'About JavaScript errors');
    });
    await test(key+' accessibility',async()=>{
