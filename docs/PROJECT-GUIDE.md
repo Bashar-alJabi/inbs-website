@@ -36,7 +36,7 @@ The `[locale]` URL segment is either `en` or `ar`; `/en` and `/ar` are the imple
 | `/[locale]/privacy-policy` | Coming Soon |
 | `/[locale]/terms` | Coming Soon |
 
-Known page slugs and service slugs live in `src/lib/site.ts`. The dynamic fallback `src/app/[locale]/[...slug]/page.tsx` resolves these URLs and displays `ComingSoon`; unknown paths are 404. A `why-inbs` page was mentioned in the earlier roadmap but is **not** a recognized route in the current `pages` array; explicitly decide whether to add it before documenting it as available.
+Known page slugs live in `src/lib/site.ts`; service slugs come from the canonical `src/content/services.ts` catalog and are re-exported by `site.ts`. The dynamic fallback `src/app/[locale]/[...slug]/page.tsx` resolves these URLs and displays `ComingSoon`; unknown paths are 404. A `why-inbs` page was mentioned in the earlier roadmap but is **not** a recognized route in the current `pages` array; explicitly decide whether to add it before documenting it as available.
 
 When a page is developed, give it its own Next.js route and replace the Coming Soon rendering. Link to the actual route, not to a homepage anchor as a substitute.
 
@@ -53,11 +53,12 @@ src/
   app/                    root layout, SEO endpoints, global CSS
     [locale]/             translated shell, home route, temporary fallback pages
   components/
-    home/                 homepage sections and its motion helpers
+    home/                 homepage sections
     layout/               header, footer, Coming Soon, language and cursor UI
-  content/                homepage copy and hero-slide data
+    shared/               reusable Reveal and SmoothScroll
+  content/                bilingual copy, service catalog, shared layout and contact data
   i18n/                   next-intl request configuration
-  lib/                    site locale/routes/services and SEO helpers
+  lib/                    site locale/routes and SEO helpers
   styles/                 design tokens, homepage CSS and site-layout CSS
 ```
 
@@ -70,7 +71,7 @@ src/
 - `src/components/layout/`: shared chrome and temporary pages.
 - `src/styles/tokens.css`: design variables; `globals.css`, `site-layout.css`, `home.css`: other styles.
 
-**Known cleanup work:** some legacy CSS selectors, duplicate language-switching logic, overlapping reveal animation components and unused legacy images exist. Review their references before removing them; never change rendered appearance accidentally.
+**Known cleanup work:** some legacy CSS selectors and unused legacy images still exist; the duplicate language-switching and reveal components have been consolidated. Review their references before removing them; never change rendered appearance accidentally.
 
 ## Where content currently lives
 
@@ -78,14 +79,16 @@ src/
 | --- | --- | --- |
 | Homepage text and About preview | `src/content/home.ts` | English and Arabic |
 | Hero slides, images and links | `src/content/hero.ts` | English and Arabic |
-| Service/page slugs and translated names | `src/lib/site.ts` | Shared source for routing and several UI components |
+| Page slugs and titles | `src/lib/site.ts` | Service names and slugs are re-exported from the service catalog |
+| Service slugs, EN/AR names and image paths | `src/content/services.ts` | Single slug-keyed catalog and display order |
+| Shared header/footer copy | `src/content/layout.ts` | Localized UI labels and descriptions |
 | Coming Soon UI messages | `messages/en.json`, `messages/ar.json` | Loaded with `next-intl` |
 | Achievement figures and captions | `src/components/home/home-achievements.tsx` | Currently embedded in UI; keep values unchanged unless owner approves |
 | Institution names and icons | `src/components/home/home-institutions.tsx` | Currently embedded in UI; keep unchanged unless owner approves |
-| Footer contact, map and social links | `src/components/layout/site-footer.tsx` | Currently embedded; centralization is planned, **not yet implemented** |
+| Contact, map and social links | `src/content/contact.ts` | Reused by footer and future contact sections |
 | Service image files and provenance | `public/images/services/` | Read `README.md` and `SOURCES.json` there |
 
-**Important:** content is not yet consolidated into a single editing interface or uniformly organized data layer. Nontechnical staff should submit approved copy/asset changes to a developer rather than change JSX/TypeScript directly. Future cleanup may centralize these sources; update this table when it does.
+**Editing convention:** see [`CONTENT-MANAGEMENT.md`](CONTENT-MANAGEMENT.md) for the authoritative content ownership map, translation rules and service editing workflow. This is a structured TypeScript content layer, not a visual CMS. Nontechnical staff should still provide approved edits for developer review.
 
 ## Language, layout and design
 
