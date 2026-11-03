@@ -292,3 +292,7 @@ html[data-theme=dark] .inbs-services-end>.inbs-services-all-link{color:#e8f5fc}
 .inbs-services-overline{color:#205a7e}
 .inbs-services-heading-row p{color:#35576d}
 html[data-theme=dark] .inbs-services-overline{color:#add6ef}
+
+/* Accessible non-selected service labels on pale panels. */
+.inbs-services-option{color:#244b63}
+html[data-theme=dark] .inbs-services-option{color:#c3d0dd}
