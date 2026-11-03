@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { homeContent, aboutDetails } from '@/content/home';
 import type { Locale } from '@/lib/site';
-import { Reveal } from './motion-elements';
+import { Reveal } from '@/components/shared/reveal';
 
 /** Company introduction; facts and translations live in src/content/home.ts. */
 export function AboutPreview({ locale }: { locale: Locale }) {
@@ -38,7 +38,7 @@ export function AboutPreview({ locale }: { locale: Locale }) {
      <p>{pillar.text}</p>
     </article></Reveal>)}
    </div>
-   <div className="inbs-about-footnote" aria-hidden="true"><span>INBS</span><span>2003 — {locale==='ar'?'دبي':'DUBAI'}</span></div>
+   <div className="inbs-about-footnote" aria-hidden="true"><span>INBS</span><span>2003 — {content.aboutLocation}</span></div>
   </div>
  </section>;
 }

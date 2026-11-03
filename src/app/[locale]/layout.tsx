@@ -3,6 +3,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { SiteHeader } from '@/components/layout/site-header';
 import { SiteFooter } from '@/components/layout/site-footer';
 import { CustomCursor } from '@/components/layout/custom-cursor';
+import { SmoothScroll } from '@/components/shared/smooth-scroll';
 import { isLocale, locales } from '@/lib/site';
 
 export function generateStaticParams() {
@@ -26,6 +27,7 @@ export default async function LocaleLayout({
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
         <div className="locale-app">
+          <SmoothScroll />
           <CustomCursor />
           <SiteHeader locale={locale} />
           {children}
