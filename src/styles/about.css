@@ -137,6 +137,8 @@
   fill:#b7ebff;stroke:#143b5a;stroke-width:1;
   filter:drop-shadow(0 0 7px #80d7ff);
 }
+.inbs-story-hero-art .inbs-story-hub{fill:#b7ebff;stroke:#b7ebff;stroke-width:1}
+.inbs-story-hero-art .inbs-story-halo{fill:none;stroke:#b7ebff;stroke-opacity:.4;stroke-width:1}
 @media(prefers-reduced-motion:reduce){
   .inbs-story-hero-art .inbs-story-traveler{display:none}
 }
