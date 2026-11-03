@@ -1,0 +1,44 @@
+/**
+ * Shared layout translations for header, navigation drawer and footer.
+ * Page-specific copy stays in its page content module.
+ */
+export const layoutContent = {
+  en: {
+    home: 'Home',
+    contact: 'Contact us',
+    mainNavAria: 'Main navigation',
+    themeToggleAria: 'Toggle light and dark mode',
+    themeToggleTitle: 'Toggle theme',
+    openMenu: 'Open menu',
+    closeMenu: 'Close menu',
+    close: 'Close',
+    drawerAria: 'Site navigation',
+    allPagesAria: 'All pages',
+    footerBrand: 'INTERNATIONAL NETWORK BUSINESSMEN SERVICES',
+    footerHeading: 'Your partner in business.',
+    footerAbout: 'Founded in Dubai in 2003, International Network Businessmen Services supports clients across a diverse range of services.',
+    quickLinks: 'Quick links',
+    services: 'Services',
+    contactDetails: 'Contact details',
+    rights: 'All rights reserved',
+  },
+  ar: {
+    home: 'الرئيسية',
+    contact: 'تواصل معنا',
+    mainNavAria: 'التنقل الرئيسي',
+    themeToggleAria: 'تبديل المظهر الفاتح والداكن',
+    themeToggleTitle: 'تبديل المظهر',
+    openMenu: 'فتح القائمة',
+    closeMenu: 'إغلاق القائمة',
+    close: 'إغلاق',
+    drawerAria: 'قائمة الصفحات',
+    allPagesAria: 'كل الصفحات',
+    footerBrand: 'الشبكة العالمية لخدمات رجال الأعمال',
+    footerHeading: 'شريكك في عالم الأعمال.',
+    footerAbout: 'تأسست الشبكة العالمية لخدمات رجال الأعمال في دبي عام 2003، وتقدم لعملائها مجموعة متنوعة من الخدمات التي تلبي احتياجاتهم.',
+    quickLinks: 'روابط مهمة',
+    services: 'خدماتنا',
+    contactDetails: 'تواصل معنا',
+    rights: 'جميع الحقوق محفوظة',
+  },
+} as const;
