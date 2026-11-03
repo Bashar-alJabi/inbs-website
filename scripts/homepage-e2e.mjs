@@ -28,6 +28,33 @@ for(const locale of ['en','ar']){
     assert.equal(await page.locator('html').getAttribute('dir'),locale==='ar'?'rtl':'ltr');
     assert.equal(await page.locator('html').getAttribute('data-theme'),theme);
     assert.equal(await page.locator('h1').count(),1);
+    const desktopType=await page.evaluate(()=>{
+      const px=selector=>parseFloat(getComputedStyle(document.querySelector(selector)).fontSize);
+      return {
+        heroBrand:px('.inbs-hero-eyebrow'),
+        related:px('.inbs-hero-service-strip'),
+        footerBrand:px('.inbs-footer-top p'),
+        nav:[...document.querySelectorAll('.inbs-primary-nav a')].map(a=>({
+          href:a.getAttribute('href'),
+          px:parseFloat(getComputedStyle(a).fontSize),
+        })),
+      };
+    });
+    if(size.width>=1151){
+      assert.equal(desktopType.heroBrand,14,'Desktop hero brand label');
+      assert.equal(desktopType.related,14,'Desktop related-service links');
+      assert.equal(desktopType.footerBrand,14,'Desktop footer brand label');
+      assert.deepEqual(desktopType.nav.map(a=>a.href),
+        ['/'+locale,'/'+locale+'/about','/'+locale+'/services'],
+        'Primary navigation must include Home, About and Services only');
+      assert.ok(desktopType.nav.every(a=>a.px===15),'Desktop nav links should be 15px');
+      const primary=page.locator('.inbs-primary-nav');
+      assert.equal(await primary.getByRole('link',{name:locale==='ar'?'فريق العمل':'Our Team'}).count(),0);
+    }else{
+      assert.equal(desktopType.heroBrand,11,'Small-screen hero brand remains unchanged');
+      assert.equal(desktopType.related,12,'Small-screen service strip remains unchanged');
+      assert.equal(desktopType.footerBrand,11,'Small-screen footer brand remains unchanged');
+    }
     assert.equal(await page.locator('.inbs-services-option').count(),10);
     assert.equal(await page.locator('.inbs-achievement').count(),4);
     assert.equal(await page.locator('.inbs-institutions-name').count(),12);
@@ -68,6 +95,8 @@ for(const locale of ['en','ar']){
     const drawer=page.getByRole('dialog',{name:locale==='ar'?'قائمة الصفحات':'Site navigation'});
     await drawer.waitFor({state:'visible'});
     assert.equal(await drawer.locator('nav a').count()>=6,true);
+    assert.equal(await drawer.locator('nav a[href="/'+locale+'/team"]').count(),1,
+      'Our Team must remain available in the drawer');
     await page.keyboard.press('Escape');
     await drawer.waitFor({state:'hidden'});
    });
