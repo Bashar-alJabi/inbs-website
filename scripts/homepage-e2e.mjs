@@ -246,8 +246,11 @@ for(const locale of ['en','ar']){
     assert.match(heroBlend.fade,/linear-gradient\(/);
     assert.ok(heroBlend.fade.includes(locale==='ar'?'270deg':'90deg'),
       'Hero gradient must fade inward from the text side in both locales');
-    assert.ok(heroBlend.fade.includes('rgba(15, 79, 130, 0.89)'),
-      'Hero fade should carry a subtle INBS blue rather than only dark navy');
+    const brandBlueStop=size.width<=760
+      ? 'rgba(12, 66, 112, 0.72)'
+      : 'rgba(15, 79, 130, 0.89)';
+    assert.ok(heroBlend.fade.includes(brandBlueStop),
+      'Hero fade missing the intentional responsive INBS blue tint: '+heroBlend.fade);
     assert.match(heroBlend.vertical,/linear-gradient\(/);
     assert.deepEqual(errors,[],'About JavaScript errors');
    });
