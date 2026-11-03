@@ -36,6 +36,7 @@ try {
   for (const image of ['hero-one.webp', 'hero-two.webp', 'hero-three.webp']) {
     await check(`/images/${image}`, { contentType: /image\/webp/i, label: `Hero ${image}` });
   }
+  await check('/images/about/hero-about.webp', { contentType: /image\/webp/i, label: 'Dedicated About hero photo' });
   assert.equal(sourceEntries.length, 10, 'Expected ten documented service images');
   for (const { slug } of sourceEntries) {
     await check(`/images/services/${slug}.webp`, {
