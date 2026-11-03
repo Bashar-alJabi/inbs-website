@@ -1,8 +1,10 @@
 'use client';
 import {useReducedMotion} from 'motion/react';
 import {Reveal} from './motion-elements';
+import {FileCheck2, GitBranch, Building2, Fingerprint, HeartPulse, BookOpenCheck} from 'lucide-react';
 import type {Locale} from '@/lib/site';
 const agencies=[{en:'Amer',ar:'آمر'},{en:'Tasheel',ar:'تسهيل'},{en:'Dubai Department of Economy and Tourism',ar:'دائرة الاقتصاد والسياحة بدبي'},{en:'Federal Authority for Identity, Citizenship, Customs & Port Security',ar:'الهيئة الاتحادية للهوية والجنسية والجمارك وأمن المنافذ'},{en:'Dubai Health Authority',ar:'هيئة الصحة بدبي'},{en:'GDRFA Dubai',ar:'الإدارة العامة للإقامة وشؤون الأجانب بدبي'}] as const;
+const symbols=[FileCheck2,GitBranch,Building2,Fingerprint,HeartPulse,BookOpenCheck] as const;
 export function HomeInstitutions({locale}:{locale:Locale}){
  const reduced=useReducedMotion();
  return <section className="inbs-institutions" aria-labelledby="inbs-institutions-heading"><div className="site-shell">
@@ -10,7 +12,7 @@ export function HomeInstitutions({locale}:{locale:Locale}){
  </div>
  <div className="inbs-institutions-window" aria-label={locale==='ar'?'الجهات ومراكز الخدمات':'Authorities and service centres'}>
   <div className={'inbs-institutions-track'+(reduced?' is-static':'')} dir="ltr">
-   {[...agencies,...agencies].map((agency,i)=><div key={i} className="inbs-institutions-name" aria-hidden={i>=agencies.length}><span className="inbs-institutions-emblem" aria-hidden="true"/><span>{agency[locale]}</span></div>)}
+   {[...agencies,...agencies].map((agency,i)=>{const Symbol=symbols[i%agencies.length];return <div key={i} className="inbs-institutions-name" aria-hidden={i>=agencies.length}><span className="inbs-institutions-symbol" aria-hidden="true"><Symbol size={27} strokeWidth={1.55}/></span><span>{agency[locale]}</span></div>})}
   </div>
  </div>
  </section>;

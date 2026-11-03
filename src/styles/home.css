@@ -270,3 +270,11 @@ html[data-theme=dark] .inbs-achievements{
 html[data-theme=dark] .inbs-services-display{
  background:linear-gradient(135deg,#17466f 0%,#102d4b 55%,#0b233c 100%);
 }
+
+/* INBS-original category illustrations, not government seals or logo recreations. */
+.inbs-institutions-symbol{display:grid;place-items:center;flex:0 0 52px;width:52px;height:52px;border-radius:12px;background:linear-gradient(145deg,#eef7fd,#dcecf7);border:1px solid #c7ddec;color:var(--brand-blue);position:relative;isolation:isolate}
+.inbs-institutions-symbol:after{content:"";position:absolute;inset:5px;border:1px solid #ffffff90;border-radius:8px;pointer-events:none}
+.inbs-institutions-name{gap:17px}
+html[data-theme=dark] .inbs-institutions-symbol{background:linear-gradient(145deg,#264a68,#1b3650);border-color:#456781;color:#b5dbf5}
+html[data-theme=dark] .inbs-institutions-symbol:after{border-color:#ffffff17}
+@media(max-width:600px){.inbs-institutions-symbol{width:44px;height:44px;flex-basis:44px}.inbs-institutions-name{gap:12px}}
