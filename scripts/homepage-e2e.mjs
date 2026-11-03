@@ -149,21 +149,31 @@ for(const locale of ['en','ar']){
     assert.equal(await page.locator('.inbs-story-outro').count(),0,'Redundant contact CTA');
     assert.equal(await page.locator('.inbs-story-all-services.inbs-about-link').count(),1);
     assert.equal(await page.locator('.inbs-story-hero-art animateMotion').count(),3);
-    assert.equal(await page.locator('.inbs-story-hero-art svg circle').count(),3,
-      'Only moving dots may remain in the network');
-    const rails=await page.locator('.inbs-story-hero-art svg').evaluate(svg=>{
-      const paths=[...svg.querySelectorAll('path.inbs-story-track')];
-      const motions=[...svg.querySelectorAll('animateMotion')];
+    const network=await page.locator('.inbs-story-hero-art svg').evaluate(svg=>{
+      const paths=[...svg.querySelectorAll('path')];
+      const rings=[...svg.querySelectorAll(':scope > circle')];
+      const travelers=[...svg.querySelectorAll('.inbs-story-traveler')];
+      const routeStrings=[...svg.querySelectorAll('animateMotion')].map(m=>m.getAttribute('path'));
       return {
-        axes:paths.find(p=>p.getAttribute('d')==='M35 300 H565 M300 35 V565')?.getAttribute('d'),
-        tracks:paths.filter(p=>motions.some(m=>m.getAttribute('path')===p.getAttribute('d'))).length,
-        moving:motions.length,
-        radii:paths.filter(p=>/A(?:188 188|265 265|265 96)/.test(p.getAttribute('d')||'')).length,
+        paths:paths.map(p=>p.getAttribute('d')),
+        ellipseCount:svg.querySelectorAll('ellipse').length,
+        outerRing:rings.some(c=>c.getAttribute('r')==='265'),
+        innerRing:rings.some(c=>c.getAttribute('r')==='188'),
+        hub:rings.some(c=>c.getAttribute('cx')==='300'&&c.getAttribute('r')==='12'),
+        halo:rings.some(c=>c.getAttribute('cx')==='300'&&c.getAttribute('r')==='22'),
+        travelerCount:travelers.length,
+        routes:routeStrings,
       };
     });
-    assert.equal(rails.axes,'M35 300 H565 M300 35 V565','Axes must reach the outer circle');
-    assert.equal(rails.tracks,3,'Every traveler must use an actually painted SVG rail');
-    assert.equal(rails.radii,3,'Both circular orbits and diagonal orbit must exist');
+    assert.deepEqual(network.paths,['M35 300 H565 M300 35 V565'],
+      'No extra visible lines or spokes may be drawn');
+    assert.equal(network.ellipseCount,1);
+    assert.ok(network.innerRing&&network.outerRing&&network.hub&&network.halo);
+    assert.equal(network.travelerCount,3);
+    for(const route of network.routes){
+      assert.ok(route.startsWith('M300 300 L')&&route.endsWith(' L300 300'),
+        'Every animation must depart from and return to the central hub');
+    }
     const type=await page.evaluate(()=>{
       const label=document.querySelector('.inbs-story-label');
       const body=document.querySelector('.inbs-story-principle p');
@@ -210,14 +220,35 @@ for(const locale of ['en','ar']){
   }
  }
 }
-// Hero orbit signals move on a full-motion display but are hidden for reduced motion.
-await test('about hero network motion respects preferences',async()=>{
+// Sample actual animated positions, not just SVG path attribute strings.
+// The point must stay on a painted axis/circle/ellipse throughout the loop.
+await test('about orbit dots stay on drawn geometry through their cycles',async()=>{
  const context=await browser.newContext({viewport:{width:1440,height:900},reducedMotion:'no-preference'});
  const page=await context.newPage();
  await page.goto(origin+'/en/about',{waitUntil:'domcontentloaded'});
- const signals=page.locator('.inbs-story-hero-art .inbs-story-traveler');
- assert.equal(await signals.count(),3);
- assert.notEqual(await signals.first().evaluate(e=>getComputedStyle(e).display),'none');
+ const result=await page.locator('.inbs-story-hero-art svg').evaluate(svg=>{
+  const movers=[...svg.querySelectorAll('.inbs-story-traveler')];
+  const samples=[];
+  const cos=Math.cos(Math.PI/5),sin=Math.sin(Math.PI/5);
+  // Ellipse is rotated -36 degrees, so convert points into ellipse coordinates.
+  const c36=Math.cos(Math.PI/5),s36=Math.sin(Math.PI/5);
+  for(let t=0;t<=24;t+=.3){
+   svg.setCurrentTime(t);
+   const inverse=svg.getScreenCTM().inverse();
+   for(let i=0;i<movers.length;i++){
+    const point=new DOMPoint(0,0).matrixTransform(movers[i].getScreenCTM()).matrixTransform(inverse);
+    const dx=point.x-300,dy=point.y-300;
+    const radial=Math.hypot(dx,dy);
+    const axisDistance=Math.min(Math.abs(dx),Math.abs(dy));
+    const ex=dx*c36-dy*s36,ey=dx*s36+dy*c36;
+    const ellipseDistance=Math.abs(Math.hypot(ex/265,ey/96)-1)*96;
+    const distance=Math.min(axisDistance,Math.abs(radial-188),Math.abs(radial-265),ellipseDistance);
+    samples.push({i,t,x:point.x,y:point.y,distance});
+   }
+  }
+  return samples.reduce((worst,p)=>p.distance>worst.distance?p:worst,{distance:0});
+ });
+ assert.ok(result.distance<3.5,'Orbit traveler left visible rails: '+JSON.stringify(result));
  await context.close();
 });
 await test('service WebP files and metadata',async()=>{
