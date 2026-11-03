@@ -40,7 +40,7 @@ export function ServicesShowcase({locale}:{locale:Locale}){
     </div>
    </Reveal>
    <Reveal className="inbs-services-stage">
-    <div className="inbs-services-index" aria-label={locale==='ar'?'اختر خدمة':'Choose a service'}>
+    <div className="inbs-services-index" aria-label={t.serviceSelectAria}>
      {serviceSlugs.map((item,i)=><Link key={item} href={`/${locale}/services/${item}`} className={'inbs-services-option'+(selected===i?' is-active':'')} onMouseEnter={()=>setSelected(i)} onFocus={()=>setSelected(i)}>
       <span className="inbs-services-option-icon">{(()=>{const ServiceIcon=serviceIcons[item];return <ServiceIcon size={21} strokeWidth={1.65} aria-hidden="true"/>})()}</span>
       <span className="inbs-services-option-name">{serviceCatalog[item][locale]}</span>
@@ -61,7 +61,7 @@ export function ServicesShowcase({locale}:{locale:Locale}){
      <div className="inbs-services-display-bottom">
       <AnimatePresence mode="wait">
        <motion.div key={slug} initial={reduced?false:{opacity:0,y:14}} animate={{opacity:1,y:0}} exit={reduced?{opacity:0}:{opacity:0,y:-10}} transition={{duration:.4}}>
-        <span className="inbs-services-selected-label">{locale==='ar'?'الخدمة المختارة':'SELECTED SERVICE'}</span>
+        <span className="inbs-services-selected-label">{t.selectedService}</span>
         <h3>{serviceCatalog[slug][locale]}</h3>
        </motion.div>
       </AnimatePresence>
@@ -73,7 +73,7 @@ export function ServicesShowcase({locale}:{locale:Locale}){
      </div>
     </div>
    </Reveal>
-   <Reveal className="inbs-services-end"><span>{locale==='ar'?'استكشف كل ما نقدمه':'DISCOVER THE FULL NETWORK'}</span><Link className="inbs-about-link inbs-services-all-link" href={`/${locale}/services`}><span>{t.allServices}</span><ArrowUpRight size={20}/></Link></Reveal>
+   <Reveal className="inbs-services-end"><span>{t.servicesOutro}</span><Link className="inbs-about-link inbs-services-all-link" href={`/${locale}/services`}><span>{t.allServices}</span><ArrowUpRight size={20}/></Link></Reveal>
   </div>
  </section>;
 }
