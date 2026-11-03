@@ -32,17 +32,17 @@ for(const locale of ['en','ar']){
     assert.equal(await page.locator('.inbs-achievement').count(),4);
     assert.equal(await page.locator('.inbs-institutions-name').count(),12);
     assert.equal(await page.locator('.inbs-institutions-track').getAttribute('dir'),'ltr');
-    const subtitleSizes=await page.locator(
-      '.inbs-about-kicker,.inbs-services-overline,.inbs-achievements-eyebrow,.inbs-institutions-kicker'
-    ).evaluateAll(elements=>elements.map(e=>({
-      name:e.className,
-      px:parseFloat(getComputedStyle(e).fontSize),
-    })));
-    assert.equal(subtitleSizes.length,4,'Expected one subtitle in each Home section');
-    for(const item of subtitleSizes){
-      assert.ok(item.px >= (locale==='ar'?18:17),
-        'Home subtitle smaller than About: '+JSON.stringify(item));
-    }
+    const subtitleSizes=await page.locator('.homepage .inbs-section-kicker').evaluateAll(
+      nodes=>nodes.map(node=>parseFloat(getComputedStyle(node).fontSize))
+    );
+    assert.equal(subtitleSizes.length,3,
+      'Home has three editorial subtitles: About, Services and Achievements');
+    const min=size.width<=760?(locale==='ar'?14:13):(locale==='ar'?18:17);
+    const max=size.width<=760?(locale==='ar'?16:15):(locale==='ar'?20:19);
+    assert.ok(subtitleSizes.every(px=>px>=min&&px<=max),
+      'Home subtitle outside shared '+min+'–'+max+'px range: '+subtitleSizes);
+    assert.ok(subtitleSizes.every(px=>Math.abs(px-subtitleSizes[0])<.1),
+      'Home subtitles do not share a computed font-size: '+subtitleSizes);
     await page.locator('.inbs-services').scrollIntoViewIfNeeded();
     await page.waitForTimeout(1100);
     const widths=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:window.innerWidth}));
@@ -151,6 +151,15 @@ for(const locale of ['en','ar']){
     assert.equal(await page.locator('html').getAttribute('dir'),locale==='ar'?'rtl':'ltr');
     assert.equal(await page.locator('html').getAttribute('data-theme'),theme);
     assert.equal(await page.locator('.inbs-about-page h1').count(),1);
+    const sharedLabels=await page.locator('.inbs-story-label.inbs-section-kicker')
+      .evaluateAll(nodes=>nodes.map(node=>parseFloat(getComputedStyle(node).fontSize)));
+    assert.equal(sharedLabels.length,3,'About has three editorial section labels');
+    const expectedMin=size.width<=760?(locale==='ar'?14:13):(locale==='ar'?18:17);
+    const expectedMax=size.width<=760?(locale==='ar'?16:15):(locale==='ar'?20:19);
+    assert.ok(sharedLabels.every(px=>px>=expectedMin&&px<=expectedMax),
+      'About subtitle outside shared '+expectedMin+'–'+expectedMax+'px range: '+sharedLabels);
+    assert.ok(sharedLabels.every(px=>Math.abs(px-sharedLabels[0])<.1),
+      'About subtitles must have the same computed size: '+sharedLabels);
     assert.equal(await page.locator('.inbs-story-principle').count(),3);
     assert.equal(await page.locator('.inbs-story-capability').count(),10);
     assert.equal(await page.locator('.inbs-story-capability').first().getAttribute('href'),
@@ -201,7 +210,8 @@ for(const locale of ['en','ar']){
         }),
       };
     });
-    assert.ok(type.label>=17,'Section kicker too small: '+type.label);
+    assert.ok(type.label >= (size.width<=760?(locale==='ar'?14:13):(locale==='ar'?18:17)),
+      'Section kicker outside shared responsive sizing: '+type.label);
     assert.ok(type.body>=18,'Principle text too small: '+type.body);
     assert.equal(type.underline,'0px','CTA underline must match Home');
     if(size.width>1100){
