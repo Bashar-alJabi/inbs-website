@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { ArrowDown, ArrowUpRight, MoveUpRight } from 'lucide-react';
 import { Reveal } from '@/components/shared/reveal';
 import { aboutPageContent } from '@/content/about';
-import { serviceCatalog } from '@/content/services';
+import { serviceCatalog, serviceSlugs } from '@/content/services';
 import type { Locale } from '@/lib/site';
 
 function Lines({ text }: { text: string }) {
@@ -34,6 +34,17 @@ export function AboutPage({ locale }: { locale: Locale }) {
           <circle cx="110" cy="210" r="6" className="inbs-story-signal"/>
           <circle cx="480" cy="404" r="8" className="inbs-story-signal"/>
           <circle cx="300" cy="300" r="12" className="inbs-story-hub"/>
+          <circle r="5" className="inbs-story-traveler">
+            <animateMotion dur="17s" begin="-4s" repeatCount="indefinite" path="M300 300 L488 300 A188 188 0 1 1 112 300 A188 188 0 1 1 488 300 L300 300"/>
+          </circle>
+          <circle r="4" className="inbs-story-traveler">
+            <animateMotion dur="23s" begin="-10s" repeatCount="indefinite" path="M300 300 L300 35 A265 265 0 1 1 300 565 A265 265 0 1 1 300 35 L300 300"/>
+          </circle>
+          <g transform="rotate(-36 300 300)">
+            <circle r="5" className="inbs-story-traveler">
+              <animateMotion dur="20s" begin="-13s" repeatCount="indefinite" path="M300 300 L565 300 A265 96 0 1 1 35 300 A265 96 0 1 1 565 300 L300 300"/>
+            </circle>
+          </g>
         </svg>
       </div>
       <div className="site-shell inbs-story-hero-inner">
@@ -94,30 +105,15 @@ export function AboutPage({ locale }: { locale: Locale }) {
           <p>{t.networkLead}</p>
         </Reveal>
         <div className="inbs-story-capabilities">
-          {t.capabilities.map(item => <Link href={`/${locale}/services/${item.id}`} className="inbs-story-capability" key={item.id}>
-            <span className="inbs-story-capability-no">{item.number}</span>
-            <span className="inbs-story-capability-name">{serviceCatalog[item.id][locale]}</span>
+          {serviceSlugs.map((slug, index) => <Link href={`/${locale}/services/${slug}`} className="inbs-story-capability" key={slug}>
+            <span className="inbs-story-capability-no">{String(index + 1).padStart(2, '0')}</span>
+            <span className="inbs-story-capability-name">{serviceCatalog[slug][locale]}</span>
             <ArrowUpRight size={22} strokeWidth={1.5} aria-hidden="true"/>
           </Link>)}
         </div>
-        <Link className="inbs-story-all-services" href={`/${locale}/services`}>{t.allServices}<ArrowUpRight size={18} aria-hidden="true"/></Link>
+        <Link className="inbs-story-all-services inbs-about-link" href={`/${locale}/services`}>{t.allServices}<ArrowUpRight size={18} aria-hidden="true"/></Link>
       </div>
     </section>
 
-    <section className="inbs-story-outro" aria-labelledby="inbs-story-outro-heading">
-      <div className="inbs-story-outro-orbit" aria-hidden="true"/>
-      <div className="site-shell inbs-story-outro-inner">
-        <Reveal>
-          <SectionLabel>{t.closingEyebrow}</SectionLabel>
-          <h2 id="inbs-story-outro-heading"><Lines text={t.closingTitle}/></h2>
-          <p>{t.closingBody}</p>
-          <div className="inbs-story-outro-actions">
-            <Link href={`/${locale}/contact`} className="inbs-story-outro-primary">{t.contact}<ArrowUpRight size={20} aria-hidden="true"/></Link>
-            <Link href={`/${locale}`} className="inbs-story-outro-secondary">{t.home}</Link>
-          </div>
-        </Reveal>
-        <span className="inbs-story-outro-mark" aria-hidden="true">INBS</span>
-      </div>
-    </section>
   </main>;
 }
