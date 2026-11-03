@@ -7,7 +7,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { ArrowUpRight, ArrowRight, ArrowLeft, BriefcaseBusiness, Building2, Globe2, FileText, Plane, Landmark, MessagesSquare, Container, Ship, Fingerprint } from 'lucide-react';
 import { serviceSlugs, serviceNames, type Locale } from '@/lib/site';
 import { homeContent } from '@/content/home';
-import { Reveal } from './motion-elements';
+import { Reveal } from '@/components/shared/reveal';
 
 const images = ["/images/services/businessmen-services.webp","/images/services/real-estate-services.webp","/images/services/website-services.webp","/images/services/typing-services.webp","/images/services/tourism-services.webp","/images/services/financial-services.webp","/images/services/consultation-services.webp","/images/services/customs-services.webp","/images/services/cargo-services.webp","/images/services/citizenship-immigration-services.webp"];
 const symbols = [BriefcaseBusiness, Building2, Globe2, FileText, Plane, Landmark, MessagesSquare, Container, Ship, Fingerprint] as const;
