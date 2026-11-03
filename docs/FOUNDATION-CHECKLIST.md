@@ -44,6 +44,9 @@
 - [x] Use licensed local Dubai photo already recorded in the service-image provenance.
 - [x] Add EN/AR metadata and opt-in sitemap entries without changing the default noindex policy.
 - [x] Add About smoke and browser checks covering locale, RTL, responsive, themes, links and major accessibility violations.
+- [x] Integrate approved supplied mission/goals/relationships themes in concise bilingual content without adding unsupported figures or affiliations.
+- [x] Display all 10 canonical service entries; remove duplicate footer-adjacent contact CTA, use the homepage-style rounded-footer handoff and section-link interaction.
+- [x] Add traveling SVG hero signals with reduced-motion support while preserving the existing network geometry.
 - [ ] Verify CI lint, TypeScript, production build, HTTP smoke, Playwright and axe on **final PR head**.
 - [ ] Review deployed preview visually in both languages, light/dark, mobile/desktop, and capture feedback.
 - [ ] Obtain owner approval before merging PR #21 to `redesign`; promote to `main` separately.
