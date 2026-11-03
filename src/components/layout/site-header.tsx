@@ -3,9 +3,10 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { ArrowUpRight, Languages, Menu, Moon, Sun, X, House, Building2, BriefcaseBusiness, Users, Newspaper, UserRoundSearch, Phone, FileText, Compass } from 'lucide-react';
+import { ArrowUpRight, Menu, Moon, Sun, X, House, Building2, BriefcaseBusiness, Users, Newspaper, UserRoundSearch, Phone, FileText, Compass } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
-import { pages, alternateLocale, type Locale } from '@/lib/site';
+import { pages, type Locale } from '@/lib/site';
+import { LanguageSwitcher } from './language-switcher';
 
 const featured=['about','services','team'];
 const drawerIcons = [Building2,BriefcaseBusiness,Users,Newspaper,UserRoundSearch,Phone,FileText,FileText] as const;
@@ -16,8 +17,6 @@ export function SiteHeader({locale}:{locale:Locale}){
  const [scrolled,setScrolled]=useState(false);
  const [open,setOpen]=useState(false);
  const home=locale==='ar'?'الرئيسية':'Home';
- const other=alternateLocale(locale);
- const otherPath='/'+[other,...pathname.split('/').filter(Boolean).slice(1)].join('/');
  useEffect(()=>{
    const onScroll=()=>setScrolled(window.scrollY>55);
    onScroll();window.addEventListener('scroll',onScroll,{passive:true});
@@ -52,7 +51,7 @@ export function SiteHeader({locale}:{locale:Locale}){
   </nav>
   <div className="inbs-header-actions">
    <Link className="inbs-contact-button" href={`/${locale}/contact`}>{locale==='ar'?'تواصل معنا':'Contact us'}<ArrowUpRight size={17}/></Link>
-   <Link href={otherPath} className="inbs-icon-button" aria-label={locale==='ar'?'Switch to English':'التبديل إلى العربية'} title={locale==='ar'?'English':'العربية'}><motion.span whileHover={{rotate:-13,scale:1.13}}><Languages size={20}/></motion.span></Link>
+   <LanguageSwitcher locale={locale}/>
    <button type="button" className="inbs-icon-button" onClick={toggleTheme} aria-label={locale==='ar'?'تبديل المظهر الفاتح والداكن':'Toggle light and dark mode'} title={locale==='ar'?'تبديل المظهر':'Toggle theme'}><motion.span className="inbs-theme-show-dark" whileHover={{rotate:15,scale:1.1}}><Sun size={21}/></motion.span><motion.span className="inbs-theme-show-light" whileHover={{rotate:-15,scale:1.1}}><Moon size={21}/></motion.span></button>
    <button type="button" ref={menuButtonRef} className="inbs-icon-button inbs-menu-trigger" onClick={()=>setOpen(!open)} aria-expanded={open} aria-controls="inbs-drawer" aria-label={locale==='ar'?(open?'إغلاق القائمة':'فتح القائمة'):(open?'Close menu':'Open menu')}>{open?<X size={23}/>:<Menu size={23}/>}</button>
   </div>
