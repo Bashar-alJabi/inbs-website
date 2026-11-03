@@ -120,6 +120,50 @@ for(const locale of ['en','ar']){
  });
  await context.close();
 }
+// About page regression coverage: all locales, themes and responsive widths.
+for(const locale of ['en','ar']){
+ for(const size of sizes){
+  for(const theme of ['light','dark']){
+   const key='about/'+[locale,size.name,theme].join('/');
+   const context=await browser.newContext({
+    viewport:{width:size.width,height:size.height},
+    reducedMotion:'reduce',colorScheme:theme,
+   });
+   await context.addInitScript(t=>localStorage.setItem('inbs-theme',t),theme);
+   const page=await context.newPage();
+   const errors=[];
+   page.on('pageerror',e=>errors.push(String(e)));
+   await test(key+' renders correctly',async()=>{
+    const res=await page.goto(origin+'/'+locale+'/about',{waitUntil:'networkidle',timeout:45000});
+    assert.equal(res?.status(),200);
+    assert.equal(await page.locator('html').getAttribute('lang'),locale);
+    assert.equal(await page.locator('html').getAttribute('dir'),locale==='ar'?'rtl':'ltr');
+    assert.equal(await page.locator('html').getAttribute('data-theme'),theme);
+    assert.equal(await page.locator('.inbs-about-page h1').count(),1);
+    assert.equal(await page.locator('.inbs-story-principle').count(),3);
+    assert.equal(await page.locator('.inbs-story-capability').count(),6);
+    assert.equal(await page.locator('.inbs-story-capability').first().getAttribute('href'),
+      '/'+locale+'/services/businessmen-services');
+    assert.equal(await page.locator('.inbs-story-outro-primary').getAttribute('href'),'/'+locale+'/contact');
+    await page.locator('.inbs-story-outro').scrollIntoViewIfNeeded();
+    const widths=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
+    assert.ok(widths.scroll<=widths.inner+3,'Horizontal overflow: '+JSON.stringify(widths));
+    assert.equal(await page.locator('.inbs-about-page img').evaluateAll(
+      images=>images.filter(i=>i.complete&&i.naturalWidth===0).length),0,'Broken About image');
+    assert.deepEqual(errors,[],'About JavaScript errors');
+   });
+   await test(key+' accessibility',async()=>{
+    const result=await new AxeBuilder({page})
+      .include('.inbs-about-page')
+      .withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa']).analyze();
+    const serious=result.violations.filter(v=>v.impact==='critical'||v.impact==='serious');
+    assert.equal(serious.length,0,
+      serious.map(v=>v.id+': '+v.nodes.map(n=>n.target.join(' ')).join(', ')).join(' | '));
+   });
+   await context.close();
+  }
+ }
+}
 await test('service WebP files and metadata',async()=>{
  assert.equal(serviceSources.length,10,'Expected 10 documented services');
  for(const {slug} of serviceSources){
