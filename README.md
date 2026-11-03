@@ -1,68 +1,60 @@
 # INBS Website
 
-Official frontend website for **International Network Businessmen Services (INBS)**, Dubai.
+Official bilingual frontend website for **International Network Businessmen Services (INBS)**, Dubai.
 
-## Project status
+## Status and branches
 
-The website is under active development. Approved changes are reviewed through pull requests into `redesign`, then selectively promoted to the company-facing `main` branch.
+The **homepage is implemented** in English and Arabic and was reviewed through PR #16 (`feature/homepage` → `redesign`) and PR #17 (`redesign` → `main`). Other routes currently display a branded Coming Soon page until their individual pages are developed. The site is **not a completed production launch**.
 
-- `main`: company-facing preview of the approved work so far.
-- `redesign`: accepted redesign work.
-- `feature/*`: isolated, reviewable changes (one feature or page per PR).
+- `main`: company-facing approved milestone.
+- `redesign`: integration branch for accepted redesign work.
+- `feature/*`: isolated page or maintenance work, branched from `redesign` and merged by PR after approval.
 
-## Technology
+## Stack
 
-- Next.js 16 (App Router), React 19, TypeScript
-- Tailwind CSS 4
-- Arabic and English, including right-to-left support
-- Vercel previews for pull requests
-- No custom backend
-
-The project uses `next-intl` for localization and Motion and Lenis for progressive animations.
+Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, `next-intl`, Motion, Lenis and Lucide React. Frontend only; no custom backend.
 
 ## Run locally
 
-Requirements: current Node.js LTS and npm.
+Use a compatible Node.js version (CI uses Node.js 24) and npm:
 
 ```bash
 npm ci
 npm run dev
 ```
 
-Open http://localhost:3000.
+Open http://localhost:3000/en or http://localhost:3000/ar.
 
-Before a change is merged:
+## Checks
 
 ```bash
 npm run lint
+npx tsc --noEmit
 npm run build
 ```
 
-## Where to change content
+`npm run test:smoke` checks a **running** server (by default http://localhost:3000); run `npm run start` after building or set `SMOKE_BASE_URL`. Browser/accessibility testing runs in GitHub Actions via `scripts/homepage-e2e.mjs`.
 
-When the corresponding pages are implemented:
+## Find the right file
 
-- `src/content/`: factual company information and service catalog
-- `messages/en.json`, `messages/ar.json`: translated UI text
-- `public/brand/`: official company logo
-- `public/images/`: approved image assets
-- `src/components/`: reusable layout and interface components
-- `src/app/[locale]/`: page routes
+- `src/app/[locale]/`: routes and locale layout.
+- `src/components/home/`: homepage sections; `src/components/layout/`: site-wide header, footer and navigation.
+- `src/content/`: homepage and hero copy.
+- `src/lib/site.ts`: language, page and service identifiers (currently also service labels).
+- `messages/ar.json` / `messages/en.json`: Coming Soon UI translations.
+- `public/brand/` and `public/images/`: logo and image assets.
+- `src/styles/` and `src/app/globals.css`: visual styles.
 
-**Do not edit services directly inside UI components.** Content must stay separate from presentation.
+**Current limitation:** editorial copy and contact details are not yet fully centralized. Refer to the handoff guide before editing and do not assume a nontechnical content editor can safely edit TSX.
 
-## Source of truth
+## Documentation and handoff
 
-The existing [INBS site repository](https://github.com/Bashar-alJabi/inbs) is the primary source for company copy and services. External profiles are not authoritative. Preserve approved facts, do not invent metrics, testimonials or legal claims. The official logo must remain unchanged.
+- [Project and handoff guide](docs/PROJECT-GUIDE.md): actual architecture, content ownership, localization, route map and maintenance procedures.
+- [Foundation, page and launch checklist](docs/FOUNDATION-CHECKLIST.md): recurring page reviews and pending launch work.
+- [Coding guidance](AGENTS.md): contributor rules.
 
-## Handoff and development guidelines
+**Documentation is part of every page/feature's definition of done.** Update these documents to reflect actual changes and check off only work that has been verified.
 
-See [docs/PROJECT-GUIDE.md](docs/PROJECT-GUIDE.md) for architecture, languages, page map, design tokens, and how the site is maintained. See [AGENTS.md](AGENTS.md) for coding conventions.
+## Source of truth and approvals
 
-## Pull-request workflow
-
-1. Create a fresh `feature/<page-or-task>` branch from `redesign`.
-2. Keep the PR limited to one page or a shared foundation change.
-3. Include screenshots, translation checks, navigation checks and build results.
-4. Review the Vercel preview.
-5. Merge into `redesign` after approval. Promote reviewed milestones to `main` when a company preview is needed, after validation.
+The earlier [INBS repository](https://github.com/Bashar-alJabi/inbs) is the reference for established company copy and services; confirm changes with the company. Do not invent company metrics, employee identities, testimonials or official affiliations, and do not alter the official logo. Keep work in a feature branch, obtain owner approval before merging and preserve both languages.

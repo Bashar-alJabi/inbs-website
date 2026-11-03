@@ -4,6 +4,11 @@ on:
     branches: [redesign, main]
   push:
     branches: [redesign]
+permissions:
+  contents: read
+concurrency:
+  group: validate-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -21,8 +26,21 @@ jobs:
       - name: Smoke-test production build
         run: |
           npm run start -- --port 3000 > /tmp/inbs-server.log 2>&1 &
+          ready=0
           for i in $(seq 1 30); do
-            if curl --fail --silent http://localhost:3000/en > /dev/null; then break; fi
+            if curl --fail --silent http://localhost:3000/en > /dev/null; then
+              ready=1
+              break
+            fi
             sleep 1
           done
+          if [ "$ready" -ne 1 ]; then
+            echo 'Production server did not become ready'
+            cat /tmp/inbs-server.log
+            exit 1
+          fi
           npm run test:smoke
+      - name: Production server logs if failed
+        if: failure()
+        run: |
+          if [ -f /tmp/inbs-server.log ]; then cat /tmp/inbs-server.log; fi

@@ -1,5 +1,6 @@
 import type { Locale } from '@/lib/site';
-type Slide={image:string;title:string;description:string;button:string;slug:string;related:{label:string;slug:string}[]};
+import type { ServiceSlug } from '@/content/services';
+type Slide={image:string;title:string;description:string;button:string;slug:ServiceSlug;related:{label:string;slug:ServiceSlug}[]};
 export const heroSlides:Record<Locale,Slide[]>={
  en:[
  {image:'/images/hero-one.webp',title:'Time is the Basis of Success.',description:'Practical support for business setup, paperwork and essential business procedures in Dubai.',button:'Explore Businessmen Services',slug:'businessmen-services',related:[{label:'Businessmen',slug:'businessmen-services'},{label:'Consultation',slug:'consultation-services'},{label:'Financial',slug:'financial-services'}]},

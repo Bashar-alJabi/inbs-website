@@ -1,8 +1,12 @@
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 import AxeBuilder from '@axe-core/playwright';
 
 const origin=(process.env.E2E_BASE_URL||'http://127.0.0.1:3000').replace(/\/$/,'');
+const serviceSources=JSON.parse(
+ await readFile(new URL('../public/images/services/SOURCES.json',import.meta.url),'utf8'),
+);
 const browser=await chromium.launch({headless:true});
 const failures=[];
 const report=(name,error)=>{failures.push({name,message:String(error?.stack||error)});console.error('FAIL',name,String(error?.message||error))};
@@ -85,8 +89,40 @@ for(const locale of ['en','ar']){
  });
  await context.close();
 }
+// Verify the shared language switch and full-viewport not-found experience.
+for(const locale of ['en','ar']){
+ const alternate=locale==='en'?'ar':'en';
+ const context=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'});
+ const page=await context.newPage();
+ await test(locale+' language switch preserves service URL',async()=>{
+  const res=await page.goto(origin+'/'+locale+'/services/cargo-services',{waitUntil:'domcontentloaded'});
+  assert.equal(res?.status(),200);
+  const switcher=page.locator('.inbs-header a[hreflang="'+alternate+'"]');
+  assert.equal(await switcher.count(),1,'Expected a single header language switcher');
+  assert.equal(await switcher.getAttribute('href'),'/'+alternate+'/services/cargo-services');
+  await switcher.click();
+  await page.waitForURL('**/'+alternate+'/services/cargo-services');
+  assert.equal(await page.locator('html').getAttribute('lang'),alternate);
+  assert.equal(await page.locator('html').getAttribute('dir'),alternate==='ar'?'rtl':'ltr');
+ });
+ await test(locale+' 404 localized and viewport-contained',async()=>{
+  const response=await page.goto(origin+'/'+locale+'/invalid-unlisted-page',{waitUntil:'domcontentloaded'});
+  assert.equal(response?.status(),404);
+  const notFound=page.locator('.inbs-not-found');
+  await notFound.waitFor({state:'visible'});
+  assert.equal(await notFound.getAttribute('lang'),locale);
+  assert.equal(await notFound.locator('h1').count(),1);
+  assert.equal(await notFound.locator('.inbs-not-found-orbit').count(),3);
+  assert.equal(await notFound.locator('.inbs-not-found-primary').getAttribute('href'),'/'+locale);
+  const bounds=await notFound.boundingBox();
+  assert.ok(bounds && bounds.y===0 && Math.abs(bounds.height-844)<=1,
+   '404 must cover the mobile viewport: '+JSON.stringify(bounds));
+ });
+ await context.close();
+}
 await test('service WebP files and metadata',async()=>{
- for(const slug of ['businessmen-services','real-estate-services','website-services','typing-services','tourism-services','financial-services','consultation-services','customs-services','cargo-services','citizenship-immigration-services']){
+ assert.equal(serviceSources.length,10,'Expected 10 documented services');
+ for(const {slug} of serviceSources){
   const response=await fetch(origin+'/images/services/'+slug+'.webp');
   assert.equal(response.status,200,slug+' HTTP '+response.status);
   assert.match(response.headers.get('content-type')||'',/image\/webp/,slug);
