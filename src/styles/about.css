@@ -18,7 +18,7 @@
   display:flex;align-items:center;gap:14px;
   font-size:15px;line-height:1.6;letter-spacing:.11em;font-weight:750;text-transform:uppercase;
 }
-.inbs-story-label{color:var(--story-accent);margin-bottom:30px;font-size:clamp(17px,1.3vw,19px);line-height:1.55}
+.inbs-story-label{color:var(--story-accent);margin-bottom:30px}
 .inbs-story-label>span,.inbs-story-eyebrow>span{width:35px;height:1px;background:currentColor;flex:none}
 
 /* Cinematic hero: one existing licensed local image, plus CSS/SVG artwork. */
@@ -224,7 +224,7 @@ html[data-theme=dark] .inbs-story-year span:first-child{opacity:.25}
 
 /* Give Arabic text breathing room before the vertical divider. */
 
-[dir=rtl] .inbs-story-label{font-size:clamp(18px,1.4vw,20px)}
+
 @media(max-width:760px){
   
 }
