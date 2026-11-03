@@ -1,0 +1,30 @@
+name: Prepare licensed service images
+on:
+  push:
+    branches: [feature/homepage]
+    paths:
+      - scripts/prepare-service-images.mjs
+      - .github/workflows/prepare-service-images.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Download, validate and convert source photos to WebP
+        run: node scripts/prepare-service-images.mjs
+      - name: Commit completed images and mapping
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/images/services/*.webp public/images/services/SOURCES.json src/components/home/services-showcase.tsx
+          git diff --cached --quiet || (git commit -m "assets(home): add licensed WebP service photography" && git push)

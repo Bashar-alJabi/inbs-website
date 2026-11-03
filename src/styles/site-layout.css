@@ -163,3 +163,47 @@ html[data-theme=dark] .inbs-theme-show-light{display:none}
  .inbs-footer-watermark{top:clamp(295px,38vh,405px);left:auto;right:auto;inset-inline-start:14px;inset-inline-end:auto;transform:none;text-align:start}
  [dir=rtl] .inbs-footer-watermark{left:auto;right:auto;inset-inline-start:14px;inset-inline-end:auto;transform:none}
 }
+
+/* Shared brand colors and consistent nav interactions */
+.inbs-contact-button{background:var(--brand-blue);border-radius:var(--radius-button);transition:background .25s,transform .25s}
+.inbs-contact-button:hover{background:var(--brand-deep);transform:translateY(-2px)}
+.inbs-hero-service-strip a{transition:color .25s,background .25s,transform .25s,border-color .25s}
+.inbs-hero-service-strip a:hover,.inbs-hero-service-strip a:focus-visible{color:#fff;background:var(--brand-blue);transform:translateY(-3px);border-color:var(--brand-light)}
+.inbs-footer{position:relative;z-index:2;background:radial-gradient(ellipse 75% 75% at 5% 5%,#126cb555 0%,transparent 65%),linear-gradient(135deg,var(--brand-blue) 0%,var(--brand-deep) 54%,#042448 100%)}
+
+/* Hero service hover: arrow rotates only, with no fill or movement of the link */
+.inbs-hero-service-strip a{background:transparent;transform:none;transition:none}
+.inbs-hero-service-strip a:hover,.inbs-hero-service-strip a:focus-visible{background:transparent;color:inherit;transform:none;border-color:currentColor}
+.inbs-hero-service-strip a svg{transition:transform .3s cubic-bezier(.22,1,.36,1)}
+.inbs-hero-service-strip a:hover svg,.inbs-hero-service-strip a:focus-visible svg{transform:rotate(45deg)}
+html[data-theme=dark]{--inbs-paper:#101b29;--inbs-ink:#edf3f8;--inbs-panel:#182738;--inbs-muted:#b5c5d3}
+html[data-theme=dark] .inbs-header.is-solid{background:#182738;box-shadow:0 6px 24px #00000025}
+html[data-theme=dark] .inbs-drawer{background:#182738;color:#edf3f8}
+html[data-theme=dark] .inbs-drawer nav a.active{background:#29445c;color:#e8f5ff}
+@media(prefers-reduced-motion:reduce){.inbs-hero-service-strip a svg{transition:none}}
+
+/* Drawer signature: connected-path divider with a restrained moving signal. */
+.inbs-drawer-top{border-bottom:0!important;padding-bottom:0!important}
+.inbs-drawer-network{flex:0 0 auto;width:100%;height:25px;margin-top:7px;position:relative;pointer-events:none}
+.inbs-drawer-network svg{width:100%;height:100%;overflow:visible;display:block}
+.inbs-drawer-network-path{stroke:var(--brand-blue);stroke-width:1.2;opacity:.62;fill:none;vector-effect:non-scaling-stroke}
+.inbs-drawer-network-node{fill:var(--brand-blue);opacity:.65}
+.inbs-drawer-network-traveller{fill:var(--brand-light);filter:drop-shadow(0 0 3px #79bbef);opacity:.98}
+html:not([data-theme=dark]) .inbs-drawer-network-traveller{fill:#4d9ed8}
+html[data-theme=dark] .inbs-drawer-network-path{stroke:#84bfe9;opacity:.55}
+html[data-theme=dark] .inbs-drawer-network-node{fill:#84bfe9}
+@media(prefers-reduced-motion:reduce){.inbs-drawer-network-traveller{display:none}}
+
+
+/* Dark footer: continue the neutral navy surfaces without the vivid blue opening. */
+html[data-theme=dark] .inbs-footer{
+ background:
+  radial-gradient(ellipse 72% 85% at 8% 0%,rgba(38,82,119,.28) 0%,transparent 70%),
+  linear-gradient(135deg,#192d40 0%,#122337 48%,#0c1c2d 100%);
+ box-shadow:inset 0 1px 0 #b9d5e414;
+}
+html[data-theme=dark] .inbs-footer-glow:before{
+ border-color:#9ed8ff16;
+ box-shadow:0 0 0 90px #90cfff05,0 0 0 180px #9ad3ff04;
+}
+html[data-theme=dark] .inbs-footer-watermark{color:#d4ecff09}

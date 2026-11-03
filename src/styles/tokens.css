@@ -4,11 +4,14 @@
  --font-en:'Manrope',Arial,sans-serif;
  --font-ar:'IBM Plex Sans Arabic',Tahoma,sans-serif;
  --font-body:var(--font-en);
- --color-primary:#05478f;
+ --color-primary:#07539a;
+ --brand-deep:#06356b;
+ --brand-blue:#126cb5;
+ --brand-light:#79bbef;
  --color-primary-hover:#1365af;
  --color-surface:#f4f7f9;
- --color-navy:#08243c;
- --color-sky:#6bb3ec;
+ --color-navy:var(--brand-deep);
+ --color-sky:var(--brand-light);
  --radius-button:7px;
  --radius-control:9px;
  --font-size-button:14px;
