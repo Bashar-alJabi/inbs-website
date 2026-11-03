@@ -46,7 +46,7 @@ export function AboutHero({ locale }: { locale: Locale }) {
   return <section className="inbs-story-hero" aria-labelledby="inbs-story-heading">
     <div className="inbs-story-hero-visual" aria-hidden="true">
       <Image src="/images/about/hero-about.webp" alt="" fill
-        sizes="(max-width: 760px) 100vw, 58vw" priority className="inbs-story-hero-image"/>
+        sizes="100vw" priority className="inbs-story-hero-image"/>
       <span className="inbs-story-hero-veil"/>
     </div>
     <HeroNetworkArt/>
