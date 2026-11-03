@@ -35,7 +35,18 @@
 - [ ] Obtain authorized verification of company metrics before final publication; the 25/30/85/25,320 values and count animation were verified unchanged against `redesign`.
 - [ ] Obtain approved content verification of institution representations before final publication; all institution names/icons were verified unchanged against `redesign`.
 
-**PR #19 cleanup status (3 November 2026):** all 15 agreed work items are implemented or reviewed on `feature/project-cleanup`; no merge performed. This does not mean release-ready. Full CI and preview review are still required on the final PR commit. The image-preparation workflow was made read-only and manual but has not been exercised end to end; do not mark its runtime verification complete. The displayed achievements and institution content were not edited, but are still subject to authorized company verification.
+**PR #19 cleanup milestone (3 November 2026):** all 15 work items were reviewed/implemented and successfully merged to `redesign`, then promoted to `main` via PR #20 after green CI. The manual, read-only image-preparation workflow has not been exercised end to end. Company achievements and institution content remain subject to authorized owner verification.
+
+## About page — draft PR #21 (feature/about-page)
+
+- [x] Implement separate bilingual About route with its own scoped styles and content ownership.
+- [x] Preserve existing company history (Dubai, established 2003), service slugs and shared navigation.
+- [x] Use licensed local Dubai photo already recorded in the service-image provenance.
+- [x] Add EN/AR metadata and opt-in sitemap entries without changing the default noindex policy.
+- [x] Add About smoke and browser checks covering locale, RTL, responsive, themes, links and major accessibility violations.
+- [ ] Verify CI lint, TypeScript, production build, HTTP smoke, Playwright and axe on **final PR head**.
+- [ ] Review deployed preview visually in both languages, light/dark, mobile/desktop, and capture feedback.
+- [ ] Obtain owner approval before merging PR #21 to `redesign`; promote to `main` separately.
 
 ## C. Repeat after **every page** (copy these tasks to the page PR)
 
