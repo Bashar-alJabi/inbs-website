@@ -5,11 +5,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { ArrowUpRight, ArrowRight, ArrowLeft, BriefcaseBusiness, Building2, Globe2, FileText, Plane, Landmark, MessagesSquare, Container, Ship, Fingerprint } from 'lucide-react';
-import { serviceSlugs, serviceNames, type Locale } from '@/lib/site';
+import { type Locale } from '@/lib/site';
+import { services, serviceSlugs, serviceNames } from '@/content/services';
 import { homeContent } from '@/content/home';
 import { Reveal } from '@/components/shared/reveal';
 
-const images = ["/images/services/businessmen-services.webp","/images/services/real-estate-services.webp","/images/services/website-services.webp","/images/services/typing-services.webp","/images/services/tourism-services.webp","/images/services/financial-services.webp","/images/services/consultation-services.webp","/images/services/customs-services.webp","/images/services/cargo-services.webp","/images/services/citizenship-immigration-services.webp"];
 const symbols = [BriefcaseBusiness, Building2, Globe2, FileText, Plane, Landmark, MessagesSquare, Container, Ship, Fingerprint] as const;
 
 export function ServicesShowcase({locale}:{locale:Locale}){
@@ -41,7 +41,7 @@ export function ServicesShowcase({locale}:{locale:Locale}){
       <div className="inbs-services-orbit orbit-one"/><div className="inbs-services-orbit orbit-two"/>
       <AnimatePresence mode="wait">
        <motion.div key={slug} className="inbs-services-photo" initial={reduced?false:{opacity:0,scale:1.07}} animate={{opacity:1,scale:1}} exit={{opacity:0}} transition={{duration:.5,ease:[.22,1,.36,1]}}>
-        <Image src={images[selected]} alt={serviceNames[slug][locale]} fill sizes="(max-width: 700px) 80vw, 42vw" className="inbs-services-photo-image"/>
+        <Image src={services[selected].image} alt={serviceNames[slug][locale]} fill sizes="(max-width: 700px) 80vw, 42vw" className="inbs-services-photo-image"/>
        </motion.div>
       </AnimatePresence>
       <span className="inbs-services-visual-mark">INBS</span>
