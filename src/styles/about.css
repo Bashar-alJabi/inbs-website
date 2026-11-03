@@ -129,34 +129,23 @@
 }
 .inbs-story-all-services:hover{gap:40px}
 
-/* High-contrast closing statement stays separate from the shared footer CTA. */
-.inbs-story-outro{
-  position:relative;isolation:isolate;overflow:hidden;background:
-  radial-gradient(ellipse at 80% 20%,#17618c 0%,transparent 53%),
-  linear-gradient(135deg,#0b3859 0%,#061e34 100%);color:#f5fbff;
+/* Continue the same light-to-rounded-footer transition as the homepage. */
+.inbs-about-page{position:relative;z-index:1;margin-bottom:-24px}
+.inbs-story-network{padding-bottom:clamp(115px,12vw,165px)}
+.inbs-story-all-services.inbs-about-link{
+  color:var(--story-ink);margin-top:37px;min-width:200px;
+  border-color:var(--story-accent);padding-bottom:14px;
 }
-.inbs-story-outro-orbit{
-  position:absolute;pointer-events:none;border:1px solid #b6e5ff38;
-  width:600px;aspect-ratio:1;border-radius:50%;inset-inline-end:-240px;top:-200px;
-  box-shadow:0 0 0 90px #89cfff0a,0 0 0 180px #89cfff07;
+.inbs-story-all-services.inbs-about-link:hover,
+.inbs-story-all-services.inbs-about-link:focus-visible{color:var(--story-accent)}
+.inbs-story-all-services.inbs-about-link:hover{gap:40px}
+.inbs-story-hero-art .inbs-story-traveler{
+  fill:#b7ebff;stroke:#143b5a;stroke-width:1;
+  filter:drop-shadow(0 0 7px #80d7ff);
 }
-.inbs-story-outro-inner{position:relative;min-height:600px;padding-block:clamp(90px,11vw,145px);display:flex;align-items:center}
-.inbs-story-outro .inbs-story-label{color:#a9dff6}
-.inbs-story-outro h2{max-width:940px;margin:0 0 26px}
-.inbs-story-outro p:not(.inbs-story-label){max-width:610px;color:#c5e0ef;font-size:clamp(16px,1.35vw,19px);line-height:1.85;margin-bottom:35px}
-.inbs-story-outro-actions{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
-.inbs-story-outro-primary{
-  display:inline-flex;align-items:center;justify-content:space-between;gap:30px;
-  background:#eef9ff;color:#0a3452;padding:18px 22px;font-size:14px;font-weight:750;border-radius:var(--radius-button);
-  transition:background .25s,transform .25s;
+@media(prefers-reduced-motion:reduce){
+  .inbs-story-hero-art .inbs-story-traveler{display:none}
 }
-.inbs-story-outro-primary:hover{background:#d1eeff;transform:translateY(-3px)}
-.inbs-story-outro-secondary{padding:14px 0;border-bottom:1px solid #9bd3ef;color:#e3f3fc;font-size:14px;font-weight:700}
-.inbs-story-outro-mark{
-  position:absolute;inset-inline-end:-5%;bottom:-.27em;font-size:clamp(150px,23vw,350px);
-  font-weight:800;letter-spacing:-.1em;opacity:.035;line-height:1;pointer-events:none;
-}
-
 /* RTL and typography adjustments. Layout direction comes from locale layout. */
 [dir=rtl] .inbs-about-page :is(h1,h2,h3){letter-spacing:0}
 [dir=rtl] .inbs-about-page h2{line-height:1.45}
@@ -206,7 +195,6 @@ html[data-theme=dark] .inbs-story-year span:first-child{opacity:.25}
   .inbs-story-capability{min-height:94px;gap:12px}
   .inbs-story-capability:nth-child(even){padding-inline-start:18px}
   .inbs-story-capability:nth-child(even):hover{padding-inline-start:25px}
-  .inbs-story-outro-inner{min-height:550px}
 }
 @media(max-width:550px){
   .inbs-about-page h2{font-size:clamp(38px,9vw,51px)}
@@ -221,15 +209,11 @@ html[data-theme=dark] .inbs-story-year span:first-child{opacity:.25}
   .inbs-story-capability:nth-child(even):hover{padding-inline-start:18px}
   .inbs-story-capability{padding-block:19px;min-height:81px}
   .inbs-story-capability-name{font-size:18px}
-  .inbs-story-outro-actions{align-items:stretch;flex-direction:column}
-  .inbs-story-outro-primary{justify-content:space-between}
-  .inbs-story-outro-secondary{align-self:flex-start}
-  .inbs-story-outro-mark{font-size:180px}
 }
 @media(prefers-reduced-motion:reduce){
   .inbs-story-hero-link,.inbs-story-capability,.inbs-story-capability svg,
-  .inbs-story-all-services,.inbs-story-outro-primary{transition:none}
+  .inbs-story-all-services{transition:none}
   .inbs-story-hero-link:hover,.inbs-story-all-services:hover{gap:30px}
   .inbs-story-capability:hover,.inbs-story-capability:nth-child(even):hover{padding-inline-start:0}
-  .inbs-story-capability:hover svg,.inbs-story-outro-primary:hover{transform:none}
+  .inbs-story-capability:hover svg{transform:none}
 }
