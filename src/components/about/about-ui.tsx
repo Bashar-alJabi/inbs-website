@@ -8,5 +8,5 @@ export function AboutLines({ text }: { text: string }) {
 }
 
 export function AboutSectionLabel({ children }: { children: ReactNode }) {
-  return <p className="inbs-story-label"><span aria-hidden="true" />{children}</p>;
+  return <p className="inbs-story-label inbs-section-kicker"><span aria-hidden="true" />{children}</p>;
 }
