@@ -10,7 +10,7 @@ export function HomeInstitutions({locale}:{locale:Locale}){
  return <section className="inbs-institutions" aria-labelledby="inbs-institutions-heading"><div className="site-shell">
   <Reveal className="inbs-institutions-heading"><h2 id="inbs-institutions-heading"><span>{locale==='ar'?'جهات ومراكز خدمات':'Authorities &'}</span><span>{locale==='ar'?'نتعامل معها':'service centres'}</span></h2><p>{locale==='ar'?'تشمل خدماتنا إنجاز معاملات لدى جهات حكومية ومراكز خدمات مختلفة في دولة الإمارات.':'Our services include procedures involving government authorities and service centres across the UAE.'}</p></Reveal>
  </div>
- <div className="inbs-institutions-window" tabIndex={reduced?0:undefined} aria-label={locale==='ar'?'الجهات ومراكز الخدمات':'Authorities and service centres'}>
+ <div className="inbs-institutions-window" tabIndex={0} aria-label={locale==='ar'?'الجهات ومراكز الخدمات':'Authorities and service centres'}>
   <div className={'inbs-institutions-track'+(reduced?' is-static':'')} dir="ltr">
    {[...agencies,...agencies].map((agency,i)=>{const Symbol=symbols[i%agencies.length];return <div key={i} className="inbs-institutions-name" aria-hidden={i>=agencies.length}><span className="inbs-institutions-symbol" aria-hidden="true"><Symbol size={27} strokeWidth={1.55}/></span><span>{agency[locale]}</span></div>})}
   </div>

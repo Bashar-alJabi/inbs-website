@@ -287,3 +287,8 @@ html[data-theme=dark] .inbs-services-overline{color:#add6ef}
 html[data-theme=dark] .inbs-services-end>.inbs-services-all-link{color:#e8f5fc}
 .inbs-institutions-window{overflow:clip}
 @media(prefers-reduced-motion:reduce){.inbs-institutions-window{overflow-x:auto;overflow-y:hidden}}
+
+/* Minimum small-text contrast against the pale services surface. */
+.inbs-services-overline{color:#205a7e}
+.inbs-services-heading-row p{color:#35576d}
+html[data-theme=dark] .inbs-services-overline{color:#add6ef}
