@@ -42,7 +42,7 @@ for(const locale of ['en','ar']){
    await test(key+' accessible landmarks',async()=>{
     const a=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa']).analyze();
     const serious=a.violations.filter(v=>v.impact==='critical'||v.impact==='serious');
-    assert.equal(serious.length,0,serious.map(v=>v.id+': '+v.nodes.map(n=>n.target.join(' ')).join(', ')).join(' | '));
+    assert.equal(serious.length,0,serious.map(v=>v.id+': '+v.nodes.map(n=>n.target.join(' ')+(n.failureSummary?' ('+n.failureSummary+')':'')).join(', ')).join(' | '));
    });
    if(size.name==='desktop'){
     await test(key+' services hover updates preview',async()=>{
@@ -146,6 +146,8 @@ for(const locale of ['en','ar']){
       '/'+locale+'/services/businessmen-services');
     assert.equal(await page.locator('.inbs-story-outro-primary').getAttribute('href'),'/'+locale+'/contact');
     await page.locator('.inbs-story-outro').scrollIntoViewIfNeeded();
+    // Wait for the shared Reveal entrance before measuring contrast with axe.
+    await page.waitForTimeout(1000);
     const widths=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
     assert.ok(widths.scroll<=widths.inner+3,'Horizontal overflow: '+JSON.stringify(widths));
     assert.equal(await page.locator('.inbs-about-page img').evaluateAll(
