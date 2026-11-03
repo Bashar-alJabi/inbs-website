@@ -42,4 +42,4 @@ jobs:
         run: node scripts/homepage-e2e.mjs
       - name: Server logs if failed
         if: failure()
-        run: cat /tmp/inbs-browser-server.log
+        run: if [ -f /tmp/inbs-browser-server.log ]; then cat /tmp/inbs-browser-server.log; fi
