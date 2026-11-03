@@ -3,7 +3,7 @@
   --story-ink:#0a3049;
   --story-muted:#526d7f;
   --story-line:#cbdce6;
-  --story-paper:#f5f9fb;
+  --story-paper:#f6f9fc;
   --story-surface:#eaf1f6;
   --story-accent:#146ba8;
   overflow:clip;
@@ -127,7 +127,6 @@
   padding-bottom:13px;border-bottom:1px solid var(--story-accent);
   color:var(--story-accent);font-weight:750;font-size:14px;
 }
-.inbs-story-all-services:hover{gap:40px}
 
 /* Continue the same light-to-rounded-footer transition as the homepage. */
 .inbs-about-page{position:relative;z-index:1;margin-bottom:-24px}
@@ -138,7 +137,6 @@
 }
 .inbs-story-all-services.inbs-about-link:hover,
 .inbs-story-all-services.inbs-about-link:focus-visible{color:var(--story-accent)}
-.inbs-story-all-services.inbs-about-link:hover{gap:40px}
 .inbs-story-hero-art .inbs-story-traveler{
   fill:#b7ebff;stroke:#143b5a;stroke-width:1;
   filter:drop-shadow(0 0 7px #80d7ff);
