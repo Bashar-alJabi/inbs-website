@@ -88,8 +88,8 @@ html[data-theme=dark] .inbs-about-preview{--inbs-about-card:#11334dba}
 .inbs-services-orbit{z-index:2;pointer-events:none;position:absolute;width:min(85%,380px);aspect-ratio:1;border:1px solid rgba(167,216,240,.25);border-radius:50%;transform:rotate(-24deg) scaleY(.71)}
 .inbs-services-orbit.orbit-two{width:min(65%,295px);transform:rotate(48deg) scaleY(.8)}
 .inbs-services-photo{position:absolute;inset:0;z-index:1;width:100%;height:100%;overflow:hidden}
-.inbs-services-photo-image{object-fit:cover;filter:saturate(.82) contrast(1.04)}
-.inbs-services-photo:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 65%,rgba(7,35,57,.24))}
+.inbs-services-photo-image{object-fit:cover;filter:saturate(1.03) contrast(1.01)}
+.inbs-services-photo:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 75%,rgba(7,35,57,.12))}
 .inbs-services-display{border-radius:12px;background:#123a54}
 .inbs-services-visual-mark{z-index:3;position:absolute;bottom:6%;right:0;font-size:clamp(78px,12vw,180px);font-weight:800;letter-spacing:-.1em;line-height:1;opacity:.055;pointer-events:none}
 .inbs-services-display-bottom{display:flex;justify-content:space-between;gap:20px;align-items:end;position:relative;z-index:2;padding:26px clamp(22px,3vw,36px) 30px}

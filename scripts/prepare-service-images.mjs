@@ -74,7 +74,7 @@ for(const item of entries){
  const input=Buffer.from(await response.arrayBuffer());
  if(input.length<10000||input.length>20000000)throw new Error(`Unreasonable image size for ${item.slug}`);
  const filename=`${item.slug}.webp`;
- await sharp(input).rotate().resize(1440,1000,{fit:'cover',position:'attention'}).webp({quality:80,effort:5}).toFile(path.join(directory,filename));
+ await sharp(input).rotate().resize(1440,1000,{fit:'cover',position:'attention'}).modulate({brightness:1.12,saturation:1.07}).webp({quality:83,effort:5}).toFile(path.join(directory,filename));
  written.push(filename);
  console.log(`Prepared ${filename}`);
 }
