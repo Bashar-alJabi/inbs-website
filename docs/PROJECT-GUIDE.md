@@ -69,7 +69,7 @@ src/
 - `src/app/[locale]/layout.tsx`: validates locale, sets `html lang/dir`, provides messages and displays shared header/footer.
 - `src/app/[locale]/page.tsx`: homepage route, locale validation and metadata; `src/components/home/homepage.tsx`: homepage section composition.
 - `src/components/home/`: Hero, About preview, Services showcase, Achievements and Institutions; client components are used only where interaction or animation requires them.
-- `src/app/[locale]/about/page.tsx` and `src/components/about/about-page.tsx`: About route/metadata and sections, with dedicated `src/styles/about.css` and bilingual `src/content/about.ts`.
+- `src/app/[locale]/about/page.tsx`: About route and metadata; `src/components/about/about-page.tsx` only composes `AboutHero`, `AboutIntro`, `AboutPrinciples` and `AboutNetwork`. They share tiny presentational helpers in `src/components/about/about-ui.tsx`, bilingual content in `src/content/about.ts`, and scoped rules in `src/styles/about.css`.
 - `src/components/layout/`: shared chrome and temporary pages.
 - `src/styles/tokens.css`: design variables; `globals.css`, `site-layout.css`, `home.css`: other styles.
 
