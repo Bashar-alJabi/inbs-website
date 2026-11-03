@@ -23,3 +23,28 @@
 .inbs-custom-cursor{position:fixed;top:0;left:0;width:26px;height:26px;border:1px solid #81cffa;border-radius:50%;background:#4099d51c;z-index:110;pointer-events:none;opacity:0;transform:translate3d(-200px,-200px,0);transition:width .2s,height .2s,opacity .18s,background .2s;will-change:transform}
 @media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){.inbs-custom-cursor[data-visible=true]{opacity:.75}.inbs-custom-cursor[data-active=true]{width:42px;height:42px;background:#87d2ff24}}
 @media(hover:none),(pointer:coarse),(prefers-reduced-motion:reduce){.inbs-custom-cursor{display:none}}
+
+/* Branded global 404 — isolated styles, responsive and theme-aware. */
+.inbs-not-found{position:relative;isolation:isolate;overflow:hidden;min-height:100svh;background:linear-gradient(135deg,#071b2c 0%,#0a2d49 55%,#0b4068 100%);color:#f4faff;display:flex;align-items:center}
+.inbs-not-found-glow{position:absolute;inset:-35% -20% auto auto;width:75vw;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#348dcc35,transparent 65%);pointer-events:none}
+.inbs-not-found-inner{position:relative;z-index:2;width:100%;padding-block:clamp(80px,13vh,170px) 45px}
+.inbs-not-found-kicker{display:flex;align-items:center;gap:13px;color:#aed4f2;font-size:12px;font-weight:700;letter-spacing:.18em}
+.inbs-not-found-kicker span{height:1px;width:36px;background:#83bde9}
+.inbs-not-found-number{font-size:clamp(130px,25vw,335px);line-height:.85;font-weight:800;letter-spacing:-.095em;color:#ffffff14;user-select:none;margin:28px 0 -28px}
+.inbs-not-found-number span{color:#72b9ee}
+.inbs-not-found h1{font-size:clamp(36px,5vw,69px);line-height:1.13;letter-spacing:-.045em;max-width:750px;margin:0 0 22px}
+.inbs-not-found-description{max-width:590px;font-size:clamp(15px,1.5vw,18px);line-height:1.9;color:#bed4e4}
+.inbs-not-found-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:36px}
+.inbs-not-found-actions a{display:inline-flex;align-items:center;gap:12px;min-height:52px;padding:12px 20px;border-radius:7px;font-size:14px;font-weight:700;transition:background .2s,transform .2s}
+.inbs-not-found-actions a:hover{transform:translateY(-2px)}
+.inbs-not-found-primary{background:#edf8ff;color:#06345c}
+.inbs-not-found-primary:hover{background:#c8ecff}
+.inbs-not-found-secondary{border:1px solid #7cadd16b;color:#e8f5ff}
+.inbs-not-found-secondary:hover{background:#ffffff14}
+.inbs-not-found-bottom{border-top:1px solid #ffffff29;display:flex;justify-content:space-between;gap:12px;margin-top:clamp(60px,12vh,125px);padding-top:22px;color:#a5c6df;font-size:12px;letter-spacing:.07em}
+.inbs-not-found-bottom span:first-child{font-weight:800;color:#e7f7ff;letter-spacing:.18em}
+.inbs-not-found-orbit{border:1px solid #ffffff0c;width:580px;height:580px;border-radius:50%;position:absolute;right:-200px;bottom:-350px;pointer-events:none}
+.inbs-not-found-orbit.orbit-b{width:720px;height:720px;right:-260px;bottom:-410px}
+[dir=rtl] .inbs-not-found h1,[dir=rtl] .inbs-not-found-number{letter-spacing:0}
+@media(max-width:650px){.inbs-not-found-number{margin-bottom:8px}.inbs-not-found-bottom{flex-direction:column}.inbs-not-found-orbit{opacity:.45}}
+@media(prefers-reduced-motion:reduce){.inbs-not-found-actions a{transition:none}.inbs-not-found-actions a:hover{transform:none}}
