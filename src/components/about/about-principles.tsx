@@ -17,6 +17,7 @@ export function AboutPrinciples({ locale }: { locale: Locale }) {
       </Reveal>
       <div className="inbs-story-principle-grid">
         <span className="inbs-story-principle-track-dot" aria-hidden="true"/>
+        <span className="inbs-story-principle-bottom-dot" aria-hidden="true"/>
         {t.principles.map((item, index) =>
           <Reveal key={item.number} delay={index * 0.08}>
             <article className="inbs-story-principle">
