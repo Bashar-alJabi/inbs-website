@@ -52,7 +52,7 @@
 }
 .inbs-services-hero-art-window{
   position:absolute;inset:5% 0 17% 15%;
-  overflow:hidden;border-radius:180px 180px 6px 6px;
+  overflow:visible;border-radius:180px 180px 6px 6px;
   background:#1d4668;
 }
 .inbs-services-hero-art-window:after,.inbs-services-hero-art-small:after{
@@ -61,18 +61,39 @@
 }
 .inbs-services-hero-art-window img,.inbs-services-hero-art-small img{
   object-fit:cover;object-position:center;
+  border-radius:inherit;
+}
+.inbs-services-hero-art-window::after,.inbs-services-hero-art-small::after{
+  border-radius:inherit;
+}
+.inbs-services-hero-art-window{border:1px solid #a1dbf16b}
+.inbs-services-hero-art-small{border-color:#0b3153}
+.inbs-services-hero-frame-dot{
+  position:absolute;z-index:5;display:block;
+  top:0;left:0;width:8px;height:8px;border-radius:50%;
+  background:#b9efff;
+  box-shadow:0 0 0 3px #7cccfb30,0 0 10px 3px #72d5ff,0 0 22px 5px #65c3ff99;
+  /* CSS motion path follows the actual rendered border box, unlike a stretched SVG. */
+  offset-path:inset(0 round 180px 180px 6px 6px);
+  offset-distance:0%;offset-rotate:0deg;
+  animation:inbs-services-border-travel 14s linear infinite;
+  pointer-events:none;
+}
+.inbs-services-hero-art-small .inbs-services-hero-frame-dot{
+  width:7px;height:7px;background:#ffffff;
+  box-shadow:0 0 0 3px #a7e6ff3f,0 0 11px 3px #8edcff,0 0 21px 5px #63c0fa9c;
+  offset-path:inset(0 round 1px);
+  animation-duration:9s;
+  animation-delay:-4s;
+}
+@keyframes inbs-services-border-travel{
+  from{offset-distance:0%}
+  to{offset-distance:100%}
 }
 .inbs-services-hero-art-small{
   position:absolute;z-index:2;bottom:2%;left:0;width:43%;aspect-ratio:1.12;
-  overflow:hidden;border:7px solid #0b3153;background:#244e6b;
+  overflow:visible;border:7px solid #0b3153;background:#244e6b;
 }
-.inbs-services-hero-art-network{
-  position:absolute;z-index:3;inset:-4% -9% auto auto;
-  width:89%;height:auto;aspect-ratio:1;pointer-events:none;
-  color:#a8e1ff;opacity:.62;
-  stroke:currentColor;stroke-width:.9;
-}
-.inbs-services-hero-traveler{fill:#b5edff;stroke:none;filter:drop-shadow(0 0 8px #82dbff)}
 .inbs-services-hero-art-caption{
   position:absolute;z-index:3;bottom:6%;right:1%;
   color:#c1deef;letter-spacing:.19em;font-size:10px;font-weight:700;
@@ -199,7 +220,7 @@ html[data-theme=dark] .inbs-services-page{
   .inbs-services-hero-art{width:min(75%,440px);margin-inline:auto;aspect-ratio:1.25}
   .inbs-services-hero-art-window{inset:3% 6% 6% 14%;border-radius:120px 120px 5px 5px}
   .inbs-services-hero-art-small{width:38%;bottom:0;border-width:5px}
-  .inbs-services-hero-art-network{width:75%;inset:-5% -3% auto auto}
+  .inbs-services-hero-art-window .inbs-services-hero-frame-dot{offset-path:inset(0 round 120px 120px 5px 5px)}
   .inbs-services-hero-art-caption{display:none}
   .inbs-services-directory-head,.inbs-services-closing-inner{grid-template-columns:1fr;gap:20px}
   .inbs-services-directory-head{margin-bottom:46px}
@@ -220,7 +241,7 @@ html[data-theme=dark] .inbs-services-page{
   .inbs-services-hero-bottom{font-size:10px}
 }
 @media(prefers-reduced-motion:reduce){
-  .inbs-services-hero-traveler{display:none}
+  .inbs-services-hero-frame-dot{display:none;animation:none}
   .inbs-services-entry-image img,.inbs-services-hero-discover,
   .inbs-services-entry-arrow,.inbs-services-entry-bottom>svg,
   .inbs-services-closing-action svg{transition:none}
