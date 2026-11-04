@@ -20,8 +20,7 @@ const drawerIcons: Record<PageSlug, LucideIcon> = {
  insights: Newspaper,
  careers: UserRoundSearch,
  contact: Phone,
- 'privacy-policy': FileText,
- terms: FileText,
+ legal: FileText,
 };
 export function SiteHeader({locale}:{locale:Locale}){
  const pathname=usePathname();
