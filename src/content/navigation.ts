@@ -1,13 +1,9 @@
 import { pages } from '@/lib/site';
 import { serviceSlugs } from '@/content/services';
 
-/**
- * Shared navigation selections, keeping names and URL paths in their catalogs.
- * Order in src/lib/site.ts controls page ordering. Footer services show the
- * first six in the canonical service catalog.
- */
+/** Shared selections; page and service names always come from their catalogs. */
 export const primaryPages = pages.filter(page => page.slug === 'about' || page.slug === 'services');
-export const drawerPages = pages.filter(page => page.slug !== 'privacy-policy' && page.slug !== 'terms');
-export const footerQuickPages = pages.slice(0, 7);
-export const footerLegalPages = pages.slice(-2);
-export const footerServiceSlugs = serviceSlugs.slice(0, 6);
+export const drawerPages = pages.filter(page => page.slug !== 'legal');
+export const footerQuickPages = pages.filter(page => page.slug !== 'legal');
+export const footerLegalPages = pages.filter(page => page.slug === 'legal');
+export const footerServiceSlugs = serviceSlugs.slice(0, 5);
