@@ -350,6 +350,30 @@ for (const locale of ['en','ar']) {
  }
 }
 
+// Edge travelers must animate on each photograph's real CSS border path.
+await test('services photo border travelers animate independently',async()=>{
+ const context=await browser.newContext({
+   viewport:{width:1440,height:900},reducedMotion:'no-preference',
+ });
+ const page=await context.newPage();
+ try {
+   await page.goto(origin+'/en/services',{waitUntil:'domcontentloaded'});
+   const dots=page.locator('.inbs-services-hero-frame-dot');
+   assert.equal(await dots.count(),2);
+   const read=()=>dots.evaluateAll(elements=>elements.map(el=>{
+     const style=getComputedStyle(el);
+     return {path:style.offsetPath,distance:parseFloat(style.offsetDistance),animation:style.animationName};
+   }));
+   const before=await read();
+   assert.ok(before.every(d=>d.path!=='none'&&d.animation.includes('inbs-services-border-travel')),
+     'Both photo travelers must use a border motion path: '+JSON.stringify(before));
+   await page.waitForTimeout(300);
+   const after=await read();
+   assert.ok(after.every((d,i)=>Math.abs(d.distance-before[i].distance)>.5),
+     'Both photo dots must actually move along their own borders: '+JSON.stringify({before,after}));
+ } finally { await context.close(); }
+});
+
 // Sample actual animated positions, not just SVG path attribute strings.
 // The point must stay on a painted axis/circle/ellipse throughout the loop.
 await test('about orbit dots stay on drawn geometry through their cycles',async()=>{
