@@ -84,6 +84,53 @@
 .inbs-story-intro-rule{width:50px;height:2px;background:var(--story-accent);margin:32px 0}
 .inbs-story-body-copy{font-size:clamp(15px,1.2vw,18px);line-height:2;color:var(--story-muted);max-width:575px;margin:0 0 19px}
 
+/* About-only editorial milestones: open columns and quiet typography, not Home cards. */
+.inbs-story-milestones{
+  background:var(--story-paper);
+  padding-block:clamp(30px,4vw,60px) clamp(85px,9vw,125px);
+}
+.inbs-story-milestones-head{
+  display:flex;align-items:center;gap:24px;margin-bottom:27px;
+}
+.inbs-story-milestones-head h2{
+  margin:0;flex:none;font-size:12px;line-height:1.6;
+  font-weight:750;letter-spacing:.13em;text-transform:uppercase;color:var(--story-accent);
+}
+.inbs-story-milestones-rule{height:1px;flex:1;background:var(--story-line)}
+.inbs-story-milestones-list{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  border-top:1px solid var(--story-line);border-bottom:1px solid var(--story-line);
+}
+.inbs-story-milestone{
+  min-width:0;display:flex;flex-direction:column;align-items:flex-start;
+  gap:12px;padding:31px clamp(12px,2.2vw,34px) 35px;
+}
+.inbs-story-milestone+.inbs-story-milestone{border-inline-start:1px solid var(--story-line)}
+.inbs-story-milestone-index{
+  color:var(--story-accent);font-size:11px;font-weight:700;letter-spacing:.1em;
+}
+.inbs-story-milestone-value{
+  font-family:var(--font-body);font-weight:620;line-height:1.1;
+  font-size:clamp(31px,3.3vw,53px);letter-spacing:-.055em;
+  color:var(--story-ink);white-space:nowrap;
+}
+.inbs-story-milestone-value span{
+  color:var(--story-accent);font-size:.6em;vertical-align:top;
+}
+.inbs-story-milestone-label{
+  color:var(--story-muted);font-size:clamp(13px,1.15vw,16px);line-height:1.6;
+}
+[dir=rtl] .inbs-story-milestones-head h2{letter-spacing:0}
+@media(max-width:980px){
+  .inbs-story-milestones-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .inbs-story-milestone:nth-child(3){border-inline-start:0}
+  .inbs-story-milestone:nth-child(n+3){border-top:1px solid var(--story-line)}
+}
+@media(max-width:480px){
+  .inbs-story-milestone{padding:25px 12px 27px}
+  .inbs-story-milestone-value{font-size:clamp(29px,7vw,40px)}
+}
+
 /* Principles are a continuous editorial grid rather than decorative cards. */
 .inbs-story-principles{background:var(--story-surface);padding-block:clamp(85px,10vw,143px)}
 .inbs-story-section-head{
