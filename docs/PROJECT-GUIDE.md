@@ -4,7 +4,7 @@
 
 INBS is a bilingual (English/Arabic) company website built with Next.js App Router, React and TypeScript. The goal is accessible, maintainable and performant presentation of verified company services.
 
-**As of November 2026:** the bilingual homepage and shared site shell are implemented and promoted to `main`, including the cleanup milestone (PR #19 to `redesign`, PR #20 to `main`). The bilingual About page is being developed in draft PR #21 on `feature/about-page`; it is **not merged yet**. Other known URLs still display **Coming Soon**. This guide describes the feature branch implementation separately from the approved production branch.
+**As of 4 November 2026:** the bilingual homepage and shared site shell are implemented and promoted to `main` (PR #19 → `redesign`, PR #20 → `main`). The bilingual About page was **merged into `redesign` via PR #21**, but has **not** been promoted to `main`. Shared routing/navigation cleanup and a decorative-year accessibility adjustment are on draft PR #22 (`feature/site-content-navigation-audit` → `redesign`), with automated CI successful at `654f16f` and manual visual approval still pending. Other known routes still display **Coming Soon**. This guide describes the current `redesign` state plus changes proposed in PR #22; it is not a production launch claim.
 
 Current maintenance work is tracked separately from page development. Do not merge or deploy an unfinished change without the owner's approval.
 
@@ -15,7 +15,7 @@ Current maintenance work is tracked separately from page development. Do not mer
 3. Implement and review both `/en` and `/ar`, responsive breakpoints, light/dark modes, keyboard behavior and reduced motion.
 4. Run lint, TypeScript, build and applicable browser/HTTP tests; record failures and fixes honestly.
 5. **Update the documentation and recurring checklist in the same PR**, including new routes, assets, dependencies, content edit locations, known limitations and test evidence.
-6. Review Vercel preview and obtain owner approval. Merge into `redesign` using a PR; promote an approved milestone to `main` using a separate reviewed PR.
+6. Review the local or available deployment preview and obtain owner approval. Merge into `redesign` using a PR; promote an approved milestone to `main` using a separate reviewed PR.
 
 No direct commits to `main`. A green CI build is necessary but not proof of complete visual/manual review.
 
@@ -26,7 +26,7 @@ The `[locale]` URL segment is either `en` or `ar`; `/en` and `/ar` are the imple
 | Route (both languages) | Current state |
 | --- | --- |
 | `/[locale]` | **Implemented homepage** |
-| `/[locale]/about` | Implemented on feature branch (draft PR #21), not merged |
+| `/[locale]/about` | Implemented and merged into `redesign` (PR #21); not yet promoted to `main` |
 | `/[locale]/services` | Coming Soon |
 | `/[locale]/services/[slug]` | Coming Soon for ten recognized service slugs |
 | `/[locale]/team` | Coming Soon |
@@ -36,7 +36,7 @@ The `[locale]` URL segment is either `en` or `ar`; `/en` and `/ar` are the imple
 | `/[locale]/privacy-policy` | Coming Soon |
 | `/[locale]/terms` | Coming Soon |
 
-Known page slugs live in `src/lib/site.ts`; service slugs come from the canonical `src/content/services.ts` catalog and are re-exported by `site.ts`. The dedicated `src/app/[locale]/about/page.tsx` owns About. The dynamic fallback `src/app/[locale]/[...slug]/page.tsx` resolves unfinished recognized URLs and displays `ComingSoon`; it excludes About from generated params. Unknown paths are 404. A `why-inbs` page was mentioned in the earlier roadmap but is **not** a recognized route in the current `pages` array; explicitly decide whether to add it before documenting it as available.
+Known page slugs and bilingual labels live in `src/lib/site.ts`; service slugs come from the canonical `src/content/services.ts` catalog and are re-exported by `site.ts`. PR #22 adds URL helpers in `src/lib/routes.ts` and shared menu selections in `src/content/navigation.ts`. Existing URLs remain unchanged. The dedicated `src/app/[locale]/about/page.tsx` owns About. The dynamic fallback `src/app/[locale]/[...slug]/page.tsx` resolves unfinished recognized URLs and displays `ComingSoon`; it excludes About from generated params. Unknown paths are 404. A `why-inbs` page was mentioned in the earlier roadmap but is **not** a recognized route in the current `pages` array; explicitly decide whether to add it before documenting it as available.
 
 When a page is developed, give it its own Next.js route and replace the Coming Soon rendering. Link to the actual route, not to a homepage anchor as a substitute.
 
