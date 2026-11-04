@@ -37,7 +37,7 @@
 
 **PR #19 cleanup milestone (3 November 2026):** all 15 work items were reviewed/implemented and successfully merged to `redesign`, then promoted to `main` via PR #20 after green CI. The manual, read-only image-preparation workflow has not been exercised end to end. Company achievements and institution content remain subject to authorized owner verification.
 
-## About page — draft PR #21 (feature/about-page)
+## About page — merged PR #21 (`feature/about-page` → `redesign`)
 
 - [x] Implement separate bilingual About route with its own scoped styles and content ownership.
 - [x] Preserve existing company history (Dubai, established 2003), service slugs and shared navigation.
@@ -51,9 +51,22 @@
 - [x] Remove off-rail decorative dots, align both SVG axes to the outer circle, and constrain ellipse traveler to the visible path.
 - [x] Increase editorial section labels and principle descriptions, add RTL divider clearance, and reuse the Home About link styling without duplicate underline offsets.
 - [x] Add browser regression assertions for SVG geometry, 10 services, typography, RTL clearance and hover underline baseline.
-- [ ] Verify CI lint, TypeScript, production build, HTTP smoke, Playwright and axe on **final PR head**.
+- [x] CI lint, TypeScript, production build, HTTP smoke, Playwright and axe passed on final PR head `aa262fb` before merge: [Validate website](https://github.com/Bashar-alJabi/inbs-website/actions/runs/41853315959), [Browser/accessibility audit](https://github.com/Bashar-alJabi/inbs-website/actions/runs/41853315951).
 - [ ] Review deployed preview visually in both languages, light/dark, mobile/desktop, and capture feedback.
-- [ ] Obtain owner approval before merging PR #21 to `redesign`; promote to `main` separately.
+- [x] Owner requested About merge to `redesign`; PR #21 squash merged as `a13bc51`.
+- [ ] Final visual confirmation of the latest About state after maintenance changes; promote to `main` separately.
+
+## Shared links and navigation cleanup — draft PR #22
+
+- [x] Keep `src/content/services.ts` and `src/lib/site.ts` as the canonical service and page-name sources, without changing service URLs.
+- [x] Add `src/lib/routes.ts` for page/service URL generation and `src/content/navigation.ts` for shared header/drawer/footer selections.
+- [x] Update the nav, footer, Home/About CTAs, fallback links and relevant metadata to reuse shared routes.
+- [x] Key mobile-drawer icons by stable page slug; use `src/content/contact.ts` for shared drawer email.
+- [x] Restore the subtle decorative founding-year styling and expose the year via accessible text instead of forcing dark visual contrast.
+- [x] Exact-head PR #22 automated CI on `654f16f`: [Validate website](https://github.com/Bashar-alJabi/inbs-website/actions/runs/41856221285) and [Browser/accessibility audit](https://github.com/Bashar-alJabi/inbs-website/actions/runs/41856221344) both successful.
+- [ ] Reconfirm exact-head CI after documentation-only updates, visually check EN/AR and both themes, obtain owner approval and merge PR #22 into `redesign`.
+- [ ] Before promoting `redesign` to `main`, reconcile their divergent histories (7 commits unique to `main` at review time) and verify the combined changes.
+- [ ] Create and review a separate `redesign` → `main` PR; test that final integration head and deployment. Do not equate integration with full public launch.
 
 ## C. Repeat after **every page** (copy these tasks to the page PR)
 

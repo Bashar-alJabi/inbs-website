@@ -2,7 +2,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight, Mail, MapPin, Phone } from 'lucide-react';
 import { LinkedinIcon, InstagramIcon, FacebookIcon } from './social-icons';
-import { pages, serviceSlugs, serviceNames, type Locale } from '@/lib/site';
+import { serviceNames, type Locale } from '@/lib/site';
+import { footerQuickPages, footerLegalPages, footerServiceSlugs } from '@/content/navigation';
+import { routes } from '@/lib/routes';
 import { Reveal } from '@/components/shared/reveal';
 import { companyContact, socialLinks } from '@/content/contact';
 import { layoutContent } from '@/content/layout';
@@ -22,7 +24,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         <div className="inbs-footer-top">
           <div><p>{t.footerBrand}</p>
             <h2>{t.footerHeading}</h2></div>
-          <Link href={`/${locale}/contact`}>{t.contact}<ArrowUpRight size={20} /></Link>
+          <Link href={routes.page(locale,'contact')}>{t.contact}<ArrowUpRight size={20} /></Link>
         </div>
       </Reveal>
       <div className="inbs-footer-grid">
@@ -37,10 +39,10 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           </div>
         </Reveal>
         <Reveal variant="footer" delay={0.12}>
-          <div><h3>{t.quickLinks}</h3>{pages.slice(0, 7).map(p => <Link key={p.slug} href={`/${locale}/${p.slug}`}>{p[locale]}</Link>)}</div>
+          <div><h3>{t.quickLinks}</h3>{footerQuickPages.map(p => <Link key={p.slug} href={routes.page(locale,p.slug)}>{p[locale]}</Link>)}</div>
         </Reveal>
         <Reveal variant="footer" delay={0.18}>
-          <div><h3>{t.services}</h3>{serviceSlugs.slice(0, 6).map(s => <Link key={s} href={`/${locale}/services/${s}`}>{serviceNames[s][locale]}</Link>)}</div>
+          <div><h3>{t.services}</h3>{footerServiceSlugs.map(s => <Link key={s} href={routes.service(locale,s)}>{serviceNames[s][locale]}</Link>)}</div>
         </Reveal>
         <Reveal variant="footer" delay={0.24}>
           <div className="inbs-footer-contact">
@@ -53,7 +55,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
       </div>
       <div className="inbs-footer-bottom">
         <span className="inbs-copyright">© {new Date().getFullYear()} INBS <span>{t.rights}</span></span>
-        <div>{pages.slice(-2).map(p => <Link key={p.slug} href={`/${locale}/${p.slug}`}>{p[locale]}</Link>)}</div>
+        <div>{footerLegalPages.map(p => <Link key={p.slug} href={routes.page(locale,p.slug)}>{p[locale]}</Link>)}</div>
       </div>
     </div>
   </footer>;

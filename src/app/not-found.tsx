@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ArrowUpRight, Compass, House } from 'lucide-react';
+import { routes } from '@/lib/routes';
 
 export default function NotFound() {
   const pathname = usePathname();
@@ -47,12 +48,12 @@ export default function NotFound() {
         </p>
 
         <div className="inbs-not-found-actions">
-          <Link className="inbs-not-found-primary" href={`/${locale}`}>
+          <Link className="inbs-not-found-primary" href={routes.home(locale)}>
             <House size={18} aria-hidden="true" />
             <span>{arabic ? 'العودة للرئيسية' : 'Back to homepage'}</span>
             <ArrowUpRight size={18} aria-hidden="true" />
           </Link>
-          <Link className="inbs-not-found-secondary" href={`/${locale}/services`}>
+          <Link className="inbs-not-found-secondary" href={routes.page(locale,'services')}>
             <Compass size={18} aria-hidden="true" />
             <span>{arabic ? 'استكشف خدماتنا' : 'Explore our services'}</span>
           </Link>

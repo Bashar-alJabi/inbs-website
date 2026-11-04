@@ -4,7 +4,7 @@ Official bilingual frontend website for **International Network Businessmen Serv
 
 ## Status and branches
 
-The **homepage and shared shell** are approved on `main` (PR #19 cleanup → `redesign`, PR #20 → `main`). The bilingual **About page is being developed on `feature/about-page` in draft PR #21**; it is not yet merged. Other unfinished routes display a branded Coming Soon page. The site is **not a completed production launch**.
+The **homepage and shared shell** are approved on `main` (PR #19 cleanup → `redesign`, PR #20 → `main`). The bilingual **About page was merged into `redesign` via PR #21** and has not yet been promoted to `main`. Shared navigation and route centralization are proposed in **draft PR #22** (`feature/site-content-navigation-audit` → `redesign`), pending visual approval. Other unfinished routes display a branded Coming Soon page. The site is **not a completed production launch**.
 
 - `main`: company-facing approved milestone.
 - `redesign`: integration branch for accepted redesign work.
@@ -40,7 +40,8 @@ npm run build
 - `src/app/[locale]/`: routes and locale layout.
 - `src/components/home/`: homepage sections; `src/components/about/`: About page; `src/components/layout/`: shared header, footer and navigation.
 - `src/content/`: bilingual content for home, About, shared layout, services and contact.
-- `src/lib/site.ts`: locale and page routing; `src/content/services.ts` is the authoritative service catalog.
+- `src/lib/site.ts`: locales and bilingual page labels; `src/lib/routes.ts`: locale-aware URL builders (on PR #22).
+- `src/content/services.ts`: authoritative service catalog; `src/content/navigation.ts`: menu selections (on PR #22).
 - `messages/ar.json` / `messages/en.json`: Coming Soon UI translations.
 - `public/brand/` and `public/images/`: logo and image assets.
 - `src/styles/` and `src/app/globals.css`: visual styles.

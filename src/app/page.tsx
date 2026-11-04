@@ -1,2 +1,3 @@
 import { redirect } from 'next/navigation';
-export default function RootPage(){redirect('/en')}
+import { routes } from '@/lib/routes';
+export default function RootPage(){redirect(routes.home('en'))}

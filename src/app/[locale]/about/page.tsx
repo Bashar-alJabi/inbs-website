@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { AboutPage } from '@/components/about/about-page';
 import { isLocale, locales } from '@/lib/site';
+import { routes } from '@/lib/routes';
 import { localeAlternates, siteIndexable, siteUrl } from '@/lib/seo';
 import '@/styles/about.css';
 
@@ -21,9 +22,9 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   return {
     title,
     description,
-    alternates: { canonical: `${siteUrl}/${locale}/about`, languages: localeAlternates('/about') },
+    alternates: { canonical: `${siteUrl}${routes.page(locale,'about')}`, languages: localeAlternates('/about') },
     openGraph: {
-      title, description, url: `${siteUrl}/${locale}/about`,
+      title, description, url: `${siteUrl}${routes.page(locale,'about')}`,
       siteName: 'INBS', type: 'website', locale: locale === 'ar' ? 'ar_AE' : 'en_US',
     },
     robots: { index: siteIndexable, follow: siteIndexable },
