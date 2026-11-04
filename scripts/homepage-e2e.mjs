@@ -450,6 +450,30 @@ await test('service WebP files and metadata',async()=>{
   assert.ok((await response.arrayBuffer()).byteLength>12000,slug+' unexpectedly small');
  }
 });
+await test('footer navigation uses one legal page and a full-services link',async()=>{
+ for(const locale of ['en','ar']){
+  const context=await browser.newContext({viewport:{width:1440,height:900}});
+  const page=await context.newPage();
+  try{
+   await page.goto(origin+'/'+locale+'/services',{waitUntil:'domcontentloaded'});
+   const quick=page.locator('.inbs-footer-grid h3').nth(0).locator('..').locator('a');
+   assert.equal(await quick.count(),7,'Home plus six nonlegal quick pages');
+   assert.equal(await quick.first().getAttribute('href'),'/'+locale);
+   assert.equal(await quick.filter({hasText:/privacy policy|سياسة الخصوصية/i}).count(),0);
+   const services=page.locator('.inbs-footer-grid h3').nth(1).locator('..').locator('a');
+   assert.equal(await services.count(),6,'Five service links plus the directory link');
+   assert.equal(await services.nth(5).getAttribute('href'),'/'+locale+'/services');
+   const legal=page.locator('.inbs-footer-bottom a');
+   assert.equal(await legal.count(),1,'Only one legal page is linked');
+   assert.equal(await legal.first().getAttribute('href'),'/'+locale+'/legal');
+   for(const previous of ['privacy-policy','terms']){
+    const response=await fetch(origin+'/'+locale+'/'+previous,{redirect:'manual'});
+    assert.ok([301,308].includes(response.status),previous+' must redirect permanently');
+    assert.equal(new URL(response.headers.get('location'),origin).pathname,'/'+locale+'/legal');
+   }
+  } finally { await context.close(); }
+ }
+});
 await test('navigation endpoints and security',async()=>{
  for(const locale of ['en','ar']){
   for(const slug of ['about','services','contact','team','privacy-policy','terms','services/businessmen-services','services/citizenship-and-immigration-services']){
