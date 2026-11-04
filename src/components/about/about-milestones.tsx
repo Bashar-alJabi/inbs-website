@@ -14,8 +14,11 @@ function MilestoneCount({ value }: { value: number }) {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    if (reduced) return;
     if (!visible) return;
+    if (reduced) {
+      setCount(value);
+      return;
+    }
 
     let frame = 0;
     const start = performance.now();
@@ -29,7 +32,7 @@ function MilestoneCount({ value }: { value: number }) {
     return () => cancelAnimationFrame(frame);
   }, [visible, reduced, value]);
 
-  return <strong ref={ref} dir="ltr">{(reduced ? value : count).toLocaleString('en-US')}<span>+</span></strong>;
+  return <strong ref={ref} dir="ltr">{count.toLocaleString('en-US')}<span>+</span></strong>;
 }
 
 /** Four alternating milestones connected by one continuous zigzag path. */
