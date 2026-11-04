@@ -16,9 +16,11 @@ export function AboutPrinciples({ locale }: { locale: Locale }) {
         <p>{t.philosophyLead}</p>
       </Reveal>
       <div className="inbs-story-principle-grid">
+        <span className="inbs-story-principle-track-dot" aria-hidden="true"/>
         {t.principles.map((item, index) =>
           <Reveal key={item.number} delay={index * 0.08}>
             <article className="inbs-story-principle">
+              {index > 0 && <span className="inbs-story-principle-divider-dot" aria-hidden="true"/>}
               <span className="inbs-story-principle-number">{item.number}</span>
               <span className="inbs-story-principle-glyph" aria-hidden="true">
                 <MoveUpRight size={28} strokeWidth={1.2}/>
