@@ -1,30 +1,68 @@
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
+import { useInView, useReducedMotion } from 'motion/react';
 import { Reveal } from '@/components/shared/reveal';
 import { companyMilestones } from '@/content/milestones';
 import { aboutPageContent } from '@/content/about';
 import type { Locale } from '@/lib/site';
 
-/** Four staggered metrics connected by one continuous, angled network path. */
+function MilestoneCount({ value }: { value: number }) {
+  const ref = useRef<HTMLElement>(null);
+  const visible = useInView(ref, { once: true, amount: 0.5 });
+  const reduced = useReducedMotion();
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (reduced) return;
+    if (!visible) return;
+
+    let frame = 0;
+    const start = performance.now();
+    const duration = 1900;
+    const update = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      setCount(Math.round(value * (1 - (1 - progress) ** 3)));
+      if (progress < 1) frame = requestAnimationFrame(update);
+    };
+    frame = requestAnimationFrame(update);
+    return () => cancelAnimationFrame(frame);
+  }, [visible, reduced, value]);
+
+  return <strong ref={ref} dir="ltr">{(reduced ? value : count).toLocaleString('en-US')}<span>+</span></strong>;
+}
+
+/** Four alternating milestones connected by one continuous zigzag path. */
 export function AboutMilestones({ locale }: { locale: Locale }) {
   const t = aboutPageContent[locale];
-  const path = 'M 125 145 L 250 145 L 375 275 L 500 275 L 625 145 L 750 145 L 875 275';
+  const desktopPath = 'M 125 145 L 250 145 L 375 275 L 500 275 L 625 145 L 750 145 L 875 275';
+  const mobilePath = 'M 250 160 L 500 160 L 750 350 L 500 350 L 250 540 L 500 540 L 750 730';
 
   return <div className="inbs-story-milestones" role="group" aria-label={t.milestonesEyebrow}>
-    <p className="inbs-story-milestones-kicker">{t.milestonesEyebrow}</p>
     <div className="inbs-story-milestones-grid">
-      <svg className="inbs-story-milestones-network" viewBox="0 0 1000 350" preserveAspectRatio="none" aria-hidden="true">
-        <path className="inbs-story-milestones-network-path" d={path}/>
+      <svg className="inbs-story-milestones-network inbs-story-milestones-network--desktop" viewBox="0 0 1000 350" preserveAspectRatio="none" aria-hidden="true">
+        <path className="inbs-story-milestones-network-path" d={desktopPath}/>
         {[{x:125,y:145},{x:375,y:275},{x:625,y:145},{x:875,y:275}].map(({x,y}) =>
           <circle className="inbs-story-milestones-network-node" key={x} cx={x} cy={y} r="4"/>
         )}
-        <circle className="inbs-story-milestones-network-traveler" r="4.5">
-          <animateMotion dur="20s" repeatCount="indefinite" path={path}/>
-          <animate attributeName="opacity" values="0;0.75;0.75;0" keyTimes="0;0.1;0.9;1" dur="20s" repeatCount="indefinite"/>
+        <circle className="inbs-story-milestones-network-traveler" r="5">
+          <animateMotion dur="22s" repeatCount="indefinite" path={desktopPath}/>
+          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="22s" repeatCount="indefinite"/>
+        </circle>
+      </svg>
+      <svg className="inbs-story-milestones-network inbs-story-milestones-network--mobile" viewBox="0 0 1000 800" preserveAspectRatio="none" aria-hidden="true">
+        <path className="inbs-story-milestones-network-path" d={mobilePath}/>
+        {[{x:250,y:160},{x:750,y:350},{x:250,y:540},{x:750,y:730}].map(({x,y}) =>
+          <circle className="inbs-story-milestones-network-node" key={y} cx={x} cy={y} r="5"/>
+        )}
+        <circle className="inbs-story-milestones-network-traveler" r="6">
+          <animateMotion dur="24s" repeatCount="indefinite" path={mobilePath}/>
+          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="24s" repeatCount="indefinite"/>
         </circle>
       </svg>
       {companyMilestones.map((fact, index) =>
         <Reveal key={fact.en} delay={index * 0.06} className={`inbs-story-milestone inbs-story-milestone--${index + 1}`}>
-          <span className="inbs-story-milestone-overline">{String(index + 1).padStart(2, '0')} / INBS</span>
-          <strong dir="ltr">{fact.value.toLocaleString('en-US')}<span>+</span></strong>
+          <MilestoneCount value={fact.value}/>
           <span className="inbs-story-milestone-caption">{fact[locale]}</span>
         </Reveal>
       )}
