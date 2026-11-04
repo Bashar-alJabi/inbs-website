@@ -374,6 +374,42 @@ await test('services photo border travelers animate independently',async()=>{
  } finally { await context.close(); }
 });
 
+// The small traveler must trace the visual middle of its border, at both widths.
+for (const width of [390, 1440]) {
+ await test('services small traveler stays on photo border at '+width+'px',async()=>{
+  const context=await browser.newContext({
+   viewport:{width,height:900},reducedMotion:'no-preference',
+  });
+  const page=await context.newPage();
+  try {
+   await page.goto(origin+'/en/services',{waitUntil:'domcontentloaded'});
+   const points=await page.locator('.inbs-services-hero-art-small').evaluate(frame=>{
+    const dot=frame.querySelector('.inbs-services-hero-frame-dot');
+    if(!dot)throw new Error('Missing small border traveler');
+    dot.style.animation='none';
+    const rect=frame.getBoundingClientRect();
+    const half=parseFloat(getComputedStyle(frame).borderTopWidth)/2;
+    const distances=[];
+    for(const pct of [0,12.5,25,37.5,50,62.5,75,87.5]){
+     dot.style.offsetDistance=pct+'%';
+     const d=dot.getBoundingClientRect();
+     const x=d.left+d.width/2,y=d.top+d.height/2;
+     const nearest=Math.min(
+      Math.abs(x-(rect.left+half)),
+      Math.abs(x-(rect.right-half)),
+      Math.abs(y-(rect.top+half)),
+      Math.abs(y-(rect.bottom-half))
+     );
+     distances.push({pct,distance:nearest});
+    }
+    return distances;
+   });
+   assert.ok(points.every(p=>p.distance<=4),
+    'Small dot moves away from border centerline: '+JSON.stringify(points));
+  } finally { await context.close(); }
+ });
+}
+
 // Sample actual animated positions, not just SVG path attribute strings.
 // The point must stay on a painted axis/circle/ellipse throughout the loop.
 await test('about orbit dots stay on drawn geometry through their cycles',async()=>{
