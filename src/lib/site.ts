@@ -8,8 +8,7 @@ export const pages = [
   { slug: 'insights', en: 'Insights', ar: 'مقالات' },
   { slug: 'careers', en: 'Careers', ar: 'الوظائف' },
   { slug: 'contact', en: 'Contact', ar: 'تواصل معنا' },
-  { slug: 'privacy-policy', en: 'Privacy Policy', ar: 'سياسة الخصوصية' },
-  { slug: 'terms', en: 'Terms & Conditions', ar: 'الشروط والأحكام' },
+  { slug: 'legal', en: 'Legal Information', ar: 'المعلومات القانونية' },
 ] as const;
 // Service labels, slugs and imagery have one source of truth.
 export { serviceSlugs, serviceNames } from '@/content/services';
