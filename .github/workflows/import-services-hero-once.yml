@@ -1,0 +1,37 @@
+# One-time asset import restricted to this feature branch.
+# Remove after the two verified Pexels WebPs have been committed.
+name: Import Services Hero Pexels Photos Once
+on:
+  push:
+    branches:
+      - feature/services-page
+    paths:
+      - .github/workflows/import-services-hero-once.yml
+permissions:
+  contents: write
+jobs:
+  import:
+    if: github.ref == 'refs/heads/feature/services-page'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: Install isolated image converter
+        run: npm install --no-save --package-lock=false sharp
+      - name: Download Pexels sources and produce verified WebP photos
+        run: node scripts/prepare-services-hero-images.mjs
+      - name: Commit two image assets on feature branch only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/images/services/hero-services-1.webp public/images/services/hero-services-2.webp
+          git diff --cached --quiet && exit 0
+          git commit -m "assets(services): add two licensed Pexels hero WebP photos"
+          git push origin HEAD:feature/services-page
