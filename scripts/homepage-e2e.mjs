@@ -295,6 +295,121 @@ for(const locale of ['en','ar']){
   }
  }
 }
+// Dedicated services page: both languages, themes, and responsive viewports.
+for (const locale of ['en','ar']) {
+ for (const size of sizes) {
+  for (const theme of ['light','dark']) {
+   const key='services/'+[locale,size.name,theme].join('/');
+   const context=await browser.newContext({
+    viewport:{width:size.width,height:size.height},
+    reducedMotion:'reduce',colorScheme:theme,
+   });
+   await context.addInitScript(t=>localStorage.setItem('inbs-theme',t),theme);
+   const page=await context.newPage();
+   const errors=[];
+   page.on('pageerror',e=>errors.push(String(e)));
+   await test(key+' page and canonical service links',async()=>{
+    const response=await page.goto(origin+'/'+locale+'/services',{waitUntil:'networkidle',timeout:45000});
+    assert.equal(response?.status(),200);
+    assert.equal(await page.locator('.inbs-services-page h1').count(),1);
+    assert.equal(await page.locator('html').getAttribute('dir'),locale==='ar'?'rtl':'ltr');
+    assert.equal(await page.locator('html').getAttribute('data-theme'),theme);
+    const cards=page.locator('.inbs-services-entry-link');
+    assert.equal(await cards.count(),10,'Must list ten canonical services');
+    assert.equal(await cards.first().getAttribute('href'),
+      '/'+locale+'/services/businessmen-services');
+    assert.equal(await cards.last().getAttribute('href'),
+      '/'+locale+'/services/citizenship-and-immigration-services');
+    assert.equal(await page.locator('.inbs-services-entry-image img').count(),10);
+    assert.equal(await page.locator('.inbs-services-hero-art-network').count(),0,'Old repeated network removed');
+    assert.equal(await page.locator('.inbs-services-hero-frame-dot').count(),2,'Both photo edges need a traveler');
+    assert.equal(await page.locator('.inbs-services-hero-art-window img').getAttribute('src')!==null,true);
+    for(const name of ['hero-services-1.webp','hero-services-2.webp']){
+      const image=page.locator('.inbs-services-hero-art img[src*="'+name+'"]');
+      assert.equal(await image.count(),1,'Dedicated Pexels hero missing: '+name);
+      const response=await fetch(origin+'/images/services/'+name);
+      assert.equal(response.status,200,'Missing local hero WebP: '+name);
+      assert.match(response.headers.get('content-type')||'',/image\/webp/);
+    }
+    assert.equal(await page.locator('.inbs-services-closing-action').getAttribute('href'),
+      '/'+locale+'/contact');
+    const dims=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
+    assert.ok(dims.scroll<=dims.inner+3,'Horizontal overflow: '+JSON.stringify(dims));
+    assert.deepEqual(errors,[],'Services page JavaScript errors');
+   });
+   await test(key+' accessibility',async()=>{
+    const analysis=await new AxeBuilder({page})
+      .include('.inbs-services-page')
+      .withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa']).analyze();
+    const serious=analysis.violations.filter(v=>v.impact==='serious'||v.impact==='critical');
+    assert.equal(serious.length,0,
+      serious.map(v=>v.id+': '+v.nodes.map(n=>n.target.join(' ')).join(', ')).join(' | '));
+   });
+   await context.close();
+  }
+ }
+}
+
+// Edge travelers must animate on each photograph's real CSS border path.
+await test('services photo border travelers animate independently',async()=>{
+ const context=await browser.newContext({
+   viewport:{width:1440,height:900},reducedMotion:'no-preference',
+ });
+ const page=await context.newPage();
+ try {
+   await page.goto(origin+'/en/services',{waitUntil:'domcontentloaded'});
+   const dots=page.locator('.inbs-services-hero-frame-dot');
+   assert.equal(await dots.count(),2);
+   const read=()=>dots.evaluateAll(elements=>elements.map(el=>{
+     const style=getComputedStyle(el);
+     return {path:style.offsetPath,distance:parseFloat(style.offsetDistance),animation:style.animationName};
+   }));
+   const before=await read();
+   assert.ok(before.every(d=>d.path!=='none'&&d.animation.includes('inbs-services-border-travel')),
+     'Both photo travelers must use a border motion path: '+JSON.stringify(before));
+   await page.waitForTimeout(300);
+   const after=await read();
+   assert.ok(after.every((d,i)=>Math.abs(d.distance-before[i].distance)>.5),
+     'Both photo dots must actually move along their own borders: '+JSON.stringify({before,after}));
+ } finally { await context.close(); }
+});
+
+// The small traveler must trace the visual middle of its border, at both widths.
+for (const width of [390, 1440]) {
+ await test('services small traveler stays on photo border at '+width+'px',async()=>{
+  const context=await browser.newContext({
+   viewport:{width,height:900},reducedMotion:'no-preference',
+  });
+  const page=await context.newPage();
+  try {
+   await page.goto(origin+'/en/services',{waitUntil:'domcontentloaded'});
+   const points=await page.locator('.inbs-services-hero-art-small').evaluate(frame=>{
+    const dot=frame.querySelector('.inbs-services-hero-frame-dot');
+    if(!dot)throw new Error('Missing small border traveler');
+    dot.style.animation='none';
+    const rect=frame.getBoundingClientRect();
+    const half=parseFloat(getComputedStyle(frame).borderTopWidth)/2;
+    const distances=[];
+    for(const pct of [0,12.5,25,37.5,50,62.5,75,87.5]){
+     dot.style.offsetDistance=pct+'%';
+     const d=dot.getBoundingClientRect();
+     const x=d.left+d.width/2,y=d.top+d.height/2;
+     const nearest=Math.min(
+      Math.abs(x-(rect.left+half)),
+      Math.abs(x-(rect.right-half)),
+      Math.abs(y-(rect.top+half)),
+      Math.abs(y-(rect.bottom-half))
+     );
+     distances.push({pct,distance:nearest});
+    }
+    return distances;
+   });
+   assert.ok(points.every(p=>p.distance<=4),
+    'Small dot moves away from border centerline: '+JSON.stringify(points));
+  } finally { await context.close(); }
+ });
+}
+
 // Sample actual animated positions, not just SVG path attribute strings.
 // The point must stay on a painted axis/circle/ellipse throughout the loop.
 await test('about orbit dots stay on drawn geometry through their cycles',async()=>{
@@ -333,6 +448,30 @@ await test('service WebP files and metadata',async()=>{
   assert.equal(response.status,200,slug+' HTTP '+response.status);
   assert.match(response.headers.get('content-type')||'',/image\/webp/,slug);
   assert.ok((await response.arrayBuffer()).byteLength>12000,slug+' unexpectedly small');
+ }
+});
+await test('footer navigation uses one legal page and a full-services link',async()=>{
+ for(const locale of ['en','ar']){
+  const context=await browser.newContext({viewport:{width:1440,height:900}});
+  const page=await context.newPage();
+  try{
+   await page.goto(origin+'/'+locale+'/services',{waitUntil:'domcontentloaded'});
+   const quick=page.locator('.inbs-footer-grid h3').nth(0).locator('..').locator('a');
+   assert.equal(await quick.count(),7,'Home plus six nonlegal quick pages');
+   assert.equal(await quick.first().getAttribute('href'),'/'+locale);
+   assert.equal(await quick.filter({hasText:/privacy policy|سياسة الخصوصية/i}).count(),0);
+   const services=page.locator('.inbs-footer-grid h3').nth(1).locator('..').locator('a');
+   assert.equal(await services.count(),6,'Five service links plus the directory link');
+   assert.equal(await services.nth(5).getAttribute('href'),'/'+locale+'/services');
+   const legal=page.locator('.inbs-footer-bottom a');
+   assert.equal(await legal.count(),1,'Only one legal page is linked');
+   assert.equal(await legal.first().getAttribute('href'),'/'+locale+'/legal');
+   for(const previous of ['privacy-policy','terms']){
+    const response=await fetch(origin+'/'+locale+'/'+previous,{redirect:'manual'});
+    assert.ok([301,308].includes(response.status),previous+' must redirect permanently');
+    assert.equal(new URL(response.headers.get('location'),origin).pathname,'/'+locale+'/legal');
+   }
+  } finally { await context.close(); }
  }
 });
 await test('navigation endpoints and security',async()=>{
