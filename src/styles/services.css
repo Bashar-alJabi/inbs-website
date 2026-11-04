@@ -51,17 +51,24 @@
   align-self:center;isolation:isolate;
 }
 .inbs-services-hero-art-window{
-  position:absolute;inset:5% 0 17% 15%;
+  position:absolute;z-index:1;inset:5% 0 17% 15%;
   overflow:visible;border-radius:180px 180px 6px 6px;
   background:#1d4668;
 }
 .inbs-services-hero-art-window:after,.inbs-services-hero-art-small:after{
   content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(180deg,#0a294411,rgba(8,32,53,.34));
+  background:linear-gradient(180deg,rgba(8,32,53,.025),rgba(8,32,53,.12));
 }
 .inbs-services-hero-art-window img,.inbs-services-hero-art-small img{
   object-fit:cover;object-position:center;
   border-radius:inherit;
+}
+.inbs-services-hero-art-window img{
+  filter:brightness(1.13) saturate(1.28) contrast(1.045);
+}
+.inbs-services-hero-art-small img{
+  object-position:center 40%;
+  filter:brightness(1.09) saturate(1.17) contrast(1.045);
 }
 .inbs-services-hero-art-window::after,.inbs-services-hero-art-small::after{
   border-radius:inherit;
@@ -69,21 +76,22 @@
 .inbs-services-hero-art-window{border:1px solid #a1dbf16b}
 .inbs-services-hero-art-small{border-color:#0b3153}
 .inbs-services-hero-frame-dot{
-  position:absolute;z-index:5;display:block;
+  position:absolute;z-index:2;display:block;
   top:0;left:0;width:8px;height:8px;border-radius:50%;
   background:#b9efff;
   box-shadow:0 0 0 3px #7cccfb30,0 0 10px 3px #72d5ff,0 0 22px 5px #65c3ff99;
-  /* CSS motion path follows the actual rendered border box, unlike a stretched SVG. */
-  offset-path:inset(0 round 180px 180px 6px 6px);
+  /* The browser tracks the rendered rounded border, including responsive sizing. */
+  offset-path:border-box;
+  offset-anchor:center;
   offset-distance:0%;offset-rotate:0deg;
-  animation:inbs-services-border-travel 14s linear infinite;
+  animation:inbs-services-border-travel 19s linear infinite;
   pointer-events:none;
 }
 .inbs-services-hero-art-small .inbs-services-hero-frame-dot{
-  width:7px;height:7px;background:#ffffff;
+  z-index:2;width:7px;height:7px;background:#ffffff;
   box-shadow:0 0 0 3px #a7e6ff3f,0 0 11px 3px #8edcff,0 0 21px 5px #63c0fa9c;
-  offset-path:inset(0 round 1px);
-  animation-duration:9s;
+  offset-path:border-box;
+  animation-duration:13s;
   animation-delay:-4s;
 }
 @keyframes inbs-services-border-travel{
@@ -91,7 +99,7 @@
   to{offset-distance:100%}
 }
 .inbs-services-hero-art-small{
-  position:absolute;z-index:2;bottom:2%;left:0;width:43%;aspect-ratio:1.12;
+  position:absolute;z-index:3;bottom:2%;left:0;width:43%;aspect-ratio:1.12;
   overflow:visible;border:7px solid #0b3153;background:#244e6b;
 }
 .inbs-services-hero-art-caption{
@@ -220,7 +228,6 @@ html[data-theme=dark] .inbs-services-page{
   .inbs-services-hero-art{width:min(75%,440px);margin-inline:auto;aspect-ratio:1.25}
   .inbs-services-hero-art-window{inset:3% 6% 6% 14%;border-radius:120px 120px 5px 5px}
   .inbs-services-hero-art-small{width:38%;bottom:0;border-width:5px}
-  .inbs-services-hero-art-window .inbs-services-hero-frame-dot{offset-path:inset(0 round 120px 120px 5px 5px)}
   .inbs-services-hero-art-caption{display:none}
   .inbs-services-directory-head,.inbs-services-closing-inner{grid-template-columns:1fr;gap:20px}
   .inbs-services-directory-head{margin-bottom:46px}
