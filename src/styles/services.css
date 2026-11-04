@@ -209,7 +209,8 @@ html[data-theme=dark] .inbs-services-page{
 [dir=rtl] .inbs-services-kicker,[dir=rtl] .inbs-services-hero-bottom,
 [dir=rtl] .inbs-services-entry-overline{letter-spacing:0}
 [dir=rtl] .inbs-services-hero-art-small{left:auto;right:0}
-[dir=rtl] .inbs-services-hero-art-caption{right:auto;left:1%}
+/* Keep the fixed English signature anchored over the photo's physical right edge in RTL, too. */
+[dir=rtl] .inbs-services-hero-art-caption{right:1%;left:auto;direction:ltr}
 [dir=rtl] .inbs-services-entry-link:hover .inbs-services-entry-arrow,
 [dir=rtl] .inbs-services-entry-link:hover .inbs-services-entry-bottom>svg,
 [dir=rtl] .inbs-services-closing-action:hover svg{transform:translate(-3px,-3px)}
