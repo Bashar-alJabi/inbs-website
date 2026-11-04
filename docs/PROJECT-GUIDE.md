@@ -33,10 +33,10 @@ The `[locale]` URL segment is either `en` or `ar`; `/en` and `/ar` are the imple
 | `/[locale]/insights` | Coming Soon |
 | `/[locale]/careers` | Coming Soon |
 | `/[locale]/contact` | Coming Soon |
-| `/[locale]/privacy-policy` | Coming Soon |
-| `/[locale]/terms` | Coming Soon |
+| `/[locale]/legal` | Coming Soon — one planned page containing privacy and terms information |
+| `/[locale]/privacy-policy` and `/[locale]/terms` | Permanent redirects to `/[locale]/legal` |
 
-Known page slugs and bilingual labels live in `src/lib/site.ts`; service slugs come from the canonical `src/content/services.ts` catalog and are re-exported by `site.ts`. Localized URL helpers are in `src/lib/routes.ts` and shared menu selections in `src/content/navigation.ts` (PR #22). Existing URLs remain unchanged. The dedicated `src/app/[locale]/about/page.tsx` owns About. The dynamic fallback `src/app/[locale]/[...slug]/page.tsx` resolves unfinished recognized URLs and displays `ComingSoon`; it excludes completed About and the Services landing page from generated params. Unknown paths are 404. A `why-inbs` page was mentioned in the earlier roadmap but is **not** a recognized route in the current `pages` array; explicitly decide whether to add it before documenting it as available.
+Known page slugs and bilingual labels live in `src/lib/site.ts`; service slugs come from the canonical `src/content/services.ts` catalog and are re-exported by `site.ts`. Localized URL helpers are in `src/lib/routes.ts` and shared menu selections in `src/content/navigation.ts` (PR #22). Existing service URLs remain unchanged. The old privacy-policy and terms URLs redirect to the single legal landing route; see `next.config.ts`. The dedicated `src/app/[locale]/about/page.tsx` owns About. The dynamic fallback `src/app/[locale]/[...slug]/page.tsx` resolves unfinished recognized URLs and displays `ComingSoon`; it excludes completed About and the Services landing page from generated params. Unknown paths are 404. A `why-inbs` page was mentioned in the earlier roadmap but is **not** a recognized route in the current `pages` array; explicitly decide whether to add it before documenting it as available.
 
 When a page is developed, give it its own Next.js route and replace the Coming Soon rendering. Link to the actual route, not to a homepage anchor as a substitute.
 
