@@ -3,24 +3,29 @@ import { companyMilestones } from '@/content/milestones';
 import { aboutPageContent } from '@/content/about';
 import type { Locale } from '@/lib/site';
 
-/** Quiet editorial metrics between the company story and its principles. */
+/** Integrated editorial feature inside the About story, not a second Home metrics strip. */
 export function AboutMilestones({ locale }: { locale: Locale }) {
   const t = aboutPageContent[locale];
-  return <section className="inbs-story-milestones" aria-labelledby="inbs-story-milestones-heading">
-    <div className="site-shell">
-      <Reveal className="inbs-story-milestones-head">
-        <h2 id="inbs-story-milestones-heading">{t.milestonesEyebrow}</h2>
-        <span aria-hidden="true" className="inbs-story-milestones-rule"/>
-      </Reveal>
-      <div className="inbs-story-milestones-list">
-        {companyMilestones.map((fact, index) =>
-          <Reveal key={fact.en} delay={index * 0.06} className="inbs-story-milestone">
-            <span className="inbs-story-milestone-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-            <strong className="inbs-story-milestone-value" dir="ltr">{fact.value.toLocaleString('en-US')}<span>+</span></strong>
-            <span className="inbs-story-milestone-label">{fact[locale]}</span>
-          </Reveal>
-        )}
+  const [featured, ...supporting] = companyMilestones;
+  return <div className="inbs-story-milestones" role="group" aria-label={t.milestonesEyebrow}>
+    <Reveal className="inbs-story-milestones-feature">
+      <p className="inbs-story-milestones-kicker">{t.milestonesEyebrow}</p>
+      <div className="inbs-story-milestones-feature-figure">
+        <strong dir="ltr">{featured.value.toLocaleString('en-US')}<span>+</span></strong>
+        <span>{featured[locale]}</span>
       </div>
+      <span className="inbs-story-milestones-orbit" aria-hidden="true"/>
+    </Reveal>
+    <div className="inbs-story-milestones-details">
+      {supporting.map((fact, index) =>
+        <Reveal key={fact.en} delay={index * 0.08} className="inbs-story-milestones-detail">
+          <span className="inbs-story-milestones-detail-no" aria-hidden="true">{String(index + 2).padStart(2, '0')}</span>
+          <div className="inbs-story-milestones-detail-copy">
+            <strong dir="ltr">{fact.value.toLocaleString('en-US')}<span>+</span></strong>
+            <span>{fact[locale]}</span>
+          </div>
+        </Reveal>
+      )}
     </div>
-  </section>;
+  </div>;
 }
