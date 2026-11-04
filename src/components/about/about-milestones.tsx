@@ -16,8 +16,8 @@ function MilestoneCount({ value }: { value: number }) {
   useEffect(() => {
     if (!visible) return;
     if (reduced) {
-      setCount(value);
-      return;
+      const frame = requestAnimationFrame(() => setCount(value));
+      return () => cancelAnimationFrame(frame);
     }
 
     let frame = 0;
