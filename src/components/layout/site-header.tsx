@@ -10,6 +10,7 @@ import { routes, type PageSlug } from '@/lib/routes';
 import { primaryPages, drawerPages } from '@/content/navigation';
 import { LanguageSwitcher } from './language-switcher';
 import { layoutContent } from '@/content/layout';
+import { companyContact } from '@/content/contact';
 
 /** Icons are keyed by stable route slug, not array position. */
 const drawerIcons: Record<PageSlug, LucideIcon> = {
@@ -73,6 +74,6 @@ export function SiteHeader({locale}:{locale:Locale}){
  <div className="inbs-drawer-top"><Link href={routes.home(locale)} onClick={()=>setOpen(false)} aria-label="INBS home"><Image src="/brand/inbs-logo.png" alt="INBS" width={142} height={72}/></Link><button className="inbs-drawer-close" onClick={()=>setOpen(false)} type="button" aria-label={t.close}><X size={22}/></button></div>
  <div className="inbs-drawer-network" aria-hidden="true"><svg viewBox="0 0 320 22" preserveAspectRatio="none" focusable="false"><path id="inbs-drawer-network-path" d="M 0 15 H 74 L 91 5 H 165 L 183 15 H 249 L 261 9 H 320" className="inbs-drawer-network-path"/><circle cx="91" cy="5" r="2" className="inbs-drawer-network-node"/><circle cx="261" cy="9" r="2" className="inbs-drawer-network-node"/><circle r="3.1" className="inbs-drawer-network-traveller"><animateMotion dur="8s" repeatCount="indefinite" path="M 0 15 H 74 L 91 5 H 165 L 183 15 H 249 L 261 9 H 320"/></circle></svg></div>
  <nav aria-label={t.allPagesAria}><Link className={onHome?'active':''} onClick={()=>setOpen(false)} href={routes.home(locale)}><House size={19}/>{home}</Link>{drawerPages.map((p)=>{const Icon=drawerIcons[p.slug];return <Link className={pathname===routes.page(locale,p.slug)?'active':''} onClick={()=>setOpen(false)} key={p.slug} href={routes.page(locale,p.slug)}><Icon size={19}/>{p[locale]}</Link>})}</nav>
- <div className="inbs-drawer-bottom"><a href="mailto:info@inbs-uae.com">info@inbs-uae.com</a><span>Dubai · UAE</span></div>
+ <div className="inbs-drawer-bottom"><a href={companyContact.emailHref}>{companyContact.email}</a><span>Dubai · UAE</span></div>
  </motion.aside></>}</AnimatePresence></header>
 }
