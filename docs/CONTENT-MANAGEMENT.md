@@ -45,6 +45,8 @@ The key is the stable public URL slug. Its position determines display order. Th
 - Edit **page labels and stable page slugs** in `src/lib/site.ts`; every existing menu uses those records.
 - Use `routes.home(locale)`, `routes.page(locale, slug)`, and `routes.service(locale, slug)` from `src/lib/routes.ts` for navigation and CTAs. Do not duplicate URL strings in components.
 - Edit **which pages are visible** in each menu and **which services the footer lists** in `src/content/navigation.ts`. The service catalog still controls the names and order.
+- Footer Quick Links include Home plus the six nonlegal pages; the Services column lists the first five services and a localized link to the full directory. Labels for Home and the directory CTA live in `src/content/layout.ts`.
+- Privacy Policy and Terms & Conditions will be sections of **one future legal page**, `/[locale]/legal`. The footer has one localized "Legal Information" link; historic `/[locale]/privacy-policy` and `/[locale]/terms` URLs permanently redirect to it via `next.config.ts`. Legal copy is not yet approved or published.
 - Existing links are preserved. Changing a slug is a public URL change and needs a redirect and link/SEO audit, not just a content edit.
 - The language switcher intentionally preserves the current path while replacing the locale segment.
 
