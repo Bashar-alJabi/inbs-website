@@ -4,6 +4,7 @@ import { Reveal } from '@/components/shared/reveal';
 import { aboutPageContent } from '@/content/about';
 import { serviceCatalog, serviceSlugs } from '@/content/services';
 import type { Locale } from '@/lib/site';
+import { routes } from '@/lib/routes';
 import { AboutLines, AboutSectionLabel } from './about-ui';
 
 export function AboutNetwork({ locale }: { locale: Locale }) {
@@ -17,14 +18,14 @@ export function AboutNetwork({ locale }: { locale: Locale }) {
       </Reveal>
       <div className="inbs-story-capabilities">
         {serviceSlugs.map((slug, index) =>
-          <Link href={`/${locale}/services/${slug}`} className="inbs-story-capability" key={slug}>
+          <Link href={routes.service(locale,slug)} className="inbs-story-capability" key={slug}>
             <span className="inbs-story-capability-no">{String(index + 1).padStart(2, '0')}</span>
             <span className="inbs-story-capability-name">{serviceCatalog[slug][locale]}</span>
             <ArrowUpRight size={22} strokeWidth={1.5} aria-hidden="true"/>
           </Link>
         )}
       </div>
-      <Link className="inbs-about-link inbs-story-all-services" href={`/${locale}/services`}>
+      <Link className="inbs-about-link inbs-story-all-services" href={routes.page(locale,'services')}>
         <span>{t.allServices}</span><ArrowUpRight size={20} aria-hidden="true"/>
       </Link>
     </div>
