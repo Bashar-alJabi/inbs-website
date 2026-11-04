@@ -3,15 +3,25 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { ArrowUpRight, Menu, Moon, Sun, X, House, Building2, BriefcaseBusiness, Users, Newspaper, UserRoundSearch, Phone, FileText, Compass } from 'lucide-react';
+import { ArrowUpRight, Menu, Moon, Sun, X, House, Building2, BriefcaseBusiness, Users, Newspaper, UserRoundSearch, Phone, FileText, type LucideIcon } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
-import { pages, type Locale } from '@/lib/site';
-import { routes } from '@/lib/routes';
+import type { Locale } from '@/lib/site';
+import { routes, type PageSlug } from '@/lib/routes';
 import { primaryPages, drawerPages } from '@/content/navigation';
 import { LanguageSwitcher } from './language-switcher';
 import { layoutContent } from '@/content/layout';
 
-const drawerIcons = [Building2,BriefcaseBusiness,Users,Newspaper,UserRoundSearch,Phone,FileText,FileText] as const;
+/** Icons are keyed by stable route slug, not array position. */
+const drawerIcons: Record<PageSlug, LucideIcon> = {
+ about: Building2,
+ services: BriefcaseBusiness,
+ team: Users,
+ insights: Newspaper,
+ careers: UserRoundSearch,
+ contact: Phone,
+ 'privacy-policy': FileText,
+ terms: FileText,
+};
 export function SiteHeader({locale}:{locale:Locale}){
  const pathname=usePathname();
  const menuButtonRef=useRef<HTMLButtonElement>(null);
@@ -62,7 +72,7 @@ export function SiteHeader({locale}:{locale:Locale}){
  <AnimatePresence>{open&&<><motion.button className="inbs-drawer-backdrop" type="button" aria-label={t.closeMenu} onClick={()=>setOpen(false)} initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}/><motion.aside ref={drawerRef} id="inbs-drawer" className="inbs-drawer" role="dialog" aria-modal="true" aria-label={t.drawerAria} initial={{x:locale==='ar'?'-100%':'100%'}} animate={{x:0}} exit={{x:locale==='ar'?'-100%':'100%'}} transition={{duration:.38,ease:[.22,1,.36,1]}}>
  <div className="inbs-drawer-top"><Link href={routes.home(locale)} onClick={()=>setOpen(false)} aria-label="INBS home"><Image src="/brand/inbs-logo.png" alt="INBS" width={142} height={72}/></Link><button className="inbs-drawer-close" onClick={()=>setOpen(false)} type="button" aria-label={t.close}><X size={22}/></button></div>
  <div className="inbs-drawer-network" aria-hidden="true"><svg viewBox="0 0 320 22" preserveAspectRatio="none" focusable="false"><path id="inbs-drawer-network-path" d="M 0 15 H 74 L 91 5 H 165 L 183 15 H 249 L 261 9 H 320" className="inbs-drawer-network-path"/><circle cx="91" cy="5" r="2" className="inbs-drawer-network-node"/><circle cx="261" cy="9" r="2" className="inbs-drawer-network-node"/><circle r="3.1" className="inbs-drawer-network-traveller"><animateMotion dur="8s" repeatCount="indefinite" path="M 0 15 H 74 L 91 5 H 165 L 183 15 H 249 L 261 9 H 320"/></circle></svg></div>
- <nav aria-label={t.allPagesAria}><Link className={onHome?'active':''} onClick={()=>setOpen(false)} href={routes.home(locale)}><House size={19}/>{home}</Link>{drawerPages.map((p)=>{const Icon=drawerIcons[pages.indexOf(p)]??Compass;return <Link className={pathname===routes.page(locale,p.slug)?'active':''} onClick={()=>setOpen(false)} key={p.slug} href={routes.page(locale,p.slug)}><Icon size={19}/>{p[locale]}</Link>})}</nav>
+ <nav aria-label={t.allPagesAria}><Link className={onHome?'active':''} onClick={()=>setOpen(false)} href={routes.home(locale)}><House size={19}/>{home}</Link>{drawerPages.map((p)=>{const Icon=drawerIcons[p.slug];return <Link className={pathname===routes.page(locale,p.slug)?'active':''} onClick={()=>setOpen(false)} key={p.slug} href={routes.page(locale,p.slug)}><Icon size={19}/>{p[locale]}</Link>})}</nav>
  <div className="inbs-drawer-bottom"><a href="mailto:info@inbs-uae.com">info@inbs-uae.com</a><span>Dubai · UAE</span></div>
  </motion.aside></>}</AnimatePresence></header>
 }
