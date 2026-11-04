@@ -87,7 +87,7 @@
 /* Lightweight, alternating statistics connected by one zigzag signal.
    Both layouts keep the story's native background; no heading or top rule. */
 .inbs-story-intro{padding-bottom:clamp(85px,9vw,130px)}
-.inbs-story-milestones{margin-top:clamp(26px,3.5vw,48px)}
+.inbs-story-milestones{margin-top:clamp(75px,8vw,115px)}
 .inbs-story-milestones-grid{
   position:relative;display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
