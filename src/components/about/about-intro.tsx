@@ -12,7 +12,7 @@ export function AboutIntro({ locale }: { locale: Locale }) {
         <AboutSectionLabel>{t.introEyebrow}</AboutSectionLabel>
         <h2 id="inbs-story-intro-heading"><AboutLines text={t.introTitle}/></h2>
         <div className="inbs-story-year" aria-label={`${t.foundedLabel} ${t.foundedValue}`}>
-          <span>{t.foundedValue}</span><span>{t.foundedLabel}</span>
+          <span aria-hidden="true">{t.foundedValue}</span><span>{t.foundedLabel}</span><span className="sr-only">{t.foundedValue}</span>
         </div>
       </Reveal>
       <Reveal className="inbs-story-intro-body" delay={0.12}>
