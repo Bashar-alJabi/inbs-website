@@ -4,7 +4,7 @@
 
 INBS is a bilingual (English/Arabic) company website built with Next.js App Router, React and TypeScript. The goal is accessible, maintainable and performant presentation of verified company services.
 
-**As of 4 November 2026:** the bilingual homepage, About page and centralized routing/navigation were promoted to `main` via PR #23 following successful integration CI. The bilingual Services landing page is in progress on `feature/services-page`, with page-specific content, styling and tests; it is **not yet merged**. Individual service detail routes and other unfinished pages remain **Coming Soon**. A development merge does not constitute a complete public launch or company content approval.
+**As of 4 November 2026:** the bilingual homepage, About page and centralized routing/navigation were promoted to `main` via PR #23 following successful integration CI. The bilingual Services landing page and shared footer improvements were reviewed by the owner, passed CI, and were squash-merged into `redesign` via PR #24; PR #25 handles promotion to `main`. Individual service detail routes and other unfinished pages remain **Coming Soon**. A development merge does not constitute a complete public launch or company content approval.
 
 Current maintenance work is tracked separately from page development. Do not merge or deploy an unfinished change without the owner's approval.
 
@@ -27,7 +27,7 @@ The `[locale]` URL segment is either `en` or `ar`; `/en` and `/ar` are the imple
 | --- | --- |
 | `/[locale]` | **Implemented homepage** |
 | `/[locale]/about` | Implemented and promoted to `main` (PRs #21 and #23) |
-| `/[locale]/services` | Bilingual landing page in progress on `feature/services-page`; not merged |
+| `/[locale]/services` | Bilingual landing page implemented and merged into `redesign`; promotion to `main` pending PR #25 |
 | `/[locale]/services/[slug]` | Coming Soon for ten recognized service slugs |
 | `/[locale]/team` | Coming Soon |
 | `/[locale]/insights` | Coming Soon |
