@@ -84,19 +84,10 @@
 .inbs-story-intro-rule{width:50px;height:2px;background:var(--story-accent);margin:32px 0}
 .inbs-story-body-copy{font-size:clamp(15px,1.2vw,18px);line-height:2;color:var(--story-muted);max-width:575px;margin:0 0 19px}
 
-/* Four horizontally aligned metrics at staggered heights, linked by one zigzag.
-   Uses the underlying story surface: no cards, shadows, or filled panels. */
+/* Lightweight, alternating statistics connected by one zigzag signal.
+   Both layouts keep the story's native background; no heading or top rule. */
 .inbs-story-intro{padding-bottom:clamp(85px,9vw,130px)}
-.inbs-story-milestones{
-  margin-top:clamp(26px,3.5vw,48px);
-  padding-top:clamp(28px,4vw,48px);
-  border-top:1px solid var(--story-line);
-}
-.inbs-story-milestones-kicker{
-  margin:0 0 28px;color:var(--story-accent);
-  font-size:12px;line-height:1.6;font-weight:750;
-  letter-spacing:.13em;text-transform:uppercase;
-}
+.inbs-story-milestones{margin-top:clamp(26px,3.5vw,48px)}
 .inbs-story-milestones-grid{
   position:relative;display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
@@ -106,27 +97,29 @@
   position:absolute;inset:0;width:100%;height:100%;
   overflow:visible;pointer-events:none;
 }
+.inbs-story-milestones-network--mobile{display:none}
 .inbs-story-milestones-network-path{
   fill:none;stroke:var(--story-line);stroke-width:1.6;
   stroke-linecap:round;stroke-linejoin:round;
 }
 .inbs-story-milestones-network-node{
-  fill:var(--story-paper);stroke:var(--story-accent);stroke-width:1.6;
+  fill:var(--story-paper);stroke:var(--story-accent);stroke-width:1.5;
 }
 .inbs-story-milestones-network-traveler{
-  fill:var(--story-accent);
-  filter:drop-shadow(0 0 4px color-mix(in srgb,var(--story-accent) 30%,transparent));
+  fill:#54b9ef;
+  filter:drop-shadow(0 0 6px #4bb7f0) drop-shadow(0 0 11px rgba(50,158,220,.82));
+}
+html[data-theme=dark] .inbs-story-milestones-network-traveler{
+  fill:#a9e7ff;
+  filter:drop-shadow(0 0 7px #76d7ff) drop-shadow(0 0 15px rgba(85,197,255,.95));
 }
 .inbs-story-milestone{
   z-index:1;position:relative;min-width:0;
   display:flex;flex-direction:column;align-items:center;
-  text-align:center;gap:9px;height:145px;
+  text-align:center;gap:9px;height:130px;
   padding-inline:6px;direction:ltr;
 }
 .inbs-story-milestone--2,.inbs-story-milestone--4{margin-top:130px}
-.inbs-story-milestone-overline{
-  font-size:10px;letter-spacing:.13em;font-weight:700;color:var(--story-accent);
-}
 .inbs-story-milestone strong{
   display:inline-flex;align-items:flex-start;gap:.03em;
   font-size:clamp(31px,4.15vw,64px);
@@ -142,44 +135,38 @@
   line-height:1.55;color:var(--story-muted);
 }
 [dir=rtl] .inbs-story-milestone-caption{direction:rtl}
-[dir=rtl] .inbs-story-milestones-kicker{letter-spacing:0}
 @media(max-width:900px){
   .inbs-story-milestone strong{font-size:clamp(28px,4vw,45px)}
   .inbs-story-milestone-caption{font-size:13px}
 }
 @media(max-width:760px){
+  /* Same alternating network, but the four metrics stack in a vertical zigzag. */
   .inbs-story-milestones-grid{
-    direction:inherit;display:flex;flex-direction:column;
-    gap:0;height:auto;padding-inline-start:33px;
+    display:grid;grid-template-columns:1fr;
+    grid-template-rows:repeat(4,190px);
+    height:760px;direction:ltr;
   }
-  [dir=rtl] .inbs-story-milestones-grid{padding-inline-start:0;padding-inline-end:33px}
-  .inbs-story-milestones-network{display:none}
-  .inbs-story-milestones-grid:before{
-    content:"";position:absolute;top:7px;bottom:7px;inset-inline-start:0;
-    width:1px;background:var(--story-line);
-  }
-  .inbs-story-milestones-grid:after{
-    content:"";position:absolute;top:7px;inset-inline-start:-3px;
-    width:7px;height:7px;border-radius:50%;background:var(--story-accent);
-    box-shadow:0 0 5px color-mix(in srgb,var(--story-accent) 30%,transparent);
-    animation:inbs-story-milestone-mobile-travel 20s linear infinite;
-  }
-  @keyframes inbs-story-milestone-mobile-travel{
-    0%{top:7px;opacity:0}
-    10%,90%{opacity:.75}
-    100%{top:calc(100% - 14px);opacity:0}
-  }
+  .inbs-story-milestones-network--desktop{display:none}
+  .inbs-story-milestones-network--mobile{display:block}
   .inbs-story-milestone,
   .inbs-story-milestone--2,.inbs-story-milestone--4{
-    direction:inherit;align-items:flex-start;text-align:start;
-    height:auto;min-height:130px;margin-top:0;
-    padding:13px 5px 25px;border-bottom:1px solid var(--story-line);
+    width:57%;height:auto;min-height:0;margin-top:0;
+    padding:15px 4px;gap:6px;
   }
-  .inbs-story-milestone strong{font-size:clamp(42px,10vw,62px)}
+  .inbs-story-milestone--1,.inbs-story-milestone--3{
+    justify-self:start;align-items:flex-start;text-align:start;
+  }
+  .inbs-story-milestone--2,.inbs-story-milestone--4{
+    justify-self:end;align-items:flex-end;text-align:end;
+  }
+  .inbs-story-milestone strong{font-size:clamp(40px,10vw,61px)}
+  .inbs-story-milestone-caption{font-size:clamp(13px,3.5vw,16px)}
+}
+@media(max-width:380px){
+  .inbs-story-milestone strong{font-size:clamp(35px,9.6vw,44px)}
 }
 @media(prefers-reduced-motion:reduce){
-  .inbs-story-milestones-network-traveler,
-  .inbs-story-milestones-grid:after{display:none;animation:none}
+  .inbs-story-milestones-network-traveler{display:none}
 }
 
 /* Principles are a continuous editorial grid rather than decorative cards. */
