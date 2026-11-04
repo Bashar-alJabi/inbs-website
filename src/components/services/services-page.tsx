@@ -22,20 +22,17 @@ export function ServicesPage({ locale }: { locale: Locale }) {
         </div>
         <div className="inbs-services-hero-art" aria-hidden="true">
           <div className="inbs-services-hero-art-window">
-            <Image src={serviceCatalog['businessmen-services'].image} alt="" fill priority sizes="(max-width: 800px) 70vw, 34vw" />
+            <Image src="/images/services/hero-services-1.webp" alt="" fill priority sizes="(max-width: 800px) 70vw, 34vw" />
+            <span className="inbs-services-hero-frame-dot" aria-hidden="true" />
           </div>
           <div className="inbs-services-hero-art-small">
-            <Image src={serviceCatalog['real-estate-services'].image} alt="" fill sizes="(max-width: 800px) 40vw, 18vw"/>
+            <Image src="/images/services/hero-services-2.webp" alt="" fill sizes="(max-width: 800px) 40vw, 18vw"/>
+            <span className="inbs-services-hero-frame-dot" aria-hidden="true" />
           </div>
-          <svg className="inbs-services-hero-art-network" viewBox="0 0 400 400" fill="none" focusable="false">
-            <circle cx="200" cy="200" r="145"/>
-            <circle cx="200" cy="200" r="190"/>
-            <path d="M0 200 H400 M200 0 V400"/>
-            <circle className="inbs-services-hero-traveler" r="4.5"><animateMotion dur="21s" repeatCount="indefinite" path="M200 200 L390 200 A190 190 0 0 1 10 200 A190 190 0 0 1 390 200 L200 200"/></circle>
-          </svg>
+
           <div className="inbs-services-hero-art-caption">INBS / DUBAI</div>
         </div>
-        <div className="inbs-services-hero-bottom"><span>{t.location}</span><span>INBS / {String(serviceSlugs.length).padStart(2,'0')}</span></div>
+        <div className="inbs-services-hero-bottom"><span>{t.location}</span></div>
       </div>
     </section>
 
