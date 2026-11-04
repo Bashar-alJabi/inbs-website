@@ -90,7 +90,8 @@
 .inbs-services-hero-art-small .inbs-services-hero-frame-dot{
   z-index:2;width:7px;height:7px;background:#ffffff;
   box-shadow:0 0 0 3px #a7e6ff3f,0 0 11px 3px #8edcff,0 0 21px 5px #63c0fa9c;
-  offset-path:border-box;
+  /* The dot follows the centerline of the 7px border, not outside it. */
+  offset-path:inset(3.5px round 0) border-box;
   animation-duration:13s;
   animation-delay:-4s;
 }
@@ -228,6 +229,7 @@ html[data-theme=dark] .inbs-services-page{
   .inbs-services-hero-art{width:min(75%,440px);margin-inline:auto;aspect-ratio:1.25}
   .inbs-services-hero-art-window{inset:3% 6% 6% 14%;border-radius:120px 120px 5px 5px}
   .inbs-services-hero-art-small{width:38%;bottom:0;border-width:5px}
+  .inbs-services-hero-art-small .inbs-services-hero-frame-dot{offset-path:inset(2.5px round 0) border-box}
   .inbs-services-hero-art-caption{display:none}
   .inbs-services-directory-head,.inbs-services-closing-inner{grid-template-columns:1fr;gap:20px}
   .inbs-services-directory-head{margin-bottom:46px}
