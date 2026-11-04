@@ -321,7 +321,16 @@ for (const locale of ['en','ar']) {
     assert.equal(await cards.last().getAttribute('href'),
       '/'+locale+'/services/citizenship-and-immigration-services');
     assert.equal(await page.locator('.inbs-services-entry-image img').count(),10);
-    assert.equal(await page.locator('.inbs-services-hero-traveler').count(),1);
+    assert.equal(await page.locator('.inbs-services-hero-art-network').count(),0,'Old repeated network removed');
+    assert.equal(await page.locator('.inbs-services-hero-frame-dot').count(),2,'Both photo edges need a traveler');
+    assert.equal(await page.locator('.inbs-services-hero-art-window img').getAttribute('src')!==null,true);
+    for(const name of ['hero-services-1.webp','hero-services-2.webp']){
+      const image=page.locator('.inbs-services-hero-art img[src*="'+name+'"]');
+      assert.equal(await image.count(),1,'Dedicated Pexels hero missing: '+name);
+      const response=await fetch(origin+'/images/services/'+name);
+      assert.equal(response.status,200,'Missing local hero WebP: '+name);
+      assert.match(response.headers.get('content-type')||'',/image\\/webp/);
+    }
     assert.equal(await page.locator('.inbs-services-closing-action').getAttribute('href'),
       '/'+locale+'/contact');
     const dims=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
