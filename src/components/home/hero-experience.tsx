@@ -7,6 +7,7 @@ import { ArrowUpRight,ArrowLeft,ArrowRight,Pause,Play } from 'lucide-react';
 import { heroSlides } from '@/content/hero';
 import { homeContent } from '@/content/home';
 import type { Locale } from '@/lib/site';
+import { routes } from '@/lib/routes';
 
 export function HeroExperience({locale}:{locale:Locale}){
  const slides=heroSlides[locale];
@@ -42,11 +43,11 @@ export function HeroExperience({locale}:{locale:Locale}){
    <motion.div initial={reduced?false:{opacity:0,y:14}} animate={{opacity:1,y:0}} transition={{duration:.7,delay:.1}} className="inbs-hero-eyebrow">{t.heroBrand} <span>· {t.heroLocation}</span></motion.div>
    <AnimatePresence mode="wait"><motion.div key={active} initial={reduced?false:{opacity:0,y:8}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-8}} transition={{duration:.65}} className="inbs-slide">
     <h1>{slide.title}</h1><p>{slide.description}</p>
-    <Link ref={buttonRef} className="inbs-hero-cta" href={`/${locale}/services/${slide.slug}`}>{slide.button}<ArrowUpRight size={19}/></Link>
+    <Link ref={buttonRef} className="inbs-hero-cta" href={routes.service(locale,slide.slug)}>{slide.button}<ArrowUpRight size={19}/></Link>
    </motion.div></AnimatePresence>
   </div>
   <div className="inbs-hero-bottom"><motion.div initial={reduced?false:{opacity:0,y:16}} animate={{opacity:1,y:0}} transition={{duration:.7,delay:.45}} className="inbs-slide-controls"><span>{String(active+1).padStart(2,'0')} <i>/</i> 03</span><button type="button" onClick={()=>setActive(n=>(n+slides.length-1)%slides.length)} aria-label={t.slidePrevious}>{locale==='ar'?<ArrowRight size={18}/>:<ArrowLeft size={18}/>}</button><button type="button" onClick={()=>setActive(n=>(n+1)%slides.length)} aria-label={t.slideNext}>{locale==='ar'?<ArrowLeft size={18}/>:<ArrowRight size={18}/>}</button><button type="button" onClick={()=>setPaused(!paused)} aria-label={paused ? t.slidePlay : t.slidePause}>{paused?<Play size={17}/>:<Pause size={17}/>}</button></motion.div>
-  <AnimatePresence mode="wait"><motion.div key={active} className="inbs-hero-service-strip" initial={reduced?false:{opacity:0,y:10}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-6}} transition={{duration:.45,delay:active===0?.5:0}}>{slide.related.map(s=><Link key={s.slug} href={`/${locale}/services/${s.slug}`}>{s.label}<ArrowUpRight size={13}/></Link>)}</motion.div></AnimatePresence></div>
+  <AnimatePresence mode="wait"><motion.div key={active} className="inbs-hero-service-strip" initial={reduced?false:{opacity:0,y:10}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-6}} transition={{duration:.45,delay:active===0?.5:0}}>{slide.related.map(s=><Link key={s.slug} href={routes.service(locale,s.slug)}>{s.label}<ArrowUpRight size={13}/></Link>)}</motion.div></AnimatePresence></div>
   </div>
  </section>;
 }
