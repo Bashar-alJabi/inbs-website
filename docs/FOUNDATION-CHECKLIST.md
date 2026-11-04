@@ -69,6 +69,15 @@
 - [ ] Before promoting `redesign` to `main`, reconcile their divergent histories (7 commits unique to `main` at review time) and verify the combined changes.
 - [ ] Create and review a separate `redesign` → `main` PR; test that final integration head and deployment. Do not equate integration with full public launch.
 
+## Footer navigation and future legal page — feature/services-page
+
+- [x] Replace Privacy Policy in Quick Links with Home; retain six nonlegal page links from the canonical page catalog.
+- [x] Show five services plus a localized link to the full Services landing page, without hardcoding service names.
+- [x] Combine both legal destinations into one `/[locale]/legal` placeholder in the catalog and footer; retain old links as permanent locale-specific redirects.
+- [x] Add dedicated smoke and browser assertions for both locales, footer link counts and redirects.
+- [ ] Obtain approved legal copy covering privacy and terms before implementing or publishing the final legal page.
+- [ ] Verify exact-head CI and obtain owner approval before merging the feature branch.
+
 ## Services landing page — feature/services-page (work in progress)
 
 - [x] Add dedicated bilingual /en/services and /ar/services route with page-specific copy and scoped styling.
