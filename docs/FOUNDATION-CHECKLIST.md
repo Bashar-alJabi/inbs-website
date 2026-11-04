@@ -69,6 +69,16 @@
 - [ ] Before promoting `redesign` to `main`, reconcile their divergent histories (7 commits unique to `main` at review time) and verify the combined changes.
 - [ ] Create and review a separate `redesign` → `main` PR; test that final integration head and deployment. Do not equate integration with full public launch.
 
+## Services landing page — feature/services-page (work in progress)
+
+- [x] Add dedicated bilingual /en/services and /ar/services route with page-specific copy and scoped styling.
+- [x] Use the canonical ten-service catalog for names, images, ordering and links, without changing detail-page status.
+- [x] Add locale-aware metadata and opt-in sitemap entries for the completed landing route.
+- [x] Add dedicated service-route smoke and responsive, theme, RTL and axe browser assertions.
+- [ ] Verify lint, TypeScript, production build, smoke, Playwright and axe on the final feature head.
+- [ ] Review hero/gallery layout and content manually in Arabic and English, light/dark, desktop/mobile.
+- [ ] Obtain owner approval before merging into redesign; main promotion will be separate.
+
 ## C. Repeat after **every page** (copy these tasks to the page PR)
 
 - [ ] Record page name, owner, PR number, preview URL, completion date and any unresolved work.
