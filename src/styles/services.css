@@ -88,7 +88,7 @@
   pointer-events:none;
 }
 .inbs-services-hero-art-small .inbs-services-hero-frame-dot{
-  z-index:2;width:7px;height:7px;background:#ffffff;
+  z-index:2;width:6px;height:6px;background:#ffffff;
   box-shadow:0 0 0 3px #a7e6ff3f,0 0 11px 3px #8edcff,0 0 21px 5px #63c0fa9c;
   /* The dot follows the centerline of the 7px border, not outside it. */
   offset-path:inset(3.5px round 0) border-box;
