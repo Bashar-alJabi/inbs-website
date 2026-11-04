@@ -7,6 +7,8 @@ This document defines **where to edit content** in the INBS bilingual site. Keep
 | Information | Edit here | Notes |
 | --- | --- | --- |
 | Supported languages and page route labels | `src/lib/site.ts` | The route list contains titles for EN/AR and stable URL slugs. |
+| Localized page and service URL builders | `src/lib/routes.ts` | Use `routes.home`, `routes.page`, and `routes.service` in links; do not hand-build localized URLs. |
+| Header, drawer, footer page/service selections | `src/content/navigation.ts` | Defines which existing page and service records appear in each area, without duplicating their labels. |
 | Service URL slugs, order, EN/AR names, and images | `src/content/services.ts` | **One catalog, keyed by slug.** Do not create aligned arrays for these values. |
 | Home page marketing copy and About preview | `src/content/home.ts` | `homeContent.en/ar` and `aboutDetails.en/ar`. |
 | About hero photo, source and regeneration | `public/images/about/hero-about.webp`, `public/images/about/SOURCE.json`, `scripts/prepare-about-image.mjs` | Dedicated Pexels skyline photo; no coupling to service-image catalog. |
@@ -36,6 +38,14 @@ The key is the stable public URL slug. Its position determines display order. Th
 - The hero's `image` property is a **hero slide background**, not a service preview. Maintain it separately.
 - Keep each translation equivalent in meaning, not necessarily word-for-word.
 - Do not modify company achievements or institution names as part of content restructuring.
+
+### Editing navigation and links
+
+- Edit **page labels and stable page slugs** in `src/lib/site.ts`; every existing menu uses those records.
+- Use `routes.home(locale)`, `routes.page(locale, slug)`, and `routes.service(locale, slug)` from `src/lib/routes.ts` for navigation and CTAs. Do not duplicate URL strings in components.
+- Edit **which pages are visible** in each menu and **which services the footer lists** in `src/content/navigation.ts`. The service catalog still controls the names and order.
+- Existing links are preserved. Changing a slug is a public URL change and needs a redirect and link/SEO audit, not just a content edit.
+- The language switcher intentionally preserves the current path while replacing the locale segment.
 
 ### Translation rules for new and updated pages
 
