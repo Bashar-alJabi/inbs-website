@@ -1,0 +1,38 @@
+# One-time replacement of the small Services hero image. Remove once the WebP is committed.
+name: Refresh Services Small Hero Photo Once
+on:
+  push:
+    branches: [feature/services-page]
+    paths:
+      - .github/workflows/refresh-services-small-photo-once.yml
+permissions:
+  contents: write
+jobs:
+  refresh:
+    if: github.ref == 'refs/heads/feature/services-page'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Fetch current branch head
+        run: |
+          git fetch origin feature/services-page
+          git checkout -B feature/services-page origin/feature/services-page
+      - run: npm ci
+      - name: Install one-time converter without lockfile edits
+        run: npm install --no-save --package-lock=false sharp
+      - name: Convert only the new Pexels business photo
+        run: node scripts/prepare-services-hero-images.mjs hero-services-2.webp
+      - name: Commit changed hero photo only to feature branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/images/services/hero-services-2.webp
+          git diff --cached --quiet && exit 0
+          git commit -m "assets(services): replace small hero with Pexels business meeting photo"
+          git pull --rebase origin feature/services-page
+          git push origin HEAD:feature/services-page
