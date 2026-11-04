@@ -7,6 +7,7 @@ import type { Locale } from '@/lib/site';
 export function AboutMilestones({ locale }: { locale: Locale }) {
   const t = aboutPageContent[locale];
   return <div className="inbs-story-milestones" role="group" aria-label={t.milestonesEyebrow}>
+    <p className="inbs-story-milestones-kicker">{t.milestonesEyebrow}</p>
     <div className="inbs-story-milestones-axis" aria-hidden="true">
       <span className="inbs-story-milestones-axis-dot"/>
     </div>
