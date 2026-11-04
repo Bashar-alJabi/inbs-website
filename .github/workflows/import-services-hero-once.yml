@@ -22,6 +22,10 @@ jobs:
         with:
           node-version: '24'
           cache: npm
+      - name: Switch to current feature head (other edits may have landed after queueing)
+        run: |
+          git fetch origin feature/services-page
+          git checkout -B feature/services-page origin/feature/services-page
       - run: npm ci
       - name: Install isolated image converter
         run: npm install --no-save --package-lock=false sharp
@@ -34,4 +38,5 @@ jobs:
           git add public/images/services/hero-services-1.webp public/images/services/hero-services-2.webp
           git diff --cached --quiet && exit 0
           git commit -m "assets(services): add two licensed Pexels hero WebP photos"
+          git pull --rebase origin feature/services-page
           git push origin HEAD:feature/services-page
