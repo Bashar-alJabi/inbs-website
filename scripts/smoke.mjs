@@ -27,7 +27,8 @@ try {
 
   for (const locale of ['en', 'ar']) {
     await check(`/${locale}/about`, { pattern: /class="inbs-about-page"/, label: `${locale} published About page` });
-    for (const route of ['services', 'contact', 'services/cargo-services']) {
+    await check(`/${locale}/services`, { pattern: /class="inbs-services-page"/, label: `${locale} dedicated Services landing page` });
+    for (const route of ['contact', 'services/cargo-services']) {
       await check(`/${locale}/${route}`, { label: `${locale} ${route} page` });
     }
     await check(`/${locale}/invalid-unlisted-page`, { status: 404, label: `${locale} unknown route` });
