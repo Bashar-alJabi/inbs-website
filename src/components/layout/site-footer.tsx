@@ -39,10 +39,10 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           </div>
         </Reveal>
         <Reveal variant="footer" delay={0.12}>
-          <div><h3>{t.quickLinks}</h3>{footerQuickPages.map(p => <Link key={p.slug} href={routes.page(locale,p.slug)}>{p[locale]}</Link>)}</div>
+          <div><h3>{t.quickLinks}</h3><Link href={routes.home(locale)}>{t.home}</Link>{footerQuickPages.map(p => <Link key={p.slug} href={routes.page(locale,p.slug)}>{p[locale]}</Link>)}</div>
         </Reveal>
         <Reveal variant="footer" delay={0.18}>
-          <div><h3>{t.services}</h3>{footerServiceSlugs.map(s => <Link key={s} href={routes.service(locale,s)}>{serviceNames[s][locale]}</Link>)}</div>
+          <div><h3>{t.services}</h3>{footerServiceSlugs.map(s => <Link key={s} href={routes.service(locale,s)}>{serviceNames[s][locale]}</Link>)}<Link href={routes.page(locale,'services')}>{t.moreServices}</Link></div>
         </Reveal>
         <Reveal variant="footer" delay={0.24}>
           <div className="inbs-footer-contact">
