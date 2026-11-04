@@ -295,6 +295,52 @@ for(const locale of ['en','ar']){
   }
  }
 }
+// Dedicated services page: both languages, themes, and responsive viewports.
+for (const locale of ['en','ar']) {
+ for (const size of sizes) {
+  for (const theme of ['light','dark']) {
+   const key='services/'+[locale,size.name,theme].join('/');
+   const context=await browser.newContext({
+    viewport:{width:size.width,height:size.height},
+    reducedMotion:'reduce',colorScheme:theme,
+   });
+   await context.addInitScript(t=>localStorage.setItem('inbs-theme',t),theme);
+   const page=await context.newPage();
+   const errors=[];
+   page.on('pageerror',e=>errors.push(String(e)));
+   await test(key+' page and canonical service links',async()=>{
+    const response=await page.goto(origin+'/'+locale+'/services',{waitUntil:'networkidle',timeout:45000});
+    assert.equal(response?.status(),200);
+    assert.equal(await page.locator('.inbs-services-page h1').count(),1);
+    assert.equal(await page.locator('html').getAttribute('dir'),locale==='ar'?'rtl':'ltr');
+    assert.equal(await page.locator('html').getAttribute('data-theme'),theme);
+    const cards=page.locator('.inbs-services-entry-link');
+    assert.equal(await cards.count(),10,'Must list ten canonical services');
+    assert.equal(await cards.first().getAttribute('href'),
+      '/'+locale+'/services/businessmen-services');
+    assert.equal(await cards.last().getAttribute('href'),
+      '/'+locale+'/services/citizenship-and-immigration-services');
+    assert.equal(await page.locator('.inbs-services-entry-image img').count(),10);
+    assert.equal(await page.locator('.inbs-services-hero-traveler').count(),1);
+    assert.equal(await page.locator('.inbs-services-closing-action').getAttribute('href'),
+      '/'+locale+'/contact');
+    const dims=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
+    assert.ok(dims.scroll<=dims.inner+3,'Horizontal overflow: '+JSON.stringify(dims));
+    assert.deepEqual(errors,[],'Services page JavaScript errors');
+   });
+   await test(key+' accessibility',async()=>{
+    const analysis=await new AxeBuilder({page})
+      .include('.inbs-services-page')
+      .withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa']).analyze();
+    const serious=analysis.violations.filter(v=>v.impact==='serious'||v.impact==='critical');
+    assert.equal(serious.length,0,
+      serious.map(v=>v.id+': '+v.nodes.map(n=>n.target.join(' ')).join(', ')).join(' | '));
+   });
+   await context.close();
+  }
+ }
+}
+
 // Sample actual animated positions, not just SVG path attribute strings.
 // The point must stay on a painted axis/circle/ellipse throughout the loop.
 await test('about orbit dots stay on drawn geometry through their cycles',async()=>{
