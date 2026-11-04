@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { homeContent, aboutDetails } from '@/content/home';
 import type { Locale } from '@/lib/site';
+import { routes } from '@/lib/routes';
 import { Reveal } from '@/components/shared/reveal';
 
 /** Company introduction; facts and translations live in src/content/home.ts. */
@@ -17,7 +18,7 @@ export function AboutPreview({ locale }: { locale: Locale }) {
    <Reveal className="inbs-about-copy" delay={0.16}>
     <p>{details.intro}</p>
     <p className="inbs-about-supporting">{details.supporting}</p>
-    <Link className="inbs-about-link" href={`/${locale}/about`}><span>{content.aboutLink}</span><ArrowUpRight size={20} aria-hidden="true" /></Link>
+    <Link className="inbs-about-link" href={routes.page(locale,'about')}><span>{content.aboutLink}</span><ArrowUpRight size={20} aria-hidden="true" /></Link>
    </Reveal>
    <div className="inbs-about-art" aria-hidden="true">
     <svg className="inbs-about-network" viewBox="0 0 450 450" fill="none" xmlns="http://www.w3.org/2000/svg">
