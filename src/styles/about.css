@@ -77,7 +77,7 @@
 .inbs-story-intro-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:clamp(35px,8vw,135px)}
 .inbs-story-intro-heading h2{max-width:700px;margin:0}
 .inbs-story-year{display:flex;align-items:baseline;gap:18px;margin-top:clamp(62px,9vw,130px);color:var(--story-accent)}
-.inbs-story-year span:first-child{font-size:clamp(80px,12vw,175px);line-height:.85;letter-spacing:-.1em;font-weight:650;color:var(--story-muted);opacity:1}
+.inbs-story-year span:first-child{font-size:clamp(80px,12vw,175px);line-height:.85;letter-spacing:-.1em;font-weight:650;opacity:.18}
 .inbs-story-year span:last-child{font-size:12px;font-weight:750;letter-spacing:.12em;text-transform:uppercase}
 .inbs-story-intro-body{padding-top:100px}
 .inbs-story-quote{font-size:clamp(24px,2.45vw,35px);font-weight:560;line-height:1.48;letter-spacing:-.035em;max-width:540px;margin:0;color:var(--story-ink)}
