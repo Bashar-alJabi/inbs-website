@@ -2,6 +2,7 @@ import { Reveal } from '@/components/shared/reveal';
 import { aboutPageContent } from '@/content/about';
 import type { Locale } from '@/lib/site';
 import { AboutLines, AboutSectionLabel } from './about-ui';
+import { AboutMilestones } from './about-milestones';
 
 export function AboutIntro({ locale }: { locale: Locale }) {
   const t = aboutPageContent[locale];
@@ -22,5 +23,6 @@ export function AboutIntro({ locale }: { locale: Locale }) {
         )}
       </Reveal>
     </div>
+    <div className="site-shell"><AboutMilestones locale={locale}/></div>
   </section>;
 }
