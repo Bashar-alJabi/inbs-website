@@ -3,28 +3,20 @@ import { companyMilestones } from '@/content/milestones';
 import { aboutPageContent } from '@/content/about';
 import type { Locale } from '@/lib/site';
 
-/** Integrated editorial feature inside the About story, not a second Home metrics strip. */
+/** Open, connected typography: a four-node editorial network, not a metrics card. */
 export function AboutMilestones({ locale }: { locale: Locale }) {
   const t = aboutPageContent[locale];
-  const [featured, ...supporting] = companyMilestones;
   return <div className="inbs-story-milestones" role="group" aria-label={t.milestonesEyebrow}>
-    <Reveal className="inbs-story-milestones-feature">
-      <p className="inbs-story-milestones-kicker">{t.milestonesEyebrow}</p>
-      <div className="inbs-story-milestones-feature-figure">
-        <strong dir="ltr">{featured.value.toLocaleString('en-US')}<span>+</span></strong>
-        <span>{featured[locale]}</span>
-      </div>
-    </Reveal>
-    <div className="inbs-story-milestones-details">
-      {supporting.map((fact, index) =>
-        <Reveal key={fact.en} delay={index * 0.08} className="inbs-story-milestones-detail">
-          <span className="inbs-story-milestones-detail-no" aria-hidden="true">{String(index + 2).padStart(2, '0')}</span>
-          <div className="inbs-story-milestones-detail-copy">
-            <strong dir="ltr">{fact.value.toLocaleString('en-US')}<span>+</span></strong>
-            <span>{fact[locale]}</span>
-          </div>
-        </Reveal>
-      )}
+    <div className="inbs-story-milestones-axis" aria-hidden="true">
+      <span className="inbs-story-milestones-axis-dot"/>
     </div>
+    {companyMilestones.map((fact, index) =>
+      <Reveal key={fact.en} delay={index * 0.06} className={`inbs-story-milestone inbs-story-milestone--${index + 1}`}>
+        <span className="inbs-story-milestone-anchor" aria-hidden="true"/>
+        <span className="inbs-story-milestone-overline">{String(index + 1).padStart(2, '0')} / INBS</span>
+        <strong dir="ltr">{fact.value.toLocaleString('en-US')}<span>+</span></strong>
+        <span className="inbs-story-milestone-caption">{fact[locale]}</span>
+      </Reveal>
+    )}
   </div>;
 }
