@@ -8,7 +8,9 @@ const sources=JSON.parse(await fs.readFile(path.join(folder,'HERO-SOURCES.json')
 if(sources.license!=='https://www.pexels.com/license/'||sources.assets?.length!==2)
   throw new Error('Unexpected hero photo metadata');
 const allowed=new Set(['hero-services-1.webp','hero-services-2.webp']);
-for(const item of sources.assets){
+const only=process.argv[2];
+if(only&&!allowed.has(only))throw new Error('Unknown requested hero image');
+for(const item of sources.assets.filter(x=>!only||x.filename===only)){
   if(!allowed.has(item.filename)||!Number.isSafeInteger(item.id)||item.id<=0||
     item.sourceImage!==`https://images.pexels.com/photos/${item.id}/pexels-photo-${item.id}.jpeg`||
     !item.page?.startsWith('https://www.pexels.com/photo/'))
@@ -22,7 +24,7 @@ for(const item of sources.assets){
   if(input.length<20000||input.length>12000000)throw new Error('Unexpected Pexels download size');
   const target=path.join(folder,item.filename);
   await sharp(input).rotate()
-    .resize(item.filename.includes('-1')?1100:760,item.filename.includes('-1')?1400:880,{
+    .resize(item.filename.includes('-1')?1100:1000,item.filename.includes('-1')?1400:900,{
       fit:'cover',position:'attention',withoutEnlargement:true,
     })
     .webp({quality:78,effort:6}).toFile(target);
