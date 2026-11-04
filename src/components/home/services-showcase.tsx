@@ -33,7 +33,7 @@ export function ServicesShowcase({locale}:{locale:Locale}){
  return <section className="inbs-services" aria-labelledby="inbs-services-heading">
   <div className="site-shell inbs-services-inner">
    <Reveal className="inbs-services-heading">
-    <div className="inbs-services-overline"><span className="inbs-services-overline-line"/>{t.offering}</div>
+    <div className="inbs-services-overline inbs-section-kicker"><span className="inbs-services-overline-line"/>{t.offering}</div>
     <div className="inbs-services-heading-row">
      <h2 id="inbs-services-heading">{t.offeringTitle.split('\n').map(line=><span key={line}>{line}</span>)}</h2>
      <p>{t.offeringDescription}</p>
