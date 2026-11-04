@@ -213,7 +213,7 @@ html[data-theme=dark] .inbs-services-page{
 [dir=rtl] .inbs-services-hero-art-caption{
   right:auto;
   left:calc(15% + 12px);
-  bottom:20%;
+  bottom:6%;
   direction:ltr;
 }
 [dir=rtl] .inbs-services-entry-link:hover .inbs-services-entry-arrow,
