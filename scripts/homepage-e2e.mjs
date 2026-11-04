@@ -329,7 +329,7 @@ for (const locale of ['en','ar']) {
       assert.equal(await image.count(),1,'Dedicated Pexels hero missing: '+name);
       const response=await fetch(origin+'/images/services/'+name);
       assert.equal(response.status,200,'Missing local hero WebP: '+name);
-      assert.match(response.headers.get('content-type')||'',/image\\/webp/);
+      assert.match(response.headers.get('content-type')||'',/image\/webp/);
     }
     assert.equal(await page.locator('.inbs-services-closing-action').getAttribute('href'),
       '/'+locale+'/contact');
