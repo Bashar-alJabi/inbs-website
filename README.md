@@ -4,7 +4,7 @@ Official bilingual frontend website for **International Network Businessmen Serv
 
 ## Status and branches
 
-The **homepage is implemented** in English and Arabic and was reviewed through PR #16 (`feature/homepage` → `redesign`) and PR #17 (`redesign` → `main`). Other routes currently display a branded Coming Soon page until their individual pages are developed. The site is **not a completed production launch**.
+The **homepage and shared shell** were previously promoted to `main` (PR #20). The bilingual **About page** (PR #21) and **centralized routing/navigation cleanup** (PR #22) have been merged into `redesign`. These changes form the next integration milestone for promotion to `main` through a separate reviewed pull request. Other unfinished routes display a branded Coming Soon page. The site is **not a completed production launch**.
 
 - `main`: company-facing approved milestone.
 - `redesign`: integration branch for accepted redesign work.
@@ -38,14 +38,15 @@ npm run build
 ## Find the right file
 
 - `src/app/[locale]/`: routes and locale layout.
-- `src/components/home/`: homepage sections; `src/components/layout/`: site-wide header, footer and navigation.
-- `src/content/`: homepage and hero copy.
-- `src/lib/site.ts`: language, page and service identifiers (currently also service labels).
+- `src/components/home/`: homepage sections; `src/components/about/`: About page; `src/components/layout/`: shared header, footer and navigation.
+- `src/content/`: bilingual content for home, About, shared layout, services and contact.
+- `src/lib/site.ts`: locales and bilingual page labels; `src/lib/routes.ts`: locale-aware URL builders.
+- `src/content/services.ts`: authoritative service catalog; `src/content/navigation.ts`: menu selections (on PR #22).
 - `messages/ar.json` / `messages/en.json`: Coming Soon UI translations.
 - `public/brand/` and `public/images/`: logo and image assets.
 - `src/styles/` and `src/app/globals.css`: visual styles.
 
-**Current limitation:** editorial copy and contact details are not yet fully centralized. Refer to the handoff guide before editing and do not assume a nontechnical content editor can safely edit TSX.
+**Content ownership:** see `docs/CONTENT-MANAGEMENT.md`. Shared contact details, service names and page-specific content have designated owners; nontechnical editors should still use a reviewed change workflow.
 
 ## Documentation and handoff
 

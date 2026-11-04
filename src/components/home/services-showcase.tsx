@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { ArrowUpRight, ArrowRight, ArrowLeft, BriefcaseBusiness, Building2, Globe2, FileText, Plane, Landmark, MessagesSquare, Container, Ship, Fingerprint } from 'lucide-react';
 import type { Locale } from '@/lib/site';
+import { routes } from '@/lib/routes';
 import { serviceCatalog, serviceSlugs, type ServiceSlug } from '@/content/services';
 import { homeContent } from '@/content/home';
 import { Reveal } from '@/components/shared/reveal';
@@ -33,7 +34,7 @@ export function ServicesShowcase({locale}:{locale:Locale}){
  return <section className="inbs-services" aria-labelledby="inbs-services-heading">
   <div className="site-shell inbs-services-inner">
    <Reveal className="inbs-services-heading">
-    <div className="inbs-services-overline"><span className="inbs-services-overline-line"/>{t.offering}</div>
+    <div className="inbs-services-overline inbs-section-kicker"><span className="inbs-services-overline-line"/>{t.offering}</div>
     <div className="inbs-services-heading-row">
      <h2 id="inbs-services-heading">{t.offeringTitle.split('\n').map(line=><span key={line}>{line}</span>)}</h2>
      <p>{t.offeringDescription}</p>
@@ -41,7 +42,7 @@ export function ServicesShowcase({locale}:{locale:Locale}){
    </Reveal>
    <Reveal className="inbs-services-stage">
     <div className="inbs-services-index" aria-label={t.serviceSelectAria}>
-     {serviceSlugs.map((item,i)=><Link key={item} href={`/${locale}/services/${item}`} className={'inbs-services-option'+(selected===i?' is-active':'')} onMouseEnter={()=>setSelected(i)} onFocus={()=>setSelected(i)}>
+     {serviceSlugs.map((item,i)=><Link key={item} href={routes.service(locale,item)} className={'inbs-services-option'+(selected===i?' is-active':'')} onMouseEnter={()=>setSelected(i)} onFocus={()=>setSelected(i)}>
       <span className="inbs-services-option-icon">{(()=>{const ServiceIcon=serviceIcons[item];return <ServiceIcon size={21} strokeWidth={1.65} aria-hidden="true"/>})()}</span>
       <span className="inbs-services-option-name">{serviceCatalog[item][locale]}</span>
       <ArrowUpRight className="inbs-services-option-arrow" size={19} aria-hidden="true"/>
@@ -65,7 +66,7 @@ export function ServicesShowcase({locale}:{locale:Locale}){
         <h3>{serviceCatalog[slug][locale]}</h3>
        </motion.div>
       </AnimatePresence>
-      <Link className="inbs-services-detail-link" href={`/${locale}/services/${slug}`} aria-label={`${t.serviceLink}: ${serviceCatalog[slug][locale]}`}><ArrowUpRight size={24}/></Link>
+      <Link className="inbs-services-detail-link" href={routes.service(locale,slug)} aria-label={`${t.serviceLink}: ${serviceCatalog[slug][locale]}`}><ArrowUpRight size={24}/></Link>
      </div>
      <div className="inbs-services-mobile-controls">
       <button type="button" onClick={()=>move(-1)} aria-label={locale==='ar'?'الخدمة السابقة':'Previous service'}>{locale==='ar'?<ArrowRight/>:<ArrowLeft/>}</button>
@@ -73,7 +74,7 @@ export function ServicesShowcase({locale}:{locale:Locale}){
      </div>
     </div>
    </Reveal>
-   <Reveal className="inbs-services-end"><span>{t.servicesOutro}</span><Link className="inbs-about-link inbs-services-all-link" href={`/${locale}/services`}><span>{t.allServices}</span><ArrowUpRight size={20}/></Link></Reveal>
+   <Reveal className="inbs-services-end"><span>{t.servicesOutro}</span><Link className="inbs-about-link inbs-services-all-link" href={routes.page(locale,'services')}><span>{t.allServices}</span><ArrowUpRight size={20}/></Link></Reveal>
   </div>
  </section>;
 }

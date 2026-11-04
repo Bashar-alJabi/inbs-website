@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { homeContent, aboutDetails } from '@/content/home';
 import type { Locale } from '@/lib/site';
+import { routes } from '@/lib/routes';
 import { Reveal } from '@/components/shared/reveal';
 
 /** Company introduction; facts and translations live in src/content/home.ts. */
@@ -11,13 +12,13 @@ export function AboutPreview({ locale }: { locale: Locale }) {
  return <section className="inbs-about-preview" aria-labelledby="inbs-about-heading">
   <div className="site-shell inbs-about-inner">
    <Reveal className="inbs-about-intro" delay={0.05}>
-    <p className="inbs-about-kicker"><span className="inbs-about-kicker-mark" aria-hidden="true" />{content.aboutEyebrow}</p>
+    <p className="inbs-about-kicker inbs-section-kicker"><span className="inbs-about-kicker-mark" aria-hidden="true" />{content.aboutEyebrow}</p>
     <h2 id="inbs-about-heading">{content.aboutTitle.split('\n').map((line, index) => <span key={line} className={index===1?'inbs-about-heading-accent':undefined}>{line}</span>)}</h2>
    </Reveal>
    <Reveal className="inbs-about-copy" delay={0.16}>
     <p>{details.intro}</p>
     <p className="inbs-about-supporting">{details.supporting}</p>
-    <Link className="inbs-about-link" href={`/${locale}/about`}><span>{content.aboutLink}</span><ArrowUpRight size={20} aria-hidden="true" /></Link>
+    <Link className="inbs-about-link" href={routes.page(locale,'about')}><span>{content.aboutLink}</span><ArrowUpRight size={20} aria-hidden="true" /></Link>
    </Reveal>
    <div className="inbs-about-art" aria-hidden="true">
     <svg className="inbs-about-network" viewBox="0 0 450 450" fill="none" xmlns="http://www.w3.org/2000/svg">

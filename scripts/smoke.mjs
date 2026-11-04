@@ -26,7 +26,8 @@ try {
   await check('/ar', { pattern: /<html[^>]*lang="ar"[^>]*dir="rtl"/, label: 'Arabic homepage and RTL' });
 
   for (const locale of ['en', 'ar']) {
-    for (const route of ['about', 'services', 'contact', 'services/cargo-services']) {
+    await check(`/${locale}/about`, { pattern: /class="inbs-about-page"/, label: `${locale} published About page` });
+    for (const route of ['services', 'contact', 'services/cargo-services']) {
       await check(`/${locale}/${route}`, { label: `${locale} ${route} page` });
     }
     await check(`/${locale}/invalid-unlisted-page`, { status: 404, label: `${locale} unknown route` });
@@ -35,6 +36,7 @@ try {
   for (const image of ['hero-one.webp', 'hero-two.webp', 'hero-three.webp']) {
     await check(`/images/${image}`, { contentType: /image\/webp/i, label: `Hero ${image}` });
   }
+  await check('/images/about/hero-about.webp', { contentType: /image\/webp/i, label: 'Dedicated About hero photo' });
   assert.equal(sourceEntries.length, 10, 'Expected ten documented service images');
   for (const { slug } of sourceEntries) {
     await check(`/images/services/${slug}.webp`, {

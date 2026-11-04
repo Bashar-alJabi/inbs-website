@@ -20,3 +20,16 @@ html[lang=ar]{--font-body:var(--font-ar)}
 body{font-family:var(--font-body)}
 button,input,textarea,select{font:inherit}
 .inbs-slide h1,.inbs-footer-top h2,.homepage h2{font-family:var(--font-body)}
+
+/* Shared editorial section subtitles for Home, About and future pages.
+   Components own their color/layout; this class alone owns type sizing. */
+.inbs-section-kicker{
+ font-size:clamp(17px,1.3vw,19px);
+ line-height:1.55;
+ font-weight:750;
+}
+[dir=rtl] .inbs-section-kicker{font-size:clamp(18px,1.4vw,20px);letter-spacing:0}
+@media(max-width:760px){
+ .inbs-section-kicker{font-size:clamp(13px,3.6vw,15px)}
+ [dir=rtl] .inbs-section-kicker{font-size:clamp(14px,4vw,16px)}
+}
