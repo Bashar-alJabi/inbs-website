@@ -14,7 +14,6 @@ export function AboutMilestones({ locale }: { locale: Locale }) {
         <strong dir="ltr">{featured.value.toLocaleString('en-US')}<span>+</span></strong>
         <span>{featured[locale]}</span>
       </div>
-      <span className="inbs-story-milestones-orbit" aria-hidden="true"/>
     </Reveal>
     <div className="inbs-story-milestones-details">
       {supporting.map((fact, index) =>
