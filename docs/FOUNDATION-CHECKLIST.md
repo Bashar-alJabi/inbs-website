@@ -56,7 +56,7 @@
 - [x] Owner requested About merge to `redesign`; PR #21 squash merged as `a13bc51`.
 - [ ] Final visual confirmation of the latest About state after maintenance changes; promote to `main` separately.
 
-## Shared links and navigation cleanup — draft PR #22
+## Shared links and navigation cleanup — merged PR #22 (`feature/site-content-navigation-audit` → `redesign`)
 
 - [x] Keep `src/content/services.ts` and `src/lib/site.ts` as the canonical service and page-name sources, without changing service URLs.
 - [x] Add `src/lib/routes.ts` for page/service URL generation and `src/content/navigation.ts` for shared header/drawer/footer selections.
@@ -64,7 +64,8 @@
 - [x] Key mobile-drawer icons by stable page slug; use `src/content/contact.ts` for shared drawer email.
 - [x] Restore the subtle decorative founding-year styling and expose the year via accessible text instead of forcing dark visual contrast.
 - [x] Exact-head PR #22 automated CI on `654f16f`: [Validate website](https://github.com/Bashar-alJabi/inbs-website/actions/runs/41856221285) and [Browser/accessibility audit](https://github.com/Bashar-alJabi/inbs-website/actions/runs/41856221344) both successful.
-- [ ] Reconfirm exact-head CI after documentation-only updates, visually check EN/AR and both themes, obtain owner approval and merge PR #22 into `redesign`.
+- [x] Exact-head CI on documentation commit `208e004` passed: [Validate website](https://github.com/Bashar-alJabi/inbs-website/actions/runs/41859234291), [Browser/accessibility audit](https://github.com/Bashar-alJabi/inbs-website/actions/runs/41859234322). PR #22 squash merged as `55541ca` after owner requested promotion.
+- [ ] Capture final manual preview review for latest content on both locales/themes/device classes (automated checks do not replace visual sign-off).
 - [ ] Before promoting `redesign` to `main`, reconcile their divergent histories (7 commits unique to `main` at review time) and verify the combined changes.
 - [ ] Create and review a separate `redesign` → `main` PR; test that final integration head and deployment. Do not equate integration with full public launch.
 
