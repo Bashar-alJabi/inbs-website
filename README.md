@@ -4,7 +4,7 @@ Official bilingual frontend website for **International Network Businessmen Serv
 
 ## Status and branches
 
-The **homepage and shared shell** were previously promoted to `main` (PR #20). The bilingual **About page** (PR #21) and **centralized routing/navigation cleanup** (PR #22) have been merged into `redesign`. These changes form the next integration milestone for promotion to `main` through a separate reviewed pull request. Other unfinished routes display a branded Coming Soon page. The site is **not a completed production launch**.
+The bilingual **Home and About pages**, shared shell, and centralized routing/navigation were promoted to `main` through PR #23. The bilingual **Services landing page** and footer navigation updates passed owner visual review and both CI workflows, then were squash-merged into `redesign` via PR #24. Promotion to `main` is tracked in PR #25. Individual service detail pages and other unfinished routes continue to display branded Coming Soon pages. This is **not a completed public production launch**.
 
 - `main`: company-facing approved milestone.
 - `redesign`: integration branch for accepted redesign work.
@@ -38,10 +38,10 @@ npm run build
 ## Find the right file
 
 - `src/app/[locale]/`: routes and locale layout.
-- `src/components/home/`: homepage sections; `src/components/about/`: About page; `src/components/layout/`: shared header, footer and navigation.
+- `src/components/home/`: homepage sections; `src/components/about/`: About page; `src/components/services/`: Services landing page; `src/components/layout/`: shared header, footer and navigation.
 - `src/content/`: bilingual content for home, About, shared layout, services and contact.
 - `src/lib/site.ts`: locales and bilingual page labels; `src/lib/routes.ts`: locale-aware URL builders.
-- `src/content/services.ts`: authoritative service catalog; `src/content/navigation.ts`: menu selections (on PR #22).
+- `src/content/services.ts`: authoritative service catalog; `src/content/navigation.ts`: menu selections.
 - `messages/ar.json` / `messages/en.json`: Coming Soon UI translations.
 - `public/brand/` and `public/images/`: logo and image assets.
 - `src/styles/` and `src/app/globals.css`: visual styles.

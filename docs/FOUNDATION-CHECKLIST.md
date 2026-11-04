@@ -69,6 +69,26 @@
 - [ ] Before promoting `redesign` to `main`, reconcile their divergent histories (7 commits unique to `main` at review time) and verify the combined changes.
 - [ ] Create and review a separate `redesign` → `main` PR; test that final integration head and deployment. Do not equate integration with full public launch.
 
+## Footer navigation and future legal page — merged into `redesign` via PR #24
+
+- [x] Replace Privacy Policy in Quick Links with Home; retain six nonlegal page links from the canonical page catalog.
+- [x] Show five services plus a localized link to the full Services landing page, without hardcoding service names.
+- [x] Combine both legal destinations into one `/[locale]/legal` placeholder in the catalog and footer; retain old links as permanent locale-specific redirects.
+- [x] Add dedicated smoke and browser assertions for both locales, footer link counts and redirects.
+- [ ] Obtain approved legal copy covering privacy and terms before implementing or publishing the final legal page.
+- [x] Owner approved final visual review and both exact-head CI checks passed before PR #24 squash merge: [Validate](https://github.com/Bashar-alJabi/inbs-website/actions/runs/41881051213) and [browser/axe](https://github.com/Bashar-alJabi/inbs-website/actions/runs/41881052075).
+
+## Services landing page — merged into `redesign` via PR #24
+
+- [x] Add dedicated bilingual /en/services and /ar/services route with page-specific copy and scoped styling.
+- [x] Use the canonical ten-service catalog for names, images, ordering and links, without changing detail-page status.
+- [x] Add locale-aware metadata and opt-in sitemap entries for the completed landing route.
+- [x] Add dedicated service-route smoke and responsive, theme, RTL and axe browser assertions.
+- [x] Lint, TypeScript, production build, smoke, Playwright and axe all passed on feature head `0162eb6` (workflow links above).
+- [x] Owner completed the Services visual review and signed off on the final styling/RTL fixes.
+- [x] Owner authorized conditional promotion; PR #24 squash merged to `redesign` as `171e8cd`.
+- [ ] Final `redesign` → `main` PR #25 CI, merge verification and deployment review.
+
 ## C. Repeat after **every page** (copy these tasks to the page PR)
 
 - [ ] Record page name, owner, PR number, preview URL, completion date and any unresolved work.

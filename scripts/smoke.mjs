@@ -27,7 +27,15 @@ try {
 
   for (const locale of ['en', 'ar']) {
     await check(`/${locale}/about`, { pattern: /class="inbs-about-page"/, label: `${locale} published About page` });
-    for (const route of ['services', 'contact', 'services/cargo-services']) {
+    await check(`/${locale}/services`, { pattern: /class="inbs-services-page"/, label: `${locale} dedicated Services landing page` });
+    await check(`/${locale}/legal`, { label: `${locale} unified legal placeholder` });
+    for (const oldPath of ['privacy-policy', 'terms']) {
+      const old = await fetch(`${origin}/${locale}/${oldPath}`, { redirect: 'manual', signal: AbortSignal.timeout(15000) });
+      assert.ok([301, 308].includes(old.status), `${locale}/${oldPath}: permanent redirect expected, got ${old.status}`);
+      assert.equal(new URL(old.headers.get('location'), origin).pathname, `/${locale}/legal`);
+      console.log('PASS', `${locale}/${oldPath} redirects to unified legal page`);
+    }
+    for (const route of ['contact', 'services/cargo-services']) {
       await check(`/${locale}/${route}`, { label: `${locale} ${route} page` });
     }
     await check(`/${locale}/invalid-unlisted-page`, { status: 404, label: `${locale} unknown route` });

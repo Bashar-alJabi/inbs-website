@@ -215,3 +215,30 @@ html[data-theme=dark] .inbs-footer-watermark{color:#d4ecff09}
   .inbs-primary-nav a{font-size:15px}
   .inbs-footer-top p{font-size:14px}
 }
+
+/* The directory CTA is an action, not a sixth service listing. */
+.inbs-footer-grid a.inbs-footer-more-services{
+  display:inline-flex;
+  width:fit-content;
+  align-items:center;
+  gap:9px;
+  margin-top:12px;
+  padding:10px 0 5px;
+  border-top:1px solid #a6d9f15c;
+  color:#a8e2ff;
+  font-weight:750;
+  transition:color .2s ease,gap .2s ease;
+}
+.inbs-footer-more-services svg{flex:none;transition:transform .2s ease}
+.inbs-footer-grid a.inbs-footer-more-services:hover,
+.inbs-footer-grid a.inbs-footer-more-services:focus-visible{
+  color:#fff;
+  gap:13px;
+}
+.inbs-footer-more-services:hover svg{transform:translate(2px,-2px)}
+[dir=rtl] .inbs-footer-more-services:hover svg{transform:translate(-2px,-2px)}
+@media(prefers-reduced-motion:reduce){
+  .inbs-footer-grid a.inbs-footer-more-services,
+  .inbs-footer-more-services svg{transition:none}
+  .inbs-footer-more-services:hover svg{transform:none}
+}

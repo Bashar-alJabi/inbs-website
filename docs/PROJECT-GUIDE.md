@@ -4,7 +4,7 @@
 
 INBS is a bilingual (English/Arabic) company website built with Next.js App Router, React and TypeScript. The goal is accessible, maintainable and performant presentation of verified company services.
 
-**Integration milestone (4 November 2026):** the bilingual homepage and shared shell were previously approved for `main` (PR #20). The About page (PR #21) and centralized page/service routing and navigation cleanup (PR #22) are now **merged into `redesign`**. They are eligible for a separately validated `redesign` → `main` PR; merging code does not constitute complete public launch or manual company sign-off. Other known routes still display **Coming Soon**.
+**As of 4 November 2026:** the bilingual homepage, About page and centralized routing/navigation were promoted to `main` via PR #23 following successful integration CI. The bilingual Services landing page and shared footer improvements were reviewed by the owner, passed CI, and were squash-merged into `redesign` via PR #24; PR #25 handles promotion to `main`. Individual service detail routes and other unfinished pages remain **Coming Soon**. A development merge does not constitute a complete public launch or company content approval.
 
 Current maintenance work is tracked separately from page development. Do not merge or deploy an unfinished change without the owner's approval.
 
@@ -26,17 +26,17 @@ The `[locale]` URL segment is either `en` or `ar`; `/en` and `/ar` are the imple
 | Route (both languages) | Current state |
 | --- | --- |
 | `/[locale]` | **Implemented homepage** |
-| `/[locale]/about` | Implemented in `redesign` (PR #21); promotion tracked through the release PR |
-| `/[locale]/services` | Coming Soon |
+| `/[locale]/about` | Implemented and promoted to `main` (PRs #21 and #23) |
+| `/[locale]/services` | Bilingual landing page implemented and merged into `redesign`; promotion to `main` pending PR #25 |
 | `/[locale]/services/[slug]` | Coming Soon for ten recognized service slugs |
 | `/[locale]/team` | Coming Soon |
 | `/[locale]/insights` | Coming Soon |
 | `/[locale]/careers` | Coming Soon |
 | `/[locale]/contact` | Coming Soon |
-| `/[locale]/privacy-policy` | Coming Soon |
-| `/[locale]/terms` | Coming Soon |
+| `/[locale]/legal` | Coming Soon — one planned page containing privacy and terms information |
+| `/[locale]/privacy-policy` and `/[locale]/terms` | Permanent redirects to `/[locale]/legal` |
 
-Known page slugs and bilingual labels live in `src/lib/site.ts`; service slugs come from the canonical `src/content/services.ts` catalog and are re-exported by `site.ts`. Localized URL helpers are in `src/lib/routes.ts` and shared menu selections in `src/content/navigation.ts` (PR #22). Existing URLs remain unchanged. The dedicated `src/app/[locale]/about/page.tsx` owns About. The dynamic fallback `src/app/[locale]/[...slug]/page.tsx` resolves unfinished recognized URLs and displays `ComingSoon`; it excludes About from generated params. Unknown paths are 404. A `why-inbs` page was mentioned in the earlier roadmap but is **not** a recognized route in the current `pages` array; explicitly decide whether to add it before documenting it as available.
+Known page slugs and bilingual labels live in `src/lib/site.ts`; service slugs come from the canonical `src/content/services.ts` catalog and are re-exported by `site.ts`. Localized URL helpers are in `src/lib/routes.ts` and shared menu selections in `src/content/navigation.ts` (PR #22). Existing service URLs remain unchanged. The old privacy-policy and terms URLs redirect to the single legal landing route; see `next.config.ts`. The dedicated `src/app/[locale]/about/page.tsx` owns About. The dynamic fallback `src/app/[locale]/[...slug]/page.tsx` resolves unfinished recognized URLs and displays `ComingSoon`; it excludes completed About and the Services landing page from generated params. Unknown paths are 404. A `why-inbs` page was mentioned in the earlier roadmap but is **not** a recognized route in the current `pages` array; explicitly decide whether to add it before documenting it as available.
 
 When a page is developed, give it its own Next.js route and replace the Coming Soon rendering. Link to the actual route, not to a homepage anchor as a substitute.
 
@@ -54,7 +54,7 @@ src/
     [locale]/             translated shell, home route, temporary fallback pages
   components/
     home/                 homepage sections
-    about/                standalone About story sections
+    about/                standalone About story sections\n    services/             Services landing page (feature branch)
     layout/               header, footer, Coming Soon, language and cursor UI
     shared/               reusable Reveal and SmoothScroll
   content/                bilingual copy, service catalog, shared layout and contact data

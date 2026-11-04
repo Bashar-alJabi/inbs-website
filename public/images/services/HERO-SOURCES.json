@@ -1,0 +1,21 @@
+{
+  "license": "https://www.pexels.com/license/",
+  "assets": [
+    {
+      "filename": "hero-services-1.webp",
+      "id": 36339282,
+      "photographer": "Lajos Kristóf Kántor",
+      "page": "https://www.pexels.com/photo/modern-skyscrapers-in-downtown-dubai-36339282/",
+      "sourceImage": "https://images.pexels.com/photos/36339282/pexels-photo-36339282.jpeg",
+      "subject": "Modern Dubai skyline with skyscrapers and palm trees"
+    },
+    {
+      "filename": "hero-services-2.webp",
+      "id": 8353769,
+      "photographer": "Kampus Production",
+      "page": "https://www.pexels.com/photo/people-working-together-in-the-office-8353769/",
+      "sourceImage": "https://images.pexels.com/photos/8353769/pexels-photo-8353769.jpeg",
+      "subject": "Three business professionals in suits collaborating around a desk"
+    }
+  ]
+}
