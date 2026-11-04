@@ -36,7 +36,7 @@ function MilestoneCount({ value }: { value: number }) {
 export function AboutMilestones({ locale }: { locale: Locale }) {
   const t = aboutPageContent[locale];
   const desktopPath = 'M 125 145 L 250 145 L 375 275 L 500 275 L 625 145 L 750 145 L 875 275';
-  const mobilePath = 'M 250 160 L 500 160 L 750 350 L 500 350 L 250 540 L 500 540 L 750 730';
+  const mobilePath = 'M 100 83 L 200 83 L 300 203 L 200 203 L 100 323 L 200 323 L 300 443';
 
   return <div className="inbs-story-milestones" role="group" aria-label={t.milestonesEyebrow}>
     <div className="inbs-story-milestones-grid">
@@ -50,12 +50,12 @@ export function AboutMilestones({ locale }: { locale: Locale }) {
           <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="22s" repeatCount="indefinite"/>
         </circle>
       </svg>
-      <svg className="inbs-story-milestones-network inbs-story-milestones-network--mobile" viewBox="0 0 1000 800" preserveAspectRatio="none" aria-hidden="true">
+      <svg className="inbs-story-milestones-network inbs-story-milestones-network--mobile" viewBox="0 0 400 480" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
         <path className="inbs-story-milestones-network-path" d={mobilePath}/>
-        {[{x:250,y:160},{x:750,y:350},{x:250,y:540},{x:750,y:730}].map(({x,y}) =>
+        {[{x:100,y:83},{x:300,y:203},{x:100,y:323},{x:300,y:443}].map(({x,y}) =>
           <circle className="inbs-story-milestones-network-node" key={y} cx={x} cy={y} r="5"/>
         )}
-        <circle className="inbs-story-milestones-network-traveler" r="6">
+        <circle className="inbs-story-milestones-network-traveler" r="4.5">
           <animateMotion dur="24s" repeatCount="indefinite" path={mobilePath}/>
           <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="24s" repeatCount="indefinite"/>
         </circle>
