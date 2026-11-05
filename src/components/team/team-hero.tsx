@@ -8,6 +8,7 @@ export function TeamHero({ locale }: { locale: Locale }) {
     <section className="inbs-team-hero" aria-labelledby="inbs-team-title">
       <div className="inbs-team-hero-glow" aria-hidden="true"/>
       <div className="site-shell inbs-team-hero-inner">
+        <p className="inbs-team-kicker inbs-team-hero-eyebrow"><span aria-hidden="true"/>{t.eyebrow}</p>
         <div className="inbs-team-gallery" aria-label={t.galleryLabel} role="group">
           <div className="inbs-team-photo inbs-team-photo--event" role="img" aria-label={t.photoEvent}/>
           <div className="inbs-team-photo inbs-team-photo--portrait" role="img" aria-label={t.photoPortrait}/>

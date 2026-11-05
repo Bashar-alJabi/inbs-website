@@ -14,6 +14,7 @@
 .inbs-team-hero{position:relative;isolation:isolate;overflow:hidden;background:#08263e;color:#f1f9ff}
 .inbs-team-hero-glow{position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse 65% 48% at 50% 28%,#164e73 0%,#0b3454 55%,#08263e 100%)}
 .inbs-team-hero-inner{position:relative;padding-top:clamp(142px,16vh,192px);padding-bottom:clamp(42px,5vw,68px)}
+.inbs-team-hero-eyebrow{position:relative;z-index:2;margin-bottom:clamp(28px,4.5vw,62px);color:#b3e2f8}
 .inbs-team-gallery{position:relative;display:grid;grid-template-columns:.83fr 1.13fr .83fr;align-items:center;gap:clamp(13px,3.5vw,54px);min-height:clamp(335px,42vw,570px);padding:20px clamp(8px,2.5vw,32px) 16px;isolation:isolate}
 .inbs-team-photo{position:relative;min-width:0;overflow:hidden;isolation:isolate;border:1px solid #e5f5ff75;box-shadow:0 26px 75px #00152580;transform-origin:center;transition:transform .45s ease,box-shadow .45s ease;
  background-position:center;background-size:cover;background-repeat:no-repeat}

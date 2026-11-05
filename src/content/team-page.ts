@@ -1,6 +1,7 @@
 /** Team page editorial copy. No unverified employee identities or personnel counts. */
 export const teamPageContent = {
   en: {
+    eyebrow: 'OUR PEOPLE / INBS',
     galleryLabel: 'Moments from the INBS story',
     photoEvent: 'Visual placeholder for an event photograph',
     photoPortrait: 'Visual placeholder for a company owner portrait',
@@ -32,6 +33,7 @@ export const teamPageContent = {
     servicesAction: 'Explore our services',
   },
   ar: {
+    eyebrow: 'وجوه وحكايات / INBS',
     galleryLabel: 'لقطات من مسيرة الشبكة العالمية لخدمات رجال الأعمال',
     photoEvent: 'صورة توضيحية مؤقتة لفعالية مهنية',
     photoPortrait: 'صورة توضيحية مؤقتة لصاحب الشركة',
