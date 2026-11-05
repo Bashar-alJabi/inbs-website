@@ -92,17 +92,17 @@
 ## Cross-page ending CTA consistency — feature/team-page
 
 - [x] Add page-specific closing CTAs to Home and About using the approved existing Home copy and new localized About text.
-- [x] Use the same shared CTA component for Home, About, Services and Team; keep localized wording page-specific and shorten Home/About headings.
+- [x] Use page-local CTA components with shared editorial CTA CSS for Home, About, Services and Team; retain distinct localized wording.
 - [x] Add EN/AR and light/dark browser checks confirming matching backgrounds, heading sizes, padding, button geometry, hover transitions, two links, and distinct copy.
-- [ ] Review all four CTAs visually with the owner before merging.
+- [ ] Owner reviewed the finished Team page and cross-page closing CTA presentation (5 November 2026).
 
 ## Team hero photo gallery — feature/team-page
 
 - [x] Replace the prior Services-like split hero with a centered, three-image editorial gallery and copy underneath.
-- [x] Add three clearly illustrative SVG mockups; reserve the upload names `public/images/team/hero-01.webp` through `hero-03.webp`.
+- [x] Use the three owner-supplied WebP images directly at `public/images/team/hero-01.webp` through `hero-03.webp`, without SVG mockups.
 - [x] Use responsive tilted side frames, a dominant central frame, and separate curved-trail traveling dots; support reduced motion and RTL.
-- [ ] Owner to upload authentic photos and approve crop/placement; verify real photo descriptions and final visual result.
-- [ ] Keep subsequent Team sections unchanged until Hero is approved.
+- [ ] Owner uploaded all ten Team WebP images and approved final visual placement; three Hero images have localized accessible descriptions.
+- [ ] After Hero approval, replace the draft middle sections with the approved integrated Team Story.
 
 ## Team page — feature/team-page (initial draft)
 
@@ -110,7 +110,7 @@
 - [x] Avoid invented names, roles, staff counts or representations of stock photographs as company employees.
 - [x] Add metadata, localized canonical/hreflang, default noindex policy and opt-in sitemap entry.
 - [x] Add route and accessibility/browser tests for EN/AR, desktop/tablet/mobile, light/dark, and links.
-- [ ] Verify CI on final commit and obtain visual review before promotion to `redesign` or `main`.
+- [ ] Verify CI on the final commit before promotion to `redesign` or `main`; owner visual approval recorded 5 November 2026.
 - [ ] Add named team profiles and authentic portraits only after explicit content approval.
 
 ## C. Repeat after **every page** (copy these tasks to the page PR)
