@@ -89,6 +89,30 @@
 - [x] Owner authorized conditional promotion; PR #24 squash merged to `redesign` as `171e8cd`.
 - [ ] Final `redesign` → `main` PR #25 CI, merge verification and deployment review.
 
+## Cross-page ending CTA consistency — feature/team-page
+
+- [x] Add page-specific closing CTAs to Home and About using the approved existing Home copy and new localized About text.
+- [x] Use page-local CTA components with shared editorial CTA CSS for Home, About, Services and Team; retain distinct localized wording.
+- [x] Add EN/AR and light/dark browser checks confirming matching backgrounds, heading sizes, padding, button geometry, hover transitions, two links, and distinct copy.
+- [ ] Owner reviewed the finished Team page and cross-page closing CTA presentation (5 November 2026).
+
+## Team hero photo gallery — feature/team-page
+
+- [x] Replace the prior Services-like split hero with a centered, three-image editorial gallery and copy underneath.
+- [x] Use the three owner-supplied WebP images directly at `public/images/team/hero-01.webp` through `hero-03.webp`, without SVG mockups.
+- [x] Use responsive tilted side frames, a dominant central frame, and separate curved-trail traveling dots; support reduced motion and RTL.
+- [ ] Owner uploaded all ten Team WebP images and approved final visual placement; three Hero images have localized accessible descriptions.
+- [ ] After Hero approval, replace the draft middle sections with the approved integrated Team Story.
+
+## Team page — feature/team-page (initial draft)
+
+- [x] Implement bilingual team editorial page using a dedicated route, content module and scoped stylesheet.
+- [x] Avoid invented names, roles, staff counts or representations of stock photographs as company employees.
+- [x] Add metadata, localized canonical/hreflang, default noindex policy and opt-in sitemap entry.
+- [x] Add route and accessibility/browser tests for EN/AR, desktop/tablet/mobile, light/dark, and links.
+- [ ] Verify CI on the final commit before promotion to `redesign` or `main`; owner visual approval recorded 5 November 2026.
+- [ ] Add named team profiles and authentic portraits only after explicit content approval.
+
 ## C. Repeat after **every page** (copy these tasks to the page PR)
 
 - [ ] Record page name, owner, PR number, preview URL, completion date and any unresolved work.
@@ -153,3 +177,21 @@
 - [ ] When requirements or hosting change: update the guide, checklist and responsible owner.
 
 **Rule:** Do not check a task without evidence. Do not equate a passing build with visual quality, verified company facts or production launch readiness.
+
+## Page architecture consistency — feature/team-page
+
+- [x] Separate Team Hero/Story/CTA into page-local components; TeamPage composes these three sections only.
+- [x] Split Services Hero/Directory/CTA into page-local components; ServicesPage now composes sections only.
+- [x] Move each CTA into its corresponding Home/About/Services/Team folder; retain shared CSS for intentionally uniform visual design.
+- [x] Document mandatory component boundaries and merge/test policy in root AGENTS.md.
+- [x] Owner reviewed and approved Team page visuals for merging (5 November 2026).
+- [ ] Validate final feature-head CI, production smoke, and browser accessibility audit before merging.
+
+## Team visual narrative restructure — feature/team-page
+
+- [x] Remove the text-only Team Note and its unapproved staff-profile placeholder copy.
+- [x] Combine How We Work and What Guides Us in one page-local TeamStory section.
+- [x] Integrate seven WebP-only image slots into opening, principle beats and closing instead of a gallery strip; no placeholder filenames or numbers are shown.
+- [x] Owner uploaded hero-01.webp through hero-03.webp and story-04.webp through story-10.webp; all ten paths and WebP signatures verified.
+- [x] Owner visually reviewed Team composition before requesting integration (5 November 2026).
+- [ ] Company-side photo ownership/publication permissions remain to be documented before final public launch.

@@ -29,7 +29,7 @@ The `[locale]` URL segment is either `en` or `ar`; `/en` and `/ar` are the imple
 | `/[locale]/about` | Implemented and promoted to `main` (PRs #21 and #23) |
 | `/[locale]/services` | Bilingual landing page implemented and merged into `redesign`; promotion to `main` pending PR #25 |
 | `/[locale]/services/[slug]` | Coming Soon for ten recognized service slugs |
-| `/[locale]/team` | Coming Soon |
+| `/[locale]/team` | Bilingual people-first editorial page in progress on `feature/team-page` (no fictional profiles; review pending) |
 | `/[locale]/insights` | Coming Soon |
 | `/[locale]/careers` | Coming Soon |
 | `/[locale]/contact` | Coming Soon |
@@ -104,7 +104,7 @@ src/
 ## SEO, security and publication
 
 - `src/lib/seo.ts` centralizes `SITE_URL` and `SITE_INDEXABLE`. Indexing is off unless `SITE_INDEXABLE=true`.
-- `src/app/robots.ts`, `src/app/sitemap.ts`, and page metadata govern crawlers and canonical/alternate URLs. The sitemap currently includes only published homepages when indexing is enabled.
+- `src/app/robots.ts`, `src/app/sitemap.ts`, and page metadata govern crawlers and canonical/alternate URLs. The sitemap includes only completed, implemented routes (Home, About, Services, Team) when indexing is enabled.
 - `next.config.ts` sets basic security response headers; this is not a substitute for deployment security testing.
 - No custom backend is currently implemented. Do not claim Contact forms, hosting migration, Search Console, structured data or analytics are complete unless verified.
 - Confirm final domain, hosting/runtime and environment variables before production launch. Never commit secrets.
@@ -147,3 +147,7 @@ Before handing over, complete and document: real company-approved content in bot
 - **Project owner:** approve design milestones and merges to the accepted branches.
 
 Only check off completed work with evidence; keep the guide accurate to the checked-in code.
+
+## Page component ownership (November 2026)
+
+Every page matches the Home/About composition pattern. `src/components/<page>/<page>-page.tsx` imports section components but contains no section JSX. Team sections: `team-hero.tsx`, `team-story.tsx` (integrates the approach, three principles and seven photo slots), and `team-cta.tsx`. Services sections: `services-hero.tsx`, `services-directory.tsx`, `services-cta.tsx`. Home and About CTAs are `home-cta.tsx` and `about-cta.tsx`. See `AGENTS.md` for mandatory architecture rules. Shared CSS for CTA consistency is a deliberate **style** abstraction, not a shared React component.

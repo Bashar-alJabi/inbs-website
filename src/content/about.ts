@@ -35,6 +35,11 @@ export const aboutPageContent = {
     networkTitle: 'Different needs.\nOne point of connection.',
     networkLead: 'Business services, advisory, real estate, tourism and logistics are part of a broader service network, so the next step does not have to start from zero.',
     allServices: 'Discover all services',
+    ctaEyebrow: 'THE NEXT CONNECTION',
+    ctaTitle: 'Our story. Your next chapter.',
+    ctaText: 'You have seen what drives INBS. Now tell us where you would like to go next.',
+    ctaAction: 'Connect with INBS',
+    ctaSecondary: 'Explore our services',
   },
   ar: {
     eyebrow: 'قصتنا / INBS',
@@ -67,5 +72,10 @@ export const aboutPageContent = {
     networkTitle: 'احتياجات مختلفة.\nونقطة تواصل واحدة.',
     networkLead: 'من خدمات رجال الأعمال والاستشارات إلى العقارات والسياحة والشحن، تجمع شبكتنا مجالات متنوعة لتكون الخطوة التالية أقرب.',
     allServices: 'استكشف جميع الخدمات',
+    ctaEyebrow: 'بداية علاقة جديدة',
+    ctaTitle: 'قصتنا مستمرة. والخطوة معك.',
+    ctaText: 'تعرّفت على ما يحرّك عملنا. الآن شاركنا ما تطمح إلى تحقيقه.',
+    ctaAction: 'تواصل مع INBS',
+    ctaSecondary: 'استكشف خدماتنا',
   },
 } as const;

@@ -13,6 +13,8 @@
  --color-navy:var(--brand-deep);
  --color-sky:var(--brand-light);
  --radius-button:7px;
+ /* Matching light/dark backgrounds across all page-ending calls to action. */
+ --inbs-cta-surface:#eaf1f6;
  --radius-control:9px;
  --font-size-button:14px;
 }
@@ -33,3 +35,5 @@ button,input,textarea,select{font:inherit}
  .inbs-section-kicker{font-size:clamp(13px,3.6vw,15px)}
  [dir=rtl] .inbs-section-kicker{font-size:clamp(14px,4vw,16px)}
 }
+
+html[data-theme=dark]{--inbs-cta-surface:#112e43}

@@ -13,6 +13,7 @@ This document defines **where to edit content** in the INBS bilingual site. Keep
 | Home page marketing copy and About preview | `src/content/home.ts` | `homeContent.en/ar` and `aboutDetails.en/ar`. |
 | About hero photo, source and regeneration | `public/images/about/hero-about.webp`, `public/images/about/SOURCE.json`, `scripts/prepare-about-image.mjs` | Dedicated Pexels skyline photo; no coupling to service-image catalog. |
 | Full About page copy and principles | `src/content/about.ts` | `aboutPageContent.en/ar`; reuse the canonical service names from `src/content/services.ts`. |\n| Services landing page headings and editorial copy | `src/content/services-page.ts` | Landing page only; never duplicate names, slugs or images from `src/content/services.ts`. |
+| Team landing copy (no unverified staff names/photos) | `src/content/team-page.ts` | People-first editorial introduction; approved real team profiles are a separate content requirement. |
 | Services landing hero photos | `public/images/services/HERO-SOURCES.json` and `hero-services-{1,2}.webp` | Two independently sourced Pexels photos; convert with `scripts/prepare-services-hero-images.mjs`. Not service catalog previews. |
 | Hero slides, CTA labels, related-service short labels, hero images | `src/content/hero.ts` | `heroSlides.en/ar`; service targets are typed as `ServiceSlug`. |
 | Public contact details, map and social links | `src/content/contact.ts` | Shared with future Contact and other components. |
@@ -64,3 +65,18 @@ The key is the stable public URL slug. Its position determines display order. Th
 ## Validation
 
 Run lint, type checks, build and browser tests through the PR workflows. Check representative paths including `/en/services/cargo-services`, `/ar/services/cargo-services`, homepage service selection, and hero links before approving content changes.
+
+### Page-owned CTAs with shared visual styling
+
+- `src/components/home/home-cta.tsx`, `src/components/about/about-cta.tsx`, `src/components/services/services-cta.tsx`, and `src/components/team/team-cta.tsx` own their respective JSX, translations, navigation, and CTA buttons. There is **no shared CTA React component**.
+- All four intentionally share the same CSS presentation in `src/styles/editorial-cta.css` (imported once by root layout) and background token `--inbs-cta-surface` from `src/styles/tokens.css`. Use this shared style layer only for uniform visual treatment; keep page content and behavior local.
+- Localized copy lives in the corresponding `src/content/home.ts`, `about.ts`, `services-page.ts`, and `team-page.ts` files.
+- Each CTA has a primary link to `/[locale]/contact`; secondary links go to a relevant page (Home/About → Services, Services → Team, Team → Services).
+
+### Team Hero photos
+
+The three photo frames in `src/components/team/team-hero.tsx` load directly from `public/images/team/hero-01.webp`, `hero-02.webp`, and `hero-03.webp` through CSS backgrounds in `src/styles/team.css`. The three approved WebP files were added to the feature branch and load directly without SVG fallbacks. Replacing a photo with the same name requires no code changes. No fallback files, file checks, JavaScript logic or code changes are required. Crop is controlled by `background-size: cover`; review it after the real photos are added. Update accessible descriptions when images are confirmed.
+
+### Team story — seven integrated photos
+
+The Team page is now strictly **Hero → TeamStory → CTA**. The previous placeholder Team Note is removed. TeamStory combines the former How We Work and What Guides Us copy with seven photo slots, integrated into an editorial layout rather than an isolated gallery. The approved WebP files are already present at `public/images/team/story-04.webp` through `story-10.webp`. The CSS references one WebP file per frame; updating them only requires replacing the images by filename. Desktop/mobile/RTL/dark styles are in `src/styles/team.css`. These seven editorial images are marked decorative; the three hero images have concise localized accessible descriptions. Photo ownership and publication permissions remain a separate company-side handoff check.
