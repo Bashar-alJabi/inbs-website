@@ -39,7 +39,7 @@ export const aboutPageContent = {
     ctaTitle: 'Our story. Your next chapter.',
     ctaText: 'You have seen what drives INBS. Now tell us where you would like to go next.',
     ctaAction: 'Connect with INBS',
-    ctaSecondary: 'Meet our team',
+    ctaSecondary: 'Explore our services',
   },
   ar: {
     eyebrow: 'قصتنا / INBS',
@@ -76,6 +76,6 @@ export const aboutPageContent = {
     ctaTitle: 'قصتنا مستمرة. والخطوة معك.',
     ctaText: 'تعرّفت على ما يحرّك عملنا. الآن شاركنا ما تطمح إلى تحقيقه.',
     ctaAction: 'تواصل مع INBS',
-    ctaSecondary: 'تعرّف على فريقنا',
+    ctaSecondary: 'استكشف خدماتنا',
   },
 } as const;

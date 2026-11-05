@@ -70,5 +70,5 @@ Run lint, type checks, build and browser tests through the PR workflows. Check r
 
 - All four page-ending CTAs use `src/components/shared/editorial-cta.tsx` and one stylesheet, `src/styles/editorial-cta.css` loaded once by `src/app/layout.tsx`. Their spacing, heading/font sizes, two links, arrow icon and hover/focus effects are intentionally identical.
 - Each page owns its bilingual labels and copy: `src/content/home.ts`, `src/content/about.ts`, `src/content/services-page.ts`, `src/content/team-page.ts`. Keep headings short and unique to the page.
-- All primary actions use the real `companyContact.emailHref`; secondary links use known implemented routes.
+- All primary actions route to `/[locale]/contact` (the Contact page is currently Coming Soon); secondary links use the Services or Team routes as configured. About's secondary CTA routes to Services.
 - The CTA background is `--inbs-cta-surface` in `src/styles/tokens.css`, with a dark-mode override. No page-specific CTA background definitions.

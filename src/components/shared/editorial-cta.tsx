@@ -5,7 +5,6 @@ import { homeContent } from '@/content/home';
 import { aboutPageContent } from '@/content/about';
 import { servicesPageContent } from '@/content/services-page';
 import { teamPageContent } from '@/content/team-page';
-import { companyContact } from '@/content/contact';
 import { routes } from '@/lib/routes';
 import type { Locale } from '@/lib/site';
 
@@ -25,7 +24,7 @@ export function EditorialCta({ locale, variant }: { locale: Locale; variant: Cta
     },
     about: {
       eyebrow: about.ctaEyebrow, title: about.ctaTitle, description: about.ctaText,
-      primary: about.ctaAction, secondary: about.ctaSecondary, secondaryHref: routes.page(locale, 'team'),
+      primary: about.ctaAction, secondary: about.ctaSecondary, secondaryHref: routes.page(locale, 'services'),
     },
     services: {
       eyebrow: services.closingEyebrow, title: services.closingTitle, description: services.closingText,
@@ -47,9 +46,9 @@ export function EditorialCta({ locale, variant }: { locale: Locale; variant: Cta
       </Reveal>
       <Reveal className="inbs-editorial-cta-body" delay={0.12}>
         <p>{content.description}</p>
-        <a className="inbs-editorial-cta-action inbs-editorial-cta-primary" href={companyContact.emailHref}>
+        <Link className="inbs-editorial-cta-action inbs-editorial-cta-primary" href={routes.page(locale, 'contact')}>
           {content.primary}<ArrowUpRight size={20} aria-hidden="true"/>
-        </a>
+        </Link>
         <Link className="inbs-editorial-cta-action inbs-editorial-cta-secondary" href={content.secondaryHref}>
           {content.secondary}<ArrowUpRight size={20} aria-hidden="true"/>
         </Link>

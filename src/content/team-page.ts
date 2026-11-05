@@ -25,7 +25,7 @@ export const teamPageContent = {
     closingEyebrow: 'START A CONVERSATION',
     closingTitle: 'Let’s find the right next step.',
     closingLead: 'Have a question about a business or personal service? Reach out to the INBS team.',
-    emailAction: 'Email INBS',
+    emailAction: 'Contact INBS',
     servicesAction: 'Explore our services',
   },
   ar: {
@@ -53,7 +53,7 @@ export const teamPageContent = {
     closingEyebrow: 'ابدأ الحوار',
     closingTitle: 'لنحدّد الخطوة المناسبة معاً.',
     closingLead: 'عندك استفسار عن إحدى خدمات الأعمال أو الخدمات الشخصية؟ تواصل مع فريق INBS.',
-    emailAction: 'راسل INBS',
+    emailAction: 'تواصل مع INBS',
     servicesAction: 'استكشف خدماتنا',
   },
 } as const;

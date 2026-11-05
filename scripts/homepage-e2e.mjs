@@ -488,7 +488,7 @@ for(const locale of ['en','ar']){
     copy.push(heading);
     assert.ok(heading.trim().length>10,name+' CTA missing localized heading');
     assert.equal(await section.locator('a').count(),2,name+' must have two actions');
-    assert.equal(await section.locator('a[href^="mailto:"]').count(),1,'Primary action must have working mailto');
+    assert.equal(await section.locator('a').first().getAttribute('href'),'/'+locale+'/contact','Primary CTA must link to Contact page');
     assert.equal(await section.locator('a').nth(1).getAttribute('href'),'/'+locale+'/'+secondary);
     assert.equal(await section.locator('.inbs-editorial-cta-action svg').count(),2);
     assert.ok(snapshot.sectionHeight<550,'CTA '+name+' is too tall at desktop: '+snapshot.sectionHeight);
