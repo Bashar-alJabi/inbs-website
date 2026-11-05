@@ -1,4 +1,5 @@
 import { ArrowDown } from 'lucide-react';
+import { TeamPhoto } from './team-photo';
 import { teamPageContent } from '@/content/team-page';
 import type { Locale } from '@/lib/site';
 
@@ -10,9 +11,9 @@ export function TeamHero({ locale }: { locale: Locale }) {
       <div className="site-shell inbs-team-hero-inner">
         <p className="inbs-team-kicker inbs-team-hero-eyebrow"><span aria-hidden="true"/>{t.eyebrow}</p>
         <div className="inbs-team-gallery" aria-label={t.galleryLabel} role="group">
-          <div className="inbs-team-photo inbs-team-photo--event" role="img" aria-label={t.photoEvent}/>
-          <div className="inbs-team-photo inbs-team-photo--portrait" role="img" aria-label={t.photoPortrait}/>
-          <div className="inbs-team-photo inbs-team-photo--office" role="img" aria-label={t.photoOffice}/>
+          <TeamPhoto kind="event" number="01" description={t.photoEvent}/>
+          <TeamPhoto kind="portrait" number="02" description={t.photoPortrait}/>
+          <TeamPhoto kind="office" number="03" description={t.photoOffice}/>
           <svg className="inbs-team-gallery-trails" viewBox="0 0 1100 540" preserveAspectRatio="none" aria-hidden="true">
             <path id="inbs-team-route-one" d="M160 125 C180 38 335 20 447 85 S635 124 730 75" />
             <path id="inbs-team-route-two" d="M816 410 C760 505 604 514 500 467 S289 424 218 483" />
