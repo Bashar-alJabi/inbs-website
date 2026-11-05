@@ -24,7 +24,7 @@ export function EditorialCta({ locale, variant }: { locale: Locale; variant: 'ho
     <div className="site-shell inbs-editorial-cta-inner">
       <Reveal className="inbs-editorial-cta-heading">
         <p className="inbs-editorial-cta-kicker"><span aria-hidden="true"/>{eyebrow}</p>
-        <h2 id={id}>{title.split('\\n').map((line,i)=><span key={i}>{line}</span>)}</h2>
+        <h2 id={id}>{title.split('\n').map((line,i)=><span key={i}>{line}</span>)}</h2>
       </Reveal>
       <Reveal className="inbs-editorial-cta-body" delay={0.12}>
         <p>{description}</p>
