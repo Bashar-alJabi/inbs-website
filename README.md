@@ -4,7 +4,7 @@ Official bilingual frontend website for **International Network Businessmen Serv
 
 ## Status and branches
 
-The bilingual **Home and About pages**, shared shell, and centralized routing/navigation were promoted to `main` through PR #23. The bilingual **Services landing page** and footer navigation updates passed owner visual review and both CI workflows, then were squash-merged into `redesign` via PR #24. Promotion to `main` is tracked in PR #25. The **Our Team** page is in development on `feature/team-page`, with no unverified employee biographies or portraits. Individual service detail pages and other unfinished routes continue to display branded Coming Soon pages. This is **not a completed public production launch**.
+The bilingual **Home and About pages**, shared shell, and centralized routing/navigation were promoted to `main` through PR #23. The bilingual **Services landing page** and footer navigation updates passed owner visual review and both CI workflows, then were squash-merged into `redesign` via PR #24. Promotion to `main` is tracked in PR #25. The bilingual **Our Team** page is owner-reviewed on `feature/team-page`, with ten supplied WebP photographs distributed between its Hero and editorial Story. Its merge and release are subject to passing feature-head CI. Individual service detail pages and other unfinished routes continue to display branded Coming Soon pages. This is **not a completed public production launch**.
 
 - `main`: company-facing approved milestone.
 - `redesign`: integration branch for accepted redesign work.

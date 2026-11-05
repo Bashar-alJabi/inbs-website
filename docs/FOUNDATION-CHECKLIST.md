@@ -180,15 +180,18 @@
 
 ## Page architecture consistency — feature/team-page
 
-- [x] Split Team Hero/Intro/Principles/Note/CTA into page-local components; TeamPage now composes sections only.
+- [x] Separate Team Hero/Story/CTA into page-local components; TeamPage composes these three sections only.
 - [x] Split Services Hero/Directory/CTA into page-local components; ServicesPage now composes sections only.
 - [x] Move each CTA into its corresponding Home/About/Services/Team folder; retain shared CSS for intentionally uniform visual design.
 - [x] Document mandatory component boundaries and merge/test policy in root AGENTS.md.
-- [ ] Validate final feature-head CI before any merge; confirm owner visual approval.
+- [x] Owner reviewed and approved Team page visuals for merging (5 November 2026).
+- [ ] Validate final feature-head CI, production smoke, and browser accessibility audit before merging.
 
 ## Team visual narrative restructure — feature/team-page
 
 - [x] Remove the text-only Team Note and its unapproved staff-profile placeholder copy.
 - [x] Combine How We Work and What Guides Us in one page-local TeamStory section.
 - [x] Integrate seven WebP-only image slots into opening, principle beats and closing instead of a gallery strip; no placeholder filenames or numbers are shown.
-- [ ] Upload approved story-04.webp through story-10.webp; review actual crops, accessibility semantics and the final presentation before merging.
+- [x] Owner uploaded hero-01.webp through hero-03.webp and story-04.webp through story-10.webp; all ten paths and WebP signatures verified.
+- [x] Owner visually reviewed Team composition before requesting integration (5 November 2026).
+- [ ] Company-side photo ownership/publication permissions remain to be documented before final public launch.

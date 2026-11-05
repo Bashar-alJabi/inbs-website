@@ -104,7 +104,7 @@ src/
 ## SEO, security and publication
 
 - `src/lib/seo.ts` centralizes `SITE_URL` and `SITE_INDEXABLE`. Indexing is off unless `SITE_INDEXABLE=true`.
-- `src/app/robots.ts`, `src/app/sitemap.ts`, and page metadata govern crawlers and canonical/alternate URLs. The sitemap currently includes only published homepages when indexing is enabled.
+- `src/app/robots.ts`, `src/app/sitemap.ts`, and page metadata govern crawlers and canonical/alternate URLs. The sitemap includes only completed, implemented routes (Home, About, Services, Team) when indexing is enabled.
 - `next.config.ts` sets basic security response headers; this is not a substitute for deployment security testing.
 - No custom backend is currently implemented. Do not claim Contact forms, hosting migration, Search Console, structured data or analytics are complete unless verified.
 - Confirm final domain, hosting/runtime and environment variables before production launch. Never commit secrets.
