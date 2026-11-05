@@ -459,7 +459,7 @@ for(const locale of ['en','ar']){
   await test('closing CTAs / '+locale+' / '+theme,async()=>{
    const appearances=[];
    const copy=[];
-   for(const [route,name,secondary] of [['','home','services'],['about','about','team'],['services','services','team'],['team','team','services']]){
+   for(const [route,name,secondary] of [['','home','services'],['about','about','services'],['services','services','team'],['team','team','services']]){
     await page.goto(origin+'/'+locale+(route?'/'+route:''),{waitUntil:'domcontentloaded',timeout:15000});
     await page.waitForFunction(expected=>document.documentElement.getAttribute('data-theme')===expected,theme,{timeout:10000});
     const section=page.locator('.inbs-editorial-cta--'+name);
