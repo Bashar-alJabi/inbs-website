@@ -93,10 +93,15 @@
 .inbs-team-story-entry-copy p{font-size:clamp(16px,1.4vw,19px);line-height:1.9;color:var(--team-muted);max-width:460px}
 .inbs-team-story-entry-visual{position:relative;min-width:0}
 .inbs-team-story-frame{position:absolute;inset-block-start:-18px;inset-inline-end:-18px;width:28%;height:40%;border:1px solid var(--team-line);z-index:0;pointer-events:none}
-.inbs-team-story-frame::after{content:"";position:absolute;width:8px;height:8px;border-radius:50%;background:var(--team-accent);box-shadow:0 0 10px var(--team-accent);offset-path:inset(0);offset-distance:0%;animation:team-frame-dot 12s linear infinite}
+.inbs-team-story-frame::after{content:"";position:absolute;top:-4px;left:-4px;width:8px;height:8px;border-radius:50%;background:var(--team-accent);box-shadow:0 0 10px var(--team-accent);animation:team-frame-dot 12s linear infinite}
 .inbs-team-story-entry--2 .inbs-team-story-frame::after{animation-delay:-4s}
 .inbs-team-story-entry--3 .inbs-team-story-frame::after{animation-delay:-8s}
-@keyframes team-frame-dot{to{offset-distance:100%}}
+@keyframes team-frame-dot{
+  0%,100%{top:-4px;left:-4px}
+  25%{top:-4px;left:calc(100% - 4px)}
+  50%{top:calc(100% - 4px);left:calc(100% - 4px)}
+  75%{top:calc(100% - 4px);left:-4px}
+}
 .inbs-team-story-entry-visual .inbs-team-story-photo{z-index:1;min-height:0}
 .inbs-team-story-photo--06{width:88%;aspect-ratio:1.34;border-radius:3px 105px 3px 3px;background-image:url('/images/team/story-06.webp')}
 .inbs-team-story-photo--07{width:85%;aspect-ratio:1.12;inset-inline-start:12%;border-radius:130px 3px 3px 3px;background-image:url('/images/team/story-07.webp')}
