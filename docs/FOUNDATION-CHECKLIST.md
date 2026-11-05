@@ -185,3 +185,10 @@
 - [x] Move each CTA into its corresponding Home/About/Services/Team folder; retain shared CSS for intentionally uniform visual design.
 - [x] Document mandatory component boundaries and merge/test policy in root AGENTS.md.
 - [ ] Validate final feature-head CI before any merge; confirm owner visual approval.
+
+## Team visual narrative restructure — feature/team-page
+
+- [x] Remove the text-only Team Note and its unapproved staff-profile placeholder copy.
+- [x] Combine How We Work and What Guides Us in one page-local TeamStory section.
+- [x] Integrate seven WebP-only image slots into opening, principle beats and closing instead of a gallery strip; no placeholder filenames or numbers are shown.
+- [ ] Upload approved story-04.webp through story-10.webp; review actual crops, accessibility semantics and the final presentation before merging.

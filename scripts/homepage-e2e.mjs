@@ -544,7 +544,10 @@ for(const locale of ['en','ar']){
     await page.waitForFunction(expected=>document.documentElement.getAttribute('data-theme')===expected,theme);
     assert.equal(await page.locator('.inbs-team-page').count(),1);
     assert.equal(await page.locator('.inbs-team-page h1').count(),1);
-    assert.equal(await page.locator('.inbs-team-principle').count(),3);
+    assert.equal(await page.locator('.inbs-team-story').count(),1);
+    assert.equal(await page.locator('.inbs-team-story-entry').count(),3);
+    assert.equal(await page.locator('.inbs-team-story-photo').count(),7);
+    assert.equal(await page.locator('.inbs-team-note').count(),0);
     assert.equal(await page.locator('.inbs-team-gallery .inbs-team-photo').count(),3);
     assert.equal(await page.locator('.inbs-team-gallery-traveler').count(),2);
     assert.equal(await page.locator('.inbs-team-hero-story h1').count(),1);

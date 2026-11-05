@@ -73,10 +73,10 @@ Run lint, type checks, build and browser tests through the PR workflows. Check r
 - Localized copy lives in the corresponding `src/content/home.ts`, `about.ts`, `services-page.ts`, and `team-page.ts` files.
 - Each CTA has a primary link to `/[locale]/contact`; secondary links go to a relevant page (Home/About → Services, Services → Team, Team → Services).
 
-### Team Hero image replacement — no code edits
-
-The hero uses three visual-only SVG mockups in `public/images/team/hero-01.svg`, `hero-02.svg`, and `hero-03.svg`; none contains text or upload instructions. Upload actual **opaque** WebP photos as `public/images/team/hero-01.webp`, `hero-02.webp`, and `hero-03.webp`, respectively. The CSS sets WebP as the top background layer and SVG below it as a fallback, so an uploaded opaque photo fully covers the mockup without code edits. The fallback SVG files should remain in the repository. Cropping is `background-size: cover`, so check the face and subject after uploading. Update screen-reader labels when the actual photos are approved.
-
 ### Team Hero photos
 
 The three photo frames in `src/components/team/team-hero.tsx` load directly from `public/images/team/hero-01.webp`, `hero-02.webp`, and `hero-03.webp` through CSS backgrounds in `src/styles/team.css`. When the files are absent, the frames remain empty. Upload approved WebP files using these exact names and redeploy: the images appear automatically. No fallback files, file checks, JavaScript logic or code changes are required. Crop is controlled by `background-size: cover`; review it after the real photos are added. Update accessible descriptions when images are confirmed.
+
+### Team story — seven integrated photos
+
+The Team page is now strictly **Hero → TeamStory → CTA**. The previous placeholder Team Note is removed. TeamStory combines the former How We Work and What Guides Us copy with seven photo slots, integrated into an editorial layout rather than an isolated gallery. Upload approved WebP images to `public/images/team/story-04.webp`, `story-05.webp`, `story-06.webp`, `story-07.webp`, `story-08.webp`, `story-09.webp`, `story-10.webp`. The CSS references exactly one WebP file per frame; missing files leave visually reserved frames with no fallback or placeholder copy. Desktop/mobile/RTL/dark styles are in `src/styles/team.css`. These editorial images are currently decorative until approved photos and accurate descriptions are available.
