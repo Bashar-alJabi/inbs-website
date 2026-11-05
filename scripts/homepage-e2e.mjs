@@ -460,9 +460,10 @@ for(const locale of ['en','ar']){
    const appearances=[];
    const copy=[];
    for(const [route,name,secondary] of [['','home','services'],['about','about','team'],['services','services','team'],['team','team','services']]){
-    await page.goto(origin+'/'+locale+(route?'/'+route:''),{waitUntil:'networkidle',timeout:45000});
-    await page.waitForFunction(expected=>document.documentElement.getAttribute('data-theme')===expected,theme);
+    await page.goto(origin+'/'+locale+(route?'/'+route:''),{waitUntil:'domcontentloaded',timeout:15000});
+    await page.waitForFunction(expected=>document.documentElement.getAttribute('data-theme')===expected,theme,{timeout:10000});
     const section=page.locator('.inbs-editorial-cta--'+name);
+    await section.waitFor({state:'attached',timeout:10000});
     assert.equal(await section.count(),1,name+' should have exactly one closing CTA');
     const snapshot=await section.evaluate(el=>{
       const style=n=>getComputedStyle(n);
