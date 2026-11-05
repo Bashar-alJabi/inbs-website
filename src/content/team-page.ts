@@ -9,7 +9,7 @@ export const teamPageContent = {
     eventLabel: 'EVENTS', presenceLabel: 'PRESENCE', officeLabel: 'AT WORK',
     titleOne: 'More than business.',
     titleTwo: 'The moments behind it.',
-    lead: 'From conversations at the office to moments shared at events, explore the people and experiences behind the INBS presence in Dubai.'
+    lead: 'From conversations at the office to moments shared at events, explore the people and experiences behind the INBS presence in Dubai.',
     explore: 'Meet our approach',
     signature: 'INBS / PEOPLE & MOMENTS',
     location: 'DUBAI, UNITED ARAB EMIRATES',
@@ -42,7 +42,7 @@ export const teamPageContent = {
     eventLabel: 'فعاليات', presenceLabel: 'حضور', officeLabel: 'في العمل',
     titleOne: 'أكثر من أعمال.',
     titleTwo: 'لحظات تصنع الحضور.',
-    lead: 'من لقاءات المكتب إلى المشاركات والفعاليات، نتشارك هنا بعض اللحظات والتجارب التي تعبّر عن حضور INBS في دبي.'
+    lead: 'من لقاءات المكتب إلى المشاركات والفعاليات، نتشارك هنا بعض اللحظات والتجارب التي تعبّر عن حضور INBS في دبي.',
     explore: 'تعرّف إلى نهجنا',
     signature: 'INBS / PEOPLE & MOMENTS',
     location: 'دبي، الإمارات العربية المتحدة',
