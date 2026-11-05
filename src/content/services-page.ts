@@ -16,6 +16,7 @@ export const servicesPageContent = {
     closingTitle: 'Not sure where to start?',
     closingText: 'Tell us what you are looking for, and we can help you identify the right service to explore.',
     closingAction: 'Contact INBS',
+    closingSecondary: 'Meet our team',
   },
   ar: {
     eyebrow: 'شبكة INBS / خدماتنا',
@@ -33,5 +34,6 @@ export const servicesPageContent = {
     closingTitle: 'لا تعرف من أين تبدأ؟',
     closingText: 'شاركنا ما تبحث عنه لنساعدك في تحديد مجال الخدمة الأنسب للبدء.',
     closingAction: 'تواصل مع INBS',
+    closingSecondary: 'تعرّف على فريقنا',
   },
 } as const;

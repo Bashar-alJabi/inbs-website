@@ -331,7 +331,7 @@ for (const locale of ['en','ar']) {
       assert.equal(response.status,200,'Missing local hero WebP: '+name);
       assert.match(response.headers.get('content-type')||'',/image\/webp/);
     }
-    assert.equal(await page.locator('.inbs-services-closing-action').getAttribute('href'),
+    assert.equal(await page.locator('.inbs-editorial-cta--services .inbs-editorial-cta-primary').getAttribute('href'),
       '/'+locale+'/contact');
     const dims=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
     assert.ok(dims.scroll<=dims.inner+3,'Horizontal overflow: '+JSON.stringify(dims));
@@ -450,6 +450,59 @@ await test('service WebP files and metadata',async()=>{
   assert.ok((await response.arrayBuffer()).byteLength>12000,slug+' unexpectedly small');
  }
 });
+// One reusable closing component: same geometry, typography, links and interaction.
+for(const locale of ['en','ar']){
+ for(const theme of ['light','dark']){
+  const context=await browser.newContext({viewport:{width:1440,height:900},reducedMotion:'reduce',colorScheme:theme});
+  await context.addInitScript(t=>localStorage.setItem('inbs-theme',t),theme);
+  const page=await context.newPage();
+  await test('closing CTAs / '+locale+' / '+theme,async()=>{
+   const appearances=[];
+   const copy=[];
+   for(const [route,name,secondary] of [['','home','services'],['about','about','services'],['services','services','team'],['team','team','services']]){
+    await page.goto(origin+'/'+locale+(route?'/'+route:''),{waitUntil:'domcontentloaded',timeout:15000});
+    await page.waitForFunction(expected=>document.documentElement.getAttribute('data-theme')===expected,theme,{timeout:10000});
+    const section=page.locator('.inbs-editorial-cta--'+name);
+    await section.waitFor({state:'attached',timeout:10000});
+    assert.equal(await section.count(),1,name+' should have exactly one closing CTA');
+    const snapshot=await section.evaluate(el=>{
+      const style=n=>getComputedStyle(n);
+      const links=[...el.querySelectorAll('.inbs-editorial-cta-action')];
+      return {
+       background:style(el).backgroundColor,
+       headingSize:style(el.querySelector('h2')).fontSize,
+       paddingTop:style(el).paddingTop,
+       paddingBottom:style(el).paddingBottom,
+       sectionHeight:el.getBoundingClientRect().height,
+       links:links.map(link=>({
+        size:style(link).fontSize,
+        weight:style(link).fontWeight,
+        minHeight:style(link).minHeight,
+        transition:style(link).transition,
+        iconTransition:style(link.querySelector('svg')).transition
+       }))
+      };
+    });
+    appearances.push(snapshot);
+    const heading=await section.locator('h2').innerText();
+    copy.push(heading);
+    assert.ok(heading.trim().length>10,name+' CTA missing localized heading');
+    assert.equal(await section.locator('a').count(),2,name+' must have two actions');
+    assert.equal(await section.locator('a').first().getAttribute('href'),'/'+locale+'/contact','Primary CTA must link to Contact page');
+    assert.equal(await section.locator('a').nth(1).getAttribute('href'),'/'+locale+'/'+secondary);
+    assert.equal(await section.locator('.inbs-editorial-cta-action svg').count(),2);
+    assert.ok(snapshot.sectionHeight<550,'CTA '+name+' is too tall at desktop: '+snapshot.sectionHeight);
+   }
+   const reference=appearances[0];
+   for(const item of appearances.slice(1)){
+    for(const key of ['background','headingSize','paddingTop','paddingBottom'])assert.equal(item[key],reference[key],'CTA mismatch: '+key);
+    assert.deepEqual(item.links,reference.links,'Action fonts/hover transitions must match');
+   }
+   assert.equal(new Set(copy).size,4,'All four CTAs should have distinct messages');
+  });
+  await context.close();
+ }
+}
 await test('footer navigation uses one legal page and a full-services link',async()=>{
  for(const locale of ['en','ar']){
   const context=await browser.newContext({viewport:{width:1440,height:900}});
@@ -474,6 +527,42 @@ await test('footer navigation uses one legal page and a full-services link',asyn
   } finally { await context.close(); }
  }
 });
+// Our Team: bilingual, responsive, accessible, no fictional employee profiles.
+for(const locale of ['en','ar']){
+ for(const size of sizes){
+  for(const theme of ['light','dark']){
+   const context=await browser.newContext({viewport:{width:size.width,height:size.height},reducedMotion:'reduce',colorScheme:theme});
+   await context.addInitScript(t=>localStorage.setItem('inbs-theme',t),theme);
+   const page=await context.newPage();
+   const errors=[];
+   page.on('pageerror',error=>errors.push(String(error)));
+   await test('team/'+[locale,size.name,theme].join('/')+' page and accessibility',async()=>{
+    const res=await page.goto(origin+'/'+locale+'/team',{waitUntil:'networkidle',timeout:45000});
+    assert.equal(res?.status(),200);
+    assert.equal(await page.locator('html').getAttribute('lang'),locale);
+    assert.equal(await page.locator('html').getAttribute('dir'),locale==='ar'?'rtl':'ltr');
+    await page.waitForFunction(expected=>document.documentElement.getAttribute('data-theme')===expected,theme);
+    assert.equal(await page.locator('.inbs-team-page').count(),1);
+    assert.equal(await page.locator('.inbs-team-page h1').count(),1);
+    assert.equal(await page.locator('.inbs-team-story').count(),1);
+    assert.equal(await page.locator('.inbs-team-story-entry').count(),3);
+    assert.equal(await page.locator('.inbs-team-story-photo').count(),7);
+    assert.equal(await page.locator('.inbs-team-note').count(),0);
+    assert.equal(await page.locator('.inbs-team-gallery .inbs-team-photo').count(),3);
+    assert.equal(await page.locator('.inbs-team-gallery-traveler').count(),2);
+    assert.equal(await page.locator('.inbs-team-hero-story h1').count(),1);
+    assert.equal(await page.locator('.inbs-editorial-cta--team .inbs-editorial-cta-primary').getAttribute('href'),'/'+locale+'/contact');
+    assert.equal(await page.locator('.inbs-editorial-cta--team .inbs-editorial-cta-secondary').getAttribute('href'),'/'+locale+'/services');
+    const dims=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
+    assert.ok(dims.scroll<=dims.inner+3,'Team horizontal overflow: '+JSON.stringify(dims));
+    const violations=(await new AxeBuilder({page}).include('.inbs-team-page').withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa']).analyze()).violations;
+    assert.deepEqual(violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)})),[]);
+    assert.deepEqual(errors,[]);
+   });
+   await context.close();
+  }
+ }
+}
 await test('navigation endpoints and security',async()=>{
  for(const locale of ['en','ar']){
   for(const slug of ['about','services','contact','team','privacy-policy','terms','services/businessmen-services','services/citizenship-and-immigration-services']){
