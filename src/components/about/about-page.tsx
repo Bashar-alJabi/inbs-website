@@ -3,7 +3,7 @@ import { AboutHero } from './about-hero';
 import { AboutIntro } from './about-intro';
 import { AboutPrinciples } from './about-principles';
 import { AboutNetwork } from './about-network';
-import { EditorialCta } from '@/components/shared/editorial-cta';
+import { AboutCta } from './about-cta';
 
 /** Page composition only. Sections, content and styles have separate owners. */
 export function AboutPage({ locale }: { locale: Locale }) {
@@ -12,6 +12,6 @@ export function AboutPage({ locale }: { locale: Locale }) {
     <AboutIntro locale={locale}/>
     <AboutPrinciples locale={locale}/>
     <AboutNetwork locale={locale}/>
-    <EditorialCta locale={locale} variant="about"/>
+    <AboutCta locale={locale}/>
   </main>;
 }

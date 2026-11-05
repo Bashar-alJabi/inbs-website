@@ -147,3 +147,7 @@ Before handing over, complete and document: real company-approved content in bot
 - **Project owner:** approve design milestones and merges to the accepted branches.
 
 Only check off completed work with evidence; keep the guide accurate to the checked-in code.
+
+## Page component ownership (November 2026)
+
+Every page matches the Home/About composition pattern. `src/components/<page>/<page>-page.tsx` imports section components but contains no section JSX. Team sections: `team-hero.tsx`, `team-intro.tsx`, `team-principles.tsx`, `team-note.tsx`, `team-cta.tsx`. Services sections: `services-hero.tsx`, `services-directory.tsx`, `services-cta.tsx`. Home and About CTAs are `home-cta.tsx` and `about-cta.tsx`. See `AGENTS.md` for mandatory architecture rules. Shared CSS for CTA consistency is a deliberate **style** abstraction, not a shared React component.

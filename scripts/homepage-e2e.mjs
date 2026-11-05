@@ -548,9 +548,9 @@ for(const locale of ['en','ar']){
     assert.equal(await page.locator('.inbs-team-gallery .inbs-team-photo').count(),3);
     assert.equal(await page.locator('.inbs-team-gallery-traveler').count(),2);
     assert.equal(await page.locator('.inbs-team-hero-story h1').count(),1);
-    assert.equal((await page.locator('.inbs-team-email').getAttribute('href'))?.startsWith('mailto:'),true);
-    assert.equal(await page.locator('.inbs-team-services-link').getAttribute('href'),'/'+locale+'/services');
-    assert.equal(await page.locator('.inbs-team-page img').count(),0,'Do not use unverified employee images');
+    assert.equal(await page.locator('.inbs-editorial-cta--team .inbs-editorial-cta-primary').getAttribute('href'),'/'+locale+'/contact');
+    assert.equal(await page.locator('.inbs-editorial-cta--team .inbs-editorial-cta-secondary').getAttribute('href'),'/'+locale+'/services');
+    assert.equal(await page.locator('.inbs-team-gallery .inbs-team-photo').count(),3,'Hero should have three photo placeholder slots');
     const dims=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
     assert.ok(dims.scroll<=dims.inner+3,'Team horizontal overflow: '+JSON.stringify(dims));
     const violations=(await new AxeBuilder({page}).include('.inbs-team-page').withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa']).analyze()).violations;

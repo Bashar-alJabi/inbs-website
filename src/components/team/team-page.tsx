@@ -1,100 +1,17 @@
-import { ArrowDown } from 'lucide-react';
-import { Reveal } from '@/components/shared/reveal';
-import { EditorialCta } from '@/components/shared/editorial-cta';
-import { teamPageContent } from '@/content/team-page';
 import type { Locale } from '@/lib/site';
+import { TeamHero } from './team-hero';
+import { TeamIntro } from './team-intro';
+import { TeamPrinciples } from './team-principles';
+import { TeamNote } from './team-note';
+import { TeamCta } from './team-cta';
 
-/**
- * Identity-free Team landing page.
- * Real employee cards must not be added without approved names, positions and photos.
- */
+/** Page composition only. Each section owns its markup. */
 export function TeamPage({ locale }: { locale: Locale }) {
-  const t = teamPageContent[locale];
   return <main className="inbs-team-page">
-    <section className="inbs-team-hero" aria-labelledby="inbs-team-title">
-      <div className="inbs-team-hero-glow" aria-hidden="true"/>
-      <div className="site-shell inbs-team-hero-inner">
-        <p className="inbs-team-kicker inbs-team-hero-eyebrow"><span aria-hidden="true"/>{t.eyebrow}</p>
-        <div className="inbs-team-gallery" aria-label={t.galleryLabel} role="group">
-          <div className="inbs-team-photo inbs-team-photo--event" role="img" aria-label={t.photoEvent}>
-            <span className="inbs-team-photo-index" aria-hidden="true">01 / {t.eventLabel}</span>
-          </div>
-          <div className="inbs-team-photo inbs-team-photo--portrait" role="img" aria-label={t.photoPortrait}>
-            <span className="inbs-team-photo-index" aria-hidden="true">02 / {t.presenceLabel}</span>
-          </div>
-          <div className="inbs-team-photo inbs-team-photo--office" role="img" aria-label={t.photoOffice}>
-            <span className="inbs-team-photo-index" aria-hidden="true">03 / {t.officeLabel}</span>
-          </div>
-          <svg className="inbs-team-gallery-trails" viewBox="0 0 1100 540" preserveAspectRatio="none" aria-hidden="true">
-            <path id="inbs-team-route-one" d="M160 125 C180 38 335 20 447 85 S635 124 730 75" />
-            <path id="inbs-team-route-two" d="M816 410 C760 505 604 514 500 467 S289 424 218 483" />
-            <circle r="4.5" className="inbs-team-gallery-traveler">
-              <animateMotion dur="17s" repeatCount="indefinite" path="M160 125 C180 38 335 20 447 85 S635 124 730 75"/>
-            </circle>
-            <circle r="3.5" className="inbs-team-gallery-traveler inbs-team-gallery-traveler--second">
-              <animateMotion dur="21s" begin="-9s" repeatCount="indefinite" path="M816 410 C760 505 604 514 500 467 S289 424 218 483"/>
-            </circle>
-            <circle cx="160" cy="125" r="3" className="inbs-team-gallery-node"/>
-            <circle cx="730" cy="75" r="3" className="inbs-team-gallery-node"/>
-            <circle cx="218" cy="483" r="3" className="inbs-team-gallery-node"/>
-          </svg>
-          <span className="inbs-team-gallery-number" aria-hidden="true">03<span> / 10</span></span>
-          <span className="inbs-team-gallery-caption" aria-hidden="true" dir="ltr">INBS — PEOPLE & MOMENTS</span>
-        </div>
-        <div className="inbs-team-hero-story">
-          <div className="inbs-team-hero-copy">
-            <h1 id="inbs-team-title"><span>{t.titleOne}</span><span>{t.titleTwo}</span></h1>
-          </div>
-          <div className="inbs-team-hero-side">
-            <p className="inbs-team-hero-lead">{t.lead}</p>
-            <a href="#team-approach" className="inbs-team-link">{t.explore}<ArrowDown size={19} aria-hidden="true"/></a>
-          </div>
-        </div>
-        <div className="inbs-team-hero-footer"><span>{t.location}</span><span>{t.signature}</span></div>
-      </div>
-    </section>
-
-    <section className="inbs-team-intro" id="team-approach" aria-labelledby="inbs-team-intro-title">
-      <div className="site-shell inbs-team-intro-grid">
-        <Reveal>
-          <p className="inbs-team-kicker"><span aria-hidden="true"/>{t.introEyebrow}</p>
-          <h2 id="inbs-team-intro-title">{t.introTitle}</h2>
-        </Reveal>
-        <Reveal className="inbs-team-intro-copy" delay={0.1}>
-          <p className="inbs-team-intro-lead">{t.introLead}</p>
-          <p>{t.introBody}</p>
-        </Reveal>
-      </div>
-    </section>
-
-    <section className="inbs-team-principles" aria-labelledby="inbs-team-principles-title">
-      <div className="site-shell">
-        <Reveal className="inbs-team-principles-head">
-          <p className="inbs-team-kicker"><span aria-hidden="true"/>{t.principlesEyebrow}</p>
-          <h2 id="inbs-team-principles-title">{t.principlesTitle}</h2>
-        </Reveal>
-        <div className="inbs-team-principles-grid">
-          {t.principles.map((principle, index) =>
-            <Reveal key={principle.code} className="inbs-team-principle" delay={index * 0.07}>
-              <span className="inbs-team-principle-code">{principle.code}</span>
-              <h3>{principle.title}</h3>
-              <p>{principle.description}</p>
-            </Reveal>
-          )}
-        </div>
-      </div>
-    </section>
-
-    <section className="inbs-team-note" aria-labelledby="inbs-team-note-title">
-      <div className="site-shell inbs-team-note-grid">
-        <Reveal>
-          <p className="inbs-team-kicker"><span aria-hidden="true"/>{t.noteEyebrow}</p>
-          <h2 id="inbs-team-note-title">{t.noteTitle}</h2>
-        </Reveal>
-        <Reveal delay={0.1}><p>{t.noteBody}</p></Reveal>
-      </div>
-    </section>
-
-    <EditorialCta locale={locale} variant="team"/>
+    <TeamHero locale={locale}/>
+    <TeamIntro locale={locale}/>
+    <TeamPrinciples locale={locale}/>
+    <TeamNote locale={locale}/>
+    <TeamCta locale={locale}/>
   </main>;
 }

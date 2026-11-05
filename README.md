@@ -52,7 +52,7 @@ npm run build
 
 - [Project and handoff guide](docs/PROJECT-GUIDE.md): actual architecture, content ownership, localization, route map and maintenance procedures.
 - [Foundation, page and launch checklist](docs/FOUNDATION-CHECKLIST.md): recurring page reviews and pending launch work.
-- [Coding guidance](AGENTS.md): contributor rules.
+- [Coding guidance](AGENTS.md): **mandatory page composition, section ownership, CTA and review rules**.
 
 **Documentation is part of every page/feature's definition of done.** Update these documents to reflect actual changes and check off only work that has been verified.
 
