@@ -75,11 +75,12 @@
 .inbs-team-story-photo--04{position:absolute;inset-block-start:0;inset-inline-end:0;width:73%;height:84%;border-radius:140px 4px 4px 4px;background-image:url('/images/team/story-04.webp')}
 .inbs-team-story-photo--05{position:absolute;inset-inline-start:0;bottom:0;width:48%;height:44%;border:7px solid var(--team-paper);border-radius:3px;transform:rotate(-6deg);background-image:url('/images/team/story-05.webp');z-index:2}
 .inbs-team-story-orbit{position:absolute;width:88px;height:88px;inset-inline-start:3%;top:13%;border:1px solid var(--team-accent);opacity:.32;border-radius:50%}
-.inbs-team-story-orbit::after{content:"";position:absolute;top:7px;inset-inline-end:10px;width:8px;height:8px;border-radius:50%;background:var(--team-accent)}
+.inbs-team-story-orbit::after{content:"";position:absolute;top:-4px;left:calc(50% - 4px);width:8px;height:8px;border-radius:50%;background:var(--team-accent);box-shadow:0 0 10px var(--team-accent)}
+.inbs-team-story-orbit{animation:team-orbit 14s linear infinite}
+@keyframes team-orbit{to{transform:rotate(360deg)}}
 .inbs-team-story-bridge{display:flex;align-items:end;gap:clamp(25px,5vw,72px);padding-block:clamp(105px,11vw,170px) clamp(40px,6vw,88px)}
 .inbs-team-story-bridge-copy{max-width:800px;flex:0 1 800px}
 .inbs-team-story-bridge h3{margin:0;font-size:clamp(35px,4.7vw,67px);font-weight:650;line-height:1.22;letter-spacing:-.055em}
-.inbs-team-story-bridge-line{flex:1;height:1px;background:var(--team-line);margin-bottom:16px}
 .inbs-team-story-entries{display:flex;flex-direction:column;gap:clamp(85px,10vw,155px)}
 .inbs-team-story-entry{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr);gap:clamp(35px,8vw,140px);align-items:center}
 .inbs-team-story-entry--2{grid-template-columns:minmax(0,1fr) minmax(0,.78fr)}
@@ -91,7 +92,11 @@
 .inbs-team-story-entry h4{font-size:clamp(29px,3.2vw,47px);line-height:1.24;letter-spacing:-.04em;font-weight:650;margin:0 0 22px}
 .inbs-team-story-entry-copy p{font-size:clamp(16px,1.4vw,19px);line-height:1.9;color:var(--team-muted);max-width:460px}
 .inbs-team-story-entry-visual{position:relative;min-width:0}
-.inbs-team-story-entry-visual::before{content:"";position:absolute;inset-block-start:-18px;inset-inline-end:-18px;width:28%;height:40%;border:1px solid var(--team-line);z-index:0}
+.inbs-team-story-frame{position:absolute;inset-block-start:-18px;inset-inline-end:-18px;width:28%;height:40%;border:1px solid var(--team-line);z-index:0;pointer-events:none}
+.inbs-team-story-frame::after{content:"";position:absolute;width:8px;height:8px;border-radius:50%;background:var(--team-accent);box-shadow:0 0 10px var(--team-accent);offset-path:inset(0);offset-distance:0%;animation:team-frame-dot 12s linear infinite}
+.inbs-team-story-entry--2 .inbs-team-story-frame::after{animation-delay:-4s}
+.inbs-team-story-entry--3 .inbs-team-story-frame::after{animation-delay:-8s}
+@keyframes team-frame-dot{to{offset-distance:100%}}
 .inbs-team-story-entry-visual .inbs-team-story-photo{z-index:1;min-height:0}
 .inbs-team-story-photo--06{width:88%;aspect-ratio:1.34;border-radius:3px 105px 3px 3px;background-image:url('/images/team/story-06.webp')}
 .inbs-team-story-photo--07{width:85%;aspect-ratio:1.12;inset-inline-start:12%;border-radius:130px 3px 3px 3px;background-image:url('/images/team/story-07.webp')}
@@ -122,9 +127,8 @@
  .inbs-team-story-heading h2{font-size:clamp(38px,9vw,51px)}
  .inbs-team-story-opening-visuals{height:clamp(280px,87vw,430px)}
  .inbs-team-story-bridge{padding-block:70px 35px}
- .inbs-team-story-bridge-line{display:none}
  .inbs-team-story-entries{gap:77px}
- .inbs-team-story-entry-visual::before{inset-inline-end:-8px}
+ .inbs-team-story-frame{inset-inline-end:-8px}
  .inbs-team-story-finale{padding-top:86px}
  .inbs-team-story-finale-visuals{height:clamp(260px,80vw,390px)}
  .inbs-team-story-photo--10,.inbs-team-story-photo--05{border-width:4px}
@@ -132,3 +136,5 @@
 html[data-theme=dark] .inbs-team-page{--team-paper:#0b2235;--team-surface:#112e43;--team-ink:#e9f5fd;--team-muted:#b3cbdb;--team-line:#36546b;--team-accent:#8bceef}
 [dir=rtl] .inbs-team-page :is(h1,h2,h3){letter-spacing:0;line-height:1.45}
 [dir=rtl] .inbs-team-kicker,[dir=rtl] .inbs-team-hero-footer{letter-spacing:0}
+
+@media(prefers-reduced-motion:reduce){.inbs-team-story-orbit,.inbs-team-story-frame::after{animation:none}}
