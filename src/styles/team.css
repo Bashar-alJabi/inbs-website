@@ -19,11 +19,11 @@
 .inbs-team-photo{position:relative;min-width:0;overflow:hidden;isolation:isolate;border:1px solid #e5f5ff75;box-shadow:0 26px 75px #00152580;transform-origin:center;transition:transform .45s ease,box-shadow .45s ease;
  background-position:center;background-size:cover;background-repeat:no-repeat}
 .inbs-team-photo--event{z-index:1;aspect-ratio:3/4;transform:rotate(-7deg) translateY(19px);
- }
+ background-image:url('/images/team/hero-01.webp');}
 .inbs-team-photo--portrait{z-index:3;aspect-ratio:4/5.1;transform:translateY(-8px);
- }
+ background-image:url('/images/team/hero-02.webp');}
 .inbs-team-photo--office{z-index:2;aspect-ratio:3/4;transform:rotate(7deg) translateY(30px);
- }
+ background-image:url('/images/team/hero-03.webp');}
 .inbs-team-photo--event:hover{transform:rotate(-4deg) translateY(8px)}
 .inbs-team-photo--portrait:hover{transform:translateY(-17px)}
 .inbs-team-photo--office:hover{transform:rotate(4deg) translateY(19px)}
@@ -95,4 +95,3 @@ html[data-theme=dark] .inbs-team-page{--team-paper:#0b2235;--team-surface:#112e4
 }
 @media(max-width:500px){.inbs-team-intro h2{font-size:clamp(36px,9vw,52px)}}
 
-.inbs-team-photo img{object-fit:cover;object-position:center}
