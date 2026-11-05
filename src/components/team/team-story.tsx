@@ -31,7 +31,6 @@ export function TeamStory({ locale }: { locale: Locale }) {
             <p className="inbs-team-kicker"><span aria-hidden="true"/>{t.principlesEyebrow}</p>
             <h3>{t.principlesTitle}</h3>
           </Reveal>
-          <span className="inbs-team-story-bridge-line" aria-hidden="true"/>
         </div>
 
         <div className="inbs-team-story-entries">
@@ -43,6 +42,7 @@ export function TeamStory({ locale }: { locale: Locale }) {
                 <p>{principle.description}</p>
               </Reveal>
               <Reveal className="inbs-team-story-entry-visual" delay={0.14}>
+                <span className="inbs-team-story-frame" aria-hidden="true"/>
                 <div className={`inbs-team-story-photo inbs-team-story-photo--0${index + 6}`} aria-hidden="true"/>
               </Reveal>
             </div>
