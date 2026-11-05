@@ -17,7 +17,7 @@
 .inbs-team-hero-eyebrow{position:relative;z-index:2;margin-bottom:clamp(28px,4.5vw,62px);color:#b3e2f8}
 .inbs-team-gallery{position:relative;display:grid;grid-template-columns:.83fr 1.13fr .83fr;align-items:center;gap:clamp(13px,3.5vw,54px);min-height:clamp(335px,42vw,570px);padding:20px clamp(8px,2.5vw,32px) 16px;isolation:isolate}
 .inbs-team-photo{position:relative;min-width:0;overflow:hidden;isolation:isolate;border:1px solid #e5f5ff75;box-shadow:0 26px 75px #00152580;transform-origin:center;transition:transform .45s ease,box-shadow .45s ease;
- background-position:center;background-size:cover;background-repeat:no-repeat}
+ background-position:center;background-size:cover;background-repeat:no-repeat;border-radius:var(--radius-button,7px)}
 .inbs-team-photo--event{z-index:1;aspect-ratio:3/4;transform:rotate(-7deg) translateY(19px);
  background-image:url('/images/team/hero-01.webp');}
 .inbs-team-photo--portrait{z-index:3;aspect-ratio:4/5.1;transform:translateY(-8px);
