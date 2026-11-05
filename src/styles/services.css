@@ -185,7 +185,7 @@ html[data-theme=dark] .inbs-services-page{
 }
 [dir=rtl] .inbs-services-page :is(h1,h2,h3){letter-spacing:0}
 [dir=rtl] .inbs-services-page h1{line-height:1.35}
-[dir=rtl] .inbs-services-directory-head h2,[dir=rtl] .inbs-services-closing h2{line-height:1.45}
+[dir=rtl] .inbs-services-directory-head h2{line-height:1.45}
 [dir=rtl] .inbs-services-kicker,[dir=rtl] .inbs-services-hero-bottom,
 [dir=rtl] .inbs-services-entry-overline{letter-spacing:0}
 [dir=rtl] .inbs-services-hero-art-small{left:auto;right:0}
@@ -198,7 +198,6 @@ html[data-theme=dark] .inbs-services-page{
 }
 [dir=rtl] .inbs-services-entry-link:hover .inbs-services-entry-arrow,
 [dir=rtl] .inbs-services-entry-link:hover .inbs-services-entry-bottom>svg,
-[dir=rtl] .inbs-services-closing-action:hover svg{transform:translate(-3px,-3px)}
 @media(max-width:980px){
   .inbs-services-hero-inner{grid-template-columns:1.05fr .95fr}
   .inbs-services-hero h1{font-size:clamp(47px,6.1vw,72px)}
