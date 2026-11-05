@@ -464,6 +464,14 @@ for(const locale of ['en','ar']){
     await page.waitForFunction(expected=>document.documentElement.getAttribute('data-theme')===expected,theme,{timeout:10000});
     const section=page.locator('.inbs-editorial-cta--'+name);
     await section.waitFor({state:'attached',timeout:10000});
+    // Next.js may attach the section before its route stylesheet has finished loading.
+    // Assert the resolved theme background only after the load and style have settled.
+    await page.waitForLoadState('load');
+    await page.waitForFunction(({name,theme})=>{
+      const element=document.querySelector('.inbs-editorial-cta--'+name);
+      const expected=theme==='dark'?'rgb(17, 46, 67)':'rgb(234, 241, 246)';
+      return element!==null&&getComputedStyle(element).backgroundColor===expected;
+    },{name,theme},{timeout:10000});
     assert.equal(await section.count(),1,name+' should have exactly one closing CTA');
     const snapshot=await section.evaluate(el=>{
       const style=n=>getComputedStyle(n);
