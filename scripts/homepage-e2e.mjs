@@ -484,15 +484,15 @@ for(const locale of ['en','ar']){
    const errors=[];
    page.on('pageerror',error=>errors.push(String(error)));
    await test('team/'+[locale,size.name,theme].join('/')+' page and accessibility',async()=>{
-    const res=await page.goto(origin+'/'+locale+'/team',{waitUntil:'domcontentloaded'});
+    const res=await page.goto(origin+'/'+locale+'/team',{waitUntil:'networkidle',timeout:45000});
     assert.equal(res?.status(),200);
     assert.equal(await page.locator('html').getAttribute('lang'),locale);
     assert.equal(await page.locator('html').getAttribute('dir'),locale==='ar'?'rtl':'ltr');
-    assert.equal(await page.locator('html').getAttribute('data-theme'),theme);
+    await page.waitForFunction(expected=>document.documentElement.getAttribute('data-theme')===expected,theme);
     assert.equal(await page.locator('.inbs-team-page').count(),1);
     assert.equal(await page.locator('.inbs-team-page h1').count(),1);
     assert.equal(await page.locator('.inbs-team-principle').count(),3);
-    assert.equal(await page.locator('.inbs-team-email').getAttribute('href')?.startsWith('mailto:'),true);
+    assert.equal((await page.locator('.inbs-team-email').getAttribute('href'))?.startsWith('mailto:'),true);
     assert.equal(await page.locator('.inbs-team-services-link').getAttribute('href'),'/'+locale+'/services');
     assert.equal(await page.locator('.inbs-team-page img').count(),0,'Do not use unverified employee images');
     const dims=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
