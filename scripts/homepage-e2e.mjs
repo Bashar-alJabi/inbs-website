@@ -450,30 +450,53 @@ await test('service WebP files and metadata',async()=>{
   assert.ok((await response.arrayBuffer()).byteLength>12000,slug+' unexpectedly small');
  }
 });
-// Distinct Home and About CTAs, with the exact Services CTA background in both themes.
+// One reusable closing component: same geometry, typography, links and interaction.
 for(const locale of ['en','ar']){
  for(const theme of ['light','dark']){
   const context=await browser.newContext({viewport:{width:1440,height:900},reducedMotion:'reduce',colorScheme:theme});
   await context.addInitScript(t=>localStorage.setItem('inbs-theme',t),theme);
   const page=await context.newPage();
   await test('closing CTAs / '+locale+' / '+theme,async()=>{
-   const surfaces=[];
+   const appearances=[];
    const copy=[];
-   for(const [route,selector] of [['', '.inbs-editorial-cta--home'],['about','.inbs-editorial-cta--about'],['services','.inbs-services-closing'],['team','.inbs-team-closing']]){
+   for(const [route,name,secondary] of [['','home','services'],['about','about','team'],['services','services','team'],['team','team','services']]){
     await page.goto(origin+'/'+locale+(route?'/'+route:''),{waitUntil:'networkidle',timeout:45000});
     await page.waitForFunction(expected=>document.documentElement.getAttribute('data-theme')===expected,theme);
-    const section=page.locator(selector);
-    assert.equal(await section.count(),1,route+' should have exactly one closing CTA');
-    surfaces.push(await section.evaluate(el=>getComputedStyle(el).backgroundColor));
+    const section=page.locator('.inbs-editorial-cta--'+name);
+    assert.equal(await section.count(),1,name+' should have exactly one closing CTA');
+    const snapshot=await section.evaluate(el=>{
+      const style=n=>getComputedStyle(n);
+      const links=[...el.querySelectorAll('.inbs-editorial-cta-action')];
+      return {
+       background:style(el).backgroundColor,
+       headingSize:style(el.querySelector('h2')).fontSize,
+       paddingTop:style(el).paddingTop,
+       paddingBottom:style(el).paddingBottom,
+       sectionHeight:el.getBoundingClientRect().height,
+       links:links.map(link=>({
+        size:style(link).fontSize,
+        weight:style(link).fontWeight,
+        minHeight:style(link).minHeight,
+        transition:style(link).transition,
+        iconTransition:style(link.querySelector('svg')).transition
+       }))
+      };
+    });
+    appearances.push(snapshot);
     const heading=await section.locator('h2').innerText();
     copy.push(heading);
-    assert.ok(heading.trim().length>15,route+' CTA missing localized heading');
-    if(route===''||route==='about'){
-     assert.equal((await section.locator('a[href^="mailto:"]').count()),1);
-     assert.equal(await section.locator('a').count(),2);
-    }
+    assert.ok(heading.trim().length>10,name+' CTA missing localized heading');
+    assert.equal(await section.locator('a').count(),2,name+' must have two actions');
+    assert.equal(await section.locator('a[href^="mailto:"]').count(),1,'Primary action must have working mailto');
+    assert.equal(await section.locator('a').nth(1).getAttribute('href'),'/'+locale+'/'+secondary);
+    assert.equal(await section.locator('.inbs-editorial-cta-action svg').count(),2);
+    assert.ok(snapshot.sectionHeight<550,'CTA '+name+' is too tall at desktop: '+snapshot.sectionHeight);
    }
-   assert.equal(new Set(surfaces).size,1,'All four CTAs must have matching background: '+JSON.stringify(surfaces));
+   const reference=appearances[0];
+   for(const item of appearances.slice(1)){
+    for(const key of ['background','headingSize','paddingTop','paddingBottom'])assert.equal(item[key],reference[key],'CTA mismatch: '+key);
+    assert.deepEqual(item.links,reference.links,'Action fonts/hover transitions must match');
+   }
    assert.equal(new Set(copy).size,4,'All four CTAs should have distinct messages');
   });
   await context.close();

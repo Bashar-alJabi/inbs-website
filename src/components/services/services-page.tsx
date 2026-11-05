@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { Reveal } from '@/components/shared/reveal';
+import { EditorialCta } from '@/components/shared/editorial-cta';
 import { serviceCatalog, serviceSlugs } from '@/content/services';
 import { servicesPageContent } from '@/content/services-page';
 import { routes } from '@/lib/routes';
@@ -68,17 +69,6 @@ export function ServicesPage({ locale }: { locale: Locale }) {
       </div>
     </section>
 
-    <section className="inbs-services-closing" aria-labelledby="inbs-services-closing-title">
-      <div className="site-shell inbs-services-closing-inner">
-        <Reveal>
-          <p className="inbs-services-kicker inbs-section-kicker"><span aria-hidden="true"/>{t.closingEyebrow}</p>
-          <h2 id="inbs-services-closing-title">{t.closingTitle}</h2>
-        </Reveal>
-        <Reveal className="inbs-services-closing-end" delay={0.12}>
-          <p>{t.closingText}</p>
-          <Link href={routes.page(locale,'contact')} className="inbs-services-closing-action">{t.closingAction}<ArrowUpRight size={20} aria-hidden="true"/></Link>
-        </Reveal>
-      </div>
-    </section>
+    <EditorialCta locale={locale} variant="services"/>
   </main>;
 }

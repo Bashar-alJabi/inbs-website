@@ -1,9 +1,7 @@
-import Link from 'next/link';
-import { ArrowDown, ArrowUpRight, Mail } from 'lucide-react';
+import { ArrowDown } from 'lucide-react';
 import { Reveal } from '@/components/shared/reveal';
-import { companyContact } from '@/content/contact';
+import { EditorialCta } from '@/components/shared/editorial-cta';
 import { teamPageContent } from '@/content/team-page';
-import { routes } from '@/lib/routes';
 import type { Locale } from '@/lib/site';
 
 /**
@@ -79,18 +77,6 @@ export function TeamPage({ locale }: { locale: Locale }) {
       </div>
     </section>
 
-    <section className="inbs-team-closing" aria-labelledby="inbs-team-closing-title">
-      <div className="site-shell inbs-team-closing-grid">
-        <Reveal>
-          <p className="inbs-team-kicker"><span aria-hidden="true"/>{t.closingEyebrow}</p>
-          <h2 id="inbs-team-closing-title">{t.closingTitle}</h2>
-        </Reveal>
-        <Reveal className="inbs-team-closing-actions" delay={0.1}>
-          <p>{t.closingLead}</p>
-          <a href={companyContact.emailHref} className="inbs-team-email">{t.emailAction}<Mail size={20} aria-hidden="true"/></a>
-          <Link href={routes.page(locale,'services')} className="inbs-team-services-link">{t.servicesAction}<ArrowUpRight size={20} aria-hidden="true"/></Link>
-        </Reveal>
-      </div>
-    </section>
+    <EditorialCta locale={locale} variant="team"/>
   </main>;
 }

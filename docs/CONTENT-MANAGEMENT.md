@@ -66,9 +66,9 @@ The key is the stable public URL slug. Its position determines display order. Th
 
 Run lint, type checks, build and browser tests through the PR workflows. Check representative paths including `/en/services/cargo-services`, `/ar/services/cargo-services`, homepage service selection, and hero links before approving content changes.
 
-### Homepage, About and Team closing CTAs
+### Shared final CTAs on Home, About, Services and Team
 
-- Home copy reuses the already-existing `homeContent[locale].cta*` fields in `src/content/home.ts`.
-- About closing copy lives alongside the About page content in `src/content/about.ts`.
-- The shared Home/About CTA presenter is `src/components/shared/editorial-cta.tsx` with scoped `src/styles/editorial-cta.css`; Services and Team keep their own component structure and copy.
-- All four closing sections share exactly one background-color token, `--inbs-cta-surface`, in `src/styles/tokens.css`, including dark mode. Do not set new per-page CTA background values.
+- All four page-ending CTAs use `src/components/shared/editorial-cta.tsx` and one stylesheet, `src/styles/editorial-cta.css` loaded once by `src/app/layout.tsx`. Their spacing, heading/font sizes, two links, arrow icon and hover/focus effects are intentionally identical.
+- Each page owns its bilingual labels and copy: `src/content/home.ts`, `src/content/about.ts`, `src/content/services-page.ts`, `src/content/team-page.ts`. Keep headings short and unique to the page.
+- All primary actions use the real `companyContact.emailHref`; secondary links use known implemented routes.
+- The CTA background is `--inbs-cta-surface` in `src/styles/tokens.css`, with a dark-mode override. No page-specific CTA background definitions.

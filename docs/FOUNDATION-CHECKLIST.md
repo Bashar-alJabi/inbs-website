@@ -92,8 +92,8 @@
 ## Cross-page ending CTA consistency — feature/team-page
 
 - [x] Add page-specific closing CTAs to Home and About using the approved existing Home copy and new localized About text.
-- [x] Keep Services and Team CTA structure and copy distinct, but match all four backgrounds through one light/dark design token.
-- [x] Add EN/AR and light/dark browser checks confirming backgrounds, distinct headings and CTA destinations.
+- [x] Use the same shared CTA component for Home, About, Services and Team; keep localized wording page-specific and shorten Home/About headings.
+- [x] Add EN/AR and light/dark browser checks confirming matching backgrounds, heading sizes, padding, button geometry, hover transitions, two links, and distinct copy.
 - [ ] Review all four CTAs visually with the owner before merging.
 
 ## Team page — feature/team-page (initial draft)

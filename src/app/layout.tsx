@@ -4,6 +4,7 @@ import './globals.css';
 import '../styles/home.css';
 import '../styles/site-layout.css';
 import '../styles/tokens.css';
+import '../styles/editorial-cta.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
