@@ -89,6 +89,15 @@
 - [x] Owner authorized conditional promotion; PR #24 squash merged to `redesign` as `171e8cd`.
 - [ ] Final `redesign` → `main` PR #25 CI, merge verification and deployment review.
 
+## Team page — feature/team-page (initial draft)
+
+- [x] Implement bilingual team editorial page using a dedicated route, content module and scoped stylesheet.
+- [x] Avoid invented names, roles, staff counts or representations of stock photographs as company employees.
+- [x] Add metadata, localized canonical/hreflang, default noindex policy and opt-in sitemap entry.
+- [x] Add route and accessibility/browser tests for EN/AR, desktop/tablet/mobile, light/dark, and links.
+- [ ] Verify CI on final commit and obtain visual review before promotion to `redesign` or `main`.
+- [ ] Add named team profiles and authentic portraits only after explicit content approval.
+
 ## C. Repeat after **every page** (copy these tasks to the page PR)
 
 - [ ] Record page name, owner, PR number, preview URL, completion date and any unresolved work.

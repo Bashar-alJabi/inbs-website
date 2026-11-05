@@ -474,6 +474,37 @@ await test('footer navigation uses one legal page and a full-services link',asyn
   } finally { await context.close(); }
  }
 });
+// Our Team: bilingual, responsive, accessible, no fictional employee profiles.
+for(const locale of ['en','ar']){
+ for(const size of sizes){
+  for(const theme of ['light','dark']){
+   const context=await browser.newContext({viewport:{width:size.width,height:size.height},reducedMotion:'reduce',colorScheme:theme});
+   await context.addInitScript(t=>localStorage.setItem('inbs-theme',t),theme);
+   const page=await context.newPage();
+   const errors=[];
+   page.on('pageerror',error=>errors.push(String(error)));
+   await test('team/'+[locale,size.name,theme].join('/')+' page and accessibility',async()=>{
+    const res=await page.goto(origin+'/'+locale+'/team',{waitUntil:'domcontentloaded'});
+    assert.equal(res?.status(),200);
+    assert.equal(await page.locator('html').getAttribute('lang'),locale);
+    assert.equal(await page.locator('html').getAttribute('dir'),locale==='ar'?'rtl':'ltr');
+    assert.equal(await page.locator('html').getAttribute('data-theme'),theme);
+    assert.equal(await page.locator('.inbs-team-page').count(),1);
+    assert.equal(await page.locator('.inbs-team-page h1').count(),1);
+    assert.equal(await page.locator('.inbs-team-principle').count(),3);
+    assert.equal(await page.locator('.inbs-team-email').getAttribute('href')?.startsWith('mailto:'),true);
+    assert.equal(await page.locator('.inbs-team-services-link').getAttribute('href'),'/'+locale+'/services');
+    assert.equal(await page.locator('.inbs-team-page img').count(),0,'Do not use unverified employee images');
+    const dims=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
+    assert.ok(dims.scroll<=dims.inner+3,'Team horizontal overflow: '+JSON.stringify(dims));
+    const violations=(await new AxeBuilder({page}).include('.inbs-team-page').withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa']).analyze()).violations;
+    assert.deepEqual(violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)})),[]);
+    assert.deepEqual(errors,[]);
+   });
+   await context.close();
+  }
+ }
+}
 await test('navigation endpoints and security',async()=>{
  for(const locale of ['en','ar']){
   for(const slug of ['about','services','contact','team','privacy-policy','terms','services/businessmen-services','services/citizenship-and-immigration-services']){

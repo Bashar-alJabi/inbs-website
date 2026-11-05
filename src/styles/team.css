@@ -1,0 +1,88 @@
+/* Team page: editorial people-first treatment without invented employee photography. */
+.inbs-team-page{
+  --team-paper:#f6f9fc;--team-surface:#eaf1f6;--team-ink:#0a3049;
+  --team-muted:#516d80;--team-line:#cbdce6;--team-accent:#146ba8;
+  position:relative;z-index:1;overflow:clip;margin-bottom:-24px;
+  background:var(--team-paper);color:var(--team-ink);
+}
+.inbs-team-page :is(h1,h2,h3,p){margin-top:0}
+.inbs-team-page :is(h1,h2,h3){font-family:var(--font-body);font-weight:650}
+.inbs-team-page h2{font-size:clamp(39px,5.25vw,76px);line-height:1.16;letter-spacing:-.06em}
+.inbs-team-kicker{display:flex;align-items:center;gap:14px;margin:0 0 28px;color:var(--team-accent);font-size:clamp(13px,1.1vw,17px);line-height:1.5;letter-spacing:.1em;font-weight:750;text-transform:uppercase}
+.inbs-team-kicker span{display:inline-block;width:35px;height:1px;background:currentColor;flex:none}
+.inbs-team-hero{position:relative;isolation:isolate;overflow:hidden;min-height:min(840px,100svh);background:#08263e;color:#f1f9ff}
+.inbs-team-hero-glow{position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse 53% 65% at 86% 46%,#1f6794 0%,#0c3556 55%,#08263e 100%)}
+.inbs-team-hero-grid{position:relative;min-height:min(840px,100svh);display:grid;align-items:center;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(22px,5vw,78px);padding-top:clamp(155px,18vh,225px);padding-bottom:95px}
+.inbs-team-hero-copy{position:relative;z-index:2}
+.inbs-team-hero-eyebrow{color:#b3e2f8;margin-bottom:36px}
+.inbs-team-hero h1{font-size:clamp(53px,6.4vw,94px);line-height:1.1;letter-spacing:-.074em;margin:0 0 26px}
+.inbs-team-hero h1 span{display:block}
+.inbs-team-hero h1 span+span{color:#a8d9f5}
+.inbs-team-hero-lead{font-size:clamp(16px,1.4vw,20px);line-height:1.85;max-width:580px;color:#d3e7f2;margin-bottom:27px}
+.inbs-team-link{display:inline-flex;align-items:center;gap:28px;min-height:52px;border-bottom:1px solid #a6dbf4;padding:12px 0;font-size:14px;font-weight:750;transition:gap .2s,color .2s}
+.inbs-team-link:hover{gap:38px;color:#b1e6ff}
+.inbs-team-art{position:relative;width:100%;aspect-ratio:1/1.04;isolation:isolate}
+.inbs-team-art-outline{position:absolute;inset:8% 7% 11% 10%;border:1px solid #addbf052;border-radius:48% 48% 7px 7px}
+.inbs-team-art-panel{position:absolute;display:flex;align-items:end;padding:18px;overflow:hidden;border:1px solid #daeffb64;box-shadow:0 25px 75px #00182d52;isolation:isolate}
+.inbs-team-art-panel::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(152deg,#a9dcf22b,transparent 44%,#071d34ba)}
+.inbs-team-art-panel span{font-size:12px;letter-spacing:.16em;font-weight:750;color:#e7f8ff}
+.inbs-team-art-panel-one{top:5%;inset-inline-start:17%;width:55%;height:58%;background:linear-gradient(135deg,#357da8,#174566 50%,#0c2d46);border-radius:45% 45% 6px 6px}
+.inbs-team-art-panel-two{top:27%;inset-inline-end:2%;width:43%;height:53%;background:linear-gradient(160deg,#b1deed,#5887a5 47%,#204e70);border-radius:4px}
+.inbs-team-art-panel-three{bottom:4%;inset-inline-start:0;width:46%;height:38%;background:linear-gradient(145deg,#8cbedb,#3178a7 55%,#0e3c5f);border-radius:4px}
+.inbs-team-art-line{position:absolute;z-index:4;border-top:1px solid #bbebfd80;transform-origin:start;pointer-events:none}
+.inbs-team-art-line-one{top:38%;left:30%;width:50%;transform:rotate(25deg)}
+.inbs-team-art-line-two{top:78%;left:13%;width:68%;transform:rotate(-22deg)}
+.inbs-team-art-marker{position:absolute;z-index:5;width:7px;height:7px;border-radius:50%;background:#d4f6ff;box-shadow:0 0 0 4px #8fdcff22,0 0 19px 5px #84d4ff88}
+.inbs-team-art-marker-one{top:37%;left:29%}
+.inbs-team-art-marker-two{top:57%;right:20%}
+.inbs-team-art-marker-three{bottom:20%;left:24%}
+.inbs-team-art-caption{position:absolute;z-index:5;inset-inline-end:0;bottom:0;font-size:10px;letter-spacing:.16em;color:#c2e0f0;writing-mode:vertical-rl}
+.inbs-team-hero-footer{position:absolute;inset-inline:clamp(20px,5vw,68px);bottom:24px;display:flex;justify-content:space-between;gap:22px;flex-wrap:wrap;border-top:1px solid #d3efff46;padding-top:17px;font-size:11px;letter-spacing:.12em;color:#c1dce9;font-weight:700}
+.inbs-team-intro{padding-block:clamp(95px,11vw,166px)}
+.inbs-team-intro-grid{display:grid;grid-template-columns:1fr .9fr;gap:clamp(32px,8vw,132px)}
+.inbs-team-intro h2{max-width:690px;margin:0}
+.inbs-team-intro-copy{padding-top:75px}
+.inbs-team-intro-copy p{font-size:clamp(16px,1.25vw,19px);line-height:1.94;color:var(--team-muted)}
+.inbs-team-intro-copy .inbs-team-intro-lead{font-size:clamp(22px,2.2vw,34px);line-height:1.54;letter-spacing:-.035em;color:var(--team-ink);font-weight:550}
+.inbs-team-principles{background:var(--team-surface);padding-block:clamp(90px,10vw,155px)}
+.inbs-team-principles-head{max-width:880px}
+.inbs-team-principles-head h2{margin-bottom:clamp(45px,6vw,88px)}
+.inbs-team-principles-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--team-line)}
+.inbs-team-principle{padding:31px clamp(18px,2.6vw,40px) 10px 0;min-width:0}
+.inbs-team-principle+.inbs-team-principle{border-inline-start:1px solid var(--team-line);padding-inline-start:clamp(18px,2.6vw,40px)}
+.inbs-team-principle-code{display:block;margin-bottom:65px;color:var(--team-accent);font-size:12px;font-weight:800;letter-spacing:.16em}
+.inbs-team-principle h3{font-size:clamp(23px,2.1vw,32px);margin-bottom:16px;line-height:1.35;letter-spacing:-.035em}
+.inbs-team-principle p{font-size:clamp(15px,1.15vw,18px);color:var(--team-muted);line-height:1.9;max-width:340px}
+.inbs-team-note{padding-block:clamp(95px,10vw,155px)}
+.inbs-team-note-grid{display:grid;grid-template-columns:1fr .8fr;align-items:center;gap:clamp(30px,8vw,120px)}
+.inbs-team-note h2{margin:0}
+.inbs-team-note-grid>div:last-child p{font-size:clamp(17px,1.35vw,20px);line-height:1.95;color:var(--team-muted);max-width:540px}
+.inbs-team-closing{padding-block:clamp(88px,10vw,146px) clamp(115px,11vw,175px);background:#123f5f;color:#f4faff}
+.inbs-team-closing-grid{display:grid;grid-template-columns:1.1fr .7fr;align-items:end;gap:clamp(32px,8vw,110px)}
+.inbs-team-closing .inbs-team-kicker{color:#aee3ff}
+.inbs-team-closing h2{margin:0}
+.inbs-team-closing-actions p{color:#d1e7f5;font-size:clamp(16px,1.35vw,19px);line-height:1.85;margin-bottom:30px}
+.inbs-team-closing-actions a{display:flex;align-items:center;justify-content:space-between;gap:20px;max-width:300px;font-size:14px;font-weight:750;padding:14px 0;transition:color .2s}
+.inbs-team-closing-actions a:hover{color:#a9dfff}
+.inbs-team-email{border-bottom:1px solid #b7eaff}
+.inbs-team-services-link{border-bottom:1px solid #91bfd94d}
+html[data-theme=dark] .inbs-team-page{--team-paper:#0b2235;--team-surface:#112e43;--team-ink:#e9f5fd;--team-muted:#b3cbdb;--team-line:#36546b;--team-accent:#8bceef}
+html[data-theme=dark] .inbs-team-closing{background:#152f43}
+[dir=rtl] .inbs-team-page :is(h1,h2,h3){letter-spacing:0;line-height:1.45}
+[dir=rtl] .inbs-team-kicker,[dir=rtl] .inbs-team-hero-footer{letter-spacing:0}
+[dir=rtl] .inbs-team-art{direction:ltr}
+@media(max-width:900px){.inbs-team-hero-grid{grid-template-columns:1fr .8fr}.inbs-team-hero h1{font-size:clamp(46px,5.8vw,65px)}}
+@media(max-width:760px){
+ .inbs-team-hero,.inbs-team-hero-grid{min-height:0}
+ .inbs-team-hero-grid{grid-template-columns:1fr;padding-top:clamp(145px,18vh,185px);padding-bottom:92px;gap:28px}
+ .inbs-team-hero h1{font-size:clamp(45px,9vw,66px)}
+ .inbs-team-art{width:min(76%,410px);margin-inline:auto;aspect-ratio:1.35}
+ .inbs-team-hero-footer{bottom:19px}
+ .inbs-team-intro-grid,.inbs-team-note-grid,.inbs-team-closing-grid{grid-template-columns:1fr;gap:25px}
+ .inbs-team-intro-copy{padding-top:0}
+ .inbs-team-principles-grid{grid-template-columns:1fr;border-top:0}
+ .inbs-team-principle,.inbs-team-principle+.inbs-team-principle{padding:23px 0 24px;border-inline-start:0;border-top:1px solid var(--team-line)}
+ .inbs-team-principle-code{margin-bottom:24px}
+}
+@media(max-width:500px){.inbs-team-art{width:min(88%,340px)}.inbs-team-hero-footer{font-size:10px}.inbs-team-hero h1{font-size:clamp(42px,10vw,57px)}.inbs-team-intro h2{font-size:clamp(36px,9vw,52px)}}
+@media(prefers-reduced-motion:reduce){.inbs-team-link,.inbs-team-closing-actions a{transition:none}}

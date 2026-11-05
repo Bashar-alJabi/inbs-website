@@ -28,6 +28,7 @@ try {
   for (const locale of ['en', 'ar']) {
     await check(`/${locale}/about`, { pattern: /class="inbs-about-page"/, label: `${locale} published About page` });
     await check(`/${locale}/services`, { pattern: /class="inbs-services-page"/, label: `${locale} dedicated Services landing page` });
+    await check(`/${locale}/team`, { pattern: /class=\"inbs-team-page\"/, label: `${locale} dedicated Team page` });
     await check(`/${locale}/legal`, { label: `${locale} unified legal placeholder` });
     for (const oldPath of ['privacy-policy', 'terms']) {
       const old = await fetch(`${origin}/${locale}/${oldPath}`, { redirect: 'manual', signal: AbortSignal.timeout(15000) });

@@ -29,7 +29,7 @@ The `[locale]` URL segment is either `en` or `ar`; `/en` and `/ar` are the imple
 | `/[locale]/about` | Implemented and promoted to `main` (PRs #21 and #23) |
 | `/[locale]/services` | Bilingual landing page implemented and merged into `redesign`; promotion to `main` pending PR #25 |
 | `/[locale]/services/[slug]` | Coming Soon for ten recognized service slugs |
-| `/[locale]/team` | Coming Soon |
+| `/[locale]/team` | Bilingual people-first editorial page in progress on `feature/team-page` (no fictional profiles; review pending) |
 | `/[locale]/insights` | Coming Soon |
 | `/[locale]/careers` | Coming Soon |
 | `/[locale]/contact` | Coming Soon |
