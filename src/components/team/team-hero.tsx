@@ -8,17 +8,10 @@ export function TeamHero({ locale }: { locale: Locale }) {
     <section className="inbs-team-hero" aria-labelledby="inbs-team-title">
       <div className="inbs-team-hero-glow" aria-hidden="true"/>
       <div className="site-shell inbs-team-hero-inner">
-        <p className="inbs-team-kicker inbs-team-hero-eyebrow"><span aria-hidden="true"/>{t.eyebrow}</p>
         <div className="inbs-team-gallery" aria-label={t.galleryLabel} role="group">
-          <div className="inbs-team-photo inbs-team-photo--event" role="img" aria-label={t.photoEvent}>
-            <span className="inbs-team-photo-index" aria-hidden="true">01 / {t.eventLabel}</span>
-          </div>
-          <div className="inbs-team-photo inbs-team-photo--portrait" role="img" aria-label={t.photoPortrait}>
-            <span className="inbs-team-photo-index" aria-hidden="true">02 / {t.presenceLabel}</span>
-          </div>
-          <div className="inbs-team-photo inbs-team-photo--office" role="img" aria-label={t.photoOffice}>
-            <span className="inbs-team-photo-index" aria-hidden="true">03 / {t.officeLabel}</span>
-          </div>
+          <div className="inbs-team-photo inbs-team-photo--event" role="img" aria-label={t.photoEvent}/>
+          <div className="inbs-team-photo inbs-team-photo--portrait" role="img" aria-label={t.photoPortrait}/>
+          <div className="inbs-team-photo inbs-team-photo--office" role="img" aria-label={t.photoOffice}/>
           <svg className="inbs-team-gallery-trails" viewBox="0 0 1100 540" preserveAspectRatio="none" aria-hidden="true">
             <path id="inbs-team-route-one" d="M160 125 C180 38 335 20 447 85 S635 124 730 75" />
             <path id="inbs-team-route-two" d="M816 410 C760 505 604 514 500 467 S289 424 218 483" />
@@ -32,8 +25,6 @@ export function TeamHero({ locale }: { locale: Locale }) {
             <circle cx="730" cy="75" r="3" className="inbs-team-gallery-node"/>
             <circle cx="218" cy="483" r="3" className="inbs-team-gallery-node"/>
           </svg>
-          <span className="inbs-team-gallery-number" aria-hidden="true">03<span> / 10</span></span>
-          <span className="inbs-team-gallery-caption" aria-hidden="true" dir="ltr">INBS — PEOPLE & MOMENTS</span>
         </div>
         <div className="inbs-team-hero-story">
           <div className="inbs-team-hero-copy">

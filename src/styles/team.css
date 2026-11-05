@@ -14,11 +14,9 @@
 .inbs-team-hero{position:relative;isolation:isolate;overflow:hidden;background:#08263e;color:#f1f9ff}
 .inbs-team-hero-glow{position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse 65% 48% at 50% 28%,#164e73 0%,#0b3454 55%,#08263e 100%)}
 .inbs-team-hero-inner{position:relative;padding-top:clamp(142px,16vh,192px);padding-bottom:clamp(42px,5vw,68px)}
-.inbs-team-hero-eyebrow{position:relative;z-index:2;margin-bottom:clamp(28px,4.5vw,62px);color:#b3e2f8}
-.inbs-team-gallery{position:relative;display:grid;grid-template-columns:.83fr 1.13fr .83fr;align-items:center;gap:clamp(13px,3.5vw,54px);min-height:clamp(335px,42vw,570px);padding:20px clamp(8px,2.5vw,32px) 30px;isolation:isolate}
+.inbs-team-gallery{position:relative;display:grid;grid-template-columns:.83fr 1.13fr .83fr;align-items:center;gap:clamp(13px,3.5vw,54px);min-height:clamp(335px,42vw,570px);padding:20px clamp(8px,2.5vw,32px) 16px;isolation:isolate}
 .inbs-team-photo{position:relative;min-width:0;overflow:hidden;isolation:isolate;border:1px solid #e5f5ff75;box-shadow:0 26px 75px #00152580;transform-origin:center;transition:transform .45s ease,box-shadow .45s ease;
  background-position:center;background-size:cover;background-repeat:no-repeat}
-.inbs-team-photo::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 62%,#051f35a6 100%)}
 .inbs-team-photo--event{z-index:1;aspect-ratio:3/4;transform:rotate(-7deg) translateY(19px);
  background-image:url('/images/team/hero-01.webp'),url('/images/team/hero-01.svg')}
 .inbs-team-photo--portrait{z-index:3;aspect-ratio:4/5.1;transform:translateY(-8px);
@@ -28,16 +26,11 @@
 .inbs-team-photo--event:hover{transform:rotate(-4deg) translateY(8px)}
 .inbs-team-photo--portrait:hover{transform:translateY(-17px)}
 .inbs-team-photo--office:hover{transform:rotate(4deg) translateY(19px)}
-.inbs-team-photo-index{position:absolute;bottom:17px;inset-inline-start:20px;z-index:2;color:#f3faff;font-size:10px;font-weight:800;letter-spacing:.16em;text-shadow:0 2px 10px #00172d;line-height:1.6}
-[dir=rtl] .inbs-team-photo-index{letter-spacing:0}
 .inbs-team-gallery-trails{position:absolute;z-index:4;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;fill:none;stroke:#b6e9fc91;stroke-width:1.2}
 .inbs-team-gallery-trails>path{stroke-dasharray:3 8;opacity:.65}
 .inbs-team-gallery-traveler{fill:#b7edff;stroke:none;filter:drop-shadow(0 0 7px #94dcff) drop-shadow(0 0 14px #71d6ff)}
 .inbs-team-gallery-traveler--second{fill:#e7faff}
 .inbs-team-gallery-node{fill:#b7edff;stroke:none}
-.inbs-team-gallery-number{position:absolute;z-index:5;bottom:-4px;inset-inline-start:0;color:#e9f7ff;font-size:clamp(27px,3.7vw,48px);letter-spacing:-.08em;font-weight:600;line-height:1}
-.inbs-team-gallery-number span{font-size:.34em;letter-spacing:.05em;color:#9dbfd3}
-.inbs-team-gallery-caption{position:absolute;z-index:5;inset-inline-end:0;bottom:5px;font-size:10px;letter-spacing:.16em;color:#b4d5e9;font-weight:650}
 .inbs-team-hero-story{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.7fr);align-items:end;gap:clamp(30px,8vw,122px);margin-top:clamp(48px,6vw,80px)}
 .inbs-team-hero h1{font-size:clamp(45px,5.4vw,82px);line-height:1.11;letter-spacing:-.068em;margin:0}
 .inbs-team-hero h1 span{display:block}
@@ -49,23 +42,18 @@
 .inbs-team-hero-footer{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-top:clamp(48px,5.5vw,78px);border-top:1px solid #d3efff46;padding-top:16px;font-size:11px;letter-spacing:.12em;color:#c1dce9;font-weight:700}
 [dir=rtl] .inbs-team-hero-footer{letter-spacing:0}
 [dir=rtl] .inbs-team-gallery{direction:ltr}
-[dir=rtl] .inbs-team-gallery-number{inset-inline-start:auto;left:0}
 @media(max-width:760px){
  .inbs-team-hero-inner{padding-top:clamp(135px,17vh,175px);padding-bottom:42px}
  .inbs-team-gallery{gap:clamp(10px,2vw,18px);min-height:0;padding:12px 3px 25px}
  .inbs-team-photo--event{transform:rotate(-6deg) translateY(11px)}
  .inbs-team-photo--office{transform:rotate(6deg) translateY(18px)}
- .inbs-team-gallery-number{font-size:25px;bottom:-7px}
- .inbs-team-gallery-caption{font-size:8px;bottom:-5px}
  .inbs-team-hero-story{grid-template-columns:1fr;gap:22px;margin-top:clamp(38px,7vw,60px)}
  .inbs-team-hero h1{font-size:clamp(42px,8.4vw,64px)}
  .inbs-team-hero-footer{margin-top:40px}
 }
 @media(max-width:450px){
  .inbs-team-gallery{gap:8px}
- .inbs-team-photo-index{font-size:8px;bottom:9px;inset-inline-start:9px}
  .inbs-team-hero h1{font-size:clamp(37px,9vw,48px)}
- .inbs-team-gallery-caption{font-size:7px}
 }
 @media(prefers-reduced-motion:reduce){
  .inbs-team-photo,.inbs-team-link{transition:none}

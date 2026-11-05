@@ -72,3 +72,7 @@ Run lint, type checks, build and browser tests through the PR workflows. Check r
 - All four intentionally share the same CSS presentation in `src/styles/editorial-cta.css` (imported once by root layout) and background token `--inbs-cta-surface` from `src/styles/tokens.css`. Use this shared style layer only for uniform visual treatment; keep page content and behavior local.
 - Localized copy lives in the corresponding `src/content/home.ts`, `about.ts`, `services-page.ts`, and `team-page.ts` files.
 - Each CTA has a primary link to `/[locale]/contact`; secondary links go to a relevant page (Home/About → Services, Services → Team, Team → Services).
+
+### Team Hero image replacement — no code edits
+
+The hero uses three visual-only SVG mockups in `public/images/team/hero-01.svg`, `hero-02.svg`, and `hero-03.svg`; none contains text or upload instructions. Upload actual **opaque** WebP photos as `public/images/team/hero-01.webp`, `hero-02.webp`, and `hero-03.webp`, respectively. The CSS sets WebP as the top background layer and SVG below it as a fallback, so an uploaded opaque photo fully covers the mockup without code edits. The fallback SVG files should remain in the repository. Cropping is `background-size: cover`, so check the face and subject after uploading. Update screen-reader labels when the actual photos are approved.

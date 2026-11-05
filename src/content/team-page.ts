@@ -1,15 +1,13 @@
 /** Team page editorial copy. No unverified employee identities or personnel counts. */
 export const teamPageContent = {
   en: {
-    eyebrow: 'OUR PEOPLE / INBS',
     galleryLabel: 'Moments from the INBS story',
     photoEvent: 'Visual placeholder for an event photograph',
     photoPortrait: 'Visual placeholder for a company owner portrait',
     photoOffice: 'Visual placeholder for an office photograph',
-    eventLabel: 'EVENTS', presenceLabel: 'PRESENCE', officeLabel: 'AT WORK',
     titleOne: 'More than business.',
     titleTwo: 'The moments behind it.',
-    lead: 'From conversations at the office to moments shared at events, explore the people and experiences behind the INBS presence in Dubai.',
+    lead: 'Discover the relationships, dedication and shared ambition behind INBS.',
     explore: 'Meet our approach',
     signature: 'INBS / PEOPLE & MOMENTS',
     location: 'DUBAI, UNITED ARAB EMIRATES',
@@ -34,15 +32,13 @@ export const teamPageContent = {
     servicesAction: 'Explore our services',
   },
   ar: {
-    eyebrow: 'وجوه وحكايات / INBS',
     galleryLabel: 'لقطات من مسيرة الشبكة العالمية لخدمات رجال الأعمال',
     photoEvent: 'صورة توضيحية مؤقتة لفعالية مهنية',
     photoPortrait: 'صورة توضيحية مؤقتة لصاحب الشركة',
     photoOffice: 'صورة توضيحية مؤقتة للمكتب',
-    eventLabel: 'فعاليات', presenceLabel: 'حضور', officeLabel: 'في العمل',
     titleOne: 'أكثر من أعمال.',
     titleTwo: 'لحظات تصنع الحضور.',
-    lead: 'من لقاءات المكتب إلى المشاركات والفعاليات، نتشارك هنا بعض اللحظات والتجارب التي تعبّر عن حضور INBS في دبي.',
+    lead: 'تعرّف على العلاقات والالتزام والطموح المشترك الذي يقف وراء مسيرة INBS.',
     explore: 'تعرّف إلى نهجنا',
     signature: 'INBS / PEOPLE & MOMENTS',
     location: 'دبي، الإمارات العربية المتحدة',
