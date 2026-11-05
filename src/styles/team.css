@@ -57,17 +57,17 @@
 .inbs-team-note-grid{display:grid;grid-template-columns:1fr .8fr;align-items:center;gap:clamp(30px,8vw,120px)}
 .inbs-team-note h2{margin:0}
 .inbs-team-note-grid>div:last-child p{font-size:clamp(17px,1.35vw,20px);line-height:1.95;color:var(--team-muted);max-width:540px}
-.inbs-team-closing{padding-block:clamp(88px,10vw,146px) clamp(115px,11vw,175px);background:#123f5f;color:#f4faff}
+.inbs-team-closing{padding-block:clamp(88px,10vw,146px) clamp(115px,11vw,175px);background:var(--inbs-cta-surface);color:var(--team-ink)}
 .inbs-team-closing-grid{display:grid;grid-template-columns:1.1fr .7fr;align-items:end;gap:clamp(32px,8vw,110px)}
-.inbs-team-closing .inbs-team-kicker{color:#aee3ff}
+.inbs-team-closing .inbs-team-kicker{color:var(--team-accent)}
 .inbs-team-closing h2{margin:0}
-.inbs-team-closing-actions p{color:#d1e7f5;font-size:clamp(16px,1.35vw,19px);line-height:1.85;margin-bottom:30px}
+.inbs-team-closing-actions p{color:var(--team-muted);font-size:clamp(16px,1.35vw,19px);line-height:1.85;margin-bottom:30px}
 .inbs-team-closing-actions a{display:flex;align-items:center;justify-content:space-between;gap:20px;max-width:300px;font-size:14px;font-weight:750;padding:14px 0;transition:color .2s}
-.inbs-team-closing-actions a:hover{color:#a9dfff}
-.inbs-team-email{border-bottom:1px solid #b7eaff}
-.inbs-team-services-link{border-bottom:1px solid #91bfd94d}
+.inbs-team-closing-actions a:hover{color:var(--team-accent)}
+.inbs-team-email{border-bottom:1px solid var(--team-accent)}
+.inbs-team-services-link{border-bottom:1px solid var(--team-line)}
 html[data-theme=dark] .inbs-team-page{--team-paper:#0b2235;--team-surface:#112e43;--team-ink:#e9f5fd;--team-muted:#b3cbdb;--team-line:#36546b;--team-accent:#8bceef}
-html[data-theme=dark] .inbs-team-closing{background:#152f43}
+html[data-theme=dark] .inbs-team-closing{background:var(--inbs-cta-surface)}
 [dir=rtl] .inbs-team-page :is(h1,h2,h3){letter-spacing:0;line-height:1.45}
 [dir=rtl] .inbs-team-kicker,[dir=rtl] .inbs-team-hero-footer{letter-spacing:0}
 [dir=rtl] .inbs-team-art{direction:ltr}

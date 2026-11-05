@@ -179,7 +179,7 @@
 }
 .inbs-services-entry-link:hover .inbs-services-entry-bottom>svg{transform:translate(3px,-3px)}
 .inbs-services-closing{
-  background:var(--services-surface);
+  background:var(--inbs-cta-surface);
   padding-block:clamp(95px,11vw,154px) clamp(120px,13vw,178px);
 }
 .inbs-services-closing-inner{

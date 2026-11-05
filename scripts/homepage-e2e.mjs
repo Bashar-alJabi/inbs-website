@@ -450,6 +450,35 @@ await test('service WebP files and metadata',async()=>{
   assert.ok((await response.arrayBuffer()).byteLength>12000,slug+' unexpectedly small');
  }
 });
+// Distinct Home and About CTAs, with the exact Services CTA background in both themes.
+for(const locale of ['en','ar']){
+ for(const theme of ['light','dark']){
+  const context=await browser.newContext({viewport:{width:1440,height:900},reducedMotion:'reduce',colorScheme:theme});
+  await context.addInitScript(t=>localStorage.setItem('inbs-theme',t),theme);
+  const page=await context.newPage();
+  await test('closing CTAs / '+locale+' / '+theme,async()=>{
+   const surfaces=[];
+   const copy=[];
+   for(const [route,selector] of [['', '.inbs-editorial-cta--home'],['about','.inbs-editorial-cta--about'],['services','.inbs-services-closing'],['team','.inbs-team-closing']]){
+    await page.goto(origin+'/'+locale+(route?'/'+route:''),{waitUntil:'networkidle',timeout:45000});
+    await page.waitForFunction(expected=>document.documentElement.getAttribute('data-theme')===expected,theme);
+    const section=page.locator(selector);
+    assert.equal(await section.count(),1,route+' should have exactly one closing CTA');
+    surfaces.push(await section.evaluate(el=>getComputedStyle(el).backgroundColor));
+    const heading=await section.locator('h2').innerText();
+    copy.push(heading);
+    assert.ok(heading.trim().length>15,route+' CTA missing localized heading');
+    if(route===''||route==='about'){
+     assert.equal((await section.locator('a[href^="mailto:"]').count()),1);
+     assert.equal(await section.locator('a').count(),2);
+    }
+   }
+   assert.equal(new Set(surfaces).size,1,'All four CTAs must have matching background: '+JSON.stringify(surfaces));
+   assert.equal(new Set(copy).size,4,'All four CTAs should have distinct messages');
+  });
+  await context.close();
+ }
+}
 await test('footer navigation uses one legal page and a full-services link',async()=>{
  for(const locale of ['en','ar']){
   const context=await browser.newContext({viewport:{width:1440,height:900}});

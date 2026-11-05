@@ -89,6 +89,13 @@
 - [x] Owner authorized conditional promotion; PR #24 squash merged to `redesign` as `171e8cd`.
 - [ ] Final `redesign` → `main` PR #25 CI, merge verification and deployment review.
 
+## Cross-page ending CTA consistency — feature/team-page
+
+- [x] Add page-specific closing CTAs to Home and About using the approved existing Home copy and new localized About text.
+- [x] Keep Services and Team CTA structure and copy distinct, but match all four backgrounds through one light/dark design token.
+- [x] Add EN/AR and light/dark browser checks confirming backgrounds, distinct headings and CTA destinations.
+- [ ] Review all four CTAs visually with the owner before merging.
+
 ## Team page — feature/team-page (initial draft)
 
 - [x] Implement bilingual team editorial page using a dedicated route, content module and scoped stylesheet.

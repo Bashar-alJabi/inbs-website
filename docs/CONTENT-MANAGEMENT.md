@@ -65,3 +65,10 @@ The key is the stable public URL slug. Its position determines display order. Th
 ## Validation
 
 Run lint, type checks, build and browser tests through the PR workflows. Check representative paths including `/en/services/cargo-services`, `/ar/services/cargo-services`, homepage service selection, and hero links before approving content changes.
+
+### Homepage, About and Team closing CTAs
+
+- Home copy reuses the already-existing `homeContent[locale].cta*` fields in `src/content/home.ts`.
+- About closing copy lives alongside the About page content in `src/content/about.ts`.
+- The shared Home/About CTA presenter is `src/components/shared/editorial-cta.tsx` with scoped `src/styles/editorial-cta.css`; Services and Team keep their own component structure and copy.
+- All four closing sections share exactly one background-color token, `--inbs-cta-surface`, in `src/styles/tokens.css`, including dark mode. Do not set new per-page CTA background values.
