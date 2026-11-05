@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1050" width="800" height="1050">
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#587c8b"/><stop offset="1" stop-color="#17334e"/></linearGradient>
+<radialGradient id="light"><stop stop-color="#f7e5c0" stop-opacity=".74"/><stop offset="1" stop-color="#f7e5c0" stop-opacity="0"/></radialGradient></defs>
+<rect width="800" height="1050" fill="url(#bg)"/>
+<circle cx="580" cy="185" r="380" fill="url(#light)" opacity=".45"/>
+<path d="M0 670 L800 485 V1050 H0Z" fill="#051e35" opacity=".23"/>
+<g opacity=".82"><ellipse cx="400" cy="390" rx="178" ry="205" fill="#d1d8d7"/><path d="M150 1050V815q58-215 250-215t250 215v235" fill="#09253d"/><path d="M315 590L400 750L485 590" fill="#e5e7df"/><path d="M265 600l135 190-120 260M535 600L400 790l120 260" fill="none" stroke="#456b85" stroke-width="34"/><path d="M242 365q22-246 195-235 154 14 144 215-76-93-138-85-118 14-201 105" fill="#09273e"/></g>
+<path d="M48 51h80M48 51v80M752 51h-80M752 51v80M48 996h80M48 996v-80M752 996h-80M752 996v-80" fill="none" stroke="#e4f4fa" stroke-opacity=".38" stroke-width="2"/>
+<rect y="842" width="800" height="208" fill="#041c31" opacity=".72"/>
+<text x="62" y="904" font-family="Arial,sans-serif" font-size="18" letter-spacing="6" fill="#a7dbf6">INBS / PHOTO PLACEHOLDER 02</text>
+<text x="62" y="958" font-family="Arial,sans-serif" font-size="37" font-weight="700" fill="#f1faff">PRESENCE</text>
+<text x="62" y="994" font-family="Arial,sans-serif" font-size="15" letter-spacing="2" fill="#a6cfe4">REPLACE WITH hero-02.webp</text>
+</svg>

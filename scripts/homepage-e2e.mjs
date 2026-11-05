@@ -545,6 +545,9 @@ for(const locale of ['en','ar']){
     assert.equal(await page.locator('.inbs-team-page').count(),1);
     assert.equal(await page.locator('.inbs-team-page h1').count(),1);
     assert.equal(await page.locator('.inbs-team-principle').count(),3);
+    assert.equal(await page.locator('.inbs-team-gallery .inbs-team-photo').count(),3);
+    assert.equal(await page.locator('.inbs-team-gallery-traveler').count(),2);
+    assert.equal(await page.locator('.inbs-team-hero-story h1').count(),1);
     assert.equal((await page.locator('.inbs-team-email').getAttribute('href'))?.startsWith('mailto:'),true);
     assert.equal(await page.locator('.inbs-team-services-link').getAttribute('href'),'/'+locale+'/services');
     assert.equal(await page.locator('.inbs-team-page img').count(),0,'Do not use unverified employee images');

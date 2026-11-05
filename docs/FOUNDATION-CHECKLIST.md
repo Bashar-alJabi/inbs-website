@@ -96,6 +96,14 @@
 - [x] Add EN/AR and light/dark browser checks confirming matching backgrounds, heading sizes, padding, button geometry, hover transitions, two links, and distinct copy.
 - [ ] Review all four CTAs visually with the owner before merging.
 
+## Team hero photo gallery — feature/team-page
+
+- [x] Replace the prior Services-like split hero with a centered, three-image editorial gallery and copy underneath.
+- [x] Add three clearly illustrative SVG mockups; reserve the upload names `public/images/team/hero-01.webp` through `hero-03.webp`.
+- [x] Use responsive tilted side frames, a dominant central frame, and separate curved-trail traveling dots; support reduced motion and RTL.
+- [ ] Owner to upload authentic photos and approve crop/placement; verify real photo descriptions and final visual result.
+- [ ] Keep subsequent Team sections unchanged until Hero is approved.
+
 ## Team page — feature/team-page (initial draft)
 
 - [x] Implement bilingual team editorial page using a dedicated route, content module and scoped stylesheet.

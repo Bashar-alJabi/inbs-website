@@ -72,3 +72,13 @@ Run lint, type checks, build and browser tests through the PR workflows. Check r
 - Each page owns its bilingual labels and copy: `src/content/home.ts`, `src/content/about.ts`, `src/content/services-page.ts`, `src/content/team-page.ts`. Keep headings short and unique to the page.
 - All primary actions route to `/[locale]/contact` (the Contact page is currently Coming Soon); secondary links use the Services or Team routes as configured. About's secondary CTA routes to Services.
 - The CTA background is `--inbs-cta-surface` in `src/styles/tokens.css`, with a dark-mode override. No page-specific CTA background definitions.
+
+### Team hero photo slots (three of the eventual ten)
+
+Place the three approved, optimized photos in `public/images/team/` with these exact filenames:
+
+1. `hero-01.webp` — event or conference moment, landscape/portrait crop.
+2. `hero-02.webp` — main company-owner photo, preferably portrait crop.
+3. `hero-03.webp` — office or professional meeting moment.
+
+The page currently contains matching `hero-01.svg`, `hero-02.svg` and `hero-03.svg` **illustrative placeholders**, not photos of real employees. Upload the WebP files using the names above; the hero CSS layers real WebP images over the illustrated placeholders automatically, without code edits. For good visual quality, export approx. 900–1400px wide WebP, with consistent color grading and a file size appropriate to the site. Do not alter the placeholders or the seven remaining photo slots until the rest of the page is approved. The Team hero uses CSS background images; alt/accessible descriptions should be updated when real photos are supplied.
