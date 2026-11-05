@@ -331,7 +331,7 @@ for (const locale of ['en','ar']) {
       assert.equal(response.status,200,'Missing local hero WebP: '+name);
       assert.match(response.headers.get('content-type')||'',/image\/webp/);
     }
-    assert.equal(await page.locator('.inbs-services-closing-action').getAttribute('href'),
+    assert.equal(await page.locator('.inbs-editorial-cta--services .inbs-editorial-cta-primary').getAttribute('href'),
       '/'+locale+'/contact');
     const dims=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
     assert.ok(dims.scroll<=dims.inner+3,'Horizontal overflow: '+JSON.stringify(dims));
