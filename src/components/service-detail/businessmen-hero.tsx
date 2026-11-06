@@ -28,7 +28,6 @@ export function BusinessmenHero({ locale }: { locale: Locale }) {
             <Image src={service.image} alt="" fill priority sizes="(max-width: 760px) 88vw, 42vw" />
           </div>
           <div className="inbs-detail-hero-orbit" aria-hidden="true"/>
-          <span className="inbs-detail-hero-index" aria-hidden="true">01 / 10</span>
           <span className="inbs-detail-photo-caption">{t.photoCaption}</span>
         </div>
       </div>
