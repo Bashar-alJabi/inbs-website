@@ -22,9 +22,9 @@ jobs:
           node-version: '24'
           cache: npm
       - run: npm ci
-      - name: Replace eleven selected Pexels WebP files
+      - name: Replace twelve selected Pexels WebP files
         run: node scripts/replace-selected-service-photos.mjs
-      - name: Commit only the eleven selected image files
+      - name: Commit only the twelve selected image files
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -37,11 +37,12 @@ jobs:
             public/images/services/editorial/real-estate-services-02.webp \
             public/images/services/editorial/tourism-services-01.webp \
             public/images/services/editorial/tourism-services-02.webp \
+            public/images/services/editorial/customs-services-01.webp \
             public/images/services/editorial/cargo-services-01.webp \
             public/images/services/editorial/citizenship-and-immigration-services-01.webp
           if git diff --cached --quiet; then
             echo "No image changes"
           else
-            git commit -m "assets(services): replace eleven selected photos with curated WebP"
+            git commit -m "assets(services): replace twelve selected photos with curated WebP"
             git push origin HEAD:feature/service-detail-pages
           fi
