@@ -1,19 +1,20 @@
 import type { Locale } from '@/lib/site';
-import { BusinessmenHero } from './businessmen-hero';
-import { BusinessmenOverview } from './businessmen-overview';
-import { BusinessmenOfferings } from './businessmen-offerings';
-import { BusinessmenProcess } from './businessmen-process';
-import { BusinessmenCta } from './businessmen-cta';
+import type { ServiceSlug } from '@/content/services';
+import { ServiceHero } from './service-hero';
+import { ServiceOverview } from './service-overview';
+import { ServiceOfferings } from './service-offerings';
+import { ServiceProcess } from './service-process';
+import { ServiceCta } from './service-cta';
 
-/** Composition only; each section owns its own markup and the copy lives in content. */
-export function BusinessmenDetailPage({ locale }: { locale: Locale }) {
+/** Composition only. All service pages use the approved editorial sections. */
+export function ServiceDetailPage({locale,slug}:{locale:Locale;slug:ServiceSlug}) {
   return (
-    <main className="inbs-service-detail">
-      <BusinessmenHero locale={locale} />
-      <BusinessmenOverview locale={locale} />
-      <BusinessmenOfferings locale={locale} />
-      <BusinessmenProcess locale={locale} />
-      <BusinessmenCta locale={locale} />
+    <main className="inbs-service-detail" data-service={slug}>
+      <ServiceHero locale={locale} slug={slug} />
+      <ServiceOverview locale={locale} slug={slug} />
+      <ServiceOfferings locale={locale} slug={slug} />
+      <ServiceProcess locale={locale} slug={slug} />
+      <ServiceCta locale={locale} slug={slug} />
     </main>
   );
 }
