@@ -589,6 +589,23 @@ for(const locale of ['en','ar']){
     assert.equal(await page.locator('.inbs-service-detail').count(),1);
     assert.equal(await page.locator('.inbs-service-detail h1').count(),1);
     assert.equal(await page.locator('.inbs-detail-offering').count(),5);
+    assert.equal(await page.locator('.inbs-detail-hero-index').count(),0);
+    assert.equal(await page.locator('.inbs-detail-disclaimer').count(),0);
+    const actions=page.locator('.inbs-detail-offering-action');
+    assert.equal(await actions.count(),5);
+    for(const href of await actions.evaluateAll(nodes=>nodes.map(node=>node.getAttribute('href'))))
+      assert.equal(href,'/'+locale+'/contact');
+    assert.equal(await page.locator('.inbs-editorial-cta--businessmen .inbs-editorial-cta-primary').innerText(),
+      locale==='ar'?'ابدأ الخدمة':'Start this service');
+    const orbit=await page.locator('.inbs-detail-hero-orbit').evaluate(el=>({
+      name:getComputedStyle(el,'::after').animationName,
+      path:getComputedStyle(el,'::after').offsetPath,
+    }));
+    assert.ok(orbit.path!=='none','Orbit dot must follow a motion path');
+    assert.equal(orbit.name,'none','Reduced motion should disable orbit animation');
+    const stepAnimation=await page.locator('.inbs-detail-process-step').first().evaluate(el=>getComputedStyle(el,'::before').animationName);
+    assert.equal(stepAnimation,'none','Reduced motion should disable process dots');
+
     assert.equal(await page.locator('.inbs-detail-process-step').count(),3);
     assert.equal(await page.locator('.inbs-editorial-cta--businessmen a').count(),2);
     assert.equal(await page.locator('.inbs-editorial-cta--businessmen a').first().getAttribute('href'),'/'+locale+'/contact');
