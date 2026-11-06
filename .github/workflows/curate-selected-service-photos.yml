@@ -44,5 +44,6 @@ jobs:
             echo "No image changes"
           else
             git commit -m "assets(services): replace twelve selected photos with curated WebP"
+            git pull --rebase origin feature/service-detail-pages
             git push origin HEAD:feature/service-detail-pages
           fi
