@@ -36,10 +36,17 @@ try {
       assert.equal(new URL(old.headers.get('location'), origin).pathname, `/${locale}/legal`);
       console.log('PASS', `${locale}/${oldPath} redirects to unified legal page`);
     }
-    await check(`/${locale}/services/businessmen-services`, {
-      pattern: /class="inbs-service-detail"/,
-      label: `${locale} businessmen service detail page`,
-    });
+    for (const slug of [
+      'businessmen-services','real-estate-services','website-services',
+      'typing-services','tourism-services','financial-services',
+      'consultation-services','customs-services','cargo-services',
+      'citizenship-and-immigration-services',
+    ]) {
+      await check(`/${locale}/services/${slug}`, {
+        pattern: /class="inbs-service-detail"/,
+        label: `${locale} ${slug} dedicated detail page`,
+      });
+    }
     await check(`/${locale}/services/unknown-service`, {
       status: 404, label: `${locale} unknown service`,
     });
