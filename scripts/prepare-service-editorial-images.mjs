@@ -11,7 +11,7 @@ const groups = {
   'businessmen-services': [7433848, 3184291],
   'real-estate-services': [12283947, 8142052],
   'website-services': [12902996, 450035],
-  'typing-services': [9550363, 4792525],
+  'typing-services': [9550363, 6170182],
   'tourism-services': [28730135, 39894364],
   'financial-services': [8297220, 4386373],
   'consultation-services': [8067939, 3184325],
