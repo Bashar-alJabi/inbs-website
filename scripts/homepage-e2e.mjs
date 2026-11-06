@@ -571,6 +571,39 @@ for(const locale of ['en','ar']){
   }
  }
 }
+// Service-detail reference: verify both locales, layout breakpoints, themes and accessibility.
+for(const locale of ['en','ar']){
+ for(const size of sizes){
+  for(const theme of ['light','dark']){
+   const context=await browser.newContext({viewport:{width:size.width,height:size.height},reducedMotion:'reduce',colorScheme:theme});
+   await context.addInitScript(t=>localStorage.setItem('inbs-theme',t),theme);
+   const page=await context.newPage();
+   const errors=[];
+   page.on('pageerror',error=>errors.push(String(error)));
+   await test('businessmen detail / '+[locale,size.name,theme].join('/'),async()=>{
+    const res=await page.goto(origin+'/'+locale+'/services/businessmen-services',{waitUntil:'domcontentloaded',timeout:45000});
+    assert.equal(res?.status(),200);
+    assert.equal(await page.locator('html').getAttribute('lang'),locale);
+    assert.equal(await page.locator('html').getAttribute('dir'),locale==='ar'?'rtl':'ltr');
+    await page.waitForFunction(expected=>document.documentElement.getAttribute('data-theme')===expected,theme);
+    assert.equal(await page.locator('.inbs-service-detail').count(),1);
+    assert.equal(await page.locator('.inbs-service-detail h1').count(),1);
+    assert.equal(await page.locator('.inbs-detail-offering').count(),5);
+    assert.equal(await page.locator('.inbs-detail-process-step').count(),3);
+    assert.equal(await page.locator('.inbs-editorial-cta--businessmen a').count(),2);
+    assert.equal(await page.locator('.inbs-editorial-cta--businessmen a').first().getAttribute('href'),'/'+locale+'/contact');
+    assert.equal(await page.locator('.inbs-editorial-cta--businessmen a').nth(1).getAttribute('href'),'/'+locale+'/services');
+    await page.locator('.inbs-detail-process').scrollIntoViewIfNeeded();
+    const widths=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
+    assert.ok(widths.scroll<=widths.inner+3,'Detail page horizontal overflow: '+JSON.stringify(widths));
+    const violations=(await new AxeBuilder({page}).include('.inbs-service-detail').withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa']).analyze()).violations;
+    assert.deepEqual(violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)})),[]);
+    assert.deepEqual(errors,[]);
+   });
+   await context.close();
+  }
+ }
+}
 await test('navigation endpoints and security',async()=>{
  for(const locale of ['en','ar']){
   for(const slug of ['about','services','contact','team','privacy-policy','terms','services/businessmen-services','services/citizenship-and-immigration-services']){
