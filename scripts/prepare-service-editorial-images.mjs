@@ -8,19 +8,23 @@ import {mkdir,writeFile,readFile} from 'node:fs/promises';
 import path from 'node:path';
 
 const groups = {
-  'businessmen-services': [7433848, 3184291],
-  'real-estate-services': [12283947, 8142052],
+  'businessmen-services': [36733333, 3184291],
+  'real-estate-services': [35027041, 34277650],
   'website-services': [12902996, 450035],
   'typing-services': [9550363, 6170182],
-  'tourism-services': [28730135, 39894364],
+  'tourism-services': [3879065, 40624401],
   'financial-services': [8297220, 4386373],
   'consultation-services': [8067939, 3184325],
-  'customs-services': [6595777, 1427541],
-  'cargo-services': [1544372, 5156696],
-  'citizenship-and-immigration-services': [14547467, 10959397],
+  'customs-services': [28438301, 1427541],
+  'cargo-services': [20821680, 5156696],
+  'citizenship-and-immigration-services': [35065648, 10959397],
 };
 const directory = path.resolve('public/images/services/editorial');
 await mkdir(directory,{recursive:true});
+
+const heroIds = JSON.parse(await readFile(path.resolve('public/images/services/SOURCES.json'),'utf8')).map(entry=>entry.id);
+const ids = [...heroIds,...Object.values(groups).flat()];
+if(new Set(ids).size !== 30)throw new Error('Each of the 30 service photos must have a unique Pexels source ID');
 
 for (const [slug, ids] of Object.entries(groups)) {
   for (const [index,id] of ids.entries()) {
