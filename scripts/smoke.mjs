@@ -1,6 +1,7 @@
 /** Lightweight production HTTP checks; run against a running Next.js server. */
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 
 const origin = (process.env.SMOKE_BASE_URL || 'http://localhost:3000').replace(/\/$/, '');
 const sourceEntries = JSON.parse(
@@ -68,6 +69,30 @@ try {
       label: `Team photo ${filename}`,
     });
   }
+  // Guard against using the same Pexels photograph in different service slots.
+  const editorialSourceNotes = await readFile(
+    new URL('../public/images/services/EDITORIAL-PHOTO-SOURCES.md', import.meta.url),'utf8',
+  );
+  const editorial = [...editorialSourceNotes.matchAll(/\\| \`([^\`]+\\.webp)\` \\| \\[Pexels (\\d+)\\]/g)]
+    .map(([,filename,id])=>({filename,id:Number(id)}));
+  assert.equal(editorial.length,20,'Expected 20 documented editorial images');
+  const sourceIds = [...sourceEntries.map(entry=>entry.id),...editorial.map(entry=>entry.id)];
+  assert.equal(new Set(sourceIds).size,30,'Pexels image source IDs must be unique across all service hero and editorial photos');
+  const photoFiles = [
+    ...sourceEntries.map(entry=>`../public/images/services/${entry.slug}.webp`),
+    ...editorial.map(entry=>`../public/images/services/editorial/${entry.filename}`),
+  ];
+  const contentHashes=new Set();
+  for(const filename of photoFiles){
+    const bytes=await readFile(new URL(filename,import.meta.url));
+    assert.equal(bytes.toString('ascii',0,4),'RIFF',`${filename}: invalid WebP header`);
+    assert.equal(bytes.toString('ascii',8,12),'WEBP',`${filename}: not a WebP file`);
+    const hash=createHash('sha256').update(bytes).digest('hex');
+    assert.ok(!contentHashes.has(hash),`${filename}: duplicate image bytes`);
+    contentHashes.add(hash);
+  }
+  console.log('PASS all 30 service photos use distinct sources and file contents');
+
   assert.equal(sourceEntries.length, 10, 'Expected ten documented service images');
   for (const { slug } of sourceEntries) {
     await check(`/images/services/${slug}.webp`, {
