@@ -1,0 +1,37 @@
+name: Prepare local service editorial photos
+on:
+  pull_request:
+    branches: [redesign]
+    paths:
+      - scripts/prepare-service-editorial-images.mjs
+      - .github/workflows/prepare-service-editorial-photos.yml
+permissions:
+  contents: write
+jobs:
+  build-editorial-assets:
+    if: github.event.pull_request.head.ref == 'feature/service-detail-pages' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: Download and convert twenty licensed Pexels photos
+        run: node scripts/prepare-service-editorial-images.mjs
+      - name: Commit WebP assets on feature branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/images/services/editorial/*.webp
+          if git diff --cached --quiet; then
+            echo "No image changes."
+          else
+            git commit -m "assets(services): commit twenty local editorial WebP photos"
+            git push origin HEAD:feature/service-detail-pages
+          fi
