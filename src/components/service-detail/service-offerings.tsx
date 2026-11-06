@@ -5,7 +5,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { routes } from '@/lib/routes';
 import { Reveal } from '@/components/shared/reveal';
 import { serviceDetailContent } from '@/content/service-detail-catalog';
-import {serviceEditorialPhotos,pexelsImage} from '@/content/service-editorial-photos';
+import {serviceEditorialPhotos} from '@/content/service-editorial-photos';
 import type { Locale } from '@/lib/site';
 import type { ServiceSlug } from '@/content/services';
 
@@ -40,10 +40,10 @@ export function ServiceOfferings({ locale, slug }: { locale: Locale; slug: Servi
               </ul>
             </Reveal>
             {photos.filter(photo => photo.after === index + 1).map(photo => (
-              <Reveal className={`inbs-detail-offering-photo${'size' in photo && photo.size === 'wide' ? ' inbs-detail-offering-photo--wide' : ''}`} key={photo.id}>
+              <Reveal className={`inbs-detail-offering-photo${'size' in photo && photo.size === 'wide' ? ' inbs-detail-offering-photo--wide' : ''}`} key={photo.src}>
                 <figure>
                   <Image
-                    src={pexelsImage(photo.id)}
+                    src={photo.src}
                     alt={photo.alt[locale]}
                     fill
                     sizes={'size' in photo && photo.size === 'wide'
