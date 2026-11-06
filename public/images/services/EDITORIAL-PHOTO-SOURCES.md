@@ -12,25 +12,25 @@ Stock photos are examples only. None depicts verified INBS premises, clients, st
 
 | File in public | Original Pexels image |
 | --- | --- |
-| `businessmen-services-01.webp` | [Pexels 7433848](https://www.pexels.com/photo/7433848/) |
+| `businessmen-services-01.webp` | [Pexels 36733333](https://www.pexels.com/photo/36733333/) |
 | `businessmen-services-02.webp` | [Pexels 3184291](https://www.pexels.com/photo/3184291/) |
-| `real-estate-services-01.webp` | [Pexels 12283947](https://www.pexels.com/photo/12283947/) |
-| `real-estate-services-02.webp` | [Pexels 8142052](https://www.pexels.com/photo/8142052/) |
+| `real-estate-services-01.webp` | [Pexels 35027041](https://www.pexels.com/photo/35027041/) |
+| `real-estate-services-02.webp` | [Pexels 34277650](https://www.pexels.com/photo/34277650/) |
 | `website-services-01.webp` | [Pexels 12902996](https://www.pexels.com/photo/12902996/) |
 | `website-services-02.webp` | [Pexels 450035](https://www.pexels.com/photo/450035/) |
 | `typing-services-01.webp` | [Pexels 9550363](https://www.pexels.com/photo/9550363/) |
 | `typing-services-02.webp` | [Pexels 6170182](https://www.pexels.com/photo/6170182/) |
-| `tourism-services-01.webp` | [Pexels 28730135](https://www.pexels.com/photo/28730135/) |
-| `tourism-services-02.webp` | [Pexels 39894364](https://www.pexels.com/photo/39894364/) |
+| `tourism-services-01.webp` | [Pexels 3879065](https://www.pexels.com/photo/3879065/) |
+| `tourism-services-02.webp` | [Pexels 40624401](https://www.pexels.com/photo/40624401/) |
 | `financial-services-01.webp` | [Pexels 8297220](https://www.pexels.com/photo/8297220/) |
 | `financial-services-02.webp` | [Pexels 4386373](https://www.pexels.com/photo/4386373/) |
 | `consultation-services-01.webp` | [Pexels 8067939](https://www.pexels.com/photo/8067939/) |
 | `consultation-services-02.webp` | [Pexels 3184325](https://www.pexels.com/photo/3184325/) |
-| `customs-services-01.webp` | [Pexels 6595777](https://www.pexels.com/photo/6595777/) |
+| `customs-services-01.webp` | [Pexels 28438301](https://www.pexels.com/photo/28438301/) |
 | `customs-services-02.webp` | [Pexels 1427541](https://www.pexels.com/photo/1427541/) |
-| `cargo-services-01.webp` | [Pexels 1544372](https://www.pexels.com/photo/1544372/) |
+| `cargo-services-01.webp` | [Pexels 20821680](https://www.pexels.com/photo/20821680/) |
 | `cargo-services-02.webp` | [Pexels 5156696](https://www.pexels.com/photo/5156696/) |
-| `citizenship-and-immigration-services-01.webp` | [Pexels 14547467](https://www.pexels.com/photo/14547467/) |
+| `citizenship-and-immigration-services-01.webp` | [Pexels 35065648](https://www.pexels.com/photo/35065648/) |
 | `citizenship-and-immigration-services-02.webp` | [Pexels 10959397](https://www.pexels.com/photo/10959397/) |
 
 The files were downloaded from Pexels and converted to WebP in the repository. The conversion recipe is available in `scripts/prepare-service-editorial-images.mjs`, but normally you should **replace an individual file**, rather than rerunning the script (which regenerates all 20).
