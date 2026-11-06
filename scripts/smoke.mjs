@@ -73,8 +73,12 @@ try {
   const editorialSourceNotes = await readFile(
     new URL('../public/images/services/EDITORIAL-PHOTO-SOURCES.md', import.meta.url),'utf8',
   );
-  const editorial = [...editorialSourceNotes.matchAll(/\\| \`([^\`]+\\.webp)\` \\| \\[Pexels (\\d+)\\]/g)]
-    .map(([,filename,id])=>({filename,id:Number(id)}));
+  const editorial = editorialSourceNotes.split('\\n')
+    .filter(line=>line.includes('[Pexels ') && line.includes('.webp'))
+    .map(line=>({
+      filename:line.split('`')[1],
+      id:Number(line.split('[Pexels ')[1]?.split(']')[0]),
+    }));
   assert.equal(editorial.length,20,'Expected 20 documented editorial images');
   const sourceIds = [...sourceEntries.map(entry=>entry.id),...editorial.map(entry=>entry.id)];
   assert.equal(new Set(sourceIds).size,30,'Pexels image source IDs must be unique across all service hero and editorial photos');
