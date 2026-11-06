@@ -1,0 +1,54 @@
+name: Reconcile release with main once
+on:
+  push:
+    branches: [release/service-details-main]
+    paths:
+      - .github/workflows/reconcile-release-main.yml
+permissions:
+  contents: write
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: release/service-details-main
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Merge main history, preserve reviewed service milestone
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          set +e
+          git merge --no-commit --no-ff origin/main
+          merge_status=$?
+          set -e
+          if [ "$merge_status" -ne 0 ]; then
+            mapfile -t conflicts < <(git diff --name-only --diff-filter=U)
+            if [ "${#conflicts[@]}" -eq 0 ]; then
+              echo "Merge error with no conflict paths" >&2; exit 1
+            fi
+            for file in "${conflicts[@]}"; do
+              case "$file" in
+                README.md|docs/CONTENT-MANAGEMENT.md|docs/PROJECT-GUIDE.md|scripts/homepage-e2e.mjs|scripts/smoke.mjs|src/app/'[locale]'/'[...slug]'/page.tsx)
+                  echo "Preserving already-tested release version of $file"
+                  git checkout --ours -- "$file"
+                  git add -- "$file"
+                  ;;
+                *)
+                  echo "UNEXPECTED CONFLICT: $file; refusing automatic resolution" >&2
+                  exit 1
+                  ;;
+              esac
+            done
+          fi
+          if [ -n "$(git ls-files -u)" ]; then
+            echo "Unresolved merge entries remain" >&2; exit 1
+          fi
+          git rm -f .github/workflows/reconcile-release-main.yml
+          git commit -m "chore(release): reconcile equivalent Team histories before main promotion"
+          git push origin HEAD:release/service-details-main
