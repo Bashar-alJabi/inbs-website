@@ -23,6 +23,7 @@ export function BusinessmenOfferings({ locale }: { locale: Locale }) {
               <div className="inbs-detail-offering-heading">
                 <span className="inbs-detail-offering-index" aria-hidden="true">{area.number}</span>
                 <Link className="inbs-detail-offering-action" href={routes.page(locale, 'contact')} aria-label={`${t.closingPrimary} — ${area.title}`}>
+                  <span>{t.closingPrimary}</span>
                   <ArrowUpRight size={23} aria-hidden="true"/>
                 </Link>
               </div>
