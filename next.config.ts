@@ -2,6 +2,9 @@ import createNextIntlPlugin from 'next-intl/plugin';
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [{ protocol: 'https', hostname: 'images.pexels.com', pathname: '/photos/**' }],
+  },
   // Preserve previously shared policy URLs; both topics now use one legal page.
   async redirects() {
     return [
