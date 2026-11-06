@@ -21,7 +21,6 @@ export function BusinessmenProcess({ locale }: { locale: Locale }) {
             </Reveal>
           ))}
         </div>
-        <p className="inbs-detail-disclaimer">{t.note}</p>
       </div>
     </section>
   );
