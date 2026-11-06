@@ -593,6 +593,9 @@ for(const locale of ['en','ar']){
     assert.equal(await page.locator('.inbs-detail-disclaimer').count(),0);
     const actions=page.locator('.inbs-detail-offering-action');
     assert.equal(await actions.count(),5);
+    for(const label of await actions.allInnerTexts())
+      assert.equal(label.trim(),locale==='ar'?'ابدأ الخدمة':'Start this service');
+
     for(const href of await actions.evaluateAll(nodes=>nodes.map(node=>node.getAttribute('href'))))
       assert.equal(href,'/'+locale+'/contact');
     assert.equal(await page.locator('.inbs-editorial-cta--businessmen .inbs-editorial-cta-primary').innerText(),
