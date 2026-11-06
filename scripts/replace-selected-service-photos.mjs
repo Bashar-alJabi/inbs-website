@@ -1,5 +1,5 @@
 /**
- * One-time curated replacement of exactly eleven user-selected INBS service images.
+ * One-time curated replacement of eleven user-selected plus one duplicated INBS service images.
  * Keep all public filenames stable so no page/component changes are needed.
  * Provenance lives in SOURCES.json and EDITORIAL-PHOTO-SOURCES.md.
  */
@@ -17,6 +17,7 @@ const replacements = [
   {file:'public/images/services/financial-services.webp',id:7567485,kind:'hero'},
   {file:'public/images/services/consultation-services.webp',id:8133856,kind:'hero'},
   {file:'public/images/services/customs-services.webp',id:24244232,kind:'hero'},
+  {file:'public/images/services/editorial/customs-services-01.webp',id:28438301,kind:'editorial'},
   {file:'public/images/services/editorial/cargo-services-01.webp',id:20821680,kind:'editorial'},
   {file:'public/images/services/editorial/citizenship-and-immigration-services-01.webp',id:35065648,kind:'editorial'},
 ];
@@ -38,4 +39,4 @@ for (const {file,id,kind} of replacements) {
   await writeFile(file,output);
   console.log(`Replaced ${file} with Pexels photo ${id}: ${metadata.width}×${metadata.height}, ${output.length} bytes`);
 }
-console.log('Eleven exact replacement paths prepared. Other images untouched.');
+console.log('Twelve exact replacement paths prepared. Other images untouched.');
