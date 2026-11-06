@@ -1,4 +1,4 @@
-/* Bilingual service-detail editorial system. Scoped to service detail routes. */
+/* Bilingual editorial system for all service detail routes. */
 .inbs-service-detail{
   --detail-ink:#0a3049;
   --detail-muted:#516d80;
