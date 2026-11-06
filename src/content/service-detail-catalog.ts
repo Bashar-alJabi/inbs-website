@@ -371,12 +371,42 @@ const common = {
 type OtherSlug = Exclude<ServiceSlug, 'businessmen-services'>;
 const combined = { ...otherServices, ...remainingServices };
 
-export const serviceDetailContent: Record<ServiceSlug, Record<Locale, ServiceDetailText>> = {
+export const serviceDetailContent = {
   'businessmen-services': businessmenDetailContent,
-  ...Object.fromEntries(
-    (Object.keys(combined) as OtherSlug[]).map(slug => [slug, {
-      en: { ...common.en, ...combined[slug].en },
-      ar: { ...common.ar, ...combined[slug].ar },
-    }]),
-  ) as Record<OtherSlug, Record<Locale, ServiceDetailText>>,
-};
+  'real-estate-services': {
+    en: { ...common.en, ...combined['real-estate-services'].en },
+    ar: { ...common.ar, ...combined['real-estate-services'].ar },
+  },
+  'website-services': {
+    en: { ...common.en, ...combined['website-services'].en },
+    ar: { ...common.ar, ...combined['website-services'].ar },
+  },
+  'typing-services': {
+    en: { ...common.en, ...combined['typing-services'].en },
+    ar: { ...common.ar, ...combined['typing-services'].ar },
+  },
+  'tourism-services': {
+    en: { ...common.en, ...combined['tourism-services'].en },
+    ar: { ...common.ar, ...combined['tourism-services'].ar },
+  },
+  'financial-services': {
+    en: { ...common.en, ...combined['financial-services'].en },
+    ar: { ...common.ar, ...combined['financial-services'].ar },
+  },
+  'consultation-services': {
+    en: { ...common.en, ...combined['consultation-services'].en },
+    ar: { ...common.ar, ...combined['consultation-services'].ar },
+  },
+  'customs-services': {
+    en: { ...common.en, ...combined['customs-services'].en },
+    ar: { ...common.ar, ...combined['customs-services'].ar },
+  },
+  'cargo-services': {
+    en: { ...common.en, ...combined['cargo-services'].en },
+    ar: { ...common.ar, ...combined['cargo-services'].ar },
+  },
+  'citizenship-and-immigration-services': {
+    en: { ...common.en, ...combined['citizenship-and-immigration-services'].en },
+    ar: { ...common.ar, ...combined['citizenship-and-immigration-services'].ar },
+  },
+} satisfies Record<ServiceSlug, Record<Locale, ServiceDetailText>>;
