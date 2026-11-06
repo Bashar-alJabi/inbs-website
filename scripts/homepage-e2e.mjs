@@ -12,6 +12,11 @@ const failures=[];
 const report=(name,error)=>{failures.push({name,message:String(error?.stack||error)});console.error('FAIL',name,String(error?.message||error))};
 async function test(name,fn){try{await fn();console.log('PASS',name)}catch(e){report(name,e)}}
 const sizes=[{name:'mobile',width:390,height:844},{name:'tablet',width:768,height:1024},{name:'desktop',width:1440,height:900}];
+const expectedServiceSlugs=[
+ 'businessmen-services','real-estate-services','website-services',
+ 'citizenship-and-immigration-services','typing-services','tourism-services',
+ 'financial-services','consultation-services','customs-services','cargo-services',
+];
 for(const locale of ['en','ar']){
  for(const size of sizes){
   for(const theme of ['light','dark']){
@@ -56,6 +61,11 @@ for(const locale of ['en','ar']){
       assert.equal(desktopType.footerBrand,11,'Small-screen footer brand remains unchanged');
     }
     assert.equal(await page.locator('.inbs-services-option').count(),10);
+    assert.deepEqual(
+      await page.locator('.inbs-services-option').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('href'))),
+      expectedServiceSlugs.map(slug=>'/'+locale+'/services/'+slug),
+      'Homepage services must use canonical ordering',
+    );
     assert.equal(await page.locator('.inbs-achievement').count(),4);
     assert.equal(await page.locator('.inbs-institutions-name').count(),12);
     assert.equal(await page.locator('.inbs-institutions-track').getAttribute('dir'),'ltr');
@@ -122,6 +132,14 @@ for(const locale of ['en','ar']){
   await page.getByRole('button',{name:locale==='ar'?'الشريحة التالية':'Next slide'}).click();
   await page.waitForTimeout(1000);
   assert.notEqual(await page.locator('.inbs-slide h1').innerText(),initial);
+  assert.equal(await page.locator('.inbs-hero-cta').getAttribute('href'),
+    '/'+locale+'/services/real-estate-services');
+  await page.getByRole('button',{name:locale==='ar'?'الشريحة التالية':'Next slide'}).click();
+  await page.waitForTimeout(1000);
+  assert.equal(await page.locator('.inbs-hero-cta').getAttribute('href'),
+    '/'+locale+'/services/website-services','Third slide CTA must target Website Services');
+  assert.equal((await page.locator('.inbs-hero-cta').innerText()).trim(),
+    locale==='ar'?'اكتشف خدمات المواقع الإلكترونية':'Explore Website Services');
   await page.getByRole('button',{name:locale==='ar'?'إيقاف الشرائح مؤقتاً':'Pause slides'}).click();
   assert.equal(await page.getByRole('button',{name:locale==='ar'?'تشغيل الشرائح':'Play slides'}).count(),1);
   assert.match(await page.locator('.inbs-institutions-track').evaluate(e=>getComputedStyle(e).animationName),/inbs-institutions-marquee/);
@@ -318,8 +336,11 @@ for (const locale of ['en','ar']) {
     assert.equal(await cards.count(),10,'Must list ten canonical services');
     assert.equal(await cards.first().getAttribute('href'),
       '/'+locale+'/services/businessmen-services');
-    assert.equal(await cards.last().getAttribute('href'),
-      '/'+locale+'/services/citizenship-and-immigration-services');
+    assert.deepEqual(
+      await cards.evaluateAll(nodes=>nodes.map(n=>n.getAttribute('href'))),
+      expectedServiceSlugs.map(slug=>'/'+locale+'/services/'+slug),
+      'Services directory must use canonical ordering',
+    );
     assert.equal(await page.locator('.inbs-services-entry-image img').count(),10);
     assert.equal(await page.locator('.inbs-services-hero-art-network').count(),0,'Old repeated network removed');
     assert.equal(await page.locator('.inbs-services-hero-frame-dot').count(),2,'Both photo edges need a traveler');
@@ -522,8 +543,12 @@ await test('footer navigation uses one legal page and a full-services link',asyn
    assert.equal(await quick.first().getAttribute('href'),'/'+locale);
    assert.equal(await quick.filter({hasText:/privacy policy|سياسة الخصوصية/i}).count(),0);
    const services=page.locator('.inbs-footer-grid h3').nth(1).locator('..').locator('a');
-   assert.equal(await services.count(),6,'Five service links plus the directory link');
-   assert.equal(await services.nth(5).getAttribute('href'),'/'+locale+'/services');
+   assert.equal(await services.count(),7,'Six service links plus the directory link');
+   assert.deepEqual(
+     await services.evaluateAll(nodes=>nodes.map(n=>n.getAttribute('href'))),
+     [...expectedServiceSlugs.slice(0,6).map(slug=>'/'+locale+'/services/'+slug),'/'+locale+'/services'],
+     'Footer services must be the first six canonical entries',
+   );
    const legal=page.locator('.inbs-footer-bottom a');
    assert.equal(await legal.count(),1,'Only one legal page is linked');
    assert.equal(await legal.first().getAttribute('href'),'/'+locale+'/legal');
