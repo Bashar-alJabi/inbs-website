@@ -128,10 +128,13 @@
   color:var(--detail-accent);margin-bottom:clamp(28px,4vw,53px);
 }
 .inbs-detail-offering-action{
-  display:grid;place-items:center;flex:none;width:44px;height:44px;
-  margin:-10px -10px -10px 0;border-radius:50%;
-  color:var(--detail-accent);outline-offset:3px;
+  display:inline-flex;align-items:center;justify-content:flex-end;
+  gap:10px;min-height:44px;max-width:75%;
+  padding:8px 0 8px 8px;
+  color:var(--detail-accent);font-size:13px;font-weight:750;
+  line-height:1.5;text-align:end;outline-offset:3px;
 }
+.inbs-detail-offering-action svg{flex:none}
 .inbs-detail-offering-action svg{transition:transform .3s cubic-bezier(.22,1,.36,1)}
 .inbs-detail-offering-action:hover svg,
 .inbs-detail-offering-action:focus-visible svg{transform:rotate(45deg) translateX(2px)}
