@@ -597,7 +597,7 @@ for(const locale of ['en','ar']){
    assert.equal(await figures.count(),editorialCounts[index]);
    assert.equal(await figures.locator('img[loading="lazy"]').count(),editorialCounts[index]);
    for(const src of await figures.locator('img').evaluateAll(imgs=>imgs.map(img=>img.getAttribute('src'))))
-     assert.ok(src?.includes('/images/services/editorial/'), 'Editorial photos must use local public WebP assets');
+     assert.ok(decodeURIComponent(src||'').includes('/images/services/editorial/'), 'Editorial photos must use local public WebP assets');
    assert.equal(await figures.locator('figcaption').count(),editorialCounts[index]);
    for(const alt of await figures.locator('img').evaluateAll(imgs=>imgs.map(img=>img.alt)))
      assert.ok(alt.length>10,'Editorial image needs descriptive localized alt');
