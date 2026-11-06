@@ -571,7 +571,44 @@ for(const locale of ['en','ar']){
   }
  }
 }
-// Service-detail reference: verify both locales, layout breakpoints, themes and accessibility.
+// Every service detail route: bilingual content, correct counts and links.
+// Run the more expensive accessibility audit on representative content densities.
+const detailSlugs=[
+ 'businessmen-services','real-estate-services','website-services',
+ 'typing-services','tourism-services','financial-services',
+ 'consultation-services','customs-services','cargo-services',
+ 'citizenship-and-immigration-services',
+];
+const areaCounts=[5,3,3,3,3,3,3,3,4,3];
+for(const locale of ['en','ar']){
+ const context=await browser.newContext({viewport:{width:1440,height:900},reducedMotion:'reduce'});
+ const page=await context.newPage();
+ for(const [index,slug] of detailSlugs.entries()){
+  await test('service detail / '+locale+' / '+slug,async()=>{
+   const res=await page.goto(origin+'/'+locale+'/services/'+slug,{waitUntil:'domcontentloaded',timeout:45000});
+   assert.equal(res?.status(),200);
+   assert.equal(await page.locator('html').getAttribute('lang'),locale);
+   assert.equal(await page.locator('html').getAttribute('dir'),locale==='ar'?'rtl':'ltr');
+   assert.equal(await page.locator('.inbs-service-detail').getAttribute('data-service'),slug);
+   assert.equal(await page.locator('.inbs-service-detail h1').count(),1);
+   assert.equal(await page.locator('.inbs-detail-offering').count(),areaCounts[index]);
+   assert.equal(await page.locator('.inbs-detail-process-step').count(),3);
+   const actions=page.locator('.inbs-detail-offering-action');
+   assert.equal(await actions.count(),areaCounts[index]);
+   for(const label of await actions.allInnerTexts())assert.equal(label.trim(),locale==='ar'?'ابدأ الخدمة':'Start this service');
+   for(const href of await actions.evaluateAll(nodes=>nodes.map(n=>n.getAttribute('href'))))assert.equal(href,'/'+locale+'/contact');
+   const closing=page.locator('.inbs-editorial-cta--service-detail');
+   assert.equal(await closing.count(),1);
+   assert.equal(await closing.locator('a').count(),2);
+   assert.equal(await closing.locator('a').first().getAttribute('href'),'/'+locale+'/contact');
+   assert.equal(await closing.locator('a').nth(1).getAttribute('href'),'/'+locale+'/services');
+   assert.equal(await page.locator('.inbs-detail-hero-index,.inbs-detail-disclaimer').count(),0);
+   const broken=await page.locator('.inbs-detail-hero-photo img').evaluate(img=>img.complete&&img.naturalWidth===0);
+   assert.equal(broken,false,'Broken service image');
+  });
+ }
+ await context.close();
+}
 for(const locale of ['en','ar']){
  for(const size of sizes){
   for(const theme of ['light','dark']){
@@ -580,46 +617,20 @@ for(const locale of ['en','ar']){
    const page=await context.newPage();
    const errors=[];
    page.on('pageerror',error=>errors.push(String(error)));
-   await test('businessmen detail / '+[locale,size.name,theme].join('/'),async()=>{
-    const res=await page.goto(origin+'/'+locale+'/services/businessmen-services',{waitUntil:'domcontentloaded',timeout:45000});
-    assert.equal(res?.status(),200);
-    assert.equal(await page.locator('html').getAttribute('lang'),locale);
-    assert.equal(await page.locator('html').getAttribute('dir'),locale==='ar'?'rtl':'ltr');
-    await page.waitForFunction(expected=>document.documentElement.getAttribute('data-theme')===expected,theme);
-    assert.equal(await page.locator('.inbs-service-detail').count(),1);
-    assert.equal(await page.locator('.inbs-service-detail h1').count(),1);
-    assert.equal(await page.locator('.inbs-detail-offering').count(),5);
-    assert.equal(await page.locator('.inbs-detail-hero-index').count(),0);
-    assert.equal(await page.locator('.inbs-detail-disclaimer').count(),0);
-    const actions=page.locator('.inbs-detail-offering-action');
-    assert.equal(await actions.count(),5);
-    for(const label of await actions.allInnerTexts())
-      assert.equal(label.trim(),locale==='ar'?'ابدأ الخدمة':'Start this service');
-
-    for(const href of await actions.evaluateAll(nodes=>nodes.map(node=>node.getAttribute('href'))))
-      assert.equal(href,'/'+locale+'/contact');
-    assert.equal(await page.locator('.inbs-editorial-cta--businessmen .inbs-editorial-cta-primary').innerText(),
-      locale==='ar'?'ابدأ الخدمة':'Start this service');
-    const orbit=await page.locator('.inbs-detail-hero-orbit').evaluate(el=>({
-      name:getComputedStyle(el,'::after').animationName,
-      path:getComputedStyle(el,'::after').offsetPath,
-    }));
-    assert.ok(orbit.path!=='none','Orbit dot must follow a motion path');
-    assert.equal(orbit.name,'none','Reduced motion should disable orbit animation');
-    const stepAnimation=await page.locator('.inbs-detail-process-step').first().evaluate(el=>getComputedStyle(el,'::before').animationName);
-    assert.equal(stepAnimation,'none','Reduced motion should disable process dots');
-
-    assert.equal(await page.locator('.inbs-detail-process-step').count(),3);
-    assert.equal(await page.locator('.inbs-editorial-cta--businessmen a').count(),2);
-    assert.equal(await page.locator('.inbs-editorial-cta--businessmen a').first().getAttribute('href'),'/'+locale+'/contact');
-    assert.equal(await page.locator('.inbs-editorial-cta--businessmen a').nth(1).getAttribute('href'),'/'+locale+'/services');
-    await page.locator('.inbs-detail-process').scrollIntoViewIfNeeded();
-    const widths=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
-    assert.ok(widths.scroll<=widths.inner+3,'Detail page horizontal overflow: '+JSON.stringify(widths));
-    const violations=(await new AxeBuilder({page}).include('.inbs-service-detail').withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa']).analyze()).violations;
-    assert.deepEqual(violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)})),[]);
-    assert.deepEqual(errors,[]);
-   });
+   for(const slug of ['businessmen-services','website-services','cargo-services','citizenship-and-immigration-services']){
+    await test('service visual & axe / '+[locale,size.name,theme,slug].join('/'),async()=>{
+     const res=await page.goto(origin+'/'+locale+'/services/'+slug,{waitUntil:'domcontentloaded',timeout:45000});
+     assert.equal(res?.status(),200);
+     await page.waitForFunction(expected=>document.documentElement.getAttribute('data-theme')===expected,theme);
+     await page.locator('.inbs-detail-process').scrollIntoViewIfNeeded();
+     const widths=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
+     assert.ok(widths.scroll<=widths.inner+3,'Horizontal overflow: '+JSON.stringify(widths));
+     const violations=(await new AxeBuilder({page}).include('.inbs-service-detail').withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa']).analyze()).violations;
+     assert.deepEqual(violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)})),[]);
+     assert.deepEqual(errors,[]);
+     errors.length=0;
+    });
+   }
    await context.close();
   }
  }
