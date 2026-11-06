@@ -73,7 +73,7 @@ try {
   const editorialSourceNotes = await readFile(
     new URL('../public/images/services/EDITORIAL-PHOTO-SOURCES.md', import.meta.url),'utf8',
   );
-  const editorial = editorialSourceNotes.split('\\n')
+  const editorial = editorialSourceNotes.split(String.fromCharCode(10))
     .filter(line=>line.includes('[Pexels ') && line.includes('.webp'))
     .map(line=>({
       filename:line.split('`')[1],
