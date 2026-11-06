@@ -18,6 +18,10 @@ export const serviceCatalog = {
     en: 'Website Services', ar: 'خدمات المواقع الإلكترونية',
     image: '/images/services/website-services.webp',
   },
+  'citizenship-and-immigration-services': {
+    en: 'Citizenship & Immigration Services', ar: 'خدمات الجنسية والهجرة',
+    image: '/images/services/citizenship-immigration-services.webp',
+  },
   'typing-services': {
     en: 'Typing Services', ar: 'خدمات الطباعة',
     image: '/images/services/typing-services.webp',
@@ -41,10 +45,6 @@ export const serviceCatalog = {
   'cargo-services': {
     en: 'Cargo Services', ar: 'خدمات الشحن',
     image: '/images/services/cargo-services.webp',
-  },
-  'citizenship-and-immigration-services': {
-    en: 'Citizenship & Immigration Services', ar: 'خدمات الجنسية والهجرة',
-    image: '/images/services/citizenship-immigration-services.webp',
   },
 } as const;
 

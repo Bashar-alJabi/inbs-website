@@ -12,6 +12,11 @@ const failures=[];
 const report=(name,error)=>{failures.push({name,message:String(error?.stack||error)});console.error('FAIL',name,String(error?.message||error))};
 async function test(name,fn){try{await fn();console.log('PASS',name)}catch(e){report(name,e)}}
 const sizes=[{name:'mobile',width:390,height:844},{name:'tablet',width:768,height:1024},{name:'desktop',width:1440,height:900}];
+const expectedServiceSlugs=[
+ 'businessmen-services','real-estate-services','website-services',
+ 'citizenship-and-immigration-services','typing-services','tourism-services',
+ 'financial-services','consultation-services','customs-services','cargo-services',
+];
 for(const locale of ['en','ar']){
  for(const size of sizes){
   for(const theme of ['light','dark']){
@@ -56,6 +61,11 @@ for(const locale of ['en','ar']){
       assert.equal(desktopType.footerBrand,11,'Small-screen footer brand remains unchanged');
     }
     assert.equal(await page.locator('.inbs-services-option').count(),10);
+    assert.deepEqual(
+      await page.locator('.inbs-services-option').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('href'))),
+      expectedServiceSlugs.map(slug=>'/'+locale+'/services/'+slug),
+      'Homepage services must use canonical ordering',
+    );
     assert.equal(await page.locator('.inbs-achievement').count(),4);
     assert.equal(await page.locator('.inbs-institutions-name').count(),12);
     assert.equal(await page.locator('.inbs-institutions-track').getAttribute('dir'),'ltr');
@@ -122,6 +132,14 @@ for(const locale of ['en','ar']){
   await page.getByRole('button',{name:locale==='ar'?'الشريحة التالية':'Next slide'}).click();
   await page.waitForTimeout(1000);
   assert.notEqual(await page.locator('.inbs-slide h1').innerText(),initial);
+  assert.equal(await page.locator('.inbs-hero-cta').getAttribute('href'),
+    '/'+locale+'/services/real-estate-services');
+  await page.getByRole('button',{name:locale==='ar'?'الشريحة التالية':'Next slide'}).click();
+  await page.waitForTimeout(1000);
+  assert.equal(await page.locator('.inbs-hero-cta').getAttribute('href'),
+    '/'+locale+'/services/website-services','Third slide CTA must target Website Services');
+  assert.equal((await page.locator('.inbs-hero-cta').innerText()).trim(),
+    locale==='ar'?'اكتشف خدمات المواقع الإلكترونية':'Explore Website Services');
   await page.getByRole('button',{name:locale==='ar'?'إيقاف الشرائح مؤقتاً':'Pause slides'}).click();
   assert.equal(await page.getByRole('button',{name:locale==='ar'?'تشغيل الشرائح':'Play slides'}).count(),1);
   assert.match(await page.locator('.inbs-institutions-track').evaluate(e=>getComputedStyle(e).animationName),/inbs-institutions-marquee/);
@@ -191,10 +209,11 @@ for(const locale of ['en','ar']){
       'About subtitles must have the same computed size: '+sharedLabels);
     assert.equal(await page.locator('.inbs-story-principle').count(),3);
     assert.equal(await page.locator('.inbs-story-capability').count(),10);
-    assert.equal(await page.locator('.inbs-story-capability').first().getAttribute('href'),
-      '/'+locale+'/services/businessmen-services');
-    assert.equal(await page.locator('.inbs-story-capability').last().getAttribute('href'),
-      '/'+locale+'/services/citizenship-and-immigration-services');
+    assert.deepEqual(
+      await page.locator('.inbs-story-capability').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('href'))),
+      expectedServiceSlugs.map(slug=>'/'+locale+'/services/'+slug),
+      'About service capabilities must follow canonical ordering',
+    );
     assert.equal(await page.locator('.inbs-story-outro').count(),0,'Redundant contact CTA');
     assert.equal(await page.locator('.inbs-story-all-services.inbs-about-link').count(),1);
     assert.equal(await page.locator('.inbs-story-hero-art animateMotion').count(),3);
@@ -318,8 +337,11 @@ for (const locale of ['en','ar']) {
     assert.equal(await cards.count(),10,'Must list ten canonical services');
     assert.equal(await cards.first().getAttribute('href'),
       '/'+locale+'/services/businessmen-services');
-    assert.equal(await cards.last().getAttribute('href'),
-      '/'+locale+'/services/citizenship-and-immigration-services');
+    assert.deepEqual(
+      await cards.evaluateAll(nodes=>nodes.map(n=>n.getAttribute('href'))),
+      expectedServiceSlugs.map(slug=>'/'+locale+'/services/'+slug),
+      'Services directory must use canonical ordering',
+    );
     assert.equal(await page.locator('.inbs-services-entry-image img').count(),10);
     assert.equal(await page.locator('.inbs-services-hero-art-network').count(),0,'Old repeated network removed');
     assert.equal(await page.locator('.inbs-services-hero-frame-dot').count(),2,'Both photo edges need a traveler');
@@ -522,8 +544,12 @@ await test('footer navigation uses one legal page and a full-services link',asyn
    assert.equal(await quick.first().getAttribute('href'),'/'+locale);
    assert.equal(await quick.filter({hasText:/privacy policy|سياسة الخصوصية/i}).count(),0);
    const services=page.locator('.inbs-footer-grid h3').nth(1).locator('..').locator('a');
-   assert.equal(await services.count(),6,'Five service links plus the directory link');
-   assert.equal(await services.nth(5).getAttribute('href'),'/'+locale+'/services');
+   assert.equal(await services.count(),7,'Six service links plus the directory link');
+   assert.deepEqual(
+     await services.evaluateAll(nodes=>nodes.map(n=>n.getAttribute('href'))),
+     [...expectedServiceSlugs.slice(0,6).map(slug=>'/'+locale+'/services/'+slug),'/'+locale+'/services'],
+     'Footer services must be the first six canonical entries',
+   );
    const legal=page.locator('.inbs-footer-bottom a');
    assert.equal(await legal.count(),1,'Only one legal page is linked');
    assert.equal(await legal.first().getAttribute('href'),'/'+locale+'/legal');
@@ -567,6 +593,88 @@ for(const locale of ['en','ar']){
     assert.deepEqual(violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)})),[]);
     assert.deepEqual(errors,[]);
    });
+   await context.close();
+  }
+ }
+}
+// Every service detail route: bilingual content, correct counts and links.
+// Run the more expensive accessibility audit on representative content densities.
+const detailSlugs=[
+ 'businessmen-services','real-estate-services','website-services',
+ 'typing-services','tourism-services','financial-services',
+ 'consultation-services','customs-services','cargo-services',
+ 'citizenship-and-immigration-services',
+];
+const areaCounts=[5,3,3,3,3,3,3,3,4,3];
+const editorialCounts=[2,2,2,2,2,2,2,2,2,2];
+for(const locale of ['en','ar']){
+ const context=await browser.newContext({viewport:{width:1440,height:900},reducedMotion:'reduce'});
+ const page=await context.newPage();
+ for(const [index,slug] of detailSlugs.entries()){
+  await test('service detail / '+locale+' / '+slug,async()=>{
+   const res=await page.goto(origin+'/'+locale+'/services/'+slug,{waitUntil:'domcontentloaded',timeout:45000});
+   assert.equal(res?.status(),200);
+   assert.equal(await page.locator('html').getAttribute('lang'),locale);
+   assert.equal(await page.locator('html').getAttribute('dir'),locale==='ar'?'rtl':'ltr');
+   assert.equal(await page.locator('.inbs-service-detail').getAttribute('data-service'),slug);
+   assert.equal(await page.locator('.inbs-service-detail h1').count(),1);
+   assert.equal(await page.locator('.inbs-detail-offering').count(),areaCounts[index]);
+   const figures=page.locator('.inbs-detail-offering-photo');
+   assert.equal(await figures.count(),editorialCounts[index]);
+   assert.equal(await figures.locator('img[loading="lazy"]').count(),editorialCounts[index]);
+   for(const src of await figures.locator('img').evaluateAll(imgs=>imgs.map(img=>img.getAttribute('src'))))
+     assert.ok(decodeURIComponent(src||'').includes('/images/services/editorial/'), 'Editorial photos must use local public WebP assets');
+   assert.equal(await figures.locator('figcaption').count(),editorialCounts[index]);
+   for(const alt of await figures.locator('img').evaluateAll(imgs=>imgs.map(img=>img.alt)))
+     assert.ok(alt.length>10,'Editorial image needs descriptive localized alt');
+
+   assert.equal(await page.locator('.inbs-detail-process-step').count(),3);
+   const actions=page.locator('.inbs-detail-offering-action');
+   assert.equal(await actions.count(),areaCounts[index]);
+   for(const label of await actions.allInnerTexts())assert.equal(label.trim(),locale==='ar'?'ابدأ الخدمة':'Start this service');
+   for(const href of await actions.evaluateAll(nodes=>nodes.map(n=>n.getAttribute('href'))))assert.equal(href,'/'+locale+'/contact');
+   const closing=page.locator('.inbs-editorial-cta--service-detail');
+   assert.equal(await closing.count(),1);
+   assert.equal(await closing.locator('a').count(),2);
+   assert.equal(await closing.locator('a').first().getAttribute('href'),'/'+locale+'/contact');
+   assert.equal(await closing.locator('a').nth(1).getAttribute('href'),'/'+locale+'/services');
+   assert.equal(await page.locator('.inbs-detail-hero-index,.inbs-detail-disclaimer').count(),0);
+   const broken=await page.locator('.inbs-detail-hero-photo img').evaluate(img=>img.complete&&img.naturalWidth===0);
+   assert.equal(broken,false,'Broken service image');
+  });
+ }
+ await context.close();
+}
+for(const locale of ['en','ar']){
+ for(const size of sizes){
+  for(const theme of ['light','dark']){
+   const context=await browser.newContext({viewport:{width:size.width,height:size.height},reducedMotion:'reduce',colorScheme:theme});
+   await context.addInitScript(t=>localStorage.setItem('inbs-theme',t),theme);
+   const page=await context.newPage();
+   const errors=[];
+   page.on('pageerror',error=>errors.push(String(error)));
+   for(const slug of ['businessmen-services','website-services','cargo-services','citizenship-and-immigration-services']){
+    await test('service visual & axe / '+[locale,size.name,theme,slug].join('/'),async()=>{
+     const res=await page.goto(origin+'/'+locale+'/services/'+slug,{waitUntil:'domcontentloaded',timeout:45000});
+     assert.equal(res?.status(),200);
+     await page.waitForFunction(expected=>document.documentElement.getAttribute('data-theme')===expected,theme);
+     const editorial=page.locator('.inbs-detail-offering-photo').first();
+     await editorial.scrollIntoViewIfNeeded();
+     await page.waitForFunction(() => {
+       const img=document.querySelector('.inbs-detail-offering-photo img');
+       return img?.complete;
+     },null,{timeout:20000});
+     const loaded=await editorial.locator('img').evaluate(img=>img.naturalWidth>0);
+     assert.ok(loaded,'Locally hosted editorial WebP photo should load');
+     await page.locator('.inbs-detail-process').scrollIntoViewIfNeeded();
+     const widths=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
+     assert.ok(widths.scroll<=widths.inner+3,'Horizontal overflow: '+JSON.stringify(widths));
+     const violations=(await new AxeBuilder({page}).include('.inbs-service-detail').withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa']).analyze()).violations;
+     assert.deepEqual(violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)})),[]);
+     assert.deepEqual(errors,[]);
+     errors.length=0;
+    });
+   }
    await context.close();
   }
  }

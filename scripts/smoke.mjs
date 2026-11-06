@@ -1,6 +1,7 @@
 /** Lightweight production HTTP checks; run against a running Next.js server. */
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 
 const origin = (process.env.SMOKE_BASE_URL || 'http://localhost:3000').replace(/\/$/, '');
 const sourceEntries = JSON.parse(
@@ -36,6 +37,20 @@ try {
       assert.equal(new URL(old.headers.get('location'), origin).pathname, `/${locale}/legal`);
       console.log('PASS', `${locale}/${oldPath} redirects to unified legal page`);
     }
+    for (const slug of [
+      'businessmen-services','real-estate-services','website-services',
+      'typing-services','tourism-services','financial-services',
+      'consultation-services','customs-services','cargo-services',
+      'citizenship-and-immigration-services',
+    ]) {
+      await check(`/${locale}/services/${slug}`, {
+        pattern: /class="inbs-service-detail"/,
+        label: `${locale} ${slug} dedicated detail page`,
+      });
+    }
+    await check(`/${locale}/services/unknown-service`, {
+      status: 404, label: `${locale} unknown service`,
+    });
     for (const route of ['contact', 'services/cargo-services']) {
       await check(`/${locale}/${route}`, { label: `${locale} ${route} page` });
     }
@@ -54,6 +69,34 @@ try {
       label: `Team photo ${filename}`,
     });
   }
+  // Guard against using the same Pexels photograph in different service slots.
+  const editorialSourceNotes = await readFile(
+    new URL('../public/images/services/EDITORIAL-PHOTO-SOURCES.md', import.meta.url),'utf8',
+  );
+  const editorial = editorialSourceNotes.split(String.fromCharCode(10))
+    .filter(line=>line.includes('[Pexels ') && line.includes('.webp'))
+    .map(line=>({
+      filename:line.split('`')[1],
+      id:Number(line.split('[Pexels ')[1]?.split(']')[0]),
+    }));
+  assert.equal(editorial.length,20,'Expected 20 documented editorial images');
+  const sourceIds = [...sourceEntries.map(entry=>entry.id),...editorial.map(entry=>entry.id)];
+  assert.equal(new Set(sourceIds).size,30,'Pexels image source IDs must be unique across all service hero and editorial photos');
+  const photoFiles = [
+    ...sourceEntries.map(entry=>`../public/images/services/${entry.slug}.webp`),
+    ...editorial.map(entry=>`../public/images/services/editorial/${entry.filename}`),
+  ];
+  const contentHashes=new Set();
+  for(const filename of photoFiles){
+    const bytes=await readFile(new URL(filename,import.meta.url));
+    assert.equal(bytes.toString('ascii',0,4),'RIFF',`${filename}: invalid WebP header`);
+    assert.equal(bytes.toString('ascii',8,12),'WEBP',`${filename}: not a WebP file`);
+    const hash=createHash('sha256').update(bytes).digest('hex');
+    assert.ok(!contentHashes.has(hash),`${filename}: duplicate image bytes`);
+    contentHashes.add(hash);
+  }
+  console.log('PASS all 30 service photos use distinct sources and file contents');
+
   assert.equal(sourceEntries.length, 10, 'Expected ten documented service images');
   for (const { slug } of sourceEntries) {
     await check(`/images/services/${slug}.webp`, {
