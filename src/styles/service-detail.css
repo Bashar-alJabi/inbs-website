@@ -138,7 +138,7 @@
 .inbs-detail-offering-action svg{transition:transform .3s cubic-bezier(.22,1,.36,1)}
 .inbs-detail-offering-action:hover svg,
 .inbs-detail-offering-action:focus-visible svg{transform:rotate(45deg) translateX(2px)}
-[dir=rtl] .inbs-detail-offering-action{margin:-10px 0 -10px -10px}
+[dir=rtl] .inbs-detail-offering-action{padding:8px 8px 8px 0}
 .inbs-detail-offering-index{font-size:12px;font-weight:750;letter-spacing:.13em}
 .inbs-detail-offering h3{
   margin:0 0 13px;font-size:clamp(24px,2.4vw,34px);line-height:1.3;
