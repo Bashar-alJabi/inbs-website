@@ -209,10 +209,11 @@ for(const locale of ['en','ar']){
       'About subtitles must have the same computed size: '+sharedLabels);
     assert.equal(await page.locator('.inbs-story-principle').count(),3);
     assert.equal(await page.locator('.inbs-story-capability').count(),10);
-    assert.equal(await page.locator('.inbs-story-capability').first().getAttribute('href'),
-      '/'+locale+'/services/businessmen-services');
-    assert.equal(await page.locator('.inbs-story-capability').last().getAttribute('href'),
-      '/'+locale+'/services/citizenship-and-immigration-services');
+    assert.deepEqual(
+      await page.locator('.inbs-story-capability').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('href'))),
+      expectedServiceSlugs.map(slug=>'/'+locale+'/services/'+slug),
+      'About service capabilities must follow canonical ordering',
+    );
     assert.equal(await page.locator('.inbs-story-outro').count(),0,'Redundant contact CTA');
     assert.equal(await page.locator('.inbs-story-all-services.inbs-about-link').count(),1);
     assert.equal(await page.locator('.inbs-story-hero-art animateMotion').count(),3);
