@@ -33,8 +33,16 @@ Service URL slugs (keep unchanged):
 
 - [x] Create the shared feature branch from `redesign`.
 - [x] Open a single draft PR for the ten-page milestone.
-- [ ] Agree on service-page layout and content structure.
-- [ ] Implement and review the ten service detail pages.
+- [x] Establish the initial editorial page architecture and bilingual content structure (Businessmen Services reference).
+- [ ] Review the implemented Businessmen Services reference page visually; implement and review remaining nine service detail pages.
 - [ ] Update project documentation/checklists to reflect final implementation.
 - [ ] Pass final-head CI and owner review.
 - [ ] Merge into `redesign`, then promote to `main`.
+
+## First implementation — Businessmen Services
+
+- Implemented `/en/services/businessmen-services` and `/ar/services/businessmen-services` using the existing service image and canonical name.
+- Built page-local Hero, Overview, Offerings, Process and CTA sections, with all bilingual copy in `src/content/service-details.ts`.
+- Grouped the owner's supplied services into five scannable areas; wording intentionally avoids guarantees about external approval and bank outcomes.
+- Remaining nine detail routes continue to show Coming Soon and remain unindexed; Businessmen Services is also noindex pending visual approval.
+- Next: review rendered layout, mobile / RTL and light / dark appearance; verify CI before marking this reference page approved.
