@@ -36,6 +36,13 @@ try {
       assert.equal(new URL(old.headers.get('location'), origin).pathname, `/${locale}/legal`);
       console.log('PASS', `${locale}/${oldPath} redirects to unified legal page`);
     }
+    await check(`/${locale}/services/businessmen-services`, {
+      pattern: /class="inbs-service-detail"/,
+      label: `${locale} businessmen service detail page`,
+    });
+    await check(`/${locale}/services/unknown-service`, {
+      status: 404, label: `${locale} unknown service`,
+    });
     for (const route of ['contact', 'services/cargo-services']) {
       await check(`/${locale}/${route}`, { label: `${locale} ${route} page` });
     }
