@@ -13,6 +13,8 @@ This document defines **where to edit content** in the INBS bilingual site. Keep
 | Home page marketing copy and About preview | `src/content/home.ts` | `homeContent.en/ar` and `aboutDetails.en/ar`. |
 | About hero photo, source and regeneration | `public/images/about/hero-about.webp`, `public/images/about/SOURCE.json`, `scripts/prepare-about-image.mjs` | Dedicated Pexels skyline photo; no coupling to service-image catalog. |
 | Full About page copy and principles | `src/content/about.ts` | `aboutPageContent.en/ar`; reuse the canonical service names from `src/content/services.ts`. |\n| Services landing page headings and editorial copy | `src/content/services-page.ts` | Landing page only; never duplicate names, slugs or images from `src/content/services.ts`. |
+| Service detail editorial photos | `public/images/services/editorial/` | Replace a `*-01.webp` or `*-02.webp` file with the same name to change a photo without changing code. Source IDs: `public/images/services/EDITORIAL-PHOTO-SOURCES.md`. |
+| Individual service detail copy and offering groups | `src/content/service-details.ts` and `src/content/service-detail-catalog.ts` | Bilingual detail copy for all ten services. Keep canonical names/images in `src/content/services.ts`. |
 | Team landing copy (no unverified staff names/photos) | `src/content/team-page.ts` | People-first editorial introduction; approved real team profiles are a separate content requirement. |
 | Services landing hero photos | `public/images/services/HERO-SOURCES.json` and `hero-services-{1,2}.webp` | Two independently sourced Pexels photos; convert with `scripts/prepare-services-hero-images.mjs`. Not service catalog previews. |
 | Hero slides, CTA labels, related-service short labels, hero images | `src/content/hero.ts` | `heroSlides.en/ar`; service targets are typed as `ServiceSlug`. |
@@ -46,7 +48,7 @@ The key is the stable public URL slug. Its position determines display order. Th
 - Edit **page labels and stable page slugs** in `src/lib/site.ts`; every existing menu uses those records.
 - Use `routes.home(locale)`, `routes.page(locale, slug)`, and `routes.service(locale, slug)` from `src/lib/routes.ts` for navigation and CTAs. Do not duplicate URL strings in components.
 - Edit **which pages are visible** in each menu and **which services the footer lists** in `src/content/navigation.ts`. The service catalog still controls the names and order.
-- Footer Quick Links include Home plus the six nonlegal pages; the Services column lists the first five services and a localized link to the full directory. Labels for Home and the directory CTA live in `src/content/layout.ts`.
+- Footer Quick Links include Home plus the six nonlegal pages; the Services column lists the first six services in canonical catalog order and a localized link to the full directory. Labels for Home and the directory CTA live in `src/content/layout.ts`.
 - Privacy Policy and Terms & Conditions will be sections of **one future legal page**, `/[locale]/legal`. The footer has one localized "Legal Information" link; historic `/[locale]/privacy-policy` and `/[locale]/terms` URLs permanently redirect to it via `next.config.ts`. Legal copy is not yet approved or published.
 - Existing links are preserved. Changing a slug is a public URL change and needs a redirect and link/SEO audit, not just a content edit.
 - The language switcher intentionally preserves the current path while replacing the locale segment.
