@@ -167,3 +167,216 @@ const otherServices = {
     },
   },
 } as const;
+
+const remainingServices = {
+  'financial-services': {
+    en: {
+      eyebrow:'INBS / FINANCIAL SERVICES',heroLead:'A clearer view of your numbers supports a clearer business decision. Explore accounting, audit-related and financial advisory service areas.',
+      photoCaption:'FINANCE / BUSINESS',overviewTitle:'Clarity around the numbers that matter.',
+      overviewLead:'Accounting systems and financial reviews are an important part of understanding business activity.',
+      overviewBody:'Our financial service categories cover monthly accounting, internal and statutory audit-related enquiries, monitoring, accounting systems and selected business and insurance advice.',
+      offeringsTitle:'Organized around financial clarity.',
+      offeringsLead:'Explore support areas connected to your business accounts, reporting and operational decisions.',
+      offerings:[
+        {number:'01',title:'Accounting & reporting',description:'Services related to recording and reviewing financial activity.',items:['Monthly accounting','Accounting monitoring and review','Accounting systems']},
+        {number:'02',title:'Audit-related services',description:'Enquiries about internal and statutory financial reviews.',items:['Internal accounting audits','Statutory audit enquiries','Financial controls and reviews']},
+        {number:'03',title:'Business & insurance guidance',description:'Related advisory areas alongside your financial requirements.',items:['Free zone company setup consultations','Insurance service enquiries']},
+      ],
+      processTitle:'Begin with the financial requirement.',
+      processLead:'Different accounting and audit needs call for different information and qualified providers.',
+      steps:[{title:'Describe the need',description:'Tell us whether you need accounting, an audit-related service, systems or advice.'},{title:'Clarify the scope',description:'Discuss the business context and relevant documents.'},{title:'Explore next steps',description:'Determine which service or qualified provider may be appropriate.'}],
+      closingTitle:'Bring more clarity to your next decision.',closingText:'Share the financial or accounting support your business is looking for.',
+    },
+    ar: {
+      eyebrow:'INBS / الخدمات المالية',heroLead:'وضوح الأرقام يساعد في وضوح قرارات الأعمال. استكشف مجالات المحاسبة والتدقيق والاستشارات المالية المرتبطة بنشاطك.',
+      photoCaption:'المالية / الأعمال',overviewTitle:'صورة أوضح للأرقام المهمة.',
+      overviewLead:'الأنظمة المحاسبية والمراجعات المالية جزء أساسي من فهم نشاط الأعمال.',
+      overviewBody:'تشمل مجالات خدماتنا المحاسبة الشهرية والاستفسارات المتعلقة بالتدقيق القانوني والداخلي والمراقبة والأنظمة المحاسبية وبعض الاستشارات والتأمين.',
+      offeringsTitle:'خدمات منظمة حول الوضوح المالي.',
+      offeringsLead:'استكشف المجالات المتعلقة بحسابات شركتك والتقارير والقرارات التشغيلية.',
+      offerings:[
+        {number:'01',title:'المحاسبة والتقارير',description:'خدمات مرتبطة بتسجيل النشاط المالي ومراجعته.',items:['المحاسبة الشهرية','المراقبة والمراجعة الحسابية','الأنظمة المحاسبية']},
+        {number:'02',title:'الخدمات المتعلقة بالتدقيق',description:'استفسارات المراجعة المالية الداخلية والقانونية.',items:['التدقيق المحاسبي الداخلي','التدقيق المحاسبي القانوني','مراجعة الرقابة الحسابية']},
+        {number:'03',title:'استشارات الأعمال والتأمين',description:'مجالات استشارية مرتبطة باحتياجاتك المالية.',items:['استشارات تأسيس شركات المناطق الحرة','الاستفسارات المتعلقة بخدمات التأمين']},
+      ],
+      processTitle:'ابدأ بتحديد احتياجك المالي.',
+      processLead:'تختلف متطلبات المحاسبة والتدقيق بحسب الحالة والجهة المهنية المختصة.',
+      steps:[{title:'اشرح احتياجك',description:'حدد ما إذا كنت تبحث عن المحاسبة أو التدقيق أو الأنظمة أو الاستشارة.'},{title:'وضح النطاق',description:'ناقش طبيعة النشاط والمستندات ذات الصلة.'},{title:'استكشف الخطوة التالية',description:'ناقش نوع الخدمة أو الجهة المهنية المناسبة لطلبك.'}],
+      closingTitle:'امنح قرارك القادم صورة أوضح.',closingText:'شاركنا نوع الدعم المالي أو المحاسبي الذي تبحث عنه.',
+    },
+  },
+  'consultation-services': {
+    en: {
+      eyebrow:'INBS / CONSULTATION',heroLead:'Better questions lead to better direction. Explore feasibility, market research, company formation and systems-related consultation.',
+      photoCaption:'INSIGHT / DIRECTION',overviewTitle:'A thoughtful starting point for important decisions.',
+      overviewLead:'Before taking a business step, it helps to understand the market, the requirements and the systems around it.',
+      overviewBody:'Our consultation categories cover feasibility studies, market surveys, quantity surveying, company formation advice and the review of business systems and internal processes.',
+      offeringsTitle:'Explore the questions behind the decision.',
+      offeringsLead:'These advisory areas provide a starting point for discussing the information your next move requires.',
+      offerings:[
+        {number:'01',title:'Market & feasibility',description:'Research-oriented enquiries for assessing business ideas and markets.',items:['Market surveys and research','Project feasibility studies']},
+        {number:'02',title:'Business formation advice',description:'Consultation on setting up and structuring a company.',items:['Company formation consultations','Online business enquiries across relevant areas']},
+        {number:'03',title:'Systems & measurement',description:'Review-oriented service areas for operations and projects.',items:['System analysis','Internal systems review','Quantity surveying']},
+      ],
+      processTitle:'Start with the question you want answered.',
+      processLead:'Define the decision or challenge first, then identify the information needed.',
+      steps:[{title:'Explain the challenge',description:'Share the business question, project or process you are considering.'},{title:'Identify the scope',description:'Discuss whether research, feasibility, formation or systems review is most relevant.'},{title:'Explore an approach',description:'Determine the information and next steps appropriate to your enquiry.'}],
+      closingTitle:'Turn an open question into a starting point.',closingText:'Tell us the idea, decision or operational challenge you want to discuss.',
+    },
+    ar: {
+      eyebrow:'INBS / الاستشارات',heroLead:'الأسئلة الدقيقة تقود إلى اتجاه أوضح. استكشف دراسات الجدوى وبحوث الأسواق وتأسيس الشركات والاستشارات المتعلقة بالأنظمة.',
+      photoCaption:'المعرفة / التوجيه',overviewTitle:'بداية مدروسة للقرارات المهمة.',
+      overviewLead:'قبل اتخاذ خطوة في الأعمال، من المفيد فهم السوق والمتطلبات والأنظمة المرتبطة بها.',
+      overviewBody:'تشمل مجالات الاستشارات دراسة الجدوى واستطلاعات الأسواق ومحاسبة الكميات واستشارات تأسيس الشركات وتحليل النظم ومراجعة العمليات الداخلية.',
+      offeringsTitle:'استكشف الأسئلة وراء القرار.',
+      offeringsLead:'مجالات استشارية تساعد على مناقشة المعلومات اللازمة لخطوتك القادمة.',
+      offerings:[
+        {number:'01',title:'الأسواق والجدوى',description:'استفسارات بحثية حول الأفكار التجارية والأسواق.',items:['استطلاعات وبحوث الأسواق','دراسات جدوى المشاريع']},
+        {number:'02',title:'استشارات تأسيس الشركات',description:'مناقشة احتياجات تأسيس الشركات وتنظيمها.',items:['استشارات إنشاء الشركات','الرد الإلكتروني على استفسارات رجال الأعمال']},
+        {number:'03',title:'الأنظمة والقياس',description:'مجالات مراجعة العمليات والأنظمة والمشاريع.',items:['تحليل الأنظمة','مراجعة النظم الداخلية','محاسبة الكميات']},
+      ],
+      processTitle:'ابدأ بالسؤال الذي تريد الإجابة عنه.',
+      processLead:'حدد القرار أو التحدي أولًا لتوضيح المعلومات المطلوبة.',
+      steps:[{title:'اشرح التحدي',description:'شاركنا السؤال التجاري أو المشروع أو العملية التي تفكر بها.'},{title:'حدد نطاق الاستشارة',description:'ناقش إن كان المطلوب بحثًا أو جدوى أو تأسيسًا أو مراجعة أنظمة.'},{title:'استكشف النهج',description:'تعرّف إلى المعلومات والخطوات الممكنة لطلبك.'}],
+      closingTitle:'حوّل السؤال إلى نقطة انطلاق.',closingText:'شاركنا الفكرة أو القرار أو التحدي الذي تريد مناقشته.',
+    },
+  },
+  'customs-services': {
+    en: {
+      eyebrow:'INBS / CUSTOMS',heroLead:'Cargo movements involve documents, service providers and customs requirements. Explore customs processing and connected coordination services.',
+      photoCaption:'TRADE / MOVEMENT',overviewTitle:'Navigate the details around every shipment.',
+      overviewLead:'Customs-related transactions often sit alongside shipping, communications and insurance arrangements.',
+      overviewBody:'Our listed customs service areas include clearing different types of customs transactions and enquiries connected to shipping, telecommunications and insurance.',
+      offeringsTitle:'The services surrounding customs clearance.',
+      offeringsLead:'Find the area most relevant to your customs or trade-related enquiry.',
+      offerings:[
+        {number:'01',title:'Customs transactions',description:'Services related to customs documentation and transaction clearance.',items:['Different types of customs transaction clearance','Customs processing enquiries']},
+        {number:'02',title:'Shipping coordination',description:'Shipping-related enquiries connected to customs requirements.',items:['Shipping services','Coordination around shipment requirements']},
+        {number:'03',title:'Supporting services',description:'Additional service areas associated with commercial activity.',items:['du and telecommunications services','Insurance services']},
+      ],
+      processTitle:'Begin with the shipment and its documents.',
+      processLead:'The type of goods and transaction determines the requirements to discuss.',
+      steps:[{title:'Describe the shipment',description:'Share the goods, route and customs question you have.'},{title:'Discuss the documents',description:'Identify the relevant transaction and supporting information.'},{title:'Explore coordination',description:'Discuss customs, shipping or related service enquiries.'}],
+      closingTitle:'A customs enquiry deserves a clear next step.',closingText:'Share the type of customs transaction or shipping support you need.',
+    },
+    ar: {
+      eyebrow:'INBS / الخدمات الجمركية',heroLead:'تتطلب حركة البضائع وثائق وتنسيقًا وإجراءات جمركية. استكشف خدمات تخليص المعاملات والخدمات المرتبطة بها.',
+      photoCaption:'التجارة / الحركة',overviewTitle:'تفاصيل كل شحنة تستحق اهتمامًا.',
+      overviewLead:'ترتبط المعاملات الجمركية أحيانًا بالشحن والاتصالات والتأمين.',
+      overviewBody:'تشمل مجالات خدماتنا تخليص أنواع مختلفة من المعاملات الجمركية والاستفسارات المرتبطة بالشحن والاتصالات والتأمين.',
+      offeringsTitle:'خدمات مرتبطة بالتخليص الجمركي.',
+      offeringsLead:'حدد المجال الأقرب إلى طلبك الجمركي أو التجاري.',
+      offerings:[
+        {number:'01',title:'المعاملات الجمركية',description:'خدمات مرتبطة بوثائق وإجراءات التخليص الجمركي.',items:['تخليص أنواع المعاملات الجمركية','استفسارات الإجراءات الجمركية']},
+        {number:'02',title:'تنسيق الشحن',description:'استفسارات الشحن المرتبطة بالمتطلبات الجمركية.',items:['خدمات الشحن','التنسيق حول احتياجات الشحنة']},
+        {number:'03',title:'الخدمات المساندة',description:'مجالات إضافية مرتبطة بالأنشطة التجارية.',items:['خدمات دو والاتصالات','خدمات التأمين']},
+      ],
+      processTitle:'ابدأ بتفاصيل الشحنة ووثائقها.',
+      processLead:'نوع البضاعة والمعاملة يساعد على تحديد المتطلبات ذات الصلة.',
+      steps:[{title:'صف الشحنة',description:'شاركنا طبيعة البضائع ومسارها واستفسارك الجمركي.'},{title:'ناقش الوثائق',description:'تعرّف إلى المعاملة والمعلومات المرتبطة بها.'},{title:'استكشف التنسيق',description:'ناقش خدمات الجمارك أو الشحن أو الخدمات المساندة.'}],
+      closingTitle:'ابدأ معاملتك الجمركية بخطوة أوضح.',closingText:'شاركنا نوع المعاملة الجمركية أو الدعم المرتبط بالشحن.',
+    },
+  },
+  'cargo-services': {
+    en: {
+      eyebrow:'INBS / CARGO & LOGISTICS',heroLead:'From moving goods by sea or air to storage and handling, explore logistics services across the stages of a shipment.',
+      photoCaption:'CARGO / LOGISTICS',overviewTitle:'Every shipment has more than one moving part.',
+      overviewLead:'Freight transport, clearance, packing and storage all have a role in how goods move.',
+      overviewBody:'Our cargo service areas cover sea and air freight, customs clearance, packaging, several storage formats, container handling, insurance and shipping-line agency enquiries.',
+      offeringsTitle:'From departure to handling and storage.',
+      offeringsLead:'Explore the cargo-related services relevant to the way your goods need to move.',
+      offerings:[
+        {number:'01',title:'Freight & maritime services',description:'Moving goods through sea and air freight channels.',items:['Sea freight for goods','Air freight for goods','Shipping-line agency services']},
+        {number:'02',title:'Customs & protection',description:'Related enquiries for shipment documentation and protection.',items:['Customs transaction clearance','Cargo insurance services','Packing goods for transport']},
+        {number:'03',title:'Storage options',description:'Different storage environments for different cargo requirements.',items:['Silo storage','Refrigerated storage','General warehouse storage']},
+        {number:'04',title:'Container operations',description:'Handling activities surrounding cargo containers.',items:['Container loading','Container unloading']},
+      ],
+      processTitle:'Tell us what needs to move.',
+      processLead:'Cargo type, route and handling needs shape the service conversation.',
+      steps:[{title:'Describe the cargo',description:'Share the goods, origin, destination and timing you have in mind.'},{title:'Identify handling needs',description:'Discuss transport mode, clearance, storage, packaging or insurance.'},{title:'Explore the arrangement',description:'Review the available logistics services and next steps.'}],
+      closingTitle:'Keep your next shipment moving forward.',closingText:'Tell us about your freight, storage or cargo-handling requirements.',
+    },
+    ar: {
+      eyebrow:'INBS / خدمات الشحن',heroLead:'من نقل البضائع بحرًا وجوًا إلى التخزين والمناولة، استكشف الخدمات اللوجستية المرتبطة بمراحل الشحنة.',
+      photoCaption:'الشحن / الخدمات اللوجستية',overviewTitle:'كل شحنة تتضمن أكثر من خطوة.',
+      overviewLead:'النقل والتخليص والتغليف والتخزين عناصر مترابطة في حركة البضائع.',
+      overviewBody:'تشمل مجالات خدمات الشحن النقل البحري والجوي والتخليص الجمركي والتغليف وأنواع التخزين ومناولة الحاويات والتأمين والوكالات الملاحية.',
+      offeringsTitle:'من النقل إلى المناولة والتخزين.',
+      offeringsLead:'استكشف خدمات الشحن وفقًا لطبيعة البضائع ومسارها.',
+      offerings:[
+        {number:'01',title:'النقل والشحن البحري',description:'نقل البضائع عبر قنوات الشحن البحرية والجوية.',items:['الشحن البحري للبضائع','الشحن الجوي للبضائع','خدمات وكيل الخطوط الملاحية']},
+        {number:'02',title:'الجمارك والحماية',description:'خدمات مرتبطة بوثائق الشحنة وحمايتها.',items:['تخليص المعاملات الجمركية','خدمات تأمين البضائع','حزم البضائع وتغليفها']},
+        {number:'03',title:'خيارات التخزين',description:'بيئات تخزين متعددة تناسب أنواعًا مختلفة من البضائع.',items:['التخزين في الصوامع','التخزين المبرد','التخزين في المخازن العامة']},
+        {number:'04',title:'مناولة الحاويات',description:'عمليات مرتبطة بتجهيز الحاويات والتعامل معها.',items:['تحميل حاويات الشحن','تفريغ حاويات الشحن']},
+      ],
+      processTitle:'ابدأ بإخبارنا ما الذي تريد شحنه.',
+      processLead:'نوع البضاعة ومسارها ومتطلبات مناولتها تحدد مجالات الخدمة المناسبة.',
+      steps:[{title:'صف البضاعة',description:'شاركنا طبيعة الشحنة ونقطة الانطلاق والوجهة والموعد المتوقع.'},{title:'حدد احتياجاتها',description:'ناقش النقل والتخليص والتخزين والتغليف أو التأمين.'},{title:'استكشف الترتيبات',description:'تعرّف إلى الخدمات اللوجستية المتاحة والخطوات التالية.'}],
+      closingTitle:'خطوة أوضح لشحنتك القادمة.',closingText:'شاركنا متطلبات النقل أو التخزين أو مناولة البضائع.',
+    },
+  },
+  'citizenship-and-immigration-services': {
+    en: {
+      eyebrow:'INBS / IMMIGRATION SERVICES',heroLead:'Explore residency and citizenship-by-investment programme enquiries across selected destinations, with attention to the requirements of each route.',
+      photoCaption:'RESIDENCY / DESTINATIONS',overviewTitle:'Different destinations. Different requirements.',
+      overviewLead:'Investment-based residency and citizenship pathways are not interchangeable.',
+      overviewBody:'Our listed service covers enquiries about investment-linked residency and citizenship programmes in selected countries. Each destination has distinct eligibility, documentation, investment and regulatory requirements that must be verified with the relevant programme authority and qualified professionals.',
+      offeringsTitle:'Explore destinations by programme type.',
+      offeringsLead:'The following destinations reflect the programmes listed by INBS. Programme availability and eligibility must be verified before any application or commitment.',
+      offerings:[
+        {number:'01',title:'Caribbean programme enquiries',description:'Discuss investment-linked citizenship programme information for selected Caribbean destinations.',items:['Saint Kitts and Nevis','Commonwealth of Dominica','Saint Lucia','Grenada','Antigua and Barbuda']},
+        {number:'02',title:'Other citizenship pathways',description:'Explore programme-related enquiries for additional jurisdictions.',items:['Vanuatu','Türkiye']},
+        {number:'03',title:'European residence pathways',description:'Discuss investment-linked residence route enquiries where applicable.',items:['Portugal','Spain','Greece']},
+      ],
+      processTitle:'Start with your destination and circumstances.',
+      processLead:'Citizenship and residence rules change; a programme must be checked before any decision.',
+      steps:[{title:'Share your objective',description:'Tell us whether your interest is residency or citizenship and which country you are considering.'},{title:'Discuss requirements',description:'Explore programme status, eligibility questions and documentation considerations.'},{title:'Verify next steps',description:'Confirm current rules and any professional or government assessment required.'}],
+      closingTitle:'Start with the right questions.',closingText:'Contact us about the destinations and programme categories you want to explore.',
+    },
+    ar: {
+      eyebrow:'INBS / الجنسية والهجرة',heroLead:'استكشف الاستفسارات المتعلقة ببرامج الإقامة والمواطنة المرتبطة بالاستثمار في وجهات مختارة، مع مراعاة متطلبات كل برنامج.',
+      photoCaption:'الإقامة / الوجهات',overviewTitle:'وجهات مختلفة، ومتطلبات مختلفة.',
+      overviewLead:'مسارات الإقامة والمواطنة عبر الاستثمار ليست متطابقة.',
+      overviewBody:'تشمل خدماتنا الاستفسارات حول برامج الإقامة والمواطنة المرتبطة بالاستثمار في دول محددة. تختلف شروط الأهلية والوثائق والاستثمار والأنظمة بين الدول، ويجب التحقق منها لدى الجهات المختصة والخبراء المرخصين.',
+      offeringsTitle:'استكشف الوجهات وفق نوع البرنامج.',
+      offeringsLead:'تعكس الوجهات التالية قائمة البرامج التي تقدم INBS استفسارات بشأنها. يجب التأكد من توفر البرنامج والأهلية قبل أي تقديم أو التزام.',
+      offerings:[
+        {number:'01',title:'استفسارات برامج الكاريبي',description:'مناقشة معلومات برامج المواطنة المرتبطة بالاستثمار في وجهات من الكاريبي.',items:['سانت كيتس ونيفيس','كومنولث دومينيكا','سانت لوسيا','غرينادا','أنتيغوا وباربودا']},
+        {number:'02',title:'مسارات مواطنة أخرى',description:'استفسارات مرتبطة ببرامج جهات إضافية.',items:['فانواتو','تركيا']},
+        {number:'03',title:'مسارات الإقامة الأوروبية',description:'استفسارات مسارات الإقامة المرتبطة بالاستثمار عند انطباقها.',items:['البرتغال','إسبانيا','اليونان']},
+      ],
+      processTitle:'ابدأ بالوجهة وظروفك الشخصية.',
+      processLead:'تتغير قواعد الإقامة والمواطنة ويجب التأكد من حالة البرنامج قبل اتخاذ أي قرار.',
+      steps:[{title:'حدد هدفك',description:'أخبرنا إن كنت تبحث عن الإقامة أو المواطنة والوجهة التي تفكر بها.'},{title:'ناقش المتطلبات',description:'استكشف حالة البرنامج وشروط الأهلية والوثائق المطلوبة.'},{title:'تحقق من الخطوات',description:'تأكد من القواعد الحالية والتقييمات المهنية أو الحكومية المطلوبة.'}],
+      closingTitle:'ابدأ بالأسئلة الصحيحة.',closingText:'تواصل معنا بشأن الوجهات وفئات البرامج التي ترغب باستكشافها.',
+    },
+  },
+} as const;
+
+// Shared editorial labels keep the same visual structure and action semantics,
+// while every service supplies its own descriptive copy and offering groups.
+const common = {
+  en: {
+    discover:'Explore the support available',overviewEyebrow:'THE BIG PICTURE',
+    offeringsEyebrow:'AREAS OF SERVICE',processEyebrow:'HOW TO START',closingEyebrow:'LET’S CONNECT',
+    closingPrimary:'Start this service',closingSecondary:'Explore all services',back:'All services',
+  },
+  ar: {
+    discover:'استكشف مجالات خدماتنا',overviewEyebrow:'نظرة شاملة',
+    offeringsEyebrow:'مجالات الخدمة',processEyebrow:'كيف تبدأ؟',closingEyebrow:'لنبقَ على تواصل',
+    closingPrimary:'ابدأ الخدمة',closingSecondary:'استكشف جميع الخدمات',back:'جميع الخدمات',
+  },
+} as const;
+
+type OtherSlug = Exclude<ServiceSlug, 'businessmen-services'>;
+const combined = { ...otherServices, ...remainingServices };
+
+export const serviceDetailContent: Record<ServiceSlug, Record<Locale, ServiceDetailText>> = {
+  'businessmen-services': businessmenDetailContent,
+  ...Object.fromEntries(
+    (Object.keys(combined) as OtherSlug[]).map(slug => [slug, {
+      en: { ...common.en, ...combined[slug].en },
+      ar: { ...common.ar, ...combined[slug].ar },
+    }]),
+  ) as Record<OtherSlug, Record<Locale, ServiceDetailText>>,
+};
