@@ -580,6 +580,7 @@ const detailSlugs=[
  'citizenship-and-immigration-services',
 ];
 const areaCounts=[5,3,3,3,3,3,3,3,4,3];
+const editorialCounts=[1,2,2,1,2,1,1,1,2,2];
 for(const locale of ['en','ar']){
  const context=await browser.newContext({viewport:{width:1440,height:900},reducedMotion:'reduce'});
  const page=await context.newPage();
@@ -592,6 +593,13 @@ for(const locale of ['en','ar']){
    assert.equal(await page.locator('.inbs-service-detail').getAttribute('data-service'),slug);
    assert.equal(await page.locator('.inbs-service-detail h1').count(),1);
    assert.equal(await page.locator('.inbs-detail-offering').count(),areaCounts[index]);
+   const figures=page.locator('.inbs-detail-offering-photo');
+   assert.equal(await figures.count(),editorialCounts[index]);
+   assert.equal(await figures.locator('img[loading="lazy"]').count(),editorialCounts[index]);
+   assert.equal(await figures.locator('figcaption').count(),editorialCounts[index]);
+   for(const alt of await figures.locator('img').evaluateAll(imgs=>imgs.map(img=>img.alt)))
+     assert.ok(alt.length>10,'Editorial image needs descriptive localized alt');
+
    assert.equal(await page.locator('.inbs-detail-process-step').count(),3);
    const actions=page.locator('.inbs-detail-offering-action');
    assert.equal(await actions.count(),areaCounts[index]);
@@ -622,6 +630,14 @@ for(const locale of ['en','ar']){
      const res=await page.goto(origin+'/'+locale+'/services/'+slug,{waitUntil:'domcontentloaded',timeout:45000});
      assert.equal(res?.status(),200);
      await page.waitForFunction(expected=>document.documentElement.getAttribute('data-theme')===expected,theme);
+     const editorial=page.locator('.inbs-detail-offering-photo').first();
+     await editorial.scrollIntoViewIfNeeded();
+     await page.waitForFunction(() => {
+       const img=document.querySelector('.inbs-detail-offering-photo img');
+       return img?.complete;
+     },null,{timeout:20000});
+     const loaded=await editorial.locator('img').evaluate(img=>img.naturalWidth>0);
+     assert.ok(loaded,'Editorial photo should load from the configured Pexels source');
      await page.locator('.inbs-detail-process').scrollIntoViewIfNeeded();
      const widths=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
      assert.ok(widths.scroll<=widths.inner+3,'Horizontal overflow: '+JSON.stringify(widths));
