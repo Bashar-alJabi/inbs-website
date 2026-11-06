@@ -52,11 +52,10 @@ export const businessmenDetailContent = {
       { title: 'Clarify the route', description: 'We discuss the applicable service area, documents and next steps for your enquiry.' },
       { title: 'Coordinate the next step', description: 'Where the service is available, we can discuss the relevant processing or follow-up arrangements.' },
     ],
-    note: 'Government approvals, bank account decisions and third-party outcomes remain subject to the relevant authorities and service providers.',
     closingEyebrow: 'LET’S CONNECT',
     closingTitle: 'Every business step begins with a conversation.',
     closingText: 'Tell us what you need help with and we can discuss the relevant service pathway.',
-    closingPrimary: 'Contact INBS',
+    closingPrimary: 'Start this service',
     closingSecondary: 'Explore all services',
     back: 'All services',
   },
@@ -107,11 +106,10 @@ export const businessmenDetailContent = {
       { title: 'تحديد المسار المناسب', description: 'نناقش مجال الخدمة والوثائق والخطوات التي قد تنطبق على استفسارك.' },
       { title: 'تنسيق الخطوة التالية', description: 'بحسب توفر الخدمة، يمكننا مناقشة ترتيبات الإنجاز أو المتابعة المناسبة.' },
     ],
-    note: 'تخضع الموافقات الحكومية وقرارات فتح الحسابات البنكية ونتائج خدمات الجهات الأخرى لشروط وإجراءات الجهات المختصة.',
     closingEyebrow: 'لنبقَ على تواصل',
     closingTitle: 'كل خطوة في الأعمال تبدأ بمحادثة.',
     closingText: 'شاركنا احتياجك لنناقش معك مسار الخدمة المناسب.',
-    closingPrimary: 'تواصل مع INBS',
+    closingPrimary: 'ابدأ الخدمة',
     closingSecondary: 'استكشف جميع الخدمات',
     back: 'جميع الخدمات',
   },
@@ -121,6 +119,6 @@ export const businessmenDetailContent = {
   offeringsEyebrow: string; offeringsTitle: string; offeringsLead: string;
   offerings: readonly {number:string;title:string;description:string;items:readonly string[]}[];
   processEyebrow:string;processTitle:string;processLead:string;
-  steps:readonly {title:string;description:string}[];note:string;
+  steps:readonly {title:string;description:string}[];
   closingEyebrow:string;closingTitle:string;closingText:string;closingPrimary:string;closingSecondary:string;back:string;
 }>;
