@@ -32,6 +32,11 @@ try {
     await check(`/${locale}/team`, { pattern: /class=\"inbs-team-page\"/, label: `${locale} dedicated Team page` });
     await check(`/${locale}/contact`, { pattern: /class="inbs-contact-page"/, label: `${locale} dedicated Contact page without a form` });
     await check(`/${locale}/careers`, { pattern: /class="inbs-careers-page"/, label: `${locale} dedicated Careers page with email applications` });
+    await check(`/${locale}/insights`, { pattern: /class="inbs-insights-page"/, label: `${locale} Insights library` });
+    for (const slug of ['starting-a-business-in-dubai','mainland-or-free-zone','understanding-uae-work-permits','family-residency-preparation','vat-registration-business-planning']) {
+      await check(`/${locale}/insights/${slug}`, { pattern: /class="inbs-insights-page/, label: `${locale} Insights article ${slug}` });
+    }
+    await check(`/${locale}/insights/unknown-article`, { status:404, label: `${locale} unknown Insights article` });
     await check(`/${locale}/legal`, { label: `${locale} unified legal placeholder` });
     for (const oldPath of ['privacy-policy', 'terms']) {
       const old = await fetch(`${origin}/${locale}/${oldPath}`, { redirect: 'manual', signal: AbortSignal.timeout(15000) });
