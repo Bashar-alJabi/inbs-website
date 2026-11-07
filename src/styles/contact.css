@@ -128,14 +128,15 @@
   offset-distance:0%;offset-rotate:0deg;
   animation:inbs-contact-photo-border 13s linear infinite;
 }
+/* All three dots move at the same speed, offset by one-third of a lap. */
 .inbs-contact-hero-photo--building .inbs-contact-photo-traveler{
-  animation-duration:11s;animation-delay:-4s;
+  animation-delay:0s;
 }
 .inbs-contact-hero-photo--office .inbs-contact-photo-traveler{
-  animation-delay:-2s;
+  animation-delay:-4.333s;
 }
 .inbs-contact-hero-photo--door .inbs-contact-photo-traveler{
-  animation-duration:16s;animation-delay:-8s;
+  animation-delay:-8.667s;
 }
 @keyframes inbs-contact-photo-border{
   from{offset-distance:0%}
