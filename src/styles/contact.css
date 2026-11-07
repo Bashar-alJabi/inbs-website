@@ -281,6 +281,8 @@ html[data-theme=dark] .inbs-contact-visit{background:#102d42}
 [dir=rtl] .inbs-contact-kicker,[dir=rtl] .inbs-contact-hero-bottom,
 [dir=rtl] .inbs-contact-channel-top span,[dir=rtl] .inbs-contact-hero-panel>p,
 [dir=rtl] .inbs-contact-visit-address>span{letter-spacing:0}
+/* Give the taller Arabic heading a clear separation from its lead paragraph. */
+[dir=rtl] .inbs-contact-visit .inbs-contact-visit-lead{margin-top:clamp(26px,3vw,36px)}
 [dir=rtl] .inbs-contact-hero-panel{align-items:flex-start}
 [dir=rtl] .inbs-contact-channel-action:hover svg,
 [dir=rtl] .inbs-contact-visit-map-action:hover svg{transform:translate(-3px,-3px)}
