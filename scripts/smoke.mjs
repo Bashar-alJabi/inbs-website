@@ -69,7 +69,7 @@ try {
     const bytes = await readFile(new URL(path, import.meta.url));
     assert.equal(bytes.toString('ascii',0,4),'RIFF',`${path}: missing RIFF header`);
     assert.equal(bytes.toString('ascii',8,12),'WEBP',`${path}: missing WebP signature`);
-    await check(`/images/insights/${slug}.webp`, {contentType:/image\\/webp/i,label:`Insights local photo ${slug}`});
+    await check(`/images/insights/${slug}.webp`, {contentType:new RegExp('image/webp','i'),label:`Insights local photo ${slug}`});
   }
   for (const image of ['hero-one.webp', 'hero-two.webp', 'hero-three.webp']) {
     await check(`/images/${image}`, { contentType: /image\/webp/i, label: `Hero ${image}` });
