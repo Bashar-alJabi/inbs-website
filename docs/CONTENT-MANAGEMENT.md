@@ -85,3 +85,11 @@ The three photo frames in `src/components/team/team-hero.tsx` load directly from
 ### Team story — seven integrated photos
 
 The Team page is now strictly **Hero → TeamStory → CTA**. The previous placeholder Team Note is removed. TeamStory combines the former How We Work and What Guides Us copy with seven photo slots, integrated into an editorial layout rather than an isolated gallery. The approved WebP files are already present at `public/images/team/story-04.webp` through `story-10.webp`. The CSS references one WebP file per frame; updating them only requires replacing the images by filename. Desktop/mobile/RTL/dark styles are in `src/styles/team.css`. These seven editorial images are marked decorative; the three hero images have concise localized accessible descriptions. Photo ownership and publication permissions remain a separate company-side handoff check.
+
+## Insights editorial content
+
+- Landing headings, category names and CTA text: `src/content/insights-page.ts`.
+- Six bilingual published guides, article slugs, summaries, body sections and official sources: `src/content/insights.ts`.
+- Article list and detail pages use a single catalog; update both English and Modern Standard Arabic together. Do not change a published slug without redirect planning.
+- Article photography: `public/images/insights/<slug>.webp` (1200×800 WebP); the separate landing Hero is `public/images/insights/insights-hero.webp` (1920×1080 WebP). Replace the file with the same name and preserve Pexels provenance in `public/images/insights/SOURCES.md`; cards and featured article resolve these paths directly.
+- Government procedures change. Verify each claim against the linked authority before publishing updates. No external CMS, author profile, image service or article API is used.

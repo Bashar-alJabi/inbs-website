@@ -32,6 +32,11 @@ try {
     await check(`/${locale}/team`, { pattern: /class=\"inbs-team-page\"/, label: `${locale} dedicated Team page` });
     await check(`/${locale}/contact`, { pattern: /class="inbs-contact-page"/, label: `${locale} dedicated Contact page without a form` });
     await check(`/${locale}/careers`, { pattern: /class="inbs-careers-page"/, label: `${locale} dedicated Careers page with email applications` });
+    await check(`/${locale}/insights`, { pattern: /class="inbs-insights-page"/, label: `${locale} Insights library` });
+    for (const slug of ['starting-a-business-in-dubai','mainland-or-free-zone','understanding-uae-work-permits','family-residency-preparation','vat-registration-business-planning','renewing-a-dubai-trade-licence']) {
+      await check(`/${locale}/insights/${slug}`, { pattern: /class="inbs-insights-page/, label: `${locale} Insights article ${slug}` });
+    }
+    await check(`/${locale}/insights/unknown-article`, { status:404, label: `${locale} unknown Insights article` });
     await check(`/${locale}/legal`, { label: `${locale} unified legal placeholder` });
     for (const oldPath of ['privacy-policy', 'terms']) {
       const old = await fetch(`${origin}/${locale}/${oldPath}`, { redirect: 'manual', signal: AbortSignal.timeout(15000) });
@@ -59,6 +64,13 @@ try {
     await check(`/${locale}/invalid-unlisted-page`, { status: 404, label: `${locale} unknown route` });
   }
 
+  for (const slug of ['starting-a-business-in-dubai','mainland-or-free-zone','understanding-uae-work-permits','family-residency-preparation','vat-registration-business-planning','renewing-a-dubai-trade-licence']) {
+    const path = `../public/images/insights/${slug}.webp`;
+    const bytes = await readFile(new URL(path, import.meta.url));
+    assert.equal(bytes.toString('ascii',0,4),'RIFF',`${path}: missing RIFF header`);
+    assert.equal(bytes.toString('ascii',8,12),'WEBP',`${path}: missing WebP signature`);
+    await check(`/images/insights/${slug}.webp`, {contentType:new RegExp('image/webp','i'),label:`Insights local photo ${slug}`});
+  }
   for (const image of ['hero-one.webp', 'hero-two.webp', 'hero-three.webp']) {
     await check(`/images/${image}`, { contentType: /image\/webp/i, label: `Hero ${image}` });
   }
