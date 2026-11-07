@@ -696,6 +696,20 @@ for(const locale of ['en','ar']){
     await page.waitForFunction(t=>document.documentElement.getAttribute('data-theme')===t,theme);
     assert.equal(await page.locator('.inbs-contact-page').count(),1);
     assert.equal(await page.locator('.inbs-contact-page h1').count(),1);
+    assert.equal(await page.locator('.inbs-contact-hero-gallery [role="img"]').count(),2);
+    assert.equal(await page.locator('.inbs-contact-hero-panel,.inbs-contact-rings').count(),0);
+    const heroImagePaths=await page.evaluate(()=>{
+      const imageOf=selector=>getComputedStyle(document.querySelector(selector)).backgroundImage;
+      return [
+        imageOf('.inbs-contact-hero-building'),
+        imageOf('.inbs-contact-hero-photo--office'),
+        imageOf('.inbs-contact-hero-photo--door'),
+      ];
+    });
+    for(const [i,name] of ['contact-building.webp','contact-office.webp','contact-door.webp'].entries())
+      assert.ok(heroImagePaths[i].includes('/images/contact/'+name),
+        'Contact Hero slot must reference its stable local WebP filename: '+name);
+    assert.equal(await page.locator('.inbs-contact-hero-signal').count(),1);
     assert.equal(await page.locator('.inbs-contact-page form,.inbs-contact-page input,.inbs-contact-page textarea').count(),0);
     assert.equal(await page.locator('.inbs-contact-channel').count(),2);
     assert.equal(await page.locator('.inbs-contact-social-links a').count(),3);
