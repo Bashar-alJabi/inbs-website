@@ -224,11 +224,12 @@
 
 ## Insights page — feature/insights-page (7 November 2026)
 
-- [x] Five substantial bilingual editorial guides with four meaningful sections each, translated in Modern Standard Arabic and English; no fabricated article authors, dates or testimonials.
+- [x] Six substantial bilingual editorial guides with four meaningful sections each, translated in Modern Standard Arabic and English; no fabricated article authors, dates or testimonials.
 - [x] Primary official reference links for business licensing, mainland/free zone options, work permits, family residence and VAT; explanatory disclaimer for changing requirements.
 - [x] Dedicated Insights Hero, featured guide, filterable library and standard closing CTA, with page-local components.
 - [x] Each article has a localized canonical route, SEO metadata, source link and related content; unknown slugs return 404.
 - [x] Shared catalog drives cards, category filters, article pages and sitemap in both languages; no CMS, API or external image dependency.
+- [x] Six distinct verified Pexels sources converted to WebP and committed under stable `public/images/insights/<slug>.webp` names; source and photographer credits documented in `SOURCES.md`.
 - [x] Added production HTTP smoke paths and browser/axe coverage for both languages, responsive sizes, modes, filters and every guide.
 - [ ] Owner visual/content approval before any merge.
 - [ ] Verify final feature-head CI and resolve any issues before promotion.
