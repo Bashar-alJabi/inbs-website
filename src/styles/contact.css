@@ -240,16 +240,21 @@
   background:var(--contact-soft);
   padding-block:clamp(95px,11vw,155px);
 }
-/* Subtle, geographically based UAE outline; never changes the section background. */
+/* Standalone map divider: office and CTA backgrounds remain unchanged. */
+.inbs-contact-uae-divider{
+  position:relative;isolation:isolate;overflow:hidden;
+  min-height:clamp(290px,34vw,420px);
+  display:grid;place-items:center;padding-block:38px;
+  background:radial-gradient(ellipse 70% 95% at 50% 45%,#165478 0%,#103c5b 48%,#09283e 100%);
+  border-block:1px solid rgba(159,217,246,.12);
+}
 .inbs-contact-uae-art{
-  position:absolute;z-index:0;pointer-events:none;
-  width:min(67%,790px);height:auto;
-  inset-inline-start:18%;top:13%;
-  color:var(--contact-accent);
-  opacity:.28;
+  position:relative;z-index:1;pointer-events:none;
+  display:block;width:min(72vw,690px);height:auto;max-height:340px;
+  color:#9edcf5;opacity:.78;
 }
 .inbs-contact-uae-outline{
-  stroke:currentColor;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round;
+  stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
   vector-effect:non-scaling-stroke;
 }
 .inbs-contact-uae-route{
@@ -273,9 +278,9 @@
   0%{opacity:.9;transform:scale(.55)}
   80%,100%{opacity:0;transform:scale(2.4)}
 }
-.inbs-contact-visit-grid{position:relative;z-index:1}
 @media(max-width:760px){
-  .inbs-contact-uae-art{width:110%;inset-inline-start:-12%;top:22%;opacity:.19}
+  .inbs-contact-uae-divider{min-height:260px;padding-block:30px}
+  .inbs-contact-uae-art{width:min(92vw,510px);max-height:220px;opacity:.83}
 }
 @media(prefers-reduced-motion:reduce){
   .inbs-contact-uae-route,.inbs-contact-uae-pulse{animation:none}
