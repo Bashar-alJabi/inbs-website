@@ -22,13 +22,25 @@ export function InsightsArticle({article,locale}:{article:InsightArticle;locale:
    </header>
    <div className="inbs-insights-article-body">
     <div className="site-shell inbs-insights-article-layout">
-     <div className="inbs-insights-article-sections">{t.sections.map((sec,i)=><section key={sec.heading}>
+     <div className="inbs-insights-article-sections">{t.sections.map((sec,i)=><section key={sec.heading} id={`insight-section-${i+1}`}>
       <span className="inbs-insights-article-number">{String(i+1).padStart(2,'0')}</span>
       <h2>{sec.heading}</h2><p>{sec.body}</p>
      </section>)}
      <div className="inbs-insights-article-source"><span>{ui.source}</span><a href={article.sourceUrl} target="_blank" rel="noopener noreferrer">{locale==='ar'?'الاطلاع على الإرشادات الرسمية':'Read the official guidance'}<ArrowUpRight size={17} aria-hidden="true"/></a><p>{ui.notice}</p></div>
      </div>
-     <aside className="inbs-insights-article-aside" aria-label={locale==='ar'?'معلومات المقال':'Article details'}><span>INBS / INSIGHTS</span><strong>{t.categoryLabel}</strong><i aria-hidden="true"/></aside>
+     <aside className="inbs-insights-article-aside" aria-label={ui.articleContents}>
+      <span>INBS / INSIGHTS</span>
+      <strong>{t.categoryLabel}</strong>
+      <nav aria-label={ui.articleContents}>
+       <p className="inbs-insights-aside-label">{ui.articleContents}</p>
+       <ol>{t.sections.map((sec,i)=><li key={sec.heading}>
+        <a href={`#insight-section-${i+1}`}>
+         <span aria-hidden="true">{String(i+1).padStart(2,'0')}</span>
+         <span>{sec.heading}</span>
+        </a>
+       </li>)}</ol>
+      </nav>
+     </aside>
     </div>
    </div>
   </article>
