@@ -164,7 +164,7 @@ html[data-theme=dark] .inbs-careers-apply-button:hover{background:#2e8ebb}
   .inbs-careers-apply-lead{max-width:760px}
 }
 @media(max-width:600px){
-  .inbs-careers-hero-inner{min-height:clamp(730px,100svh,820px);padding-top:clamp(145px,18vh,180px);padding-bottom:74px;gap:28px}
+  .inbs-careers-hero-inner{min-height:clamp(675px,92svh,740px);padding-top:clamp(145px,18vh,180px);padding-bottom:62px;gap:28px}
   .inbs-careers-hero-copy{transform:none}
   .inbs-careers-hero h1{font-size:var(--inbs-inner-hero-title-size)}
   .inbs-careers-hero-art{width:min(96vw,420px);top:23%;inset-inline-end:-30%;opacity:.24}
