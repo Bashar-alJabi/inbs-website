@@ -113,6 +113,18 @@
 - [ ] Verify CI on the final commit before promotion to `redesign` or `main`; owner visual approval recorded 5 November 2026.
 - [ ] Add named team profiles and authentic portraits only after explicit content approval.
 
+## Contact page — feature/contact-page (7 November 2026)
+
+- [x] Dedicated bilingual Contact route with scoped editorial Hero, direct contact channels, office location and social links, plus page-ending CTA.
+- [x] **No contact form**: no inputs, submission endpoint, data collection, new dependencies or messaging backend.
+- [x] Centralize displayed phone, email, office address, map destination and official social destinations in `src/content/contact.ts`; page-local EN/AR copy lives in `src/content/contact-page.ts`.
+- [x] Remove Contact from Coming Soon fallback and add opt-in SEO metadata, localized canonical/hreflang and sitemap entries.
+- [x] Add HTTP smoke checks and browser checks for EN/AR, RTL, light/dark, mobile/tablet/desktop, no form, links, overflow and axe.
+- [ ] Verify exact-head lint, TypeScript, production build, HTTP smoke, Playwright and axe checks.
+- [ ] Owner visual approval and authorization for merge to `redesign` (and later `main`).
+- [ ] Confirm phone number supports WhatsApp **before** adding a WhatsApp link; it is intentionally omitted to avoid claiming an unverified messaging channel.
+- [ ] Obtain company confirmation of contact details and business hours if hours are added later.
+
 ## C. Repeat after **every page** (copy these tasks to the page PR)
 
 - [ ] Record page name, owner, PR number, preview URL, completion date and any unresolved work.
