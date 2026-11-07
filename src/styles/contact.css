@@ -13,25 +13,38 @@
   letter-spacing:.11em;line-height:1.6;text-transform:uppercase;
 }
 .inbs-contact-kicker>span{width:34px;height:1px;flex:none;background:currentColor}
+/* The real office building spans the visual half of the Hero, fading into
+   solid navy behind the copy. The editorial pair is layered over the exterior.
+   All three URLs are stable public assets, intentionally not imported. */
 .inbs-contact-hero{
-  position:relative;isolation:isolate;background:#071f34;color:#f4f9fc;
-  overflow:hidden;min-height:min(850px,100svh);
+  position:relative;isolation:isolate;overflow:hidden;
+  min-height:min(850px,100svh);
+  background:#071f34;color:#f4f9fc;
 }
-.inbs-contact-hero-glow{
-  position:absolute;z-index:-1;inset:0;
-  background:
-    radial-gradient(ellipse at 78% 45%,#145986 0%,#0d3c5e 36%,#071f34 77%);
+.inbs-contact-hero-building{
+  position:absolute;inset-block:0;inset-inline-end:0;
+  width:67%;pointer-events:none;
+  background-image:
+    linear-gradient(180deg,rgba(7,31,52,.5),transparent 26%,rgba(7,31,52,.12) 66%,#071f34),
+    url('/images/contact/contact-building.webp');
+  background-color:#153954;
+  background-size:cover;
+  background-position:center center;
+  -webkit-mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,.18) 15%,#000 64%);
+  mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,.18) 15%,#000 64%);
 }
 .inbs-contact-hero-grid{
-  display:grid;position:relative;grid-template-columns:minmax(0,1.13fr) minmax(0,.87fr);
-  align-items:center;gap:clamp(32px,6vw,105px);
-  padding-top:clamp(170px,22vh,230px);padding-bottom:clamp(115px,12vh,145px);
+  display:grid;position:relative;isolation:isolate;
+  grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+  gap:clamp(32px,5vw,88px);align-items:center;
+  padding-top:clamp(165px,21vh,220px);
+  padding-bottom:clamp(105px,11vh,130px);
   min-height:min(850px,100svh);
 }
 .inbs-contact-hero-copy{position:relative;z-index:2}
 .inbs-contact-hero-kicker{color:#a9defa;margin-bottom:clamp(26px,4vw,46px)}
 .inbs-contact-hero h1{
-  margin:0 0 28px;font-size:clamp(55px,6.1vw,98px);
+  margin:0 0 28px;font-size:clamp(53px,5.9vw,92px);
   line-height:1.09;letter-spacing:-.075em;
 }
 .inbs-contact-hero h1 span{display:block}
@@ -46,54 +59,68 @@
   font-size:14px;font-weight:700;transition:gap .25s,color .25s;
 }
 .inbs-contact-hero-discover:hover{gap:38px;color:#b9e8ff}
-.inbs-contact-hero-scene{
-  position:relative;min-width:0;aspect-ratio:1/1.12;
-  display:grid;place-items:center;
+.inbs-contact-hero-gallery{
+  position:relative;isolation:isolate;min-width:0;
+  width:100%;height:clamp(365px,37vw,540px);
 }
-.inbs-contact-rings{
-  position:absolute;inset:2%;pointer-events:none;
+.inbs-contact-hero-photo{
+  position:absolute;overflow:hidden;
+  border:1px solid rgba(220,244,255,.75);
+  border-radius:var(--radius-button,7px);
+  background-color:#28536b;
+  background-size:cover;background-repeat:no-repeat;
+  box-shadow:0 30px 75px rgba(0,17,31,.55);
+  transition:transform .45s ease,box-shadow .45s ease;
 }
-.inbs-contact-rings i{
-  position:absolute;inset:0;border:1px solid #b1e5f332;border-radius:50%;
+.inbs-contact-hero-photo--office{
+  z-index:1;inset-block-start:0;inset-inline-start:8%;
+  width:72%;height:77%;
+  background-image:url('/images/contact/contact-office.webp');
+  background-position:center center;
+  transform:rotate(-2deg);
 }
-.inbs-contact-rings i:nth-child(2){inset:12%;border-color:#b1e5f34d}
-.inbs-contact-rings i:nth-child(3){inset:25%;border-color:#b1e5f32e}
-.inbs-contact-rings b{
-  position:absolute;top:0;left:50%;
-  width:8px;height:8px;border-radius:50%;background:#d6f5ff;
-  box-shadow:0 0 0 3px #9ddcf733,0 0 18px 7px #7fd4f66b;
-  offset-path:border-box;offset-anchor:center;
-  animation:inbs-contact-orbit 23s linear infinite;
+.inbs-contact-hero-photo--door{
+  z-index:2;inset-block-end:6%;inset-inline-end:1%;
+  width:48%;height:55%;
+  background-image:url('/images/contact/contact-door.webp');
+  background-position:center center;
+  transform:rotate(3deg);
+  border-width:5px;border-color:#102f48;
 }
-@keyframes inbs-contact-orbit{from{offset-distance:0%}to{offset-distance:100%}}
-.inbs-contact-hero-panel{
-  width:min(77%,345px);min-height:350px;
-  padding:clamp(24px,3.3vw,44px);
-  display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
-  position:relative;z-index:1;border:1px solid #a7e3f45e;
-  border-radius:clamp(12px,2vw,25px);
-  background:linear-gradient(145deg,#1c5877c9,#102d48f2);
-  box-shadow:0 28px 70px #001b3294;backdrop-filter:blur(8px);
+.inbs-contact-hero-photo--office:hover{transform:rotate(-1deg) translateY(-5px)}
+.inbs-contact-hero-photo--door:hover{transform:rotate(1deg) translateY(-5px)}
+/* A single quiet moving point follows the short editorial rail,
+   rather than the old orbiting dots or circular illustration. */
+.inbs-contact-hero-signal{
+  position:absolute;z-index:3;
+  inset-inline-start:7%;inset-block-end:7%;
+  height:1px;width:34%;
+  background:linear-gradient(90deg,rgba(185,235,255,.15),rgba(185,235,255,.76));
+  pointer-events:none;
 }
-.inbs-contact-hero-panel>p{
-  color:#a7d9f4;font-size:11px;font-weight:750;letter-spacing:.12em;
-  margin:0 0 40px;line-height:1.5;
+.inbs-contact-hero-signal span{
+  position:absolute;top:-3px;inset-inline-start:0;
+  width:7px;height:7px;border-radius:50%;
+  background:#e5faff;box-shadow:0 0 11px 3px #9de5ff94;
+  animation:inbs-contact-rail 10s ease-in-out infinite alternate;
 }
-.inbs-contact-hero-panel>svg{color:#9fdcf6;margin-bottom:16px}
-.inbs-contact-hero-panel h2{font-size:clamp(26px,2.5vw,36px);line-height:1.28;letter-spacing:-.04em;margin:0 0 15px}
-.inbs-contact-hero-panel>span{color:#c8e0ed;font-size:15px;line-height:1.8}
-.inbs-contact-hero-panel>a{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:14px;width:100%;color:#d4f0ff;
-  border-top:1px solid #9edbf355;margin-top:24px;padding-top:19px;
-  font-size:12px;font-weight:750;line-height:1.5;
+@keyframes inbs-contact-rail{
+  from{inset-inline-start:0}
+  to{inset-inline-start:calc(100% - 7px)}
 }
-.inbs-contact-hero-panel>a svg{flex:none}
 .inbs-contact-hero-bottom{
   position:absolute;bottom:29px;inset-inline:clamp(20px,5vw,68px);
   padding-top:16px;border-top:1px solid #c6eaff48;
   color:#c7e2ee;font-size:11px;font-weight:700;letter-spacing:.12em;
 }
+[dir=rtl] .inbs-contact-hero-building{
+  -webkit-mask-image:linear-gradient(to left,transparent 0%,rgba(0,0,0,.18) 15%,#000 64%);
+  mask-image:linear-gradient(to left,transparent 0%,rgba(0,0,0,.18) 15%,#000 64%);
+}
+[dir=rtl] .inbs-contact-hero-photo--office{transform:rotate(2deg)}
+[dir=rtl] .inbs-contact-hero-photo--door{transform:rotate(-3deg)}
+[dir=rtl] .inbs-contact-hero-photo--office:hover{transform:rotate(1deg) translateY(-5px)}
+[dir=rtl] .inbs-contact-hero-photo--door:hover{transform:rotate(-1deg) translateY(-5px)}
 .inbs-contact-channels{padding-block:clamp(100px,12vw,165px) clamp(94px,11vw,145px)}
 .inbs-contact-section-head{
   display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.53fr);
@@ -234,21 +261,30 @@ html[data-theme=dark] .inbs-contact-visit{background:#102d42}
 [dir=rtl] .inbs-contact-visit-map-action:hover svg{transform:translate(-3px,-3px)}
 [dir=rtl] .inbs-contact-social-links{justify-content:flex-start}
 @media(max-width:980px){
-  .inbs-contact-hero-grid{gap:28px}
+  .inbs-contact-hero-grid{gap:26px}
   .inbs-contact-hero h1{font-size:clamp(45px,6vw,69px)}
-  .inbs-contact-hero-panel{min-height:315px;padding:26px;width:86%}
+  .inbs-contact-hero-gallery{height:clamp(320px,41vw,440px)}
   .inbs-contact-visit-grid{gap:35px}
 }
 @media(max-width:760px){
   .inbs-contact-hero,.inbs-contact-hero-grid{min-height:0}
+  .inbs-contact-hero-building{
+    inset-block:0 auto;width:100%;height:53%;
+    background-position:center 42%;
+    -webkit-mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.38) 56%,transparent 100%);
+    mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.38) 56%,transparent 100%);
+    opacity:.42;
+  }
+  [dir=rtl] .inbs-contact-hero-building{
+    -webkit-mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.38) 56%,transparent 100%);
+    mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.38) 56%,transparent 100%);
+  }
   .inbs-contact-hero-grid{
-    grid-template-columns:1fr;gap:24px;
+    grid-template-columns:1fr;gap:38px;
     padding-top:clamp(160px,19vh,195px);padding-bottom:100px;
   }
   .inbs-contact-hero h1{font-size:clamp(45px,9vw,69px)}
-  .inbs-contact-hero-scene{width:min(78%,460px);margin-inline:auto;aspect-ratio:1.1}
-  .inbs-contact-hero-panel{min-height:270px;width:72%;padding:26px}
-  .inbs-contact-hero-panel>p{margin-bottom:21px}
+  .inbs-contact-hero-gallery{width:min(87%,490px);height:clamp(310px,71vw,455px);margin-inline:auto}
   .inbs-contact-hero-bottom{bottom:25px}
   .inbs-contact-section-head,.inbs-contact-social{grid-template-columns:1fr;gap:21px}
   .inbs-contact-social-links{justify-content:flex-start}
@@ -257,9 +293,10 @@ html[data-theme=dark] .inbs-contact-visit{background:#102d42}
 }
 @media(max-width:600px){
   .inbs-contact-hero h1{font-size:clamp(42px,10.2vw,59px)}
-  .inbs-contact-hero-scene{width:min(94%,380px)}
-  .inbs-contact-hero-panel{width:75%;min-height:250px;padding:23px}
-  .inbs-contact-hero-panel h2{font-size:24px}
+  .inbs-contact-hero-gallery{width:min(96%,410px);height:clamp(300px,85vw,365px)}
+  .inbs-contact-hero-photo--office{width:74%;height:76%;inset-inline-start:4%}
+  .inbs-contact-hero-photo--door{width:49%;height:52%;inset-inline-end:0}
+  .inbs-contact-hero-signal{inset-inline-start:4%;width:32%}
   .inbs-contact-section-head h2,.inbs-contact-visit h2{font-size:clamp(37px,8vw,53px)}
   .inbs-contact-channel-grid{grid-template-columns:1fr}
   .inbs-contact-channel{padding:30px}
@@ -268,9 +305,13 @@ html[data-theme=dark] .inbs-contact-visit{background:#102d42}
   .inbs-contact-map-scene{aspect-ratio:1.05}
 }
 @media(prefers-reduced-motion:reduce){
-  .inbs-contact-rings b{animation:none}
-  .inbs-contact-hero-discover,.inbs-contact-channel-action svg,
+  .inbs-contact-hero-signal span{animation:none}
+  .inbs-contact-hero-discover,.inbs-contact-hero-photo,.inbs-contact-channel-action svg,
   .inbs-contact-social-links a,.inbs-contact-visit-map-action svg{transition:none}
   .inbs-contact-hero-discover:hover{gap:29px}
+  .inbs-contact-hero-photo--office:hover{transform:rotate(-2deg)}
+  .inbs-contact-hero-photo--door:hover{transform:rotate(3deg)}
+  [dir=rtl] .inbs-contact-hero-photo--office:hover{transform:rotate(2deg)}
+  [dir=rtl] .inbs-contact-hero-photo--door:hover{transform:rotate(-3deg)}
   .inbs-contact-channel-action:hover svg,.inbs-contact-visit-map-action:hover svg{transform:none}
 }
