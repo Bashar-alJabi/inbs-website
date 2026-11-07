@@ -19,19 +19,20 @@
 .inbs-contact-hero{
   position:relative;isolation:isolate;overflow:hidden;
   min-height:min(850px,100svh);
-  background:#071f34;color:#f4f9fc;
+  background:linear-gradient(110deg,#08263e 0%,#0d3f69 34%,#155b86 63%,#0b3454 100%);
+  color:#f4f9fc;
 }
-/* About-inspired blue-to-navy wash across the full Hero, not only the photo. */
+/* Full-area blue/navy gradient; translucent veil blends the building without flattening text background. */
 .inbs-contact-hero::after{
   content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
   background:linear-gradient(90deg,
-    #071f34 0%,rgba(11,52,84,.96) 19%,rgba(13,63,105,.72) 36%,
-    rgba(21,91,134,.34) 58%,rgba(7,31,52,.05) 82%,transparent 100%);
+    rgba(8,38,62,.36) 0%,rgba(13,63,105,.28) 28%,
+    rgba(21,91,134,.16) 58%,rgba(7,31,52,.02) 85%,transparent 100%);
 }
 [dir=rtl] .inbs-contact-hero::after{
   background:linear-gradient(270deg,
-    #071f34 0%,rgba(11,52,84,.96) 19%,rgba(13,63,105,.72) 36%,
-    rgba(21,91,134,.34) 58%,rgba(7,31,52,.05) 82%,transparent 100%);
+    rgba(8,38,62,.36) 0%,rgba(13,63,105,.28) 28%,
+    rgba(21,91,134,.16) 58%,rgba(7,31,52,.02) 85%,transparent 100%);
 }
 .inbs-contact-hero-building{
   position:absolute;inset-block:0;inset-inline-end:0;
@@ -309,12 +310,16 @@ html[data-theme=dark] .inbs-contact-visit{background:#102d42}
   .inbs-contact-visit-grid{gap:35px}
 }
 @media(max-width:760px){
-  /* Mobile: preserve the original top-to-bottom fade rather than the desktop side wash. */
+  /* Mobile: vertical background gradient remains visible even behind the text. */
+  .inbs-contact-hero{
+    background:linear-gradient(to bottom,
+      #155b86 0%,#12547f 24%,#0d3f69 53%,#0b3454 77%,#08263e 100%);
+  }
   .inbs-contact-hero::after,
   [dir=rtl] .inbs-contact-hero::after{
     background:linear-gradient(to bottom,
-      rgba(21,91,134,.24) 0%,rgba(13,63,105,.22) 35%,
-      rgba(8,42,69,.44) 66%,#071f34 96%);
+      rgba(21,91,134,.06) 0%,rgba(13,63,105,.08) 38%,
+      rgba(8,38,62,.13) 68%,transparent 100%);
   }
   .inbs-contact-hero,.inbs-contact-hero-grid{min-height:0}
   .inbs-contact-hero-building{
