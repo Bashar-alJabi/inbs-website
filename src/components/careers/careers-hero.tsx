@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowUpRight } from 'lucide-react';
+import { ArrowDown } from 'lucide-react';
 import { careersPageContent } from '@/content/careers-page';
 import type { Locale } from '@/lib/site';
 
@@ -15,14 +15,12 @@ export function CareersHero({ locale }: { locale: Locale }) {
           <a className="inbs-careers-hero-action" href="#careers-why">{t.heroAction}<ArrowDown size={19} aria-hidden="true"/></a>
         </div>
         <div className="inbs-careers-hero-art" aria-hidden="true">
-          <div className="inbs-careers-art-frame">
-            <div className="inbs-careers-art-top"><span>INBS / 01</span><span>{t.heroVisualTop}</span></div>
-            <div className="inbs-careers-art-orbit inbs-careers-art-orbit--outer"><i/></div>
-            <div className="inbs-careers-art-orbit inbs-careers-art-orbit--inner"><i/></div>
-            <div className="inbs-careers-art-cross" aria-hidden="true"/>
-            <span className="inbs-careers-art-word">{t.heroVisualWord}</span>
-            <div className="inbs-careers-art-bottom"><span>{t.heroVisualCaption}</span><ArrowUpRight size={21}/></div>
-          </div>
+          <span className="inbs-careers-art-top">{t.heroVisualTop}</span>
+          <div className="inbs-careers-art-orbit inbs-careers-art-orbit--outer"><i/></div>
+          <div className="inbs-careers-art-orbit inbs-careers-art-orbit--inner"><i/></div>
+          <div className="inbs-careers-art-cross"/>
+          <span className="inbs-careers-art-word">{t.heroVisualWord}</span>
+          <span className="inbs-careers-art-bottom">{t.heroVisualCaption}</span>
         </div>
         <div className="inbs-careers-hero-bottom"><span>{t.heroLocation}</span><span>INBS / CAREERS</span></div>
       </div>
