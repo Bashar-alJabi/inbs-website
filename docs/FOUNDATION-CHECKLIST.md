@@ -252,4 +252,6 @@
 - [x] Insert map immediately before Home CTA, matching Milestones gradient for light and dark themes.
 - [x] Preserve localization, office marker, reduced-motion support, and Contact's existing map unchanged.
 - [x] Add homepage browser assertions for render, map labels, placement and gradient parity.
-- [ ] Owner visual review and final CI approval before merging to redesign or main.
+- [x] Owner approved the Home map and authorized promotion through `redesign` to `main` (7 November 2026).
+- [x] Feature-head CI validated production build, smoke, responsive browser and accessibility tests prior to promotion.
+- [ ] Verify promotion PR CI and deployment independently after merging.
