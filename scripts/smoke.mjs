@@ -31,6 +31,7 @@ try {
     await check(`/${locale}/services`, { pattern: /class="inbs-services-page"/, label: `${locale} dedicated Services landing page` });
     await check(`/${locale}/team`, { pattern: /class=\"inbs-team-page\"/, label: `${locale} dedicated Team page` });
     await check(`/${locale}/contact`, { pattern: /class="inbs-contact-page"/, label: `${locale} dedicated Contact page without a form` });
+    await check(`/${locale}/careers`, { pattern: /class="inbs-careers-page"/, label: `${locale} dedicated Careers page with email applications` });
     await check(`/${locale}/legal`, { label: `${locale} unified legal placeholder` });
     for (const oldPath of ['privacy-policy', 'terms']) {
       const old = await fetch(`${origin}/${locale}/${oldPath}`, { redirect: 'manual', signal: AbortSignal.timeout(15000) });

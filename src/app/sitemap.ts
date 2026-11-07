@@ -7,9 +7,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   if (!siteIndexable) return [];
 
   // Only completed public pages belong here; unfinished routes remain noindex.
-  return ['', '/about', '/services', '/team', '/contact'].flatMap(path =>
+  return ['', '/about', '/services', '/team', '/contact', '/careers'].flatMap(path =>
     locales.map(locale => ({
-      url: `${siteUrl}${path === '/about' ? routes.page(locale, 'about') : path === '/services' ? routes.page(locale, 'services') : path === '/team' ? routes.page(locale, 'team') : path === '/contact' ? routes.page(locale, 'contact') : routes.home(locale)}`,
+      url: `${siteUrl}${path === '/about' ? routes.page(locale, 'about') : path === '/services' ? routes.page(locale, 'services') : path === '/team' ? routes.page(locale, 'team') : path === '/contact' ? routes.page(locale, 'contact') : path === '/careers' ? routes.page(locale, 'careers') : routes.home(locale)}`,
       alternates: { languages: localeAlternates(path) },
       changeFrequency: 'monthly' as const,
       priority: path ? 0.8 : 1,

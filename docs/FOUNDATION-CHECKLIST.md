@@ -210,3 +210,14 @@
 - [x] Owner uploaded hero-01.webp through hero-03.webp and story-04.webp through story-10.webp; all ten paths and WebP signatures verified.
 - [x] Owner visually reviewed Team composition before requesting integration (5 November 2026).
 - [ ] Company-side photo ownership/publication permissions remain to be documented before final public launch.
+
+## Careers page — feature/careers-page (7 November 2026)
+
+- [x] Owner reviewed Careers visuals and explicitly requested the full validation and merge workflow.
+- [x] Four page-local sections: Careers Hero, Why Join INBS, Apply, and standard page-ending CTA; no Open Positions section.
+- [x] Both languages have page-owned copy in `src/content/careers-page.ts`; Arabic copy is Modern Standard Arabic.
+- [x] Applications link to the additional email first, official email second, and the shared mobile number via WhatsApp; Arabic number isolated as LTR.
+- [x] Dedicated locale route, metadata, sitemap integration, responsive/light/dark styles and reduced-motion orbit behavior implemented.
+- [x] Production HTTP smoke and Playwright/axe coverage added for Careers in both locales, three viewport sizes and both themes.
+- [ ] Verify final feature-head CI (lint, types, build, smoke, browser/axe), and check integration-branch CI after merge.
+- [ ] Verify updated main branch and production deployment after integration; site-wide launch approval remains a separate milestone.
