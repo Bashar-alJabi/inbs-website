@@ -128,6 +128,12 @@
   offset-distance:0%;offset-rotate:0deg;
   animation:inbs-contact-photo-border 13s linear infinite;
 }
+.inbs-contact-hero-photo--building .inbs-contact-photo-traveler{
+  animation-duration:11s;animation-delay:-4s;
+}
+.inbs-contact-hero-photo--office .inbs-contact-photo-traveler{
+  animation-delay:-2s;
+}
 .inbs-contact-hero-photo--door .inbs-contact-photo-traveler{
   animation-duration:16s;animation-delay:-8s;
 }
