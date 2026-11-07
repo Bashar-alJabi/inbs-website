@@ -35,7 +35,7 @@ export function CareersApply({ locale }: { locale: Locale }) {
           <div className="inbs-careers-apply-address inbs-careers-apply-whatsapp">
             <span>{t.applyWhatsappLabel}</span>
             <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
-              <MessageCircle size={19} aria-hidden="true"/>{mobile.label}<ArrowUpRight size={19} aria-hidden="true"/>
+              <MessageCircle size={19} aria-hidden="true"/><bdi dir="ltr">{mobile.label}</bdi><ArrowUpRight size={19} aria-hidden="true"/>
             </a>
           </div>
         </Reveal>
