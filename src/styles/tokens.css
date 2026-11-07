@@ -17,6 +17,12 @@
  --inbs-cta-surface:#eaf1f6;
  --radius-control:9px;
  --font-size-button:14px;
+ /* Unified typography for all editorial page Heroes except the Home slider. */
+ --inbs-inner-hero-title-size:clamp(48px,5.4vw,80px);
+ --inbs-inner-hero-lead-size:clamp(16px,1.35vw,20px);
+ --inbs-inner-hero-kicker-size:14px;
+ --inbs-inner-hero-action-size:14px;
+ --inbs-inner-hero-action-height:52px;
 }
 html[lang=ar]{--font-body:var(--font-ar)}
 body{font-family:var(--font-body)}
@@ -37,3 +43,14 @@ button,input,textarea,select{font:inherit}
 }
 
 html[data-theme=dark]{--inbs-cta-surface:#112e43}
+
+@media(max-width:760px){
+ :root{
+  --inbs-inner-hero-title-size:clamp(40px,8.4vw,58px);
+  --inbs-inner-hero-lead-size:16px;
+  --inbs-inner-hero-kicker-size:13px;
+ }
+}
+@media(max-width:450px){
+ :root{--inbs-inner-hero-title-size:clamp(36px,9vw,52px)}
+}

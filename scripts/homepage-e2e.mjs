@@ -679,6 +679,80 @@ for(const locale of ['en','ar']){
   }
  }
 }
+// Dedicated Contact page: direct links only, never a form or submission API.
+for(const locale of ['en','ar']){
+ for(const size of sizes){
+  for(const theme of ['light','dark']){
+   const context=await browser.newContext({viewport:{width:size.width,height:size.height},reducedMotion:'reduce',colorScheme:theme});
+   await context.addInitScript(t=>localStorage.setItem('inbs-theme',t),theme);
+   const page=await context.newPage();
+   const errors=[];
+   page.on('pageerror',error=>errors.push(String(error)));
+   await test('contact/'+[locale,size.name,theme].join('/')+' direct channels and accessibility',async()=>{
+    const response=await page.goto(origin+'/'+locale+'/contact',{waitUntil:'domcontentloaded',timeout:45000});
+    assert.equal(response?.status(),200);
+    assert.equal(await page.locator('html').getAttribute('lang'),locale);
+    assert.equal(await page.locator('html').getAttribute('dir'),locale==='ar'?'rtl':'ltr');
+    await page.waitForFunction(t=>document.documentElement.getAttribute('data-theme')===t,theme);
+    assert.equal(await page.locator('.inbs-contact-page').count(),1);
+    assert.equal(await page.locator('.inbs-contact-page h1').count(),1);
+    assert.equal(await page.locator('.inbs-contact-hero-gallery button.inbs-contact-hero-photo').count(),3);
+    assert.equal(await page.locator('.inbs-contact-photo-traveler').count(),3);
+    assert.equal(await page.locator('.inbs-contact-hero-panel,.inbs-contact-rings').count(),0);
+    const heroImagePaths=await page.evaluate(()=>{
+      const imageOf=selector=>getComputedStyle(document.querySelector(selector)).backgroundImage;
+      return [
+        imageOf('.inbs-contact-hero-building'),
+        imageOf('.inbs-contact-hero-photo--building .inbs-contact-photo-image'),
+        imageOf('.inbs-contact-hero-photo--office .inbs-contact-photo-image'),
+        imageOf('.inbs-contact-hero-photo--door .inbs-contact-photo-image'),
+      ];
+    });
+    for(const [i,name] of ['contact-building.webp','contact-building.webp','contact-office.webp','contact-door.webp'].entries())
+      assert.ok(heroImagePaths[i].includes('/images/contact/'+name),
+        'Contact Hero slot must reference its stable local WebP filename: '+name);
+    assert.equal(await page.locator('.inbs-contact-hero-signal').count(),0);
+    const thumbs=page.locator('.inbs-contact-hero-photo');
+    for(let i=0;i<3;i++){
+      const tile=thumbs.nth(i);
+      const dimensions=await tile.boundingBox();
+      assert.ok(dimensions && Math.abs(dimensions.width-dimensions.height)<4,'Hero thumbnail must be square');
+      await tile.focus();
+      assert.equal(await tile.evaluate(node=>node===document.activeElement),true,'Thumbnail must be keyboard focusable');
+    }
+    await thumbs.first().click();
+    assert.equal(await page.getByRole('dialog').count(),1,'Click opens full-size photo viewer');
+    assert.ok((await page.getByRole('dialog').locator('img').getAttribute('src')||'').includes('contact-building.webp'));
+    await page.keyboard.press('Escape');
+    assert.equal(await page.getByRole('dialog').count(),0,'Escape closes full-size photo viewer');
+    const scene=await page.locator('.inbs-contact-hero-gallery').boundingBox();
+    const large=await page.locator('.inbs-contact-hero-building').boundingBox();
+    assert.ok(scene&&large,'Hero building and thumbnail gallery must render');
+    assert.equal(await page.locator('.inbs-contact-page form,.inbs-contact-page input,.inbs-contact-page textarea').count(),0);
+    assert.equal(await page.locator('.inbs-contact-channel').count(),2);
+    assert.equal(await page.locator('.inbs-contact-social-links a').count(),3);
+    assert.equal(await page.locator('.inbs-contact-channel-value[href^="tel:"]').count(),2,'Both mobile and landline should be shown');
+    assert.equal(await page.locator('.inbs-contact-channel-value[href^="mailto:"]').count(),2,'Both official and additional email should be shown');
+    assert.equal(await page.locator('.inbs-contact-visit address').count(),1);
+    assert.equal(await page.locator('.inbs-contact-map-embed[loading="lazy"]').count(),1,'Office map is embedded');
+    assert.equal(await page.locator('.inbs-contact-uae-divider').count(),1,'Dedicated UAE map divider is present');
+    assert.equal(await page.locator('.inbs-contact-uae-emirates path').count(),7,'All seven emirates are outlined');
+    assert.equal(await page.locator('.inbs-contact-uae-labels text').count(),7,'All seven emirates are labeled');
+    assert.equal(await page.locator('.inbs-contact-uae-office-dot').count(),1,'Office location is marked');
+    assert.equal(await page.locator('.inbs-contact-uae-pointer-line').count(),0,'Mouse interaction stays hidden with reduced motion');
+    assert.equal(await page.locator('.inbs-contact-visit-map-action[target="_blank"][rel="noopener noreferrer"]').count(),1);
+    assert.equal(await page.locator('.inbs-editorial-cta--contact .inbs-editorial-cta-primary').getAttribute('href'),'mailto:info@inbs-uae.com');
+    assert.equal(await page.locator('.inbs-editorial-cta--contact .inbs-editorial-cta-secondary').getAttribute('href'),'/'+locale+'/services');
+    const widths=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
+    assert.ok(widths.scroll<=widths.inner+3,'Horizontal overflow '+JSON.stringify(widths));
+    const violations=(await new AxeBuilder({page}).include('.inbs-contact-page').withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa']).analyze()).violations;
+    assert.deepEqual(violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)})),[]);
+    assert.deepEqual(errors,[]);
+   });
+   await context.close();
+  }
+ }
+}
 await test('navigation endpoints and security',async()=>{
  for(const locale of ['en','ar']){
   for(const slug of ['about','services','contact','team','privacy-policy','terms','services/businessmen-services','services/citizenship-and-immigration-services']){

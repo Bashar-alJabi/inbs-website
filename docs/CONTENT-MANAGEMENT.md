@@ -18,7 +18,9 @@ This document defines **where to edit content** in the INBS bilingual site. Keep
 | Team landing copy (no unverified staff names/photos) | `src/content/team-page.ts` | People-first editorial introduction; approved real team profiles are a separate content requirement. |
 | Services landing hero photos | `public/images/services/HERO-SOURCES.json` and `hero-services-{1,2}.webp` | Two independently sourced Pexels photos; convert with `scripts/prepare-services-hero-images.mjs`. Not service catalog previews. |
 | Hero slides, CTA labels, related-service short labels, hero images | `src/content/hero.ts` | `heroSlides.en/ar`; service targets are typed as `ServiceSlug`. |
-| Public contact details, map and social links | `src/content/contact.ts` | Shared with future Contact and other components. |
+| Public contact details, map and social links | `src/content/contact.ts` | Canonical `companyContact.phones`, `companyContact.emails`, address/map and `socialLinks` feed Contact and footer. Existing single-value aliases use the first entry. Never duplicate contact values/URLs in UI components. |
+| Contact page localized editorial copy | `src/content/contact-page.ts` | EN/AR hero, photo descriptions, direct channels, location and closing CTA. No form; no backend. |
+| Contact Hero real office photos | `public/images/contact/` | Upload `contact-building.webp`, `contact-office.webp`, `contact-door.webp` once; CSS fixed paths render them automatically. See folder README. |
 | Header, navigation and footer text | `src/content/layout.ts` | Shared bilingual labels and copy, without mixing into component markup. |
 | Strings rendered using `next-intl` | `messages/en.json`, `messages/ar.json` | Currently used by Coming Soon. Add matching keys to both locales. |
 | Visual icons, layout and animation | `src/components/` and `src/styles/` | Not content or translation stores. |

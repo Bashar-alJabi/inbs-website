@@ -3,16 +3,33 @@
  * Shared data for the footer and future contact-related pages.
  * Keep display values and destinations here, not in UI components.
  */
+const phones = [
+  { kind: 'mobile', label: '+971 50 886 6555', href: 'tel:+971508866555' },
+  { kind: 'landline', label: '+971 4 221 9222', href: 'tel:+97142219222' },
+] as const;
+
+const emails = [
+  { kind: 'official', label: 'info@inbs-uae.com', href: 'mailto:info@inbs-uae.com' },
+  { kind: 'additional', label: 'jalal.omar2021@gmail.com', href: 'mailto:jalal.omar2021@gmail.com' },
+] as const;
+
+const officeMapUrl = 'https://www.google.com/maps?q=Park+Lane+Tower+-+Business+Bay+-+Dubai';
+
 export const companyContact = {
-  email: 'info@inbs-uae.com',
-  emailHref: 'mailto:info@inbs-uae.com',
-  phone: '+971 50 886 6555',
-  phoneHref: 'tel:+971508866555',
+  phones,
+  emails,
+  // Existing single-contact consumers continue using the first listed entry.
+  email: emails[0].label,
+  emailHref: emails[0].href,
+  phone: phones[0].label,
+  phoneHref: phones[0].href,
   address: {
     en: 'Office 1720, ParkLane Tower, Business Bay, Dubai',
     ar: 'مكتب 1720، برج بارك لين، الخليج التجاري، دبي',
   },
-  mapUrl: 'https://www.google.com/maps?q=Park+Lane+Tower+-+Business+Bay+-+Dubai',
+  mapUrl: officeMapUrl,
+  // Keep the embedded view anchored to the same central location URL.
+  mapEmbedUrl: `${officeMapUrl}&z=16&output=embed`,
 } as const;
 
 export const socialLinks = [
