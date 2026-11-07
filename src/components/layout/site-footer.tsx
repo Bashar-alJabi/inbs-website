@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowUpRight, Mail, MapPin, Phone } from 'lucide-react';
+import { ArrowUpRight, AtSign, Mail, MapPin, Phone, Smartphone } from 'lucide-react';
 import { LinkedinIcon, InstagramIcon, FacebookIcon } from './social-icons';
 import { serviceNames, type Locale } from '@/lib/site';
 import { footerQuickPages, footerLegalPages, footerServiceSlugs } from '@/content/navigation';
@@ -8,6 +8,9 @@ import { routes } from '@/lib/routes';
 import { Reveal } from '@/components/shared/reveal';
 import { companyContact, socialLinks } from '@/content/contact';
 import { layoutContent } from '@/content/layout';
+
+const emailIcons = { official: Mail, additional: AtSign } as const;
+const phoneIcons = { mobile: Smartphone, landline: Phone } as const;
 
 const socialIcons = {
   linkedin: LinkedinIcon,
@@ -47,12 +50,14 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         <Reveal variant="footer" delay={0.24}>
           <div className="inbs-footer-contact">
             <h3>{t.contactDetails}</h3>
-            {companyContact.emails.map(email => (
-              <a key={email.href} href={email.href}><Mail size={18} aria-hidden="true" /><span>{email.label}</span></a>
-            ))}
-            {companyContact.phones.map(phone => (
-              <a key={phone.href} href={phone.href}><Phone size={18} aria-hidden="true" /><span className="inbs-phone-number" dir="ltr">{phone.label}</span></a>
-            ))}
+            {companyContact.emails.map(email => {
+              const Icon = emailIcons[email.kind];
+              return <a key={email.href} href={email.href}><Icon size={18} aria-hidden="true" /><span>{email.label}</span></a>;
+            })}
+            {companyContact.phones.map(phone => {
+              const Icon = phoneIcons[phone.kind];
+              return <a key={phone.href} href={phone.href}><Icon size={18} aria-hidden="true" /><span className="inbs-phone-number" dir="ltr">{phone.label}</span></a>;
+            })}
             <a href={companyContact.mapUrl} target="_blank" rel="noopener noreferrer"><MapPin size={18} aria-hidden="true" /><span>{companyContact.address[locale]} <ArrowUpRight size={14} className="map-external" /></span></a>
           </div>
         </Reveal>
