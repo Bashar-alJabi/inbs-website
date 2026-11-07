@@ -1,4 +1,4 @@
-import { ArrowUpRight, FileText, Mail, MessageSquareText } from 'lucide-react';
+import { ArrowUpRight, FileText, Mail, MessageCircle, MessageSquareText } from 'lucide-react';
 import { Reveal } from '@/components/shared/reveal';
 import { careersPageContent } from '@/content/careers-page';
 import { companyContact } from '@/content/contact';
@@ -14,7 +14,11 @@ export function CareersApply({ locale }: { locale: Locale }) {
     { title:t.applyStepThree, description:t.applyStepThreeText },
   ];
   const subject = locale === 'ar' ? 'طلب توظيف - INBS' : 'Career application - INBS';
-  const mailto = `${companyContact.emailHref}?subject=${encodeURIComponent(subject)}`;
+  const applicationEmail = companyContact.emails.find(email => email.kind === 'additional')!;
+  const officialEmail = companyContact.emails.find(email => email.kind === 'official')!;
+  const mobile = companyContact.phones.find(phone => phone.kind === 'mobile')!;
+  const mailto = `${applicationEmail.href}?subject=${encodeURIComponent(subject)}`;
+  const whatsappHref = `https://wa.me/${mobile.href.replace(/\D/g, '')}`;
 
   return (
     <section className="inbs-careers-apply" id="careers-apply" aria-labelledby="inbs-careers-apply-title">
@@ -25,7 +29,14 @@ export function CareersApply({ locale }: { locale: Locale }) {
           <p className="inbs-careers-apply-lead">{t.applyLead}</p>
           <div className="inbs-careers-apply-address">
             <span>{t.applyEmailLabel}</span>
-            <a href={mailto}>{companyContact.email}<ArrowUpRight size={19} aria-hidden="true"/></a>
+            <a href={mailto}>{applicationEmail.label}<ArrowUpRight size={19} aria-hidden="true"/></a>
+            <a href={officialEmail.href}>{officialEmail.label}<ArrowUpRight size={19} aria-hidden="true"/></a>
+          </div>
+          <div className="inbs-careers-apply-address inbs-careers-apply-whatsapp">
+            <span>{t.applyWhatsappLabel}</span>
+            <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
+              <MessageCircle size={19} aria-hidden="true"/>{mobile.label}<ArrowUpRight size={19} aria-hidden="true"/>
+            </a>
           </div>
         </Reveal>
         <div className="inbs-careers-apply-panel">
