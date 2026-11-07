@@ -57,7 +57,7 @@
  .inbs-team-hero h1{font-size:var(--inbs-inner-hero-title-size)}
 }
 @media(prefers-reduced-motion:reduce){
- .inbs-team-photo,.inbs-team-link{min-height:var(--inbs-inner-hero-action-height );transition:none}
+ .inbs-team-photo,.inbs-team-link{transition:none}
  .inbs-team-photo--event:hover{transform:rotate(-7deg) translateY(19px)}
  .inbs-team-photo--portrait:hover{transform:translateY(-8px)}
  .inbs-team-photo--office:hover{transform:rotate(7deg) translateY(30px)}
