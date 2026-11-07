@@ -297,3 +297,82 @@ html[data-theme=dark] .inbs-services-overline{color:#add6ef}
 /* Accessible non-selected service labels on pale panels. */
 .inbs-services-option{color:#244b63}
 html[data-theme=dark] .inbs-services-option{color:#c3d0dd}
+
+
+/* Homepage-local copy of the Contact map interaction and styling. */
+.inbs-home-uae-divider{
+  position:relative;isolation:isolate;overflow:hidden;
+  min-height:clamp(360px,43vw,560px);
+  display:grid;place-items:center;padding-block:24px;
+  background:radial-gradient(ellipse 65% 125% at 0% 15%,rgba(18,108,181,.38),transparent 72%),linear-gradient(115deg,var(--brand-deep) 5%,#0b4d86 55%,#082e5b 100%);
+  border-block:1px solid rgba(159,217,246,.12);
+}
+.inbs-home-uae-art{
+  position:relative;z-index:1;pointer-events:none;
+  display:block;width:min(94vw,1050px);height:auto;max-height:510px;
+  color:#9edcf5;opacity:.87;
+}
+.inbs-home-uae-pointer-line{
+  position:absolute;inset:0;z-index:2;width:100%;height:100%;
+  overflow:visible;color:#d4f4ff;pointer-events:none;
+}
+.inbs-home-uae-pointer-line>path{
+  fill:none;stroke:currentColor;stroke-width:2;
+  stroke-dasharray:2 9;stroke-linecap:round;opacity:.92;
+}
+.inbs-home-uae-pointer-label{
+  position:absolute;z-index:3;pointer-events:none;
+  padding:5px 8px;border:1px solid #c8eeff72;border-radius:4px;
+  background:#09283edb;color:#e9f8ff;
+  font-family:var(--font-body),sans-serif;font-size:11px;
+  font-weight:800;letter-spacing:.09em;line-height:1.1;
+  box-shadow:0 0 15px #9edcf533;
+}
+.inbs-home-uae-emirates path{
+  fill:rgba(158,220,245,.035);
+  stroke:currentColor;stroke-width:1.4;
+  stroke-linejoin:round;stroke-linecap:round;
+  vector-effect:non-scaling-stroke;
+}
+.inbs-home-uae-labels text{
+  font-family:var(--font-body),sans-serif;
+  font-size:12px;font-weight:600;letter-spacing:.015em;
+  fill:#d3eaf6;opacity:.66;
+  paint-order:stroke fill;stroke:#103c5b;stroke-width:2px;stroke-linejoin:round;
+}
+[dir=rtl] .inbs-home-uae-labels text{letter-spacing:0;font-size:15px}
+.inbs-home-uae-office-halo{
+  stroke:currentColor;stroke-width:1;stroke-dasharray:3 7;fill:none;opacity:.72;
+}
+.inbs-home-uae-office-halo--outer{opacity:.32;stroke-dasharray:2 9}
+.inbs-home-uae-office-dot{fill:#e8faff;filter:drop-shadow(0 0 6px #a9e9ff)}
+.inbs-home-uae-office-pulse{
+  stroke:#bcefff;stroke-width:1.6;fill:none;
+  transform-box:fill-box;transform-origin:center;
+  animation:inbs-home-uae-pulse 4.2s ease-out infinite;
+}
+.inbs-home-uae-orbit{
+  transform-origin:585px 158px;
+  animation:inbs-home-uae-orbit 10s linear infinite;
+}
+.inbs-home-uae-orbit--far{animation-duration:17s;animation-direction:reverse}
+.inbs-home-uae-orbit circle{fill:#c7f3ff;filter:drop-shadow(0 0 5px #9edcf5)}
+@keyframes inbs-home-uae-pulse{
+  0%{opacity:.9;transform:scale(.4)}
+  80%,100%{opacity:0;transform:scale(2.8)}
+}
+@keyframes inbs-home-uae-orbit{to{transform:rotate(360deg)}}
+@media(max-width:760px){
+  .inbs-home-uae-divider{min-height:290px;padding-block:22px}
+  .inbs-home-uae-art{
+    width:calc(100% - 24px);max-width:460px;max-height:none;
+    height:auto;opacity:.92;
+  }
+  .inbs-home-uae-labels text{font-size:17px;opacity:.78}
+  [dir=rtl] .inbs-home-uae-labels text{font-size:19px}
+}
+@media(prefers-reduced-motion:reduce){
+  .inbs-home-uae-office-pulse,.inbs-home-uae-orbit{animation:none}
+}
+
+html[data-theme=dark] .inbs-home-uae-divider{background:radial-gradient(ellipse 70% 130% at 0% 15%,rgba(18,108,181,.2),transparent 75%),linear-gradient(115deg,#102a44 0%,#113657 55%,#0c223a 100%)}
