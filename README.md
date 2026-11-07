@@ -4,7 +4,7 @@ Official bilingual frontend website for **International Network Businessmen Serv
 
 ## Status and branches
 
-Home, About, Services, Team, Contact and ten service-detail pages are integrated in `main`. The Careers page is implemented and owner-reviewed on `feature/careers-page`, pending final CI verification and merge. Insights and Legal continue to show Coming Soon. A development milestone is **not** company-wide content or compliance approval for a public launch.
+Home, About, Services, Team, Contact and ten service-detail pages are integrated in `main`. Careers is integrated in `main`. Insights comprises a complete bilingual article library with six guides and dedicated article routes, approved for integration. Legal continues to show Coming Soon. A development milestone is **not** company-wide content or compliance approval for a public launch.
 
 - `main`: company-facing approved milestone.
 - `redesign`: integration branch for accepted redesign work.
@@ -38,12 +38,12 @@ npm run build
 ## Find the right file
 
 - `src/app/[locale]/`: routes and locale layout.
-- `src/components/home/`: homepage sections; `src/components/about/`: About page; `src/components/services/`: Services landing page; `src/components/team/`: Team editorial page; `src/components/service-detail/`: shared service-detail section composition; `src/components/contact/`: direct-contact page without a form; `src/components/careers/`: Careers editorial page, email and WhatsApp application steps and standalone CTA; `src/components/layout/`: shared header, footer and navigation.
-- `src/content/`: bilingual content for home, About, shared layout, services, contact and Careers.
+- `src/components/home/`: homepage sections; `src/components/about/`: About page; `src/components/services/`: Services landing page; `src/components/team/`: Team editorial page; `src/components/service-detail/`: shared service-detail section composition; `src/components/contact/`: direct-contact page without a form; `src/components/careers/`: Careers editorial page; `src/components/insights/`: Insights landing, library, articles and CTA; `src/components/layout/`: shared header, footer and navigation.
+- `src/content/`: bilingual content for home, About, shared layout, services, contact, Careers and Insights.
 - `src/lib/site.ts`: locales and bilingual page labels; `src/lib/routes.ts`: locale-aware URL builders.
 - `src/content/services.ts`: authoritative service catalog; `src/content/navigation.ts`: menu selections.
 - `messages/ar.json` / `messages/en.json`: Coming Soon UI translations.
-- `public/brand/` and `public/images/`: logo and image assets.
+- `public/brand/` and `public/images/`: logo and image assets. Insights uses six article photos and a separate Hero image (all replaceable local WebP) under `public/images/insights/`, with Pexels credits in `SOURCES.md`.
 - `src/styles/` and `src/app/globals.css`: visual styles.
 
 **Content ownership:** see `docs/CONTENT-MANAGEMENT.md`. Shared contact details, service names and page-specific content have designated owners; nontechnical editors should still use a reviewed change workflow.

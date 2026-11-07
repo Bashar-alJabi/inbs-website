@@ -4,7 +4,7 @@
 
 INBS is a bilingual (English/Arabic) company website built with Next.js App Router, React and TypeScript. The goal is accessible, maintainable and performant presentation of verified company services.
 
-**As of 7 November 2026:** Home, About, Services landing, Team and all ten bilingual service-detail routes are merged into `main` (service milestone PR #29 → redesign, PR #31 → main). Contact is integrated into `main`. Careers is implemented and owner-reviewed on `feature/careers-page`, pending final CI verification and merge; applications link to the additional contact email and official mobile WhatsApp, with no form or backend. Insights and Legal remain Coming Soon. Development releases are not company compliance, service-program or public indexing approval.
+**As of 7 November 2026:** Home, About, Services landing, Team and all ten bilingual service-detail routes are merged into `main` (service milestone PR #29 → redesign, PR #31 → main). Contact is integrated into `main`. Careers is merged into `main`; applications use shared email and mobile WhatsApp details. Insights includes six bilingual editorial guides, official reference links, topic filters and article detail pages, approved for integration. Legal remains Coming Soon. Development releases are not company compliance, service-program or public indexing approval.
 
 Current maintenance work is tracked separately from page development. Do not merge or deploy an unfinished change without the owner's approval.
 
@@ -30,8 +30,8 @@ The `[locale]` URL segment is either `en` or `ar`; `/en` and `/ar` are the imple
 | `/[locale]/services` | Implemented on `main` |
 | `/[locale]/services/[slug]` | Ten bilingual service-detail pages implemented on `main`; detail routes remain `noindex` pending company-side content review |
 | `/[locale]/team` | Implemented on `main` |
-| `/[locale]/insights` | Coming Soon |
-| `/[locale]/careers` | Dedicated bilingual Careers page on `feature/careers-page`; final CI and merge pending |
+| `/[locale]/insights` | Dedicated bilingual Insights landing and six localized articles; approved for integration |
+| `/[locale]/careers` | Implemented on `main` |
 | `/[locale]/contact` | Implemented on `main` |
 | `/[locale]/legal` | Coming Soon — one planned page containing privacy and terms information |
 | `/[locale]/privacy-policy` and `/[locale]/terms` | Permanent redirects to `/[locale]/legal` |
@@ -156,3 +156,7 @@ Every page matches the Home/About composition pattern. `src/components/<page>/<p
 ## Service-detail architecture — PR #29
 
 All ten bilingual service pages use `src/components/service-detail/service-detail-page.tsx` as a thin composition layer with separate Hero, Overview, Offerings, Process and CTA components. The owner-approved Businessmen Services layout is shared; offering group counts and copy vary per service. Bilingual descriptions are in `src/content/service-details.ts` (Businessmen reference) and `src/content/service-detail-catalog.ts` (all ten effective service records), while authoritative labels, slugs and images remain in `src/content/services.ts`. Content is still awaiting review; detail route indexing is disabled. See `docs/SERVICE-DETAIL-PAGES-PLAN.md`.
+
+## Insights editorial content
+
+Six bilingual articles live in `src/content/insights.ts`, with landing text in `src/content/insights-page.ts`. Each entry has a stable slug, category, English and Arabic title, summary, structured article sections and an official reference URL. Add both locale variants together and verify current requirements against the linked primary authority. The `/[locale]/insights/[slug]` route generates its article pages from this catalog; topic filters run client-side without a CMS or external API. Article photos are six optimized local WebP files at `public/images/insights/<slug>.webp`, plus the distinct `insights-hero.webp` background image, with provenance in `public/images/insights/SOURCES.md`; replacing a photo with the same filename requires no code edit. Articles are educational, not legal or tax advice. Never add fictitious dates, authors, testimonials or regulatory promises.
