@@ -1,18 +1,18 @@
 # Contact Hero photography
 
-This folder intentionally contains **no photographs yet**. The owner will upload three real INBS location photographs from their local computer.
+The owner uploaded three real INBS location photographs. All three are tracked in this folder and displayed in the Contact Hero.
 
 ## Required filenames
 
 | File | Placement | Suggested image |
 | --- | --- | --- |
 | `contact-building.webp` | Large building backdrop blended with the navy Contact Hero | Exterior of the actual office building; ideally landscape, width ≥ 1600px |
-| `contact-office.webp` | Primary large editorial frame in the Hero | Actual interior office photo; preferably portrait, width ≥ 900px |
-| `contact-door.webp` | Secondary overlapping frame | Actual entrance/door photo; preferably portrait, width ≥ 700px |
+| `contact-office.webp` | Small square thumbnail at the lower-left of the building photo | Actual interior office photo; preferably portrait, width ≥ 900px |
+| `contact-door.webp` | Second small square thumbnail alongside the office image | Actual entrance/door photo; preferably portrait, width ≥ 700px |
 
 Save all files directly in **`public/images/contact/`** as valid optimized WebP images with exactly these filenames. They are referenced by stable CSS paths in `src/styles/contact.css`. **No JSX/TS/TypeScript, CSS, imports or Next config changes are needed after uploading.**
 
-The placeholders appear as solid navy-blue frames before the photos are uploaded. Do not merge the Contact feature until the owner has supplied the three images and inspected the result in both languages, light/dark and responsive layouts.
+Both thumbnails are independent square image buttons. Hover or keyboard/mouse focus temporarily enlarges each image without affecting the building. A tiny point travels along each border, unless reduced motion is requested. Owner visual approval is still required before merging.
 
 ### Local upload workflow
 
