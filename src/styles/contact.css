@@ -46,7 +46,7 @@
   mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,.18) 15%,#000 64%);
 }
 .inbs-contact-hero-grid{
-  display:grid;position:relative;isolation:isolate;
+  display:grid;position:relative;z-index:1;isolation:isolate;
   grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
   gap:clamp(32px,5vw,88px);align-items:center;
   padding-top:clamp(165px,21vh,220px);
