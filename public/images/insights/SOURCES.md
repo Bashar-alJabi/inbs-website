@@ -1,9 +1,10 @@
 # Insights editorial photos — Pexels sources
 
-All assets are downloaded from Pexels and converted to 1200 × 800 WebP (quality 82) for local hosting. Filenames match the article slugs in `src/content/insights.ts` so a photo can be replaced without a code change.
+All assets are downloaded from Pexels and converted to WebP (quality 82) for local hosting. Article thumbnails are 1200 × 800; the distinct Insights Hero image is 1920 × 1080. Filenames match the article slugs in `src/content/insights.ts` so a photo can be replaced without a code change.
 
 | Local WebP | Pexels source | Photographer | Subject |
 | --- | --- | --- | --- |
+| `insights-hero.webp` | [Pexels 37466738](https://www.pexels.com/photo/37466738/) | Julia Filirovska | Looking upward at modern glass skyscrapers against a blue sky; Insights landing Hero only |
 | `starting-a-business-in-dubai.webp` | [Pexels 35791381](https://www.pexels.com/photo/35791381/) | San Photography | Bright daytime Dubai skyline with modern skyscrapers |
 | `mainland-or-free-zone.webp` | [Pexels 33719777](https://www.pexels.com/photo/33719777/) | Zulfugar Karimov | Modern Glass Facade of Office Building |
 | `understanding-uae-work-permits.webp` | [Pexels 7652176](https://www.pexels.com/photo/7652176/) | Thirdman | A Group of People Having a Meeting in the Office |
