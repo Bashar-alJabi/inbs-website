@@ -309,6 +309,13 @@ html[data-theme=dark] .inbs-contact-visit{background:#102d42}
   .inbs-contact-visit-grid{gap:35px}
 }
 @media(max-width:760px){
+  /* Mobile: preserve the original top-to-bottom fade rather than the desktop side wash. */
+  .inbs-contact-hero::after,
+  [dir=rtl] .inbs-contact-hero::after{
+    background:linear-gradient(to bottom,
+      transparent 0%,rgba(13,65,106,.12) 30%,
+      rgba(7,31,52,.7) 64%,#071f34 88%);
+  }
   .inbs-contact-hero,.inbs-contact-hero-grid{min-height:0}
   .inbs-contact-hero-building{
     inset-block:0 auto;width:100%;height:53%;
