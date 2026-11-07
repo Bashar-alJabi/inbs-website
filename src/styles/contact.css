@@ -25,13 +25,13 @@
 .inbs-contact-hero::after{
   content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
   background:linear-gradient(90deg,
-    #071f34 0%,rgba(9,43,73,.98) 19%,rgba(15,79,130,.83) 36%,
-    rgba(17,83,135,.42) 58%,rgba(7,31,52,.09) 82%,transparent 100%);
+    #071f34 0%,rgba(11,52,84,.96) 19%,rgba(13,63,105,.72) 36%,
+    rgba(21,91,134,.34) 58%,rgba(7,31,52,.05) 82%,transparent 100%);
 }
 [dir=rtl] .inbs-contact-hero::after{
   background:linear-gradient(270deg,
-    #071f34 0%,rgba(9,43,73,.98) 19%,rgba(15,79,130,.83) 36%,
-    rgba(17,83,135,.42) 58%,rgba(7,31,52,.09) 82%,transparent 100%);
+    #071f34 0%,rgba(11,52,84,.96) 19%,rgba(13,63,105,.72) 36%,
+    rgba(21,91,134,.34) 58%,rgba(7,31,52,.05) 82%,transparent 100%);
 }
 .inbs-contact-hero-building{
   position:absolute;inset-block:0;inset-inline-end:0;
@@ -313,20 +313,20 @@ html[data-theme=dark] .inbs-contact-visit{background:#102d42}
   .inbs-contact-hero::after,
   [dir=rtl] .inbs-contact-hero::after{
     background:linear-gradient(to bottom,
-      transparent 0%,rgba(13,65,106,.12) 30%,
-      rgba(7,31,52,.7) 64%,#071f34 88%);
+      rgba(21,91,134,.24) 0%,rgba(13,63,105,.22) 35%,
+      rgba(8,42,69,.44) 66%,#071f34 96%);
   }
   .inbs-contact-hero,.inbs-contact-hero-grid{min-height:0}
   .inbs-contact-hero-building{
     inset-block:0 auto;width:100%;height:53%;
     background-position:center 42%;
-    -webkit-mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.38) 56%,transparent 100%);
-    mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.38) 56%,transparent 100%);
-    opacity:.42;
+    -webkit-mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.78) 58%,transparent 100%);
+    mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.78) 58%,transparent 100%);
+    opacity:.82;
   }
   [dir=rtl] .inbs-contact-hero-building{
-    -webkit-mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.38) 56%,transparent 100%);
-    mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.38) 56%,transparent 100%);
+    -webkit-mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.78) 58%,transparent 100%);
+    mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.78) 58%,transparent 100%);
   }
   .inbs-contact-hero-grid{
     grid-template-columns:1fr;gap:38px;
