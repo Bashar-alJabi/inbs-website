@@ -91,5 +91,5 @@ The Team page is now strictly **Hero → TeamStory → CTA**. The previous place
 - Landing headings, category names and CTA text: `src/content/insights-page.ts`.
 - Six bilingual published guides, article slugs, summaries, body sections and official sources: `src/content/insights.ts`.
 - Article list and detail pages use a single catalog; update both English and Modern Standard Arabic together. Do not change a published slug without redirect planning.
-- Article photography: `public/images/insights/<slug>.webp` (1200×800 WebP). Replace the file with the same name and preserve Pexels provenance in `public/images/insights/SOURCES.md`; cards and featured article resolve these paths directly.
+- Article photography: `public/images/insights/<slug>.webp` (1200×800 WebP); the separate landing Hero is `public/images/insights/insights-hero.webp` (1920×1080 WebP). Replace the file with the same name and preserve Pexels provenance in `public/images/insights/SOURCES.md`; cards and featured article resolve these paths directly.
 - Government procedures change. Verify each claim against the linked authority before publishing updates. No external CMS, author profile, image service or article API is used.
