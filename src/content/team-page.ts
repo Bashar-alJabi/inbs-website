@@ -54,7 +54,7 @@ export const teamPageContent = {
     ],
     closingEyebrow: 'ابدأ الحوار',
     closingTitle: 'لنحدّد الخطوة المناسبة معاً.',
-    closingLead: 'عندك استفسار عن إحدى خدمات الأعمال أو الخدمات الشخصية؟ تواصل مع فريق INBS.',
+    closingLead: 'هل لديك استفسار عن إحدى خدمات الأعمال أو الخدمات الشخصية؟ تواصل مع فريق INBS.',
     emailAction: 'تواصل مع INBS',
     servicesAction: 'استكشف خدماتنا',
   },
