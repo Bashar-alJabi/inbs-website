@@ -164,3 +164,10 @@ Six bilingual articles live in `src/content/insights.ts`, with landing text in `
 ## Legal Information page — company review required
 
 Implemented in `src/app/[locale]/legal/page.tsx` with separate components in `src/components/legal/`, scoped styles in `src/styles/legal.css`, and bilingual content in `src/content/legal-page.ts`. Existing `/en|ar/privacy-policy` and `/en|ar/terms` permanent redirects are retained. The policy page uses `noindex` regardless of global `SITE_INDEXABLE` until company-specific operational disclosures are checked and approved. Privacy copy deliberately does **not** assert unverified cookie behavior, analytics, retention periods, processing locations, suppliers or data-sharing practices. Confirm these with INBS's legal/compliance owner and hosting/service providers, then revise the text and metadata before final public legal sign-off.
+
+## Homepage UAE interactive map
+
+- The Home page renders a separate copy of the Contact page's interactive UAE map **immediately before the final Home CTA**.
+- Home-only logic and markup: `src/components/home/home-uae-map.tsx`; Home-only path data: `src/content/home-uae-map.ts` (original SVG source attribution preserved); Home-only map styles: `src/styles/home.css`.
+- The map shares **no React component or path-data file** with Contact. Adjust the Home map independently without changing the Contact version.
+- Its section gradient matches the final effective `.inbs-achievements` gradient in both light and dark themes. Office marker, mouse-following pointer line, emirate labels and reduced-motion behavior are copied intact.
