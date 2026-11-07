@@ -1,4 +1,4 @@
-import { ArrowUpRight, MapPin } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { Reveal } from '@/components/shared/reveal';
 import { companyContact } from '@/content/contact';
 import { contactPageContent } from '@/content/contact-page';
@@ -20,19 +20,16 @@ export function ContactVisit({ locale }: { locale: Locale }) {
           <a className="inbs-contact-visit-map-action" href={companyContact.mapUrl} target="_blank" rel="noopener noreferrer">
             {t.mapAction}<ArrowUpRight size={21} aria-hidden="true"/>
           </a>
-          <p className="inbs-contact-map-note">{t.mapNote}</p>
-        </Reveal>
+         </Reveal>
         <Reveal className="inbs-contact-map-scene" delay={0.1}>
-          <div className="inbs-contact-map-grid" aria-hidden="true"/>
-          <span className="inbs-contact-map-large" aria-hidden="true">DUBAI</span>
-          <div className="inbs-contact-map-target" aria-hidden="true">
-            <span/><MapPin size={36} strokeWidth={1.4}/>
-          </div>
-          <div className="inbs-contact-map-address">
-            <MapPin size={19} aria-hidden="true"/>
-            <span>{companyContact.address[locale]}</span>
-          </div>
-          <a className="inbs-contact-map-overlay" href={companyContact.mapUrl} target="_blank" rel="noopener noreferrer" aria-label={t.mapAction}/>
+          <iframe
+            className="inbs-contact-map-embed"
+            src={companyContact.mapEmbedUrl}
+            title={t.mapEmbedTitle}
+            loading="lazy"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          />
         </Reveal>
       </div>
     </section>
