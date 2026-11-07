@@ -753,9 +753,58 @@ for(const locale of ['en','ar']){
   }
  }
 }
+// Careers: four dedicated sections, email and WhatsApp actions, RTL, accessibility.
+for(const locale of ['en','ar']){
+ for(const size of sizes){
+  for(const theme of ['light','dark']){
+   const context=await browser.newContext({viewport:{width:size.width,height:size.height},reducedMotion:'reduce',colorScheme:theme});
+   await context.addInitScript(t=>localStorage.setItem('inbs-theme',t),theme);
+   const page=await context.newPage();
+   const errors=[];
+   page.on('pageerror',error=>errors.push(String(error)));
+   await test('careers/'+[locale,size.name,theme].join('/')+' layout, application links and accessibility',async()=>{
+    const response=await page.goto(origin+'/'+locale+'/careers',{waitUntil:'domcontentloaded',timeout:45000});
+    assert.equal(response?.status(),200);
+    assert.equal(await page.locator('html').getAttribute('lang'),locale);
+    assert.equal(await page.locator('html').getAttribute('dir'),locale==='ar'?'rtl':'ltr');
+    await page.waitForFunction(t=>document.documentElement.getAttribute('data-theme')===t,theme);
+    assert.equal(await page.locator('.inbs-careers-page').count(),1);
+    assert.equal(await page.locator('.inbs-careers-page h1').count(),1);
+    assert.equal(await page.locator('.inbs-careers-hero').count(),1);
+    assert.equal(await page.locator('.inbs-careers-why').count(),1);
+    assert.equal(await page.locator('.inbs-careers-apply').count(),1);
+    assert.equal(await page.locator('.inbs-editorial-cta--careers').count(),1);
+    assert.equal(await page.locator('.inbs-careers-reason').count(),3);
+    assert.equal(await page.locator('.inbs-careers-apply-steps li').count(),3);
+    assert.equal(await page.locator('.inbs-careers-page form,.inbs-careers-page input,.inbs-careers-page textarea').count(),0);
+    assert.equal(await page.locator('.inbs-careers-art-orbit').count(),2);
+    assert.equal(await page.locator('.inbs-careers-art-cross').count(),0);
+    assert.equal(await page.locator('.inbs-careers-apply-address a[href^="mailto:"]').count(),2);
+    const email=page.locator('.inbs-careers-apply-address a[href^="mailto:"]').first();
+    assert.equal(await email.textContent()!==null,true);
+    assert.ok((await email.getAttribute('href')).startsWith('mailto:jalal.omar2021@gmail.com?subject='));
+    const applyHref=await page.locator('.inbs-careers-apply-button').getAttribute('href');
+    assert.ok(applyHref.startsWith('mailto:jalal.omar2021@gmail.com?subject='));
+    assert.equal(await page.locator('.inbs-careers-apply-address a[href="mailto:info@inbs-uae.com"]').count(),1);
+    assert.equal(await page.locator('.inbs-careers-apply-whatsapp a').getAttribute('href'),'https://wa.me/971508866555');
+    assert.equal(await page.locator('.inbs-careers-apply-whatsapp bdi').getAttribute('dir'),'ltr');
+    assert.equal((await page.locator('.inbs-careers-apply-whatsapp bdi').textContent()).trim(),'+971 50 886 6555');
+    assert.equal(await page.locator('.inbs-careers-hero-action').getAttribute('href'),'#careers-why');
+    assert.equal(await page.locator('.inbs-editorial-cta--careers .inbs-editorial-cta-primary').getAttribute('href'),'/'+locale+'/contact');
+    assert.equal(await page.locator('.inbs-editorial-cta--careers .inbs-editorial-cta-secondary').getAttribute('href'),'/'+locale+'/services');
+    const widths=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
+    assert.ok(widths.scroll<=widths.inner+3,'Horizontal overflow '+JSON.stringify(widths));
+    const violations=(await new AxeBuilder({page}).include('.inbs-careers-page').withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa']).analyze()).violations;
+    assert.deepEqual(violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)})),[]);
+    assert.deepEqual(errors,[]);
+   });
+   await context.close();
+  }
+ }
+}
 await test('navigation endpoints and security',async()=>{
  for(const locale of ['en','ar']){
-  for(const slug of ['about','services','contact','team','privacy-policy','terms','services/businessmen-services','services/citizenship-and-immigration-services']){
+  for(const slug of ['about','services','contact','team','careers','privacy-policy','terms','services/businessmen-services','services/citizenship-and-immigration-services']){
    const res=await fetch(origin+'/'+locale+'/'+slug);
    assert.equal(res.status,200,locale+'/'+slug);
   }
