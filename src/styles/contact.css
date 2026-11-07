@@ -21,12 +21,23 @@
   min-height:min(850px,100svh);
   background:#071f34;color:#f4f9fc;
 }
+/* About-inspired blue-to-navy wash across the full Hero, not only the photo. */
+.inbs-contact-hero::after{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(90deg,
+    #071f34 0%,rgba(9,43,73,.98) 19%,rgba(15,79,130,.83) 36%,
+    rgba(17,83,135,.42) 58%,rgba(7,31,52,.09) 82%,transparent 100%);
+}
+[dir=rtl] .inbs-contact-hero::after{
+  background:linear-gradient(270deg,
+    #071f34 0%,rgba(9,43,73,.98) 19%,rgba(15,79,130,.83) 36%,
+    rgba(17,83,135,.42) 58%,rgba(7,31,52,.09) 82%,transparent 100%);
+}
 .inbs-contact-hero-building{
   position:absolute;inset-block:0;inset-inline-end:0;
   width:67%;pointer-events:none;
   background-image:
-    linear-gradient(180deg,rgba(11,48,82,.14),rgba(10,55,95,.05) 60%,rgba(7,31,52,.78)),
-    linear-gradient(90deg,rgba(18,87,142,.46),rgba(15,66,110,.13) 67%,rgba(7,31,52,.03)),
+    linear-gradient(180deg,rgba(11,48,82,.06),transparent 62%,rgba(7,31,52,.5)),
     url('/images/contact/contact-building.webp');
   background-color:#1b608b;
   background-size:cover;
