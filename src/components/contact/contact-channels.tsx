@@ -1,10 +1,8 @@
-import { ArrowUpRight, Mail, Phone, Linkedin, Instagram, Facebook } from 'lucide-react';
+import { ArrowUpRight, Mail, Phone, Globe2 } from 'lucide-react';
 import { Reveal } from '@/components/shared/reveal';
 import { companyContact, socialLinks } from '@/content/contact';
 import { contactPageContent } from '@/content/contact-page';
 import type { Locale } from '@/lib/site';
-
-const socialIcons = { linkedin: Linkedin, instagram: Instagram, facebook: Facebook };
 
 export function ContactChannels({ locale }: { locale: Locale }) {
   const t = contactPageContent[locale];
@@ -46,9 +44,8 @@ export function ContactChannels({ locale }: { locale: Locale }) {
           </div>
           <nav aria-label={t.socialTitle} className="inbs-contact-social-links">
             {socialLinks.map(item=>{
-              const Icon = socialIcons[item.id];
               return <a key={item.id} href={item.href} target="_blank" rel="noopener noreferrer">
-                <Icon size={21} strokeWidth={1.6} aria-hidden="true"/>
+                <Globe2 size={21} strokeWidth={1.6} aria-hidden="true"/>
                 {item.label}<ArrowUpRight size={17} aria-hidden="true"/>
               </a>;
             })}
