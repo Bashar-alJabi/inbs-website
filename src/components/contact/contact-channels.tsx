@@ -1,8 +1,15 @@
-import { ArrowUpRight, Mail, Phone, Globe2 } from 'lucide-react';
+import { ArrowUpRight, Mail, Phone } from 'lucide-react';
+import { LinkedinIcon, InstagramIcon, FacebookIcon } from '@/components/layout/social-icons';
 import { Reveal } from '@/components/shared/reveal';
 import { companyContact, socialLinks } from '@/content/contact';
 import { contactPageContent } from '@/content/contact-page';
 import type { Locale } from '@/lib/site';
+
+const socialIcons = {
+  linkedin: LinkedinIcon,
+  instagram: InstagramIcon,
+  facebook: FacebookIcon,
+} as const;
 
 export function ContactChannels({ locale }: { locale: Locale }) {
   const t = contactPageContent[locale];
@@ -21,7 +28,11 @@ export function ContactChannels({ locale }: { locale: Locale }) {
             <div className="inbs-contact-channel-top"><span>01 / {t.callLabel}</span><Phone size={25} strokeWidth={1.6} aria-hidden="true"/></div>
             <h3>{t.callTitle}</h3>
             <p>{t.callText}</p>
-            <a className="inbs-contact-channel-value" dir="ltr" href={companyContact.phoneHref}>{companyContact.phone}</a>
+            <div className="inbs-contact-channel-values">
+              {companyContact.phones.map(phone => (
+                <a key={phone.href} className="inbs-contact-channel-value" dir="ltr" href={phone.href}>{phone.label}</a>
+              ))}
+            </div>
             <a className="inbs-contact-channel-action" href={companyContact.phoneHref}>
               {t.phoneAction}<ArrowUpRight size={20} aria-hidden="true"/>
             </a>
@@ -30,7 +41,11 @@ export function ContactChannels({ locale }: { locale: Locale }) {
             <div className="inbs-contact-channel-top"><span>02 / {t.mailLabel}</span><Mail size={25} strokeWidth={1.6} aria-hidden="true"/></div>
             <h3>{t.mailTitle}</h3>
             <p>{t.mailText}</p>
-            <a className="inbs-contact-channel-value" dir="ltr" href={companyContact.emailHref}>{companyContact.email}</a>
+            <div className="inbs-contact-channel-values">
+              {companyContact.emails.map(email => (
+                <a key={email.href} className="inbs-contact-channel-value" dir="ltr" href={email.href}>{email.label}</a>
+              ))}
+            </div>
             <a className="inbs-contact-channel-action" href={companyContact.emailHref}>
               {t.emailAction}<ArrowUpRight size={20} aria-hidden="true"/>
             </a>
@@ -44,8 +59,9 @@ export function ContactChannels({ locale }: { locale: Locale }) {
           </div>
           <nav aria-label={t.socialTitle} className="inbs-contact-social-links">
             {socialLinks.map(item=>{
+              const Icon = socialIcons[item.id];
               return <a key={item.id} href={item.href} target="_blank" rel="noopener noreferrer">
-                <Globe2 size={21} strokeWidth={1.6} aria-hidden="true"/>
+                <Icon width={21} height={21}/>
                 {item.label}<ArrowUpRight size={17} aria-hidden="true"/>
               </a>;
             })}
