@@ -259,6 +259,13 @@
   stroke-linejoin:round;stroke-linecap:round;
   vector-effect:non-scaling-stroke;
 }
+.inbs-contact-uae-labels text{
+  font-family:var(--font-body),sans-serif;
+  font-size:12px;font-weight:600;letter-spacing:.015em;
+  fill:#d3eaf6;opacity:.66;
+  paint-order:stroke fill;stroke:#103c5b;stroke-width:2px;stroke-linejoin:round;
+}
+[dir=rtl] .inbs-contact-uae-labels text{letter-spacing:0;font-size:15px}
 .inbs-contact-uae-office-halo{
   stroke:currentColor;stroke-width:1;stroke-dasharray:3 7;fill:none;opacity:.72;
 }
@@ -282,7 +289,12 @@
 @keyframes inbs-contact-uae-orbit{to{transform:rotate(360deg)}}
 @media(max-width:760px){
   .inbs-contact-uae-divider{min-height:290px;padding-block:22px}
-  .inbs-contact-uae-art{width:112vw;max-width:none;max-height:315px;opacity:.92}
+  .inbs-contact-uae-art{
+    width:calc(100% - 24px);max-width:460px;max-height:none;
+    height:auto;opacity:.92;
+  }
+  .inbs-contact-uae-labels text{font-size:17px;opacity:.78}
+  [dir=rtl] .inbs-contact-uae-labels text{font-size:19px}
 }
 @media(prefers-reduced-motion:reduce){
   .inbs-contact-uae-office-pulse,.inbs-contact-uae-orbit{animation:none}
