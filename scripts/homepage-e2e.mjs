@@ -679,6 +679,42 @@ for(const locale of ['en','ar']){
   }
  }
 }
+// Dedicated Contact page: direct links only, never a form or submission API.
+for(const locale of ['en','ar']){
+ for(const size of sizes){
+  for(const theme of ['light','dark']){
+   const context=await browser.newContext({viewport:{width:size.width,height:size.height},reducedMotion:'reduce',colorScheme:theme});
+   await context.addInitScript(t=>localStorage.setItem('inbs-theme',t),theme);
+   const page=await context.newPage();
+   const errors=[];
+   page.on('pageerror',error=>errors.push(String(error)));
+   await test('contact/'+[locale,size.name,theme].join('/')+' direct channels and accessibility',async()=>{
+    const response=await page.goto(origin+'/'+locale+'/contact',{waitUntil:'domcontentloaded',timeout:45000});
+    assert.equal(response?.status(),200);
+    assert.equal(await page.locator('html').getAttribute('lang'),locale);
+    assert.equal(await page.locator('html').getAttribute('dir'),locale==='ar'?'rtl':'ltr');
+    await page.waitForFunction(t=>document.documentElement.getAttribute('data-theme')===t,theme);
+    assert.equal(await page.locator('.inbs-contact-page').count(),1);
+    assert.equal(await page.locator('.inbs-contact-page h1').count(),1);
+    assert.equal(await page.locator('.inbs-contact-page form,.inbs-contact-page input,.inbs-contact-page textarea').count(),0);
+    assert.equal(await page.locator('.inbs-contact-channel').count(),2);
+    assert.equal(await page.locator('.inbs-contact-social-links a').count(),3);
+    assert.equal(await page.locator('.inbs-contact-channel-value[href^="tel:"]').count(),1);
+    assert.equal(await page.locator('.inbs-contact-channel-value[href^="mailto:"]').count(),1);
+    assert.equal(await page.locator('.inbs-contact-visit address').count(),1);
+    assert.equal(await page.locator('.inbs-contact-visit-map-action[target="_blank"][rel="noopener noreferrer"]').count(),1);
+    assert.equal(await page.locator('.inbs-editorial-cta--contact .inbs-editorial-cta-primary').getAttribute('href'),'mailto:info@inbs-uae.com');
+    assert.equal(await page.locator('.inbs-editorial-cta--contact .inbs-editorial-cta-secondary').getAttribute('href'),'/'+locale+'/services');
+    const widths=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
+    assert.ok(widths.scroll<=widths.inner+3,'Horizontal overflow '+JSON.stringify(widths));
+    const violations=(await new AxeBuilder({page}).include('.inbs-contact-page').withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa']).analyze()).violations;
+    assert.deepEqual(violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)})),[]);
+    assert.deepEqual(errors,[]);
+   });
+   await context.close();
+  }
+ }
+}
 await test('navigation endpoints and security',async()=>{
  for(const locale of ['en','ar']){
   for(const slug of ['about','services','contact','team','privacy-policy','terms','services/businessmen-services','services/citizenship-and-immigration-services']){
