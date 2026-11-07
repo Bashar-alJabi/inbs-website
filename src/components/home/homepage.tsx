@@ -6,6 +6,7 @@ import { ServicesShowcase } from './services-showcase';
 import { HomeAchievements } from './home-achievements';
 import { HomeInstitutions } from './home-institutions';
 import { HomeCta } from './home-cta';
+import { HomeUaeMap } from './home-uae-map';
 
 /** Homepage shell. Additional sections will be added after their design is approved. */
 export function Homepage({locale}:{locale:Locale}){
@@ -16,6 +17,7 @@ export function Homepage({locale}:{locale:Locale}){
     <ServicesShowcase locale={locale}/>
     <HomeAchievements locale={locale}/>
     <HomeInstitutions locale={locale}/>
+    <HomeUaeMap locale={locale}/>
     <HomeCta locale={locale}/>
   </main>;
 }
