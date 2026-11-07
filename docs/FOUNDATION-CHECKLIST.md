@@ -229,8 +229,8 @@
 - [x] Dedicated Insights Hero, featured guide, filterable library and standard closing CTA, with page-local components.
 - [x] Each article has a localized canonical route, SEO metadata, source link and related content; unknown slugs return 404.
 - [x] Shared catalog drives cards, category filters, article pages and sitemap in both languages; no CMS, API or external image dependency.
-- [x] Six distinct verified Pexels sources converted to WebP and committed under stable `public/images/insights/<slug>.webp` names; source and photographer credits documented in `SOURCES.md`.
+- [x] Six distinct article Pexels sources plus a separate Insights Hero photo converted to WebP and committed under stable `public/images/insights/<slug>.webp` names; source and photographer credits documented in `SOURCES.md`.
 - [x] Added production HTTP smoke paths and browser/axe coverage for both languages, responsive sizes, modes, filters and every guide.
-- [ ] Owner visual/content approval before any merge.
-- [ ] Verify final feature-head CI and resolve any issues before promotion.
+- [x] Owner visual approval and authorization to merge (7 November 2026).
+- [ ] Verify final feature-head CI (including accessibility and article contents navigation) and resolve any issues before promotion.
 - [ ] Verify production deployment and current regulatory facts before public indexing.
