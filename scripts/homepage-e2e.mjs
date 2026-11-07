@@ -696,20 +696,32 @@ for(const locale of ['en','ar']){
     await page.waitForFunction(t=>document.documentElement.getAttribute('data-theme')===t,theme);
     assert.equal(await page.locator('.inbs-contact-page').count(),1);
     assert.equal(await page.locator('.inbs-contact-page h1').count(),1);
-    assert.equal(await page.locator('.inbs-contact-hero-gallery [role="img"]').count(),2);
+    assert.equal(await page.locator('.inbs-contact-hero-gallery button.inbs-contact-hero-photo').count(),2);
+    assert.equal(await page.locator('.inbs-contact-photo-traveler').count(),2);
     assert.equal(await page.locator('.inbs-contact-hero-panel,.inbs-contact-rings').count(),0);
     const heroImagePaths=await page.evaluate(()=>{
       const imageOf=selector=>getComputedStyle(document.querySelector(selector)).backgroundImage;
       return [
         imageOf('.inbs-contact-hero-building'),
-        imageOf('.inbs-contact-hero-photo--office'),
-        imageOf('.inbs-contact-hero-photo--door'),
+        imageOf('.inbs-contact-hero-photo--office .inbs-contact-photo-image'),
+        imageOf('.inbs-contact-hero-photo--door .inbs-contact-photo-image'),
       ];
     });
     for(const [i,name] of ['contact-building.webp','contact-office.webp','contact-door.webp'].entries())
       assert.ok(heroImagePaths[i].includes('/images/contact/'+name),
         'Contact Hero slot must reference its stable local WebP filename: '+name);
-    assert.equal(await page.locator('.inbs-contact-hero-signal').count(),1);
+    assert.equal(await page.locator('.inbs-contact-hero-signal').count(),0);
+    const thumbs=page.locator('.inbs-contact-hero-photo');
+    for(let i=0;i<2;i++){
+      const tile=thumbs.nth(i);
+      const dimensions=await tile.boundingBox();
+      assert.ok(dimensions && Math.abs(dimensions.width-dimensions.height)<4,'Hero thumbnail must be square');
+      await tile.focus();
+      assert.equal(await tile.evaluate(node=>node===document.activeElement),true,'Thumbnail must be keyboard focusable');
+    }
+    const scene=await page.locator('.inbs-contact-hero-gallery').boundingBox();
+    const large=await page.locator('.inbs-contact-hero-building').boundingBox();
+    assert.ok(scene&&large,'Hero building and thumbnail gallery must render');
     assert.equal(await page.locator('.inbs-contact-page form,.inbs-contact-page input,.inbs-contact-page textarea').count(),0);
     assert.equal(await page.locator('.inbs-contact-channel').count(),2);
     assert.equal(await page.locator('.inbs-contact-social-links a').count(),3);
