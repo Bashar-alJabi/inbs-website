@@ -731,9 +731,15 @@ for(const locale of ['en','ar']){
     assert.equal(await page.locator('.inbs-contact-page form,.inbs-contact-page input,.inbs-contact-page textarea').count(),0);
     assert.equal(await page.locator('.inbs-contact-channel').count(),2);
     assert.equal(await page.locator('.inbs-contact-social-links a').count(),3);
-    assert.equal(await page.locator('.inbs-contact-channel-value[href^="tel:"]').count(),1);
-    assert.equal(await page.locator('.inbs-contact-channel-value[href^="mailto:"]').count(),1);
+    assert.equal(await page.locator('.inbs-contact-channel-value[href^="tel:"]').count(),2,'Both mobile and landline should be shown');
+    assert.equal(await page.locator('.inbs-contact-channel-value[href^="mailto:"]').count(),2,'Both official and additional email should be shown');
     assert.equal(await page.locator('.inbs-contact-visit address').count(),1);
+    assert.equal(await page.locator('.inbs-contact-map-embed[loading="lazy"]').count(),1,'Office map is embedded');
+    assert.equal(await page.locator('.inbs-contact-uae-divider').count(),1,'Dedicated UAE map divider is present');
+    assert.equal(await page.locator('.inbs-contact-uae-emirates path').count(),7,'All seven emirates are outlined');
+    assert.equal(await page.locator('.inbs-contact-uae-labels text').count(),7,'All seven emirates are labeled');
+    assert.equal(await page.locator('.inbs-contact-uae-office-dot').count(),1,'Office location is marked');
+    assert.equal(await page.locator('.inbs-contact-uae-pointer-line').count(),0,'Mouse interaction stays hidden with reduced motion');
     assert.equal(await page.locator('.inbs-contact-visit-map-action[target="_blank"][rel="noopener noreferrer"]').count(),1);
     assert.equal(await page.locator('.inbs-editorial-cta--contact .inbs-editorial-cta-primary').getAttribute('href'),'mailto:info@inbs-uae.com');
     assert.equal(await page.locator('.inbs-editorial-cta--contact .inbs-editorial-cta-secondary').getAttribute('href'),'/'+locale+'/services');
