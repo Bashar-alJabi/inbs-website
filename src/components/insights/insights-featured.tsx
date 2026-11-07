@@ -11,7 +11,6 @@ export function InsightsFeatured({locale}:{locale:Locale}){
   <div className="site-shell inbs-insights-featured-inner">
    <Reveal className="inbs-insights-featured-copy">
     <p className="inbs-insights-section-kicker">{ui.featured}</p>
-    <span className="inbs-insights-meta">{t.categoryLabel} / 01</span>
     <h2 id="inbs-insights-featured-title">{t.title}</h2>
     <p>{t.summary}</p>
     <Link className="inbs-insights-featured-link" href={`/${locale}/insights/${article.slug}`}>{ui.read}<ArrowUpRight size={20} aria-hidden="true"/></Link>
