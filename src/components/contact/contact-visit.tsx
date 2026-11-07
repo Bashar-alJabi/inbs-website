@@ -20,7 +20,7 @@ export function ContactVisit({ locale }: { locale: Locale }) {
           <a className="inbs-contact-visit-map-action" href={companyContact.mapUrl} target="_blank" rel="noopener noreferrer">
             {t.mapAction}<ArrowUpRight size={21} aria-hidden="true"/>
           </a>
-         </Reveal>
+        </Reveal>
         <Reveal className="inbs-contact-map-scene" delay={0.1}>
           <iframe
             className="inbs-contact-map-embed"
