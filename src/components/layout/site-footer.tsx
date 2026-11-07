@@ -47,8 +47,12 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         <Reveal variant="footer" delay={0.24}>
           <div className="inbs-footer-contact">
             <h3>{t.contactDetails}</h3>
-            <a href={companyContact.emailHref}><Mail size={18} aria-hidden="true" /><span>{companyContact.email}</span></a>
-            <a href={companyContact.phoneHref}><Phone size={18} aria-hidden="true" /><span className="inbs-phone-number" dir="ltr">{companyContact.phone}</span></a>
+            {companyContact.emails.map(email => (
+              <a key={email.href} href={email.href}><Mail size={18} aria-hidden="true" /><span>{email.label}</span></a>
+            ))}
+            {companyContact.phones.map(phone => (
+              <a key={phone.href} href={phone.href}><Phone size={18} aria-hidden="true" /><span className="inbs-phone-number" dir="ltr">{phone.label}</span></a>
+            ))}
             <a href={companyContact.mapUrl} target="_blank" rel="noopener noreferrer"><MapPin size={18} aria-hidden="true" /><span>{companyContact.address[locale]} <ArrowUpRight size={14} className="map-external" /></span></a>
           </div>
         </Reveal>
