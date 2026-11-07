@@ -93,9 +93,18 @@
 .inbs-insights-article-source span,.inbs-insights-article-aside>span{display:block;font-size:12px;letter-spacing:.1em;font-weight:750;color:var(--i-accent);margin-bottom:14px}
 .inbs-insights-article-source a{display:inline-flex;align-items:center;gap:10px;font-weight:700;color:var(--i-ink);text-decoration:underline;text-underline-offset:4px;overflow-wrap:anywhere}
 .inbs-insights-article-source p{font-size:14px;line-height:1.8;color:var(--i-muted);margin:20px 0 0}
-.inbs-insights-article-aside{position:sticky;top:140px;border-top:1px solid var(--i-line);padding-top:23px;display:flex;flex-direction:column;gap:10px}
-.inbs-insights-article-aside strong{font-size:18px;font-weight:650}
-.inbs-insights-article-aside i{height:80px;width:80px;margin-top:22px;border:1px solid var(--i-accent);border-radius:50%;opacity:.5}
+.inbs-insights-article-sections>section{scroll-margin-top:125px}
+.inbs-insights-article-aside{position:sticky;top:140px;border-top:1px solid var(--i-line);padding-top:23px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.inbs-insights-article-aside strong{font-size:18px;font-weight:650;line-height:1.5}
+.inbs-insights-article-aside nav{margin-top:23px}
+.inbs-insights-aside-label{font-size:12px;font-weight:750;letter-spacing:.07em;text-transform:uppercase;color:var(--i-muted);margin-bottom:16px}
+.inbs-insights-article-aside ol{list-style:none;margin:0;padding:0;border-top:1px solid var(--i-line)}
+.inbs-insights-article-aside li{border-bottom:1px solid var(--i-line)}
+.inbs-insights-article-aside li a{display:flex;align-items:baseline;gap:12px;padding:13px 0;color:var(--i-muted);font-size:14px;line-height:1.55;transition:color .2s ease}
+.inbs-insights-article-aside li a>span:first-child{flex:none;color:var(--i-accent);font-size:11px;font-weight:750;font-variant-numeric:tabular-nums}
+.inbs-insights-article-aside li a:hover,.inbs-insights-article-aside li a:focus-visible{color:var(--i-accent)}
+[dir=rtl] .inbs-insights-aside-label{letter-spacing:0}
+@media(prefers-reduced-motion:reduce){.inbs-insights-article-aside li a{transition:none}}
 .inbs-insights-related{background:var(--i-surface);padding-block:clamp(78px,9vw,125px)}
 .inbs-insights-related .inbs-insights-cards{margin-top:48px;grid-template-columns:repeat(2,minmax(0,1fr));max-width:900px}
 html[data-theme=dark] .inbs-insights-page{--i-paper:#0b2235;--i-surface:#132f44;--i-ink:#e9f5fd;--i-muted:#b3cbdb;--i-line:#36566e;--i-accent:#8bceef}
