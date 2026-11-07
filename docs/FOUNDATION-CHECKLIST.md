@@ -245,3 +245,13 @@
 - [x] Owner approved visual design and requested promotion through `redesign` to `main` (7 November 2026).
 - [ ] Verify final feature-head CI (lint, types, build, smoke, browser/axe) and promotion PR CI.
 - [ ] Check production deployment independently; the Legal page remains `noindex` by owner preference.
+
+## Home UAE map — feature/home-uae-map (7 November 2026)
+
+- [x] Copy Contact UAE map and pointer behavior into a standalone Home component and Home-only emirate path source.
+- [x] Insert map immediately before Home CTA, matching Milestones gradient for light and dark themes.
+- [x] Preserve localization, office marker, reduced-motion support, and Contact's existing map unchanged.
+- [x] Add homepage browser assertions for render, map labels, placement and gradient parity.
+- [x] Owner approved the Home map and authorized promotion through `redesign` to `main` (7 November 2026).
+- [x] Feature-head CI validated production build, smoke, responsive browser and accessibility tests prior to promotion.
+- [ ] Verify promotion PR CI and deployment independently after merging.

@@ -59,3 +59,10 @@ npm run build
 ## Source of truth and approvals
 
 The earlier [INBS repository](https://github.com/Bashar-alJabi/inbs) is the reference for established company copy and services; confirm changes with the company. Do not invent company metrics, employee identities, testimonials or official affiliations, and do not alter the official logo. Keep work in a feature branch, obtain owner approval before merging and preserve both languages.
+
+## Homepage UAE interactive map
+
+- The Home page renders a separate copy of the Contact page's interactive UAE map **immediately before the final Home CTA**.
+- Home-only logic and markup: `src/components/home/home-uae-map.tsx`; Home-only path data: `src/content/home-uae-map.ts` (original SVG source attribution preserved); Home-only map styles: `src/styles/home.css`.
+- The map shares **no React component or path-data file** with Contact. Adjust the Home map independently without changing the Contact version.
+- Its section gradient matches the final effective `.inbs-achievements` gradient in both light and dark themes. Office marker, mouse-following pointer line, emirate labels and reduced-motion behavior are copied intact.
