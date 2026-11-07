@@ -264,43 +264,14 @@
 }
 .inbs-contact-visit-map-action svg{color:var(--contact-accent);transition:transform .25s}
 .inbs-contact-visit-map-action:hover svg{transform:translate(3px,-3px)}
-.inbs-contact-map-note{font-size:12px;line-height:1.7;color:var(--contact-muted);margin:14px 0 0}
 .inbs-contact-map-scene{
-  position:relative;isolation:isolate;min-width:0;aspect-ratio:1.07;
+  position:relative;min-width:0;aspect-ratio:1.07;
   background:#133c59;overflow:hidden;
-  display:grid;place-items:center;
 }
-.inbs-contact-map-grid{
-  position:absolute;inset:-25%;opacity:.52;transform:rotate(-25deg);
-  background:
-    linear-gradient(90deg,transparent 48%,#9ed9ef28 49%,#9ed9ef28 51%,transparent 52%) 0 0/89px 89px,
-    linear-gradient(0deg,transparent 48%,#9ed9ef28 49%,#9ed9ef28 51%,transparent 52%) 0 0/89px 89px;
+.inbs-contact-map-embed{
+  position:absolute;inset:0;display:block;width:100%;height:100%;
+  border:0;
 }
-.inbs-contact-map-scene:before{
-  content:"";position:absolute;inset:0;
-  background:radial-gradient(circle at center,#2f719354,transparent 56%),linear-gradient(130deg,#103c5e,#09263e);
-}
-.inbs-contact-map-large{
-  position:absolute;z-index:1;top:10%;inset-inline-start:7%;
-  font-size:clamp(62px,8vw,145px);font-weight:800;
-  letter-spacing:-.08em;color:#b4e8fc13;line-height:1;
-}
-.inbs-contact-map-target{position:relative;z-index:2;display:grid;place-items:center;color:#d4f7ff}
-.inbs-contact-map-target>span{
-  position:absolute;width:170px;height:170px;
-  border:1px solid #c3effc65;border-radius:50%;
-  box-shadow:0 0 0 55px #bcf4ff0b,0 0 0 110px #bcf4ff08;
-}
-.inbs-contact-map-target>svg{filter:drop-shadow(0 0 17px #9adfff)}
-.inbs-contact-map-address{
-  position:absolute;z-index:3;bottom:clamp(24px,3vw,43px);
-  inset-inline:clamp(24px,4vw,48px);
-  display:flex;align-items:flex-start;gap:13px;
-  border-top:1px solid #d0ecfb70;padding-top:20px;
-  color:#f0faff;font-size:clamp(13px,1.15vw,16px);font-weight:650;line-height:1.75;
-}
-.inbs-contact-map-address svg{flex:none;margin-top:3px}
-.inbs-contact-map-overlay{position:absolute;z-index:4;inset:0;outline-offset:-7px}
 html[data-theme=dark] .inbs-contact-page{
   --contact-ink:#e9f5fd;--contact-muted:#b3cbdb;--contact-rule:#36546b;
   --contact-paper:#0b2235;--contact-soft:#112e43;--contact-accent:#8bceef;
