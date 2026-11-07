@@ -12,7 +12,7 @@ The owner uploaded three real INBS location photographs. All three are tracked i
 
 Save all files directly in **`public/images/contact/`** as valid optimized WebP images with exactly these filenames. They are referenced by stable CSS paths in `src/styles/contact.css`. **No JSX/TS/TypeScript, CSS, imports or Next config changes are needed after uploading.**
 
-Both thumbnails are independent square image buttons. Hover or keyboard/mouse focus temporarily enlarges each image without affecting the building. A tiny point travels along each border, unless reduced motion is requested. Owner visual approval is still required before merging.
+All three photos are now independent small square thumbnail buttons (building first, then office, then door). Hover gives a subtle zoom; clicking opens a full-screen accessible image viewer, closed by the X button, Escape or the backdrop. A tiny point travels each thumbnail border, unless reduced motion is requested. The larger building backdrop uses a softer blue-to-navy blend. Owner visual approval remains required before merging.
 
 ### Local upload workflow
 
