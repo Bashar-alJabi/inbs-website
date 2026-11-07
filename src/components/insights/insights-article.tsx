@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import { insightsPageContent } from '@/content/insights-page';
 import type { InsightArticle } from '@/content/insights';
@@ -12,6 +13,7 @@ export function InsightsArticle({article,locale}:{article:InsightArticle;locale:
  return <main className="inbs-insights-page inbs-insights-article-page">
   <article>
    <header className="inbs-insights-article-hero">
+    <Image className="inbs-insights-article-hero-image" src={`/images/insights/${article.slug}.webp`} alt="" fill sizes="100vw" priority />
     <div className="site-shell">
      <Link className="inbs-insights-article-back" href={`/${locale}/insights`}><ArrowLeft size={18} aria-hidden="true"/>{ui.back}</Link>
      <p className="inbs-insights-kicker">{t.categoryLabel} / INBS INSIGHTS</p>
