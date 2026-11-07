@@ -4,13 +4,13 @@
  * Keep display values and destinations here, not in UI components.
  */
 const phones = [
-  { label: '+971 50 886 6555', href: 'tel:+971508866555' },
-  { label: '+971 4 221 9222', href: 'tel:+97142219222' },
+  { kind: 'mobile', label: '+971 50 886 6555', href: 'tel:+971508866555' },
+  { kind: 'landline', label: '+971 4 221 9222', href: 'tel:+97142219222' },
 ] as const;
 
 const emails = [
-  { label: 'info@inbs-uae.com', href: 'mailto:info@inbs-uae.com' },
-  { label: 'jalal.omar2021@gmail.com', href: 'mailto:jalal.omar2021@gmail.com' },
+  { kind: 'official', label: 'info@inbs-uae.com', href: 'mailto:info@inbs-uae.com' },
+  { kind: 'additional', label: 'jalal.omar2021@gmail.com', href: 'mailto:jalal.omar2021@gmail.com' },
 ] as const;
 
 export const companyContact = {
