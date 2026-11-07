@@ -115,9 +115,11 @@
 
 ## Contact page — feature/contact-page (7 November 2026)
 
-- [x] Dedicated bilingual Contact route with scoped editorial Hero, direct contact channels, office location and social links, plus page-ending CTA.
+- [x] Dedicated bilingual Contact route with a building-backdrop editorial Hero, two photo frames, direct contact channels, office location and social links, plus page-ending CTA.
 - [x] **No contact form**: no inputs, submission endpoint, data collection, new dependencies or messaging backend.
 - [x] Centralize displayed phone, email, office address, map destination and official social destinations in `src/content/contact.ts`; page-local EN/AR copy lives in `src/content/contact-page.ts`.
+- [x] Configure stable public WebP paths for actual building, office interior and office door photos; replace old Hero card/orbit graphic with a layered editorial gallery and single subtle rail dot, including reduced-motion behavior.
+- [ ] Owner uploads all three WebPs to `public/images/contact/` and reviews real image crops on desktop/mobile, Arabic/English and light/dark. Do not treat missing photo files as QA-complete.
 - [x] Remove Contact from Coming Soon fallback and add opt-in SEO metadata, localized canonical/hreflang and sitemap entries.
 - [x] Add HTTP smoke checks and browser checks for EN/AR, RTL, light/dark, mobile/tablet/desktop, no form, links, overflow and axe.
 - [ ] Verify exact-head lint, TypeScript, production build, HTTP smoke, Playwright and axe checks.
