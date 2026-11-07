@@ -234,3 +234,12 @@
 - [x] Owner visual approval and authorization to merge (7 November 2026).
 - [ ] Verify final feature-head CI (including accessibility and article contents navigation) and resolve any issues before promotion.
 - [ ] Verify production deployment and current regulatory facts before public indexing.
+
+## Legal Information — feature/legal-page (7 November 2026)
+
+- [x] Dedicated English/Arabic policy page with privacy, terms, important notices, official reference links and contact CTA.
+- [x] Existing privacy-policy and terms redirects retained to unified localized `/legal`.
+- [x] Content reflects visible front-end behavior (no on-site enquiry form) without inventing cookie/retention/data-transfer promises.
+- [x] Legal disclosures marked `noindex` pending operational and company legal validation.
+- [ ] Company confirms legal entity information and real-world data processing, and authorizes final legal notice.
+- [ ] Owner visual review, production CI verification and merger approval.
