@@ -15,9 +15,9 @@
 .inbs-insights-hero-lead{max-width:715px;color:#d1e5f1;font-size:var(--inbs-inner-hero-lead-size);line-height:1.86}
 .inbs-insights-hero-foot{position:absolute;bottom:clamp(20px,3vw,36px);inset-inline:clamp(20px,5vw,68px);display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;border-top:1px solid #c7eaff51;padding-top:17px;color:#b5d4e6;font-size:11px;font-weight:700;letter-spacing:.12em}
 .inbs-insights-hero-decor{position:absolute;z-index:-1;width:clamp(400px,60vw,860px);aspect-ratio:1;inset-inline-end:-9%;top:5%;opacity:.26;pointer-events:none}
-.inbs-insights-hero-square{position:absolute;top:50%;left:50%;aspect-ratio:1;border:1px solid #b1e2ff;transform:translate(-50%,-50%) rotate(24deg)}
+.inbs-insights-hero-square{position:absolute;top:50%;left:50%;aspect-ratio:1;border:1px solid #b1e2ff;transform:translate(-50%,-50%) rotate(45deg)}
 .inbs-insights-hero-square--outer{width:74%;border-color:#b1e2ff}
-.inbs-insights-hero-square--inner{width:48%;transform:translate(-50%,-50%) rotate(-18deg);border-color:#b1e2ffae}
+.inbs-insights-hero-square--inner{width:48%;transform:translate(-50%,-50%) rotate(45deg);border-color:#b1e2ffae}
 .inbs-insights-hero-square i{position:absolute;top:0;left:0;width:10px;height:10px;border-radius:50%;background:#b6ebff;box-shadow:0 0 16px 4px #8bdfff9c;transform:translate(-50%,-50%);animation:inbs-insights-square-forward 24s linear infinite}
 .inbs-insights-hero-square--inner i{animation-name:inbs-insights-square-reverse}
 @keyframes inbs-insights-square-forward{
