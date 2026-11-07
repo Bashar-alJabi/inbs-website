@@ -67,6 +67,19 @@ for(const locale of ['en','ar']){
       'Homepage services must use canonical ordering',
     );
     assert.equal(await page.locator('.inbs-achievement').count(),4);
+    const homeMap=page.locator('.inbs-home-uae-divider');
+    assert.equal(await homeMap.count(),1,'Homepage has a distinct UAE map section');
+    assert.equal(await homeMap.locator('.inbs-home-uae-emirates path').count(),7,'Seven emirate outlines');
+    assert.equal(await homeMap.locator('.inbs-home-uae-labels text').count(),7,'Seven translated labels');
+    assert.equal(await homeMap.locator('.inbs-home-uae-office-dot').count(),1,'Dubai office marker');
+    assert.equal(await homeMap.locator('.inbs-home-uae-pointer-line').count(),0,'Reduced motion disables pointer trail');
+    const homeMapPlacement=await homeMap.evaluate(el=>({
+      beforeCta:el.nextElementSibling?.classList.contains('inbs-home-cta')||el.nextElementSibling?.classList.contains('inbs-editorial-cta'),
+      mapBackground:getComputedStyle(el).backgroundImage,
+      milestonesBackground:getComputedStyle(document.querySelector('.inbs-achievements')).backgroundImage,
+    }));
+    assert.equal(homeMapPlacement.mapBackground,homeMapPlacement.milestonesBackground,'Match Milestones gradient exactly');
+    assert.equal(homeMapPlacement.beforeCta,true,'Homepage map must be directly before CTA');
     assert.equal(await page.locator('.inbs-institutions-name').count(),12);
     assert.equal(await page.locator('.inbs-institutions-track').getAttribute('dir'),'ltr');
     const subtitleSizes=await page.locator('.homepage .inbs-section-kicker').evaluateAll(
