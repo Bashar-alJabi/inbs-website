@@ -11,7 +11,7 @@ export function ContactPage({ locale }: { locale: Locale }) {
     <ContactHero locale={locale}/>
     <ContactChannels locale={locale}/>
     <ContactVisit locale={locale}/>
-    <ContactUaeDivider/>
+    <ContactUaeDivider locale={locale}/>
     <ContactClosing locale={locale}/>
   </main>;
 }
