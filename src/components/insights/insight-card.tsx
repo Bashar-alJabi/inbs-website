@@ -8,7 +8,7 @@ export function InsightCard({article,locale}:{article:InsightArticle;locale:Loca
  const t=article.content[locale],ui=insightsPageContent[locale];
  const number=String(insightArticles.indexOf(article)+1).padStart(2,'0');
  return <article className="inbs-insights-card">
-   <Link className={`inbs-insights-card-art inbs-insights-art--${article.category}`} href={`/${locale}/insights/${article.slug}`} aria-label={t.title}>
+   <Link className={`inbs-insights-card-art inbs-insights-art--${article.category}`} href={`/${locale}/insights/${article.slug}`}>
      <Image src={`/images/insights/${article.slug}.webp`} alt={t.title} fill sizes="(max-width: 600px) 100vw, (max-width: 950px) 50vw, 33vw" />
      <span className="inbs-insights-card-index" aria-hidden="true">{number}</span>
      <ArrowUpRight size={26} aria-hidden="true"/>
