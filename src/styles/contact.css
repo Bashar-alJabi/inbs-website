@@ -236,9 +236,52 @@
 .inbs-contact-social-links a:hover{border-color:var(--contact-accent);background:var(--contact-soft)}
 .inbs-contact-social-links a svg:last-child{color:var(--contact-accent)}
 .inbs-contact-visit{
+  position:relative;isolation:isolate;overflow:hidden;
   background:var(--contact-soft);
   padding-block:clamp(95px,11vw,155px);
 }
+/* Subtle, geographically based UAE outline; never changes the section background. */
+.inbs-contact-uae-art{
+  position:absolute;z-index:0;pointer-events:none;
+  width:min(67%,790px);height:auto;
+  inset-inline-start:18%;top:13%;
+  color:var(--contact-accent);
+  opacity:.28;
+}
+.inbs-contact-uae-outline{
+  stroke:currentColor;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round;
+  vector-effect:non-scaling-stroke;
+}
+.inbs-contact-uae-route{
+  stroke:currentColor;stroke-width:1.7;stroke-dasharray:3 9;
+  vector-effect:non-scaling-stroke;
+  animation:inbs-contact-uae-dashes 18s linear infinite;
+}
+.inbs-contact-uae-city{fill:currentColor;filter:drop-shadow(0 0 5px currentColor)}
+.inbs-contact-uae-city--dubai{opacity:1}
+.inbs-contact-uae-city--abu{opacity:.72}
+.inbs-contact-uae-city--sharjah{opacity:.65}
+.inbs-contact-uae-pulse{
+  stroke:currentColor;stroke-width:1.25;fill:none;
+  transform-box:fill-box;transform-origin:center;
+  animation:inbs-contact-uae-pulse 4.5s ease-out infinite;
+}
+.inbs-contact-uae-pulse--abu{animation-delay:-2.25s}
+.inbs-contact-uae-traveler{fill:currentColor;filter:drop-shadow(0 0 7px currentColor)}
+@keyframes inbs-contact-uae-dashes{to{stroke-dashoffset:-72}}
+@keyframes inbs-contact-uae-pulse{
+  0%{opacity:.9;transform:scale(.55)}
+  80%,100%{opacity:0;transform:scale(2.4)}
+}
+.inbs-contact-visit-grid{position:relative;z-index:1}
+@media(max-width:760px){
+  .inbs-contact-uae-art{width:110%;inset-inline-start:-12%;top:22%;opacity:.19}
+}
+@media(prefers-reduced-motion:reduce){
+  .inbs-contact-uae-route,.inbs-contact-uae-pulse{animation:none}
+  .inbs-contact-uae-traveler{display:none}
+}
+
 .inbs-contact-visit-grid{
   display:grid;grid-template-columns:minmax(0,.84fr) minmax(0,1.16fr);
   gap:clamp(35px,8vw,125px);align-items:center;
