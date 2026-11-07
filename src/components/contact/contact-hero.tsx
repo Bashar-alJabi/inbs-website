@@ -1,9 +1,10 @@
 import { ArrowDown } from 'lucide-react';
 import { contactPageContent } from '@/content/contact-page';
+import { ContactHeroGallery } from './contact-hero-gallery';
 import type { Locale } from '@/lib/site';
 
 /**
- * Building photo blends into the dark Hero; two editorial photo frames replace
+ * Building photo blends into the dark Hero; three compact photo thumbnails replace
  * the former text card. CSS references fixed public WebP filenames so the
  * owner can supply/replace photographs without editing component code.
  */
@@ -19,16 +20,11 @@ export function ContactHero({ locale }: { locale: Locale }) {
           <p className="inbs-contact-hero-lead">{t.heroLead}</p>
           <a className="inbs-contact-hero-discover" href="#contact-channels">{t.heroExplore}<ArrowDown size={19} aria-hidden="true"/></a>
         </div>
-        <div className="inbs-contact-hero-gallery" role="group" aria-label={t.heroGalleryLabel}>
-          <button className="inbs-contact-hero-photo inbs-contact-hero-photo--office" type="button" aria-label={t.heroOfficeAlt}>
-            <span className="inbs-contact-photo-image" aria-hidden="true"/>
-            <span className="inbs-contact-photo-traveler" aria-hidden="true"/>
-          </button>
-          <button className="inbs-contact-hero-photo inbs-contact-hero-photo--door" type="button" aria-label={t.heroDoorAlt}>
-            <span className="inbs-contact-photo-image" aria-hidden="true"/>
-            <span className="inbs-contact-photo-traveler" aria-hidden="true"/>
-          </button>
-        </div>
+        <ContactHeroGallery label={t.heroGalleryLabel} closeLabel={t.heroClosePhoto} photos={[
+          {key:'building',label:t.heroBuildingAlt,path:'/images/contact/contact-building.webp'},
+          {key:'office',label:t.heroOfficeAlt,path:'/images/contact/contact-office.webp'},
+          {key:'door',label:t.heroDoorAlt,path:'/images/contact/contact-door.webp'},
+        ]}/>
         <p className="inbs-contact-hero-bottom">{t.heroLocation}</p>
       </div>
     </section>
