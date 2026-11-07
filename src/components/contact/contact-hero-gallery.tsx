@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { X } from 'lucide-react';
+import Image from 'next/image';
+import { createPortal } from 'react-dom';
 
 type Photo = { key: 'building' | 'office' | 'door'; label: string; path: string };
 type Props = { label: string; closeLabel: string; photos: [Photo, Photo, Photo] };
@@ -48,15 +50,15 @@ export function ContactHeroGallery({ label, closeLabel, photos }: Props) {
           </button>
         ))}
       </div>
-      {opened && (
+      {opened && createPortal(
         <div className="inbs-contact-photo-lightbox" role="presentation"
           onMouseDown={event => { if (event.target === event.currentTarget) setOpened(null); }}>
           <div className="inbs-contact-photo-lightbox-panel" role="dialog" aria-modal="true" aria-label={opened.label}>
             <button ref={closeButton} type="button" className="inbs-contact-photo-lightbox-close"
               aria-label={closeLabel} onClick={() => setOpened(null)}><X size={23} aria-hidden="true"/></button>
-            <img src={opened.path} alt={opened.label} className="inbs-contact-photo-lightbox-image"/>
+            <Image src={opened.path} alt={opened.label} className="inbs-contact-photo-lightbox-image" fill sizes="100vw"/>
           </div>
-        </div>
+        </div>, document.body
       )}
     </>
   );
