@@ -834,6 +834,7 @@ for(const locale of ['en','ar']){
      assert.equal(await page.locator(`.inbs-insights-card-art img[src*="${slug}.webp"]`).count(),1,`Missing local photo for ${slug}`);
     }
     assert.equal(await page.locator('.inbs-insights-featured-art img').count(),1);
+    assert.equal(await page.locator('.inbs-insights-hero-photo[src*="insights-hero.webp"]').count(),1);
     const widths=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
     assert.ok(widths.scroll<=widths.inner+3,'Horizontal overflow '+JSON.stringify(widths));
     const violations=(await new AxeBuilder({page}).include('.inbs-insights-page').withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa']).analyze()).violations;
@@ -861,6 +862,21 @@ for(const locale of ['en','ar']){
   });
  }
  await context.close();
+ const desktop=await browser.newContext({viewport:{width:1440,height:900},reducedMotion:'reduce'});
+ const articlePage=await desktop.newPage();
+ await test('insights/'+locale+' desktop article table of contents',async()=>{
+  await articlePage.goto(origin+'/'+locale+'/insights/starting-a-business-in-dubai',{waitUntil:'domcontentloaded',timeout:45000});
+  const aside=articlePage.locator('.inbs-insights-article-aside');
+  assert.equal(await aside.isVisible(),true,'Desktop table of contents visible');
+  assert.equal(await aside.locator('nav ol a').count(),4,'Four article section links');
+  const links=await aside.locator('nav ol a').evaluateAll(els=>els.map(el=>el.getAttribute('href')));
+  assert.deepEqual(links,['#insight-section-1','#insight-section-2','#insight-section-3','#insight-section-4']);
+  for(const href of links)assert.equal(await articlePage.locator(href).count(),1,'Target section exists '+href);
+  await aside.locator('nav ol a').nth(1).click();
+  await articlePage.waitForFunction(()=>location.hash==='#insight-section-2');
+  assert.equal(await aside.evaluate(el=>getComputedStyle(el).position),'sticky');
+ });
+ await desktop.close();
 }
 await test('navigation endpoints and security',async()=>{
  for(const locale of ['en','ar']){
