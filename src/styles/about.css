@@ -14,7 +14,7 @@
 .inbs-about-page :is(h1,h2,h3){font-family:var(--font-body);font-weight:650}
 .inbs-about-page h2{font-size:clamp(40px,5.2vw,77px);line-height:1.15;letter-spacing:-.06em}
 .inbs-about-line{display:block}
-.inbs-story-label,.inbs-story-eyebrow{font-size:var(--inbs-inner-hero-kicker-size );
+.inbs-story-label,.inbs-story-eyebrow{
   display:flex;align-items:center;gap:14px;
   line-height:1.6;letter-spacing:.11em;font-weight:750;text-transform:uppercase;
 }
