@@ -199,6 +199,10 @@
 .inbs-contact-channel-top svg{flex:none}
 .inbs-contact-channel h3{font-size:clamp(26px,2.5vw,36px);letter-spacing:-.045em;line-height:1.32;margin:0 0 11px}
 .inbs-contact-channel>p{min-height:61px;color:var(--contact-muted);font-size:16px;line-height:1.85;margin:0 0 23px}
+.inbs-contact-channel-values{
+  display:flex;flex-direction:column;align-items:flex-start;gap:12px;
+  max-width:100%;
+}
 .inbs-contact-channel-value{
   max-width:100%;display:inline-block;overflow-wrap:anywhere;
   font-size:clamp(18px,2vw,29px);font-weight:650;
