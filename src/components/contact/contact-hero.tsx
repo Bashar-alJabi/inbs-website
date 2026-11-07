@@ -22,7 +22,7 @@ export function ContactHero({ locale }: { locale: Locale }) {
             <MapPin size={28} strokeWidth={1.5} aria-hidden="true"/>
             <h2>{t.heroPanelTitle}</h2>
             <span>{t.heroPanelBody}</span>
-            <a href={companyContact.mapUrl} target="_blank" rel="noopener noreferrer" aria-label={t.mapAction}>
+            <a href={companyContact.mapUrl} target="_blank" rel="noopener noreferrer" aria-label={`${t.city} — ${t.mapAction}`}>
               {t.city}<ArrowUpRight size={18} aria-hidden="true"/>
             </a>
           </div>
