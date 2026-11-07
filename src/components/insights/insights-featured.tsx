@@ -18,7 +18,7 @@ export function InsightsFeatured({locale}:{locale:Locale}){
    </Reveal>
    <Link className="inbs-insights-featured-art" href={`/${locale}/insights/${article.slug}`} aria-label={t.title}>
      <Image src={`/images/insights/${article.slug}.webp`} alt={t.title} fill sizes="(max-width: 950px) 100vw, 45vw" priority />
-     <span aria-hidden="true">01</span><strong aria-hidden="true">INBS / INSIGHTS</strong>
+     <strong aria-hidden="true">INBS / INSIGHTS</strong>
    </Link>
   </div>
  </section>;
