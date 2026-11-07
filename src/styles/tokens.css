@@ -18,7 +18,7 @@
  --radius-control:9px;
  --font-size-button:14px;
  /* Unified typography for all editorial page Heroes except the Home slider. */
- --inbs-inner-hero-title-size:clamp(54px,6.2vw,92px);
+ --inbs-inner-hero-title-size:clamp(48px,5.4vw,80px);
  --inbs-inner-hero-lead-size:clamp(16px,1.35vw,20px);
  --inbs-inner-hero-kicker-size:14px;
  --inbs-inner-hero-action-size:14px;
@@ -46,11 +46,11 @@ html[data-theme=dark]{--inbs-cta-surface:#112e43}
 
 @media(max-width:760px){
  :root{
-  --inbs-inner-hero-title-size:clamp(44px,9.2vw,66px);
+  --inbs-inner-hero-title-size:clamp(40px,8.4vw,58px);
   --inbs-inner-hero-lead-size:16px;
   --inbs-inner-hero-kicker-size:13px;
  }
 }
 @media(max-width:450px){
- :root{--inbs-inner-hero-title-size:clamp(40px,10vw,58px)}
+ :root{--inbs-inner-hero-title-size:clamp(36px,9vw,52px)}
 }
