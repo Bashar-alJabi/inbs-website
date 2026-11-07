@@ -77,17 +77,8 @@
   position:absolute;top:-5px;left:50%;width:9px;height:9px;
   background:#b5eaff;border-radius:50%;box-shadow:0 0 17px 3px #8fd9ff99;
 }
-.inbs-careers-art-orbit--inner{width:50%;opacity:.65;transform:translate(-50%,-50%) rotate(110deg)}
+.inbs-careers-art-orbit--inner{width:50%;transform:translate(-50%,-50%) rotate(110deg);animation:inbs-careers-orbit-reverse 25s linear infinite}
 .inbs-careers-art-orbit--outer{animation:inbs-careers-orbit 25s linear infinite}
-.inbs-careers-art-cross{
-  position:absolute;left:50%;top:51%;width:125%;height:1px;
-  background:linear-gradient(90deg,transparent,#b9e3f548 28%,#b9e3f548 72%,transparent);
-  transform:translate(-50%,-50%) rotate(-26deg);
-}
-.inbs-careers-art-cross:after{
-  content:"";position:absolute;left:50%;top:-225px;width:1px;height:450px;
-  background:linear-gradient(transparent,#b9e3f53b 30%,#b9e3f53b 70%,transparent);
-}
 .inbs-careers-art-word{
   position:absolute;z-index:2;left:50%;top:51%;transform:translate(-50%,-50%);
   font-size:clamp(65px,10vw,142px);font-weight:800;letter-spacing:-.085em;
@@ -95,12 +86,14 @@
   white-space:nowrap;
 }
 .inbs-careers-hero-bottom{
-  position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:16px;margin-top:clamp(15px,3vw,36px);
+  position:absolute;z-index:2;inset-inline:clamp(20px,5vw,68px);
+  bottom:clamp(28px,4vw,48px);display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;margin-top:0;
   border-top:1px solid #d5efff4a;padding-top:17px;
   color:#b9d8e9;font-size:11px;font-weight:700;letter-spacing:.13em;
 }
 @keyframes inbs-careers-orbit{to{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes inbs-careers-orbit-reverse{to{transform:translate(-50%,-50%) rotate(-250deg)}}
 
 /* Why Join: measured text with three lightweight editorial principles. */
 .inbs-careers-why{padding-block:clamp(94px,11vw,155px);background:var(--career-paper)}
@@ -176,7 +169,7 @@ html[data-theme=dark] .inbs-careers-apply-button:hover{background:#2e8ebb}
   .inbs-careers-art-word{font-size:clamp(58px,15vw,96px)}
   [dir=rtl] .inbs-careers-art-word{font-size:clamp(64px,17vw,110px)}
   .inbs-careers-art-top,.inbs-careers-art-bottom{font-size:10px;opacity:.64}
-  .inbs-careers-hero-bottom{margin-top:6px}
+  .inbs-careers-hero-bottom{bottom:22px}
   .inbs-careers-why,.inbs-careers-apply{padding-block:75px 85px}
   .inbs-careers-reasons{grid-template-columns:1fr;gap:8px}
   .inbs-careers-reason{padding:25px 0 27px}
@@ -186,7 +179,7 @@ html[data-theme=dark] .inbs-careers-apply-button:hover{background:#2e8ebb}
   .inbs-careers-apply-panel{padding:26px 22px}
 }
 @media(prefers-reduced-motion:reduce){
-  .inbs-careers-art-orbit--outer{animation:none}
+  .inbs-careers-art-orbit--outer,.inbs-careers-art-orbit--inner{animation:none}
   .inbs-careers-hero-action,.inbs-careers-apply-button{transition:none}
   .inbs-careers-apply-button:hover{transform:none}
 }
