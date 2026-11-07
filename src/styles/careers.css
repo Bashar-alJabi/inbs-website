@@ -26,22 +26,21 @@
   background-size:68px 68px;mask-image:linear-gradient(to bottom,#000b,transparent 93%);
 }
 .inbs-careers-hero-inner{
-  min-height:min(850px,100svh);display:grid;
-  grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
-  gap:clamp(30px,5vw,82px);align-items:center;
+  position:relative;min-height:min(850px,100svh);
+  display:flex;flex-direction:column;justify-content:center;align-items:stretch;
   padding-top:clamp(165px,19vh,210px);
   padding-bottom:clamp(74px,9vh,105px);
 }
-.inbs-careers-hero-copy{position:relative;z-index:2;min-width:0}
+.inbs-careers-hero-copy{position:relative;z-index:2;width:100%;min-width:0}
 .inbs-careers-hero-kicker{color:#b1e3fb;margin-bottom:clamp(27px,3vw,45px)}
 .inbs-careers-hero h1{
-  margin:0 0 25px;font-size:var(--inbs-inner-hero-title-size);
+  margin:0 0 25px;max-width:1050px;font-size:var(--inbs-inner-hero-title-size);
   letter-spacing:-.07em;line-height:1.12;
 }
 .inbs-careers-hero h1 span{display:block}
 .inbs-careers-hero h1 span+span{color:#a8d9f5}
 .inbs-careers-hero-lead{
-  max-width:550px;margin:0 0 29px;
+  max-width:750px;margin:0 0 29px;
   color:#d1e5f1;font-size:var(--inbs-inner-hero-lead-size);line-height:1.86;
 }
 .inbs-careers-hero-action{
@@ -52,25 +51,19 @@
   transition:gap .25s,color .25s;
 }
 .inbs-careers-hero-action:hover{gap:44px;color:#b6e8ff}
-.inbs-careers-hero-art{position:relative;min-width:0;width:100%;max-width:520px;justify-self:center;aspect-ratio:1/1.08}
-.inbs-careers-art-frame{
-  position:absolute;inset:3%;overflow:hidden;isolation:isolate;
-  border:1px solid #b4e9ff57;border-radius:var(--radius-button,7px);
-  background:linear-gradient(145deg,#ffffff14,#ffffff03 55%,#51b7f015);
-  box-shadow:inset 0 0 0 1px #ffffff06,0 24px 100px #001a2f66;
-}
-.inbs-careers-art-frame:before{
-  content:"";position:absolute;inset:15%;border:1px solid #a7ddf526;border-radius:50%;
+.inbs-careers-hero-art{
+  position:absolute;z-index:1;pointer-events:none;
+  inset-inline-end:clamp(-180px,-8vw,-45px);top:16%;
+  width:clamp(520px,59vw,830px);aspect-ratio:1;
+  opacity:.48;
 }
 .inbs-careers-art-top,.inbs-careers-art-bottom{
-  position:absolute;z-index:3;inset-inline:clamp(17px,2.6vw,32px);
-  display:flex;align-items:center;justify-content:space-between;gap:16px;
-  font-size:clamp(10px,1vw,12px);font-weight:750;letter-spacing:.13em;
-  color:#c3e6f9;
+  position:absolute;z-index:3;inset-inline:9%;
+  font-size:clamp(11px,1vw,13px);font-weight:700;letter-spacing:.12em;
+  line-height:1.6;color:#c3e6f9;opacity:.58;
 }
-.inbs-careers-art-top{top:clamp(18px,2.5vw,32px)}
-.inbs-careers-art-bottom{bottom:clamp(18px,2.5vw,32px);letter-spacing:.02em;font-weight:600}
-.inbs-careers-art-bottom svg{flex:none}
+.inbs-careers-art-top{top:10%}
+.inbs-careers-art-bottom{bottom:11%;letter-spacing:.02em;font-weight:600}
 .inbs-careers-art-orbit{
   position:absolute;left:50%;top:51%;width:73%;aspect-ratio:1;
   transform:translate(-50%,-50%);border:1px solid #b4e3f559;
@@ -98,11 +91,11 @@
 .inbs-careers-art-word{
   position:absolute;z-index:2;left:50%;top:51%;transform:translate(-50%,-50%);
   font-size:clamp(65px,10vw,142px);font-weight:800;letter-spacing:-.085em;
-  color:#e6f7ff;line-height:1;text-shadow:0 9px 45px #8bd6ff38;
+  color:#e6f7ff;opacity:.27;line-height:1;
   white-space:nowrap;
 }
 .inbs-careers-hero-bottom{
-  grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;
+  position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;
   flex-wrap:wrap;gap:16px;margin-top:clamp(15px,3vw,36px);
   border-top:1px solid #d5efff4a;padding-top:17px;
   color:#b9d8e9;font-size:11px;font-weight:700;letter-spacing:.13em;
@@ -169,20 +162,20 @@ html[data-theme=dark] .inbs-careers-apply-button:hover{background:#2e8ebb}
 [dir=rtl] .inbs-careers-kicker,[dir=rtl] .inbs-careers-hero-bottom,[dir=rtl] .inbs-careers-art-top,[dir=rtl] .inbs-careers-apply-address>span,[dir=rtl] .inbs-careers-reason-number{letter-spacing:0}
 [dir=rtl] .inbs-careers-art-word{font-size:clamp(80px,11vw,150px);letter-spacing:0}
 @media(max-width:900px){
-  .inbs-careers-hero-inner{grid-template-columns:1fr;min-height:auto;padding-top:clamp(150px,19vh,195px)}
-  .inbs-careers-hero-art{width:min(100%,510px);aspect-ratio:1.12;max-width:510px}
+  .inbs-careers-hero-inner{min-height:690px;padding-top:clamp(150px,19vh,195px)}
+  .inbs-careers-hero-art{width:min(83vw,590px);top:22%;inset-inline-end:-12%;opacity:.33}
   .inbs-careers-why-heading{grid-template-columns:1fr;gap:22px}
   .inbs-careers-why-lead{max-width:660px}
   .inbs-careers-apply-inner{grid-template-columns:1fr;gap:48px}
   .inbs-careers-apply-lead{max-width:760px}
 }
 @media(max-width:600px){
-  .inbs-careers-hero-inner{padding-top:clamp(145px,18vh,180px);padding-bottom:42px;gap:28px}
+  .inbs-careers-hero-inner{min-height:640px;padding-top:clamp(145px,18vh,180px);padding-bottom:42px;gap:28px}
   .inbs-careers-hero h1{font-size:var(--inbs-inner-hero-title-size)}
-  .inbs-careers-hero-art{width:min(100%,390px);aspect-ratio:1/.9}
+  .inbs-careers-hero-art{width:min(96vw,420px);top:23%;inset-inline-end:-30%;opacity:.24}
   .inbs-careers-art-word{font-size:clamp(58px,15vw,96px)}
   [dir=rtl] .inbs-careers-art-word{font-size:clamp(64px,17vw,110px)}
-  .inbs-careers-art-top{font-size:9px}
+  .inbs-careers-art-top,.inbs-careers-art-bottom{font-size:10px;opacity:.64}
   .inbs-careers-hero-bottom{margin-top:6px}
   .inbs-careers-why,.inbs-careers-apply{padding-block:75px 85px}
   .inbs-careers-reasons{grid-template-columns:1fr;gap:8px}
