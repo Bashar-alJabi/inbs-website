@@ -26,9 +26,12 @@
 .inbs-insights-featured h2{font-size:clamp(40px,4.5vw,66px);letter-spacing:-.055em;line-height:1.2;margin:23px 0}
 .inbs-insights-featured-copy>p:not(.inbs-insights-section-kicker){font-size:clamp(16px,1.4vw,19px);line-height:1.9;max-width:580px;color:var(--i-muted);margin-bottom:22px}
 .inbs-insights-featured-link,.inbs-insights-read{display:inline-flex;align-items:center;gap:18px;font-size:15px;font-weight:750;border-bottom:1px solid var(--i-accent);padding-block:12px;color:var(--i-ink)}
-.inbs-insights-featured-link svg,.inbs-insights-read svg{color:var(--i-accent)}
-.inbs-insights-featured-art{position:relative;display:flex;align-items:flex-end;justify-content:space-between;min-height:clamp(365px,39vw,530px);padding:35px;overflow:hidden;border-radius:var(--radius-button,7px);background:linear-gradient(140deg,#16649b,#0b3859 70%,#061e33);color:#effaff}
-.inbs-insights-featured-art span{position:relative;z-index:1;font-size:clamp(85px,13vw,170px);font-weight:800;letter-spacing:-.07em;line-height:.8;opacity:.32}
+.inbs-insights-featured-link,.inbs-insights-read{transition:color .25s ease,border-color .25s ease}
+.inbs-insights-featured-link svg,.inbs-insights-read svg{color:var(--i-accent);transition:transform .25s ease}
+.inbs-insights-featured-link:hover,.inbs-insights-featured-link:focus-visible,.inbs-insights-read:hover,.inbs-insights-read:focus-visible{color:var(--i-accent);border-bottom-color:currentColor}
+.inbs-insights-featured-link:hover svg,.inbs-insights-featured-link:focus-visible svg,.inbs-insights-read:hover svg,.inbs-insights-read:focus-visible svg{transform:translate(4px,-4px)}
+[dir=rtl] .inbs-insights-featured-link:hover svg,[dir=rtl] .inbs-insights-featured-link:focus-visible svg,[dir=rtl] .inbs-insights-read:hover svg,[dir=rtl] .inbs-insights-read:focus-visible svg{transform:translate(-4px,-4px)}
+.inbs-insights-featured-art{position:relative;display:flex;align-items:flex-end;justify-content:flex-end;min-height:clamp(365px,39vw,530px);padding:35px;overflow:hidden;border-radius:var(--radius-button,7px);background:linear-gradient(140deg,#16649b,#0b3859 70%,#061e33);color:#effaff}
 .inbs-insights-featured-art strong{position:relative;z-index:1;font-size:11px;letter-spacing:.13em}
 
 .inbs-insights-library{background:var(--i-surface);padding-block:clamp(90px,10vw,145px)}
@@ -47,7 +50,8 @@
 .inbs-insights-art--compliance{background:linear-gradient(135deg,#246b83,#082c44)}
 .inbs-insights-card-art>img,.inbs-insights-featured-art>img{object-fit:cover;transition:transform .4s ease}
 .inbs-insights-card-art:hover>img,.inbs-insights-featured-art:hover>img{transform:scale(1.045)}
-.inbs-insights-card-art:after,.inbs-insights-featured-art:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,#05233b90,transparent 65%)}
+.inbs-insights-card-art:after,.inbs-insights-featured-art:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,#05233b54,transparent 58%)}
+.inbs-insights-featured-art:after{background:linear-gradient(0deg,#05233b33,transparent 45%)}
 .inbs-insights-card-index{position:relative;z-index:1;font-size:clamp(75px,8vw,125px);line-height:.8;letter-spacing:-.07em;font-weight:800;opacity:.35}
 .inbs-insights-card-art svg{position:relative;z-index:1}
 .inbs-insights-card-content{display:flex;flex-direction:column;align-items:flex-start;flex:1;padding-top:25px}
@@ -103,6 +107,7 @@ html[data-theme=dark] .inbs-insights-page{--i-paper:#0b2235;--i-surface:#132f44;
  .inbs-insights-filters button{padding:9px 13px;font-size:12px}
 }
 @media(prefers-reduced-motion:reduce){
- .inbs-insights-filters button,.inbs-insights-card-art>img,.inbs-insights-featured-art>img{transition:none}
+ .inbs-insights-filters button,.inbs-insights-card-art>img,.inbs-insights-featured-art>img,.inbs-insights-featured-link,.inbs-insights-read,.inbs-insights-featured-link svg,.inbs-insights-read svg{transition:none}
+ .inbs-insights-featured-link:hover svg,.inbs-insights-featured-link:focus-visible svg,.inbs-insights-read:hover svg,.inbs-insights-read:focus-visible svg{transform:none}
  .inbs-insights-card-art:hover>img,.inbs-insights-featured-art:hover>img{transform:none}
 }
