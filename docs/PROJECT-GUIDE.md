@@ -4,7 +4,7 @@
 
 INBS is a bilingual (English/Arabic) company website built with Next.js App Router, React and TypeScript. The goal is accessible, maintainable and performant presentation of verified company services.
 
-**As of 4 November 2026:** the bilingual homepage, About page and centralized routing/navigation were promoted to `main` via PR #23 following successful integration CI. The bilingual Services landing page and shared footer improvements were reviewed by the owner, passed CI, and were squash-merged into `redesign` via PR #24; PR #25 handles promotion to `main`. Service detail routes are implemented on the PR #29 feature branch, pending testing and owner review; other unfinished pages remain **Coming Soon**. A development merge does not constitute a complete public launch or company content approval.
+**As of 7 November 2026:** Home, About, Services landing, Team and all ten bilingual service-detail routes are merged into `main` (service milestone PR #29 → redesign, PR #31 → main). Contact is being developed on `feature/contact-page`, without a form or backend. Insights, Careers and Legal remain Coming Soon. Development releases are not company compliance, service-program or public indexing approval.
 
 Current maintenance work is tracked separately from page development. Do not merge or deploy an unfinished change without the owner's approval.
 
@@ -27,16 +27,16 @@ The `[locale]` URL segment is either `en` or `ar`; `/en` and `/ar` are the imple
 | --- | --- |
 | `/[locale]` | **Implemented homepage** |
 | `/[locale]/about` | Implemented and promoted to `main` (PRs #21 and #23) |
-| `/[locale]/services` | Bilingual landing page implemented and merged into `redesign`; promotion to `main` pending PR #25 |
-| `/[locale]/services/[slug]` | Ten bilingual service-detail pages implemented on feature/service-detail-pages (PR #29); review and CI pending |
-| `/[locale]/team` | Bilingual people-first editorial page in progress on `feature/team-page` (no fictional profiles; review pending) |
+| `/[locale]/services` | Implemented on `main` |
+| `/[locale]/services/[slug]` | Ten bilingual service-detail pages implemented on `main`; detail routes remain `noindex` pending company-side content review |
+| `/[locale]/team` | Implemented on `main` |
 | `/[locale]/insights` | Coming Soon |
 | `/[locale]/careers` | Coming Soon |
-| `/[locale]/contact` | Coming Soon |
+| `/[locale]/contact` | Dedicated bilingual Contact page on `feature/contact-page`; pending owner review and PR merge |
 | `/[locale]/legal` | Coming Soon — one planned page containing privacy and terms information |
 | `/[locale]/privacy-policy` and `/[locale]/terms` | Permanent redirects to `/[locale]/legal` |
 
-Known page slugs and bilingual labels live in `src/lib/site.ts`; service slugs come from the canonical `src/content/services.ts` catalog and are re-exported by `site.ts`. Localized URL helpers are in `src/lib/routes.ts` and shared menu selections in `src/content/navigation.ts` (PR #22). Existing service URLs remain unchanged. The old privacy-policy and terms URLs redirect to the single legal landing route; see `next.config.ts`. The dedicated `src/app/[locale]/about/page.tsx` owns About. The dedicated `src/app/[locale]/services/[slug]/page.tsx` renders all ten recognized service detail pages. The dynamic fallback `src/app/[locale]/[...slug]/page.tsx` resolves unfinished non-service URLs and displays `ComingSoon`; it excludes completed About and the Services landing page from generated params. Unknown paths are 404. A `why-inbs` page was mentioned in the earlier roadmap but is **not** a recognized route in the current `pages` array; explicitly decide whether to add it before documenting it as available.
+Known page slugs and bilingual labels live in `src/lib/site.ts`; service slugs come from the canonical `src/content/services.ts` catalog and are re-exported by `site.ts`. Localized URL helpers are in `src/lib/routes.ts` and shared menu selections in `src/content/navigation.ts` (PR #22). Existing service URLs remain unchanged. The old privacy-policy and terms URLs redirect to the single legal landing route; see `next.config.ts`. The dedicated `src/app/[locale]/about/page.tsx` owns About. The dedicated `src/app/[locale]/services/[slug]/page.tsx` renders all ten recognized service detail pages. The dedicated `src/app/[locale]/contact/page.tsx` replaces Contact's placeholder; `src/content/contact-page.ts` owns localized copy, while `src/content/contact.ts` owns official contact details. The fallback `src/app/[locale]/[...slug]/page.tsx` resolves only unfinished non-service routes and displays `ComingSoon`. Contact uses direct telephone, email, map and social links, without a form, submission endpoint or message persistence. Unknown paths are 404. A `why-inbs` page was mentioned in the earlier roadmap but is **not** a recognized route in the current `pages` array; explicitly decide whether to add it before documenting it as available.
 
 When a page is developed, give it its own Next.js route and replace the Coming Soon rendering. Link to the actual route, not to a homepage anchor as a substitute.
 

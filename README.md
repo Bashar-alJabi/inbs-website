@@ -4,7 +4,7 @@ Official bilingual frontend website for **International Network Businessmen Serv
 
 ## Status and branches
 
-The bilingual **Home and About pages**, shared shell, and centralized routing/navigation were promoted to `main` through PR #23. The bilingual **Services landing page** and footer navigation updates passed owner visual review and both CI workflows, then were squash-merged into `redesign` via PR #24. Promotion to `main` is tracked in PR #25. The bilingual **Our Team** page is owner-reviewed on `feature/team-page`, with ten supplied WebP photographs distributed between its Hero and editorial Story. Its merge and release are subject to passing feature-head CI. The ten bilingual service-detail pages are implemented on `feature/service-detail-pages` (draft PR #29) and await final QA and editorial review; other unfinished routes continue to display branded Coming Soon pages. This is **not a completed public production launch**.
+The bilingual Home, About, Services landing, Team and ten service-detail pages have been merged to `main` (latest service milestone via PR #31). The Contact page is now being built on `feature/contact-page` for owner review. Insights, Careers and Legal continue to show Coming Soon. A development milestone is **not** company-wide content or compliance approval for a public launch.
 
 - `main`: company-facing approved milestone.
 - `redesign`: integration branch for accepted redesign work.
@@ -38,7 +38,7 @@ npm run build
 ## Find the right file
 
 - `src/app/[locale]/`: routes and locale layout.
-- `src/components/home/`: homepage sections; `src/components/about/`: About page; `src/components/services/`: Services landing page; `src/components/team/`: Team editorial page; `src/components/service-detail/`: shared service-detail section composition; `src/components/layout/`: shared header, footer and navigation.
+- `src/components/home/`: homepage sections; `src/components/about/`: About page; `src/components/services/`: Services landing page; `src/components/team/`: Team editorial page; `src/components/service-detail/`: shared service-detail section composition; `src/components/contact/`: direct-contact page without a form; `src/components/layout/`: shared header, footer and navigation.
 - `src/content/`: bilingual content for home, About, shared layout, services and contact.
 - `src/lib/site.ts`: locales and bilingual page labels; `src/lib/routes.ts`: locale-aware URL builders.
 - `src/content/services.ts`: authoritative service catalog; `src/content/navigation.ts`: menu selections.

@@ -51,17 +51,17 @@
   display:flex;flex-direction:column;justify-content:space-between;gap:75px;
 }
 .inbs-story-hero-copy{max-width:850px}
-.inbs-story-eyebrow{color:#a5dbf5;margin:0 0 30px;font-size:15px}
+.inbs-story-eyebrow{color:#a5dbf5;margin:0 0 30px;font-size:var(--inbs-inner-hero-kicker-size)}
 .inbs-story-hero h1{
-  font-size:clamp(58px,7vw,108px);line-height:1.07;letter-spacing:-.075em;
+  font-size:var(--inbs-inner-hero-title-size);line-height:1.07;letter-spacing:-.075em;
   margin:0 0 29px;max-width:900px;
 }
 .inbs-story-hero h1>span{display:block}
 .inbs-story-hero-accent{color:#a0d7f4}
-.inbs-story-hero-lead{font-size:clamp(16px,1.45vw,21px);line-height:1.85;color:#d5e8f1;max-width:560px;margin:0 0 31px}
+.inbs-story-hero-lead{font-size:var(--inbs-inner-hero-lead-size);line-height:1.85;color:#d5e8f1;max-width:560px;margin:0 0 31px}
 .inbs-story-hero-link{
-  display:inline-flex;align-items:center;gap:35px;min-height:52px;padding:13px 0;
-  border-bottom:1px solid #a2d9f1;font-size:14px;font-weight:700;transition:gap .25s,color .25s;
+  display:inline-flex;align-items:center;gap:35px;min-height:var(--inbs-inner-hero-action-height);padding:13px 0;
+  border-bottom:1px solid #a2d9f1;font-size:var(--inbs-inner-hero-action-size);font-weight:700;transition:gap .25s,color .25s;
 }
 .inbs-story-hero-link:hover{gap:47px;color:#a0dbff}
 .inbs-story-hero-bottom{
@@ -326,7 +326,7 @@ html[data-theme=dark] .inbs-about-page{
 
 /* Accessible responsive behavior, without global CSS side effects. */
 @media(max-width:980px){
-  .inbs-story-hero h1{font-size:clamp(55px,8vw,87px)}
+  .inbs-story-hero h1{font-size:var(--inbs-inner-hero-title-size)}
   .inbs-story-intro-grid{gap:50px}
   .inbs-story-intro-body{padding-top:65px}
   .inbs-story-section-head{grid-template-columns:1fr 1fr;gap:25px}
@@ -341,8 +341,8 @@ html[data-theme=dark] .inbs-about-page{
     rgba(7,31,52,.98) 0%,rgba(10,50,85,.93) 38%,rgba(12,66,112,.72) 70%,rgba(7,31,52,.4) 100%)}
 
   .inbs-story-hero-art{width:450px;top:25%;opacity:.2}
-  .inbs-story-hero h1{font-size:clamp(49px,10vw,70px)}
-  .inbs-story-hero-lead{font-size:16px}
+  .inbs-story-hero h1{font-size:var(--inbs-inner-hero-title-size)}
+  .inbs-story-hero-lead{font-size:var(--inbs-inner-hero-lead-size)}
   .inbs-story-hero-location{display:none}
   .inbs-story-intro-grid{grid-template-columns:1fr;gap:25px}
   .inbs-story-intro-body{padding-top:0}
@@ -362,10 +362,10 @@ html[data-theme=dark] .inbs-about-page{
 }
 @media(max-width:550px){
   .inbs-about-page h2{font-size:clamp(38px,9vw,51px)}
-  .inbs-story-hero h1{font-size:clamp(44px,11vw,60px)}
+  .inbs-story-hero h1{font-size:var(--inbs-inner-hero-title-size)}
   .inbs-story-hero-bottom{font-size:10px}
   .inbs-story-hero-established strong{font-size:22px}
-  .inbs-story-hero-link{font-size:13px}
+  .inbs-story-hero-link{min-height:var(--inbs-inner-hero-action-height );font-size:var(--inbs-inner-hero-action-size)}
   .inbs-story-quote{font-size:clamp(23px,6vw,30px)}
   .inbs-story-capabilities{grid-template-columns:1fr}
   .inbs-story-capability:nth-child(odd){border-inline-end:0}
