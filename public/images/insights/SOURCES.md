@@ -4,7 +4,7 @@ All assets are downloaded from Pexels and converted to 1200 × 800 WebP (quality
 
 | Local WebP | Pexels source | Photographer | Subject |
 | --- | --- | --- | --- |
-| `starting-a-business-in-dubai.webp` | [Pexels 29470839](https://www.pexels.com/photo/29470839/) | Nelemson G | Dubai Cityscape with Iconic Skyscrapers |
+| `starting-a-business-in-dubai.webp` | [Pexels 35791381](https://www.pexels.com/photo/35791381/) | San Photography | Bright daytime Dubai skyline with modern skyscrapers |
 | `mainland-or-free-zone.webp` | [Pexels 33719777](https://www.pexels.com/photo/33719777/) | Zulfugar Karimov | Modern Glass Facade of Office Building |
 | `understanding-uae-work-permits.webp` | [Pexels 7652176](https://www.pexels.com/photo/7652176/) | Thirdman | A Group of People Having a Meeting in the Office |
 | `family-residency-preparation.webp` | [Pexels 14547467](https://www.pexels.com/photo/14547467/) | Arturo A | Suitcases and Passport Lying on Tiles |
