@@ -19,20 +19,20 @@
 .inbs-contact-hero{
   position:relative;isolation:isolate;overflow:hidden;
   min-height:min(850px,100svh);
-  background:linear-gradient(110deg,#08263e 0%,#0d3f69 34%,#155b86 63%,#0b3454 100%);
+  background:linear-gradient(110deg,#071f34 0%,#0b3454 30%,#104a75 57%,#08263e 100%);
   color:#f4f9fc;
 }
 /* Full-area blue/navy gradient; translucent veil blends the building without flattening text background. */
 .inbs-contact-hero::after{
   content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
   background:linear-gradient(90deg,
-    rgba(8,38,62,.36) 0%,rgba(13,63,105,.28) 28%,
-    rgba(21,91,134,.16) 58%,rgba(7,31,52,.02) 85%,transparent 100%);
+    rgba(7,31,52,.78) 0%,rgba(9,43,73,.58) 28%,
+    rgba(15,79,130,.32) 55%,rgba(7,31,52,.12) 84%,transparent 100%);
 }
 [dir=rtl] .inbs-contact-hero::after{
   background:linear-gradient(270deg,
-    rgba(8,38,62,.36) 0%,rgba(13,63,105,.28) 28%,
-    rgba(21,91,134,.16) 58%,rgba(7,31,52,.02) 85%,transparent 100%);
+    rgba(7,31,52,.78) 0%,rgba(9,43,73,.58) 28%,
+    rgba(15,79,130,.32) 55%,rgba(7,31,52,.12) 84%,transparent 100%);
 }
 .inbs-contact-hero-building{
   position:absolute;inset-block:0;inset-inline-end:0;
@@ -313,13 +313,13 @@ html[data-theme=dark] .inbs-contact-visit{background:#102d42}
   /* Mobile: vertical background gradient remains visible even behind the text. */
   .inbs-contact-hero{
     background:linear-gradient(to bottom,
-      #155b86 0%,#12547f 24%,#0d3f69 53%,#0b3454 77%,#08263e 100%);
+      #104a75 0%,#0d3f69 25%,#0b3454 53%,#08263e 78%,#071f34 100%);
   }
   .inbs-contact-hero::after,
   [dir=rtl] .inbs-contact-hero::after{
     background:linear-gradient(to bottom,
-      rgba(21,91,134,.06) 0%,rgba(13,63,105,.08) 38%,
-      rgba(8,38,62,.13) 68%,transparent 100%);
+      rgba(7,31,52,.28) 0%,rgba(9,43,73,.20) 32%,
+      rgba(8,38,62,.12) 68%,transparent 100%);
   }
   .inbs-contact-hero,.inbs-contact-hero-grid{min-height:0}
   .inbs-contact-hero-building{
@@ -327,7 +327,7 @@ html[data-theme=dark] .inbs-contact-visit{background:#102d42}
     background-position:center 42%;
     -webkit-mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.78) 58%,transparent 100%);
     mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.78) 58%,transparent 100%);
-    opacity:.82;
+    opacity:.58;
   }
   [dir=rtl] .inbs-contact-hero-building{
     -webkit-mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.78) 58%,transparent 100%);
