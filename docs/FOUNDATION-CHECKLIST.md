@@ -242,4 +242,6 @@
 - [x] Content reflects visible front-end behavior (no on-site enquiry form) without inventing cookie/retention/data-transfer promises.
 - [x] Legal disclosures marked `noindex` pending operational and company legal validation.
 - [ ] Company confirms legal entity information and real-world data processing, and authorizes final legal notice.
-- [ ] Owner visual review, production CI verification and merger approval.
+- [x] Owner approved visual design and requested promotion through `redesign` to `main` (7 November 2026).
+- [ ] Verify final feature-head CI (lint, types, build, smoke, browser/axe) and promotion PR CI.
+- [ ] Check production deployment independently; the Legal page remains `noindex` by owner preference.
