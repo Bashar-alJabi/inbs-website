@@ -274,7 +274,61 @@ export const insightArticles: InsightArticle[] = [
         "categoryLabel": "الضرائب والامتثال"
       }
     }
+  },
+  {
+  "slug": "renewing-a-dubai-trade-licence",
+  "category": "setup",
+  "featured": false,
+  "sourceUrl": "https://www.investindubai.gov.ae/en/business-setup/business-setup-services/renew-trade-licence",
+  "content": {
+    "en": {
+      "title": "Renewing a Dubai trade licence: a practical checklist",
+      "summary": "Review key information before your next business licence renewal, from activity details to supporting records.",
+      "categoryLabel": "Business setup",
+      "sections": [
+        {
+          "heading": "Check the expiry date and issuing authority",
+          "body": "Begin by confirming which authority issued your trade licence and when it expires. Renewal channels and required documents can differ between Dubai mainland businesses and free-zone entities. Set an internal reminder well before the expiry date to allow time to resolve outstanding issues."
+        },
+        {
+          "heading": "Review the business details on record",
+          "body": "Make sure the licence accurately reflects the company name, permitted activities, business address and responsible parties. A change of activity, location or legal details may require a separate amendment rather than a straightforward renewal."
+        },
+        {
+          "heading": "Prepare relevant supporting documents",
+          "body": "Depending on the licensing authority and business activity, you may need valid lease or premises information, approvals from specialist authorities and other supporting records. Confirm the current checklist directly instead of assuming last year’s requirements still apply."
+        },
+        {
+          "heading": "Verify payment and keep confirmation",
+          "body": "Invest in Dubai provides an official channel to request trade-licence renewal. Fees depend on the activity and licence circumstances. Review the amount and payment instructions in the official transaction, then retain the renewed licence and proof of payment for future reference."
+        }
+      ]
+    },
+    "ar": {
+      "title": "تجديد الرخصة التجارية في دبي: قائمة مراجعة عملية",
+      "summary": "أهم ما ينبغي التحقق منه قبل تجديد الرخصة، من بيانات النشاط إلى المستندات والرسوم.",
+      "categoryLabel": "تأسيس الأعمال",
+      "sections": [
+        {
+          "heading": "راجع تاريخ الانتهاء وجهة الترخيص",
+          "body": "ابدأ بتحديد الجهة التي أصدرت الرخصة التجارية وتاريخ انتهاء صلاحيتها. وقد تختلف قنوات التجديد والمستندات بين شركات البر الرئيسي والمناطق الحرة في دبي. ومن المناسب تخصيص تذكير مبكر لتوفير وقت كافٍ لمعالجة أي متطلبات إضافية."
+        },
+        {
+          "heading": "تحقق من بيانات الشركة المسجلة",
+          "body": "تأكد من مطابقة اسم الشركة والأنشطة المرخصة والعنوان وبيانات الأطراف المعنية للوضع الفعلي. وقد يستلزم تغيير النشاط أو الموقع أو بعض البيانات القانونية تقديم طلب تعديل مستقل قبل استكمال التجديد."
+        },
+        {
+          "heading": "جهّز الوثائق والموافقات المطلوبة",
+          "body": "بحسب جهة الترخيص وطبيعة النشاط، قد تُطلب مستندات متعلقة بمقر العمل أو موافقات من جهات مختصة أو سجلات أخرى. راجع قائمة المتطلبات الحالية لدى الجهة المعنية، ولا تفترض أنها مماثلة لمتطلبات السنة السابقة."
+        },
+        {
+          "heading": "راجع الرسوم واحتفظ بإثبات التجديد",
+          "body": "تتيح بوابة «استثمر في دبي» قناة رسمية لطلب تجديد الرخصة التجارية. وتختلف الرسوم بحسب النشاط وظروف الرخصة. تحقق من المبلغ وإرشادات الدفع داخل المعاملة الرسمية، واحتفظ بنسخة من الرخصة المجددة وإثبات السداد."
+        }
+      ]
+    }
   }
+}
 ];
 
 export function findInsight(slug:string){return insightArticles.find(article=>article.slug===slug)}
