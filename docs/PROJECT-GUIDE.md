@@ -4,7 +4,7 @@
 
 INBS is a bilingual (English/Arabic) company website built with Next.js App Router, React and TypeScript. The goal is accessible, maintainable and performant presentation of verified company services.
 
-**As of 7 November 2026:** Home, About, Services landing, Team and all ten bilingual service-detail routes are merged into `main` (service milestone PR #29 → redesign, PR #31 → main). Contact is being developed on `feature/contact-page`, without a form or backend. Insights, Careers and Legal remain Coming Soon. Development releases are not company compliance, service-program or public indexing approval.
+**As of 7 November 2026:** Home, About, Services landing, Team and all ten bilingual service-detail routes are merged into `main` (service milestone PR #29 → redesign, PR #31 → main). Contact is integrated into `main`. Careers is implemented and owner-reviewed on `feature/careers-page`, pending final CI verification and merge; applications link to the additional contact email and official mobile WhatsApp, with no form or backend. Insights and Legal remain Coming Soon. Development releases are not company compliance, service-program or public indexing approval.
 
 Current maintenance work is tracked separately from page development. Do not merge or deploy an unfinished change without the owner's approval.
 
@@ -31,8 +31,8 @@ The `[locale]` URL segment is either `en` or `ar`; `/en` and `/ar` are the imple
 | `/[locale]/services/[slug]` | Ten bilingual service-detail pages implemented on `main`; detail routes remain `noindex` pending company-side content review |
 | `/[locale]/team` | Implemented on `main` |
 | `/[locale]/insights` | Coming Soon |
-| `/[locale]/careers` | Coming Soon |
-| `/[locale]/contact` | Dedicated bilingual Contact page on `feature/contact-page`; pending owner review and PR merge |
+| `/[locale]/careers` | Dedicated bilingual Careers page on `feature/careers-page`; final CI and merge pending |
+| `/[locale]/contact` | Implemented on `main` |
 | `/[locale]/legal` | Coming Soon — one planned page containing privacy and terms information |
 | `/[locale]/privacy-policy` and `/[locale]/terms` | Permanent redirects to `/[locale]/legal` |
 
