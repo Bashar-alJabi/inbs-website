@@ -878,6 +878,38 @@ for(const locale of ['en','ar']){
  });
  await desktop.close();
 }
+// Legal information: bilingual sections, in-page navigation, screen sizes, themes and axe.
+for(const locale of ['en','ar']){
+ for(const size of sizes){
+  for(const theme of ['light','dark']){
+   const context=await browser.newContext({viewport:{width:size.width,height:size.height},reducedMotion:'reduce',colorScheme:theme});
+   await context.addInitScript(t=>localStorage.setItem('inbs-theme',t),theme);
+   const page=await context.newPage(),errors=[];
+   page.on('pageerror',e=>errors.push(String(e)));
+   await test('legal/'+[locale,size.name,theme].join('/')+' policy and accessibility',async()=>{
+    const res=await page.goto(origin+'/'+locale+'/legal',{waitUntil:'domcontentloaded',timeout:45000});
+    assert.equal(res?.status(),200);
+    assert.equal(await page.locator('html').getAttribute('dir'),locale==='ar'?'rtl':'ltr');
+    await page.waitForFunction(t=>document.documentElement.getAttribute('data-theme')===t,theme);
+    assert.equal(await page.locator('.inbs-legal-page h1').count(),1);
+    assert.equal(await page.locator('.inbs-legal-document>section').count(),3);
+    assert.equal(await page.locator('.inbs-legal-document-entries>.inbs-legal-entry').count(),12);
+    assert.equal(await page.locator('.inbs-legal-sidebar nav a').count(),3);
+    assert.equal(await page.locator('.inbs-legal-resources a[target="_blank"]').count(),2);
+    assert.equal(await page.locator('.inbs-editorial-cta--legal').count(),1);
+    assert.equal(await page.locator('meta[name="robots"][content*="noindex"]').count(),1);
+    await page.locator('.inbs-legal-sidebar nav a').nth(1).click();
+    assert.equal(new URL(page.url()).hash,'#legal-terms');
+    const widths=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
+    assert.ok(widths.scroll<=widths.inner+3,'Horizontal overflow '+JSON.stringify(widths));
+    const violations=(await new AxeBuilder({page}).include('.inbs-legal-page').withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa']).analyze()).violations;
+    assert.deepEqual(violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)})),[]);
+    assert.deepEqual(errors,[]);
+   });
+   await context.close();
+  }
+ }
+}
 await test('navigation endpoints and security',async()=>{
  for(const locale of ['en','ar']){
   for(const slug of ['about','services','contact','team','careers','privacy-policy','terms','services/businessmen-services','services/citizenship-and-immigration-services']){

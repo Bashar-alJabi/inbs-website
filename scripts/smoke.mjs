@@ -37,7 +37,7 @@ try {
       await check(`/${locale}/insights/${slug}`, { pattern: /class="inbs-insights-page/, label: `${locale} Insights article ${slug}` });
     }
     await check(`/${locale}/insights/unknown-article`, { status:404, label: `${locale} unknown Insights article` });
-    await check(`/${locale}/legal`, { label: `${locale} unified legal placeholder` });
+    await check(`/${locale}/legal`, { pattern: /class="inbs-legal-page"/, label: `${locale} complete legal information page` });
     for (const oldPath of ['privacy-policy', 'terms']) {
       const old = await fetch(`${origin}/${locale}/${oldPath}`, { redirect: 'manual', signal: AbortSignal.timeout(15000) });
       assert.ok([301, 308].includes(old.status), `${locale}/${oldPath}: permanent redirect expected, got ${old.status}`);
