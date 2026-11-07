@@ -15,7 +15,7 @@ export function InsightsFeatured({locale}:{locale:Locale}){
     <p>{t.summary}</p>
     <Link className="inbs-insights-featured-link" href={`/${locale}/insights/${article.slug}`}>{ui.read}<ArrowUpRight size={20} aria-hidden="true"/></Link>
    </Reveal>
-   <Link className="inbs-insights-featured-art" href={`/${locale}/insights/${article.slug}`} aria-label={t.title}>
+   <Link className="inbs-insights-featured-art" href={`/${locale}/insights/${article.slug}`}>
      <Image src={`/images/insights/${article.slug}.webp`} alt={t.title} fill sizes="(max-width: 950px) 100vw, 45vw" priority />
      <strong aria-hidden="true">INBS / INSIGHTS</strong>
    </Link>
