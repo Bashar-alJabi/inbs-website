@@ -26,6 +26,8 @@ export const companyContact = {
     ar: 'مكتب 1720، برج بارك لين، الخليج التجاري، دبي',
   },
   mapUrl: 'https://www.google.com/maps?q=Park+Lane+Tower+-+Business+Bay+-+Dubai',
+  // Public Google Maps iframe endpoint; share the same location as mapUrl.
+  mapEmbedUrl: 'https://maps.google.com/maps?q=Park+Lane+Tower+-+Business+Bay+-+Dubai&z=16&output=embed',
 } as const;
 
 export const socialLinks = [
