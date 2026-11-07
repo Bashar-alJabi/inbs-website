@@ -821,13 +821,19 @@ for(const locale of ['en','ar']){
     assert.equal(await page.locator('.inbs-insights-featured').count(),1);
     assert.equal(await page.locator('.inbs-insights-library').count(),1);
     assert.equal(await page.locator('.inbs-editorial-cta--insights').count(),1);
-    assert.equal(await page.locator('.inbs-insights-library .inbs-insights-card').count(),5);
+    assert.equal(await page.locator('.inbs-insights-library .inbs-insights-card').count(),6);
     assert.equal(await page.locator('.inbs-insights-filters button').count(),4);
     await page.locator('.inbs-insights-filters button').nth(1).click();
-    assert.equal(await page.locator('.inbs-insights-library .inbs-insights-card').count(),2);
+    assert.equal(await page.locator('.inbs-insights-library .inbs-insights-card').count(),3);
     assert.equal(await page.locator('.inbs-insights-filters button').nth(1).getAttribute('aria-pressed'),'true');
     await page.locator('.inbs-insights-filters button').first().click();
-    assert.equal(await page.locator('.inbs-insights-library .inbs-insights-card').count(),5);
+    assert.equal(await page.locator('.inbs-insights-library .inbs-insights-card').count(),6);
+    const photos=page.locator('.inbs-insights-library .inbs-insights-card-art img');
+    assert.equal(await photos.count(),6,'All insights cards must use a local photo');
+    for(const slug of ['starting-a-business-in-dubai','mainland-or-free-zone','understanding-uae-work-permits','family-residency-preparation','vat-registration-business-planning','renewing-a-dubai-trade-licence']){
+     assert.equal(await page.locator(`.inbs-insights-card-art img[src*="${slug}.webp"]`).count(),1,`Missing local photo for ${slug}`);
+    }
+    assert.equal(await page.locator('.inbs-insights-featured-art img').count(),1);
     const widths=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
     assert.ok(widths.scroll<=widths.inner+3,'Horizontal overflow '+JSON.stringify(widths));
     const violations=(await new AxeBuilder({page}).include('.inbs-insights-page').withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa']).analyze()).violations;
@@ -839,7 +845,7 @@ for(const locale of ['en','ar']){
  }
  const context=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'});
  const page=await context.newPage();
- for(const slug of ['starting-a-business-in-dubai','mainland-or-free-zone','understanding-uae-work-permits','family-residency-preparation','vat-registration-business-planning']){
+ for(const slug of ['starting-a-business-in-dubai','mainland-or-free-zone','understanding-uae-work-permits','family-residency-preparation','vat-registration-business-planning','renewing-a-dubai-trade-licence']){
   await test('insights/'+locale+'/'+slug+' full article',async()=>{
    const response=await page.goto(origin+'/'+locale+'/insights/'+slug,{waitUntil:'domcontentloaded',timeout:45000});
    assert.equal(response?.status(),200);
