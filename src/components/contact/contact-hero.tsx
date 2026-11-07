@@ -20,9 +20,14 @@ export function ContactHero({ locale }: { locale: Locale }) {
           <a className="inbs-contact-hero-discover" href="#contact-channels">{t.heroExplore}<ArrowDown size={19} aria-hidden="true"/></a>
         </div>
         <div className="inbs-contact-hero-gallery" role="group" aria-label={t.heroGalleryLabel}>
-          <div className="inbs-contact-hero-photo inbs-contact-hero-photo--office" role="img" aria-label={t.heroOfficeAlt}/>
-          <div className="inbs-contact-hero-photo inbs-contact-hero-photo--door" role="img" aria-label={t.heroDoorAlt}/>
-          <div className="inbs-contact-hero-signal" aria-hidden="true"><span/></div>
+          <button className="inbs-contact-hero-photo inbs-contact-hero-photo--office" type="button" aria-label={t.heroOfficeAlt}>
+            <span className="inbs-contact-photo-image" aria-hidden="true"/>
+            <span className="inbs-contact-photo-traveler" aria-hidden="true"/>
+          </button>
+          <button className="inbs-contact-hero-photo inbs-contact-hero-photo--door" type="button" aria-label={t.heroDoorAlt}>
+            <span className="inbs-contact-photo-image" aria-hidden="true"/>
+            <span className="inbs-contact-photo-traveler" aria-hidden="true"/>
+          </button>
         </div>
         <p className="inbs-contact-hero-bottom">{t.heroLocation}</p>
       </div>
