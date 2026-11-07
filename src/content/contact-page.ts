@@ -14,7 +14,7 @@ export const contactPageContent = {
     heroDoorAlt:'Entrance to the INBS office',
     waysEyebrow:'DIRECT CHANNELS',
     waysTitle:'Connect on your terms.',
-    waysLead:'Have a question or a business enquiry? Our Dubai team is here to help you take the next step.'
+    waysLead:'Have a question or a business enquiry? Our Dubai team is here to help you take the next step.',
     callLabel:'CALL OUR OFFICE',
     callTitle:'Speak with us.',
     callText:'Call us directly to discuss your enquiry.',
@@ -53,7 +53,7 @@ export const contactPageContent = {
     heroDoorAlt:'مدخل مكتب INBS',
     waysEyebrow:'قنوات التواصل',
     waysTitle:'تواصل بالطريقة الأنسب لك.',
-    waysLead:'لديك استفسار عن خدماتنا أو أعمالك؟ فريقنا في دبي جاهز لمساعدتك في خطوتك القادمة.'
+    waysLead:'لديك استفسار عن خدماتنا أو أعمالك؟ فريقنا في دبي جاهز لمساعدتك في خطوتك القادمة.',
     callLabel:'اتصل بمكتبنا',
     callTitle:'تحدث معنا.',
     callText:'اتصل بنا مباشرةً لمناقشة استفسارك.',
