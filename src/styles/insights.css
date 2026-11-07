@@ -50,8 +50,8 @@
 .inbs-insights-art--compliance{background:linear-gradient(135deg,#246b83,#082c44)}
 .inbs-insights-card-art>img,.inbs-insights-featured-art>img{object-fit:cover;transition:transform .4s ease}
 .inbs-insights-card-art:hover>img,.inbs-insights-featured-art:hover>img{transform:scale(1.045)}
-.inbs-insights-card-art:after,.inbs-insights-featured-art:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,#05233b54,transparent 58%)}
-.inbs-insights-featured-art:after{background:linear-gradient(0deg,#05233b33,transparent 45%)}
+.inbs-insights-card-art:after,.inbs-insights-featured-art:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,#05233b26,transparent 52%)}
+.inbs-insights-featured-art:after{background:linear-gradient(0deg,#05233b12,transparent 38%)}
 .inbs-insights-card-index{position:relative;z-index:1;font-size:clamp(75px,8vw,125px);line-height:.8;letter-spacing:-.07em;font-weight:800;opacity:.35}
 .inbs-insights-card-art svg{position:relative;z-index:1}
 .inbs-insights-card-content{display:flex;flex-direction:column;align-items:flex-start;flex:1;padding-top:25px}
