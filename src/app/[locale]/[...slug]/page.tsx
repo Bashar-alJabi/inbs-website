@@ -9,7 +9,7 @@ function findTitle(locale:'en'|'ar',slug:string[]):string|null {
 }
 export function generateStaticParams(){
  return locales.flatMap(locale=>[
- ...pages.filter(p=>p.slug!=='about'&&p.slug!=='services'&&p.slug!=='team'&&p.slug!=='contact'&&p.slug!=='careers').map(p=>({locale,slug:[p.slug]})),
+ ...pages.filter(p=>p.slug!=='about'&&p.slug!=='services'&&p.slug!=='team'&&p.slug!=='contact'&&p.slug!=='careers'&&p.slug!=='insights').map(p=>({locale,slug:[p.slug]})),
  ]);
 }
 export async function generateMetadata({params}:{params:Promise<Params>}):Promise<Metadata>{
