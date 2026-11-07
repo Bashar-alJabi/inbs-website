@@ -18,7 +18,6 @@ export function CareersHero({ locale }: { locale: Locale }) {
           <span className="inbs-careers-art-top">{t.heroVisualTop}</span>
           <div className="inbs-careers-art-orbit inbs-careers-art-orbit--outer"><i/></div>
           <div className="inbs-careers-art-orbit inbs-careers-art-orbit--inner"><i/></div>
-          <div className="inbs-careers-art-cross"/>
           <span className="inbs-careers-art-word">{t.heroVisualWord}</span>
           <span className="inbs-careers-art-bottom">{t.heroVisualCaption}</span>
         </div>
