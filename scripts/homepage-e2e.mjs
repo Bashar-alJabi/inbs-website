@@ -802,6 +802,60 @@ for(const locale of ['en','ar']){
   }
  }
 }
+// Insights: published bilingual editorial guides, topic filtering and article routes.
+for(const locale of ['en','ar']){
+ for(const size of sizes){
+  for(const theme of ['light','dark']){
+   const context=await browser.newContext({viewport:{width:size.width,height:size.height},reducedMotion:'reduce',colorScheme:theme});
+   await context.addInitScript(t=>localStorage.setItem('inbs-theme',t),theme);
+   const page=await context.newPage(),errors=[];
+   page.on('pageerror',error=>errors.push(String(error)));
+   await test('insights/'+[locale,size.name,theme].join('/')+' cards, filters and accessibility',async()=>{
+    const response=await page.goto(origin+'/'+locale+'/insights',{waitUntil:'domcontentloaded',timeout:45000});
+    assert.equal(response?.status(),200);
+    assert.equal(await page.locator('html').getAttribute('lang'),locale);
+    assert.equal(await page.locator('html').getAttribute('dir'),locale==='ar'?'rtl':'ltr');
+    await page.waitForFunction(t=>document.documentElement.getAttribute('data-theme')===t,theme);
+    assert.equal(await page.locator('.inbs-insights-page h1').count(),1);
+    assert.equal(await page.locator('.inbs-insights-hero').count(),1);
+    assert.equal(await page.locator('.inbs-insights-featured').count(),1);
+    assert.equal(await page.locator('.inbs-insights-library').count(),1);
+    assert.equal(await page.locator('.inbs-editorial-cta--insights').count(),1);
+    assert.equal(await page.locator('.inbs-insights-library .inbs-insights-card').count(),5);
+    assert.equal(await page.locator('.inbs-insights-filters button').count(),4);
+    await page.locator('.inbs-insights-filters button').nth(1).click();
+    assert.equal(await page.locator('.inbs-insights-library .inbs-insights-card').count(),2);
+    assert.equal(await page.locator('.inbs-insights-filters button').nth(1).getAttribute('aria-pressed'),'true');
+    await page.locator('.inbs-insights-filters button').first().click();
+    assert.equal(await page.locator('.inbs-insights-library .inbs-insights-card').count(),5);
+    const widths=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
+    assert.ok(widths.scroll<=widths.inner+3,'Horizontal overflow '+JSON.stringify(widths));
+    const violations=(await new AxeBuilder({page}).include('.inbs-insights-page').withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa']).analyze()).violations;
+    assert.deepEqual(violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)})),[]);
+    assert.deepEqual(errors,[]);
+   });
+   await context.close();
+  }
+ }
+ const context=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'});
+ const page=await context.newPage();
+ for(const slug of ['starting-a-business-in-dubai','mainland-or-free-zone','understanding-uae-work-permits','family-residency-preparation','vat-registration-business-planning']){
+  await test('insights/'+locale+'/'+slug+' full article',async()=>{
+   const response=await page.goto(origin+'/'+locale+'/insights/'+slug,{waitUntil:'domcontentloaded',timeout:45000});
+   assert.equal(response?.status(),200);
+   assert.equal(await page.locator('.inbs-insights-article-page h1').count(),1);
+   assert.equal(await page.locator('.inbs-insights-article-sections>section').count(),4);
+   assert.equal(await page.locator('.inbs-insights-article-source a[target="_blank"][rel="noopener noreferrer"]').count(),1);
+   assert.equal(await page.locator('.inbs-insights-related .inbs-insights-card').count(),2);
+   assert.ok((await page.locator('.inbs-insights-article-back').getAttribute('href'))==='/'+locale+'/insights');
+   const widths=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
+   assert.ok(widths.scroll<=widths.inner+3,'Horizontal overflow '+JSON.stringify(widths));
+   const violations=(await new AxeBuilder({page}).include('.inbs-insights-article-page').withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa']).analyze()).violations;
+   assert.deepEqual(violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)})),[]);
+  });
+ }
+ await context.close();
+}
 await test('navigation endpoints and security',async()=>{
  for(const locale of ['en','ar']){
   for(const slug of ['about','services','contact','team','careers','privacy-policy','terms','services/businessmen-services','services/citizenship-and-immigration-services']){
