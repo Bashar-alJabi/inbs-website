@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 import AxeBuilder from '@axe-core/playwright';
 import { runHomeMotionTests } from './home-motion-e2e.mjs';
+import { runDrawerMotionTests } from './drawer-motion-e2e.mjs';
 
 const origin=(process.env.E2E_BASE_URL||'http://127.0.0.1:3000').replace(/\/$/,'');
 const serviceSources=JSON.parse(
@@ -162,6 +163,7 @@ for(const locale of ['en','ar']){
  await context.close();
 }
 await runHomeMotionTests({ browser, origin, test });
+await runDrawerMotionTests({ browser, origin, test });
 // Verify the shared language switch and full-viewport not-found experience.
 for(const locale of ['en','ar']){
  const alternate=locale==='en'?'ar':'en';
