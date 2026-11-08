@@ -299,3 +299,25 @@
 - [x] All 53 focused checks passed: source URLs, three isolated policies (unset/false/true), default HTTP robots/sitemap policy, and real HTTP metadata for 48 routes. Each isolated policy checks all 48 metadata records; the enabled simulation checks 46 unique sitemap URLs, including all twenty service details with correct EN/AR/x-default alternates, and excludes Legal.
 - [x] ESLint, TypeScript, Production build and `git diff --check` passed. ESLint retains four existing warnings and no errors. No full smoke/browser/accessibility suite was rerun; no dependencies, styles, service/article copy, slugs or hosting settings changed.
 - [ ] Recheck external sources and public-origin crawling before launch. Owner authorized Commit/Push only; no PR, merge, deployment, global indexing activation or unrelated audit work in this batch.
+
+## Development dependency advisory — INBS-A07 (8 November 2026)
+
+- [x] Reproduce `npm audit --json`: eight Moderate affected-package records from one advisory, [GHSA-g3hv-75wg-m249 / CVE-2026-118764](https://github.com/isaacs/minimatch/security/advisories/GHSA-g3hv-75wg-m249). The root is `minimatch@10.2.6` at `node_modules/@typescript-eslint/typescript-estree/node_modules/minimatch`, marked `dev: true`. The advisory concerns attacker-controlled glob amplification with `optimizationLevel >= 2`; it is not eight independent vulnerabilities.
+- [x] Confirm the dependency paths using `npm ls` and `npm explain minimatch`. The eight affected packages are the nodes below (repeated arrows refer to deduplicated packages):
+
+```text
+eslint-config-next@16.4.3 (devDependency)
+└─ typescript-eslint@8.72.1
+   ├─ @typescript-eslint/typescript-estree@8.72.1 → minimatch@10.2.6
+   ├─ @typescript-eslint/parser@8.72.1 → typescript-estree
+   ├─ @typescript-eslint/utils@8.72.1 → typescript-estree
+   └─ @typescript-eslint/eslint-plugin@8.72.1
+      ├─ parser / utils → typescript-estree
+      └─ @typescript-eslint/type-utils@8.72.1 → utils / typescript-estree
+```
+
+- [x] Separate production from development: `npm audit --omit=dev --json` reports zero vulnerabilities; `npm ls minimatch --all --omit=dev` is empty. The separately installed `minimatch@3.1.5` used by ESLint and its other plugins is outside this advisory's affected range.
+- [x] Check live npm registry metadata: the latest 10.x release is still 10.2.6, while the maintainer's first patched release is 11.0.1 (latest: 11.0.5). Latest `typescript-eslint` is 8.72.1; its matching `@typescript-eslint/typescript-estree@8.72.1` still requires `minimatch: ^10.2.2`. Both current `eslint-config-next@16.4.3` and latest 16.4.5 require `typescript-eslint: ^8.56.0`, so updating that parent alone cannot resolve the issue.
+- [x] Defer the dependency change: a minimatch 11 override crosses the owner's major-version restriction and the parent's declared range. npm's proposed `eslint-config-next@15.5.29` is a major downgrade from the project's Next 16 lint stack. Neither was applied; no install/update, audit fix, overrides, lint-rule exclusions or manifest/lockfile changes were made.
+- [x] ESLint, TypeScript, Production build and `git diff --check` passed on the working tree based on `dd6291e`. ESLint retains its four existing warnings and no errors. No additional functional regression or full browser/smoke suite was needed because application code, test configuration and dependency versions are unchanged. The complete audit remains at eight Moderate development records; production remains at zero.
+- [ ] Resolve the remaining development advisory when a patched compatible 10.x release or an upstream supported dependency path becomes available, then recheck audit, lint, TypeScript, build and any affected parser/project-glob behavior. This A07 batch records the verified deferral only; owner authorized Commit/Push of this documentation, without PR, merge, deployment or unrelated cleanup.
