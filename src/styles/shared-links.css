@@ -1,0 +1,10 @@
+/* Shared editorial link used by Home and About; load before page overrides. */
+.inbs-about-link{display:inline-flex;align-items:center;justify-content:space-between;gap:34px;min-width:200px;border-bottom:1px solid var(--inbs-about-accent,#2173a7);padding:0 0 14px;color:var(--inbs-about-ink,#092c47);font-size:14px;font-weight:750;transition:color .2s,gap .2s}
+.inbs-about-link:hover{color:var(--inbs-about-accent,#2173a7);gap:46px}
+.inbs-about-link{position:relative;overflow:hidden;transition:color .25s ease,gap .25s ease}
+.inbs-about-link:after{content:"";position:absolute;bottom:0;inset-inline-start:0;width:100%;height:2px;background:var(--inbs-about-accent,#2173a7);transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.inbs-about-link:hover:after,.inbs-about-link:focus-visible:after{transform:scaleX(1)}
+.inbs-about-link svg{transition:transform .3s cubic-bezier(.22,1,.36,1)}
+.inbs-about-link:hover svg,.inbs-about-link:focus-visible svg{transform:translate(4px,-4px)}
+[dir=rtl] .inbs-about-link:hover svg,[dir=rtl] .inbs-about-link:focus-visible svg{transform:translate(-4px,-4px)}
+@media(prefers-reduced-motion:reduce){.inbs-about-link svg,.inbs-about-link:after{transition:none}}

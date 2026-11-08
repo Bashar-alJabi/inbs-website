@@ -73,6 +73,7 @@ src/
 - `src/app/[locale]/about/page.tsx`: About route and metadata; `src/components/about/about-page.tsx` only composes `AboutHero`, `AboutIntro`, `AboutPrinciples` and `AboutNetwork`. They share tiny presentational helpers in `src/components/about/about-ui.tsx`, bilingual content in `src/content/about.ts`, and scoped rules in `src/styles/about.css`.
 - `src/components/layout/`: shared chrome and temporary pages.
 - `src/styles/tokens.css`: design variables; `globals.css`, `site-layout.css`, `home.css`: other styles.
+- `src/styles/shared-links.css`: `.inbs-about-link` rules shared by Home and About, including hover, keyboard focus, RTL and reduced motion. The Root Layout imports this file before `home.css`; keep page overrides later to preserve the Home all-services link's hover color.
 
 **Known cleanup work:** some legacy CSS selectors and unused legacy images still exist; the duplicate language-switching and reveal components have been consolidated. Review their references before removing them; never change rendered appearance accidentally.
 

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { siteUrl, siteIndexable } from '@/lib/seo';
 import './globals.css';
+import '../styles/shared-links.css';
 import '../styles/home.css';
 import '../styles/site-layout.css';
 import '../styles/tokens.css';
