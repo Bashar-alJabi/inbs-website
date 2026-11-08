@@ -4,6 +4,7 @@ import { chromium } from 'playwright';
 import AxeBuilder from '@axe-core/playwright';
 import { runHomeMotionTests } from './home-motion-e2e.mjs';
 import { runDrawerMotionTests } from './drawer-motion-e2e.mjs';
+import { runNotFoundTests } from './not-found-e2e.mjs';
 
 const origin=(process.env.E2E_BASE_URL||'http://127.0.0.1:3000').replace(/\/$/,'');
 const serviceSources=JSON.parse(
@@ -164,6 +165,7 @@ for(const locale of ['en','ar']){
 }
 await runHomeMotionTests({ browser, origin, test });
 await runDrawerMotionTests({ browser, origin, test });
+await runNotFoundTests({ browser, origin, test });
 // Verify the shared language switch and full-viewport not-found experience.
 for(const locale of ['en','ar']){
  const alternate=locale==='en'?'ar':'en';
@@ -185,6 +187,8 @@ for(const locale of ['en','ar']){
   assert.equal(response?.status(),404);
   const notFound=page.locator('.inbs-not-found');
   await notFound.waitFor({state:'visible'});
+  assert.equal(await page.locator('html').getAttribute('lang'),locale);
+  assert.equal(await page.locator('html').getAttribute('dir'),locale==='ar'?'rtl':'ltr');
   assert.equal(await notFound.getAttribute('lang'),locale);
   assert.equal(await notFound.locator('h1').count(),1);
   assert.equal(await notFound.locator('.inbs-not-found-orbit').count(),3);

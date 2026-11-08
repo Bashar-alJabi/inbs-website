@@ -23,6 +23,9 @@ export default function NotFound() {
   }, []);
 
   return (
+    // RootLayout passes through; this fallback replaces LocaleLayout's document.
+    <html lang={locale} dir={arabic ? 'rtl' : 'ltr'}>
+      <body>
     <main className="inbs-not-found" lang={locale} dir={arabic ? 'rtl' : 'ltr'}>
       <div className="inbs-not-found-aura" aria-hidden="true" />
       <div className="inbs-not-found-ring" aria-hidden="true">
@@ -65,5 +68,7 @@ export default function NotFound() {
         </div>
       </div>
     </main>
+      </body>
+    </html>
   );
 }
