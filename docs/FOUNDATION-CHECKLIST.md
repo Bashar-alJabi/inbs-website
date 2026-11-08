@@ -255,3 +255,15 @@
 - [x] Owner approved the Home map and authorized promotion through `redesign` to `main` (7 November 2026).
 - [x] Feature-head CI validated production build, smoke, responsive browser and accessibility tests prior to promotion.
 - [ ] Verify promotion PR CI and deployment independently after merging.
+
+## Home interaction fixes — INBS-A01 / INBS-A02 (8 November 2026)
+
+- [x] Show the existing Hero slide controls below the primary and related-service CTA links on viewports up to 760px. Use compact 32px visible outlines and 16px icons inside unchanged 44px touch targets. Preserve the desktop presentation, existing labels/images, 7.5-second autoplay interval and Reduced Motion guard.
+- [x] Pause the institutions ticker on focus and focus-within as well as hover; provide an inset keyboard focus outline. Leaving focus/hover resumes the existing 42-second animation. In Chromium touch emulation, tapping the existing focusable window pauses it and tapping outside resumes it; no extra control or JavaScript was needed.
+- [x] Add `scripts/home-motion-e2e.mjs` and call its `runHomeMotionTests({browser, origin, test})` from the existing `scripts/homepage-e2e.mjs` suite. The focused module checks EN/AR, RTL/LTR, light/dark, widths 320/390/768/1440, both motion preferences, keyboard, mouse or touch, timing, overflow, overlap and Console/hydration errors.
+- [x] Local Production validation on the uncommitted A01/A02 working tree based on `375471d`: 32 focused matrix cases plus two real-time touch Pause/Resume cases passed. The two existing desktop Hero/ticker cases also passed. Virtual-clock assertions use the visible slide index; real-time cases separately verify that the heading changes after Resume.
+- [x] Focused axe checks using the already-available axe-core: 16 locale/theme/viewport combinations, before and after ticker focus, with no violations in the slide controls or ticker. This is not a claim that the full browser/axe suite passed.
+- [x] Compare Hero geometry with the 16 baseline captures: heading/primary-CTA bounds and Hero height remained unchanged. Review updated mobile screenshots with the compact control row below the CTA links; the control row and keyboard focus indicator are the intended visible additions.
+- [x] Final local lint and TypeScript checks passed; lint retained the same four pre-existing warnings and no errors. The current Production build passed; no dependencies or lockfile changes were made.
+- [x] Owner requested the compact mobile control row below all CTA links and authorized committing/pushing A01/A02 after focused validation. Physical touch devices, Safari/WebKit and the full CI/browser suite remain part of pre-merge validation.
+- [ ] Obtain separate owner authorization before any PR, merge or deployment. This batch covers A01/A02 only; A03/A04 and all other audit items remain untouched.

@@ -80,7 +80,12 @@ html[data-theme=dark] .inbs-drawer-top img{filter:brightness(0) invert(1)}
  .inbs-hero-content{flex:0 0 auto}
  .inbs-slide h1{font-size:clamp(39px,8.2vw,61px)}
  .inbs-slide p{min-height:0}
- .inbs-slide-controls{display:none}
+ .inbs-slide-controls{order:1;align-self:flex-start;gap:8px}
+ .inbs-slide-controls button{position:relative;width:44px;height:44px;border:0}
+ .inbs-slide-controls button::before{content:"";position:absolute;inset:6px;border:1px solid #ffffff75;border-radius:50%;pointer-events:none}
+ .inbs-slide-controls button:hover{background:transparent}
+ .inbs-slide-controls button:hover::before{background:#ffffff35}
+ .inbs-slide-controls button svg{position:relative;width:16px;height:16px}
  .inbs-hero-bottom{margin-top:auto}
  .inbs-hero-service-strip{justify-content:flex-start}
  .inbs-footer-grid>div{justify-self:stretch}
