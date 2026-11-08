@@ -27,7 +27,7 @@ Each slug below renders at `/en/services/[slug]` and `/ar/services/[slug]` using
 - Visual design: `src/styles/service-detail.css` follows the approved responsive, light/dark, RTL/LTR, reduced-motion design. Shared closing CTA styles stay in `src/styles/editorial-cta.css`.
 - **AREAS OF SERVICE** groups differ by service (3–5 cards) based on the owner's notes. All card action text and arrows form one accessible localized Contact link. The rest of the page sections retain the same structure.
 - Existing category WebP images remain in Hero. Twenty locally hosted Pexels-derived WebP editorial photos are shown **only** inside AREAS OF SERVICE (two per service), one near the start and one near the end. Images live in `public/images/services/editorial/` and can be replaced by name. Source IDs are recorded in `public/images/services/EDITORIAL-PHOTO-SOURCES.md`.
-- All ten detail pages retain `noindex` pending separate content/compliance and indexing approval. This milestone merges the page implementation, but does not implicitly enable public search indexing; the sitemap remains limited to previously approved pages.
+- As of the 8 November 2026 audit preparation, all ten detail pages follow the central `SITE_INDEXABLE` gate. Their twenty localized URLs enter the sitemap only when the gate is enabled. Indexing remains disabled; no launch or content/compliance approval is implied by this preparation.
 - Requests for regulated financial, customs or immigration outcomes are phrased as enquiries and service coordination, not guarantees. Programme rules, qualification, accreditation, fees and availability must be independently verified where applicable.
 
 ## Release notes

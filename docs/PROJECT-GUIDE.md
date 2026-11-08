@@ -28,7 +28,7 @@ The `[locale]` URL segment is either `en` or `ar`; `/en` and `/ar` are the imple
 | `/[locale]` | **Implemented homepage** |
 | `/[locale]/about` | Implemented and promoted to `main` (PRs #21 and #23) |
 | `/[locale]/services` | Implemented on `main` |
-| `/[locale]/services/[slug]` | Ten bilingual service-detail pages implemented on `main`; detail routes remain `noindex` pending company-side content review |
+| `/[locale]/services/[slug]` | Ten bilingual service-detail pages; metadata and all twenty sitemap entries follow `SITE_INDEXABLE`, which remains disabled |
 | `/[locale]/team` | Implemented on `main` |
 | `/[locale]/insights` | Dedicated bilingual Insights landing and six localized articles; approved for integration |
 | `/[locale]/careers` | Implemented on `main` |
@@ -105,7 +105,8 @@ src/
 ## SEO, security and publication
 
 - `src/lib/seo.ts` centralizes `SITE_URL` and `SITE_INDEXABLE`. Indexing is off unless `SITE_INDEXABLE=true`.
-- `src/app/robots.ts`, `src/app/sitemap.ts`, and page metadata govern crawlers and canonical/alternate URLs. The sitemap includes only completed, implemented routes (Home, About, Services, Team) when indexing is enabled.
+- `src/app/robots.ts`, `src/app/sitemap.ts`, and page metadata govern crawlers and canonical/alternate URLs. When indexing is enabled, the sitemap includes Home, About, Services, Team, Contact, Careers, Insights, six articles and ten service details in both locales (46 URLs). It is empty while indexing is disabled. Legal remains permanently `noindex` and excluded by owner decision.
+- Pages that already include the INBS suffix use `title.absolute`; other pages use the root title template. Preserve Open Graph titles independently when changing document titles.
 - `next.config.ts` sets basic security response headers; this is not a substitute for deployment security testing.
 - No custom backend is currently implemented. Do not claim Contact forms, hosting migration, Search Console, structured data or analytics are complete unless verified.
 - Confirm final domain, hosting/runtime and environment variables before production launch. Never commit secrets.
@@ -156,7 +157,7 @@ Every page matches the Home/About composition pattern. `src/components/<page>/<p
 
 ## Service-detail architecture — PR #29
 
-All ten bilingual service pages use `src/components/service-detail/service-detail-page.tsx` as a thin composition layer with separate Hero, Overview, Offerings, Process and CTA components. The owner-approved Businessmen Services layout is shared; offering group counts and copy vary per service. Bilingual descriptions are in `src/content/service-details.ts` (Businessmen reference) and `src/content/service-detail-catalog.ts` (all ten effective service records), while authoritative labels, slugs and images remain in `src/content/services.ts`. Content is still awaiting review; detail route indexing is disabled. See `docs/SERVICE-DETAIL-PAGES-PLAN.md`.
+All ten bilingual service pages use `src/components/service-detail/service-detail-page.tsx` as a thin composition layer with separate Hero, Overview, Offerings, Process and CTA components. The owner-approved Businessmen Services layout is shared; offering group counts and copy vary per service. Bilingual descriptions are in `src/content/service-details.ts` (Businessmen reference) and `src/content/service-detail-catalog.ts` (all ten effective service records), while authoritative labels, slugs and images remain in `src/content/services.ts`. Content still requires company review before launch; service indexing now follows the central `SITE_INDEXABLE` gate and remains disabled. See `docs/SERVICE-DETAIL-PAGES-PLAN.md`.
 
 ## Insights editorial content
 
@@ -164,7 +165,7 @@ Six bilingual articles live in `src/content/insights.ts`, with landing text in `
 
 ## Legal Information page — company review required
 
-Implemented in `src/app/[locale]/legal/page.tsx` with separate components in `src/components/legal/`, scoped styles in `src/styles/legal.css`, and bilingual content in `src/content/legal-page.ts`. Existing `/en|ar/privacy-policy` and `/en|ar/terms` permanent redirects are retained. The policy page uses `noindex` regardless of global `SITE_INDEXABLE` until company-specific operational disclosures are checked and approved. Privacy copy deliberately does **not** assert unverified cookie behavior, analytics, retention periods, processing locations, suppliers or data-sharing practices. Confirm these with INBS's legal/compliance owner and hosting/service providers, then revise the text and metadata before final public legal sign-off.
+Implemented in `src/app/[locale]/legal/page.tsx` with separate components in `src/components/legal/`, scoped styles in `src/styles/legal.css`, and bilingual content in `src/content/legal-page.ts`. Existing `/en|ar/privacy-policy` and `/en|ar/terms` permanent redirects are retained. The policy page stays permanently `noindex` regardless of global `SITE_INDEXABLE`, by owner decision. Privacy copy deliberately does **not** assert unverified cookie behavior, analytics, retention periods, processing locations, suppliers or data-sharing practices. Confirm these with INBS's legal/compliance owner and hosting/service providers before final public legal sign-off; that review does not authorize changing the indexing policy.
 
 ## Homepage UAE interactive map
 

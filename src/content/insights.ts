@@ -117,7 +117,7 @@ export const insightArticles: InsightArticle[] = [
     "slug": "understanding-uae-work-permits",
     "category": "people",
     "featured": false,
-    "sourceUrl": "https://u.ae/en/information-and-services/jobs/employment-in-the-private-sector/job-offers-and-work-permits-and-contracts/work-permits",
+    "sourceUrl": "https://assets.u.ae/api/public/content/eb65a60bbff949fa912eddd566613014?v=7174ed78#page=7",
     "content": {
       "en": {
         "title": "UAE work permits: what employers should understand",
@@ -171,7 +171,7 @@ export const insightArticles: InsightArticle[] = [
     "slug": "family-residency-preparation",
     "category": "people",
     "featured": false,
-    "sourceUrl": "https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/residence-visa-for-family-members",
+    "sourceUrl": "https://www.gdrfad.gov.ae/en/services/bf409606-56e2-11ea-0320-0050569629e8",
     "content": {
       "en": {
         "title": "Family residence in the UAE: preparing your documents",

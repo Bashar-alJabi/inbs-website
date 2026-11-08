@@ -5,6 +5,7 @@ import AxeBuilder from '@axe-core/playwright';
 import { runHomeMotionTests } from './home-motion-e2e.mjs';
 import { runDrawerMotionTests } from './drawer-motion-e2e.mjs';
 import { runNotFoundTests } from './not-found-e2e.mjs';
+import { runSeoRegressionTests } from './seo-regression.mjs';
 
 const origin=(process.env.E2E_BASE_URL||'http://127.0.0.1:3000').replace(/\/$/,'');
 const serviceSources=JSON.parse(
@@ -166,6 +167,7 @@ for(const locale of ['en','ar']){
 await runHomeMotionTests({ browser, origin, test });
 await runDrawerMotionTests({ browser, origin, test });
 await runNotFoundTests({ browser, origin, test });
+await runSeoRegressionTests({ origin, test });
 // Verify the shared language switch and full-viewport not-found experience.
 for(const locale of ['en','ar']){
  const alternate=locale==='en'?'ar':'en';
