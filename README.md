@@ -42,7 +42,7 @@ npm run build
 - `src/content/`: bilingual content for home, About, shared layout, services, contact, Careers, Insights and Legal.
 - `src/lib/site.ts`: locales and bilingual page labels; `src/lib/routes.ts`: locale-aware URL builders.
 - `src/content/services.ts`: authoritative service catalog; `src/content/navigation.ts`: menu selections.
-- `messages/ar.json` / `messages/en.json`: Coming Soon UI translations.
+- `messages/ar.json` / `messages/en.json`: locale bundles still loaded by `next-intl`; legacy Coming Soon messages are retained.
 - `public/brand/` and `public/images/`: logo and image assets. Insights uses six article photos and a separate Hero image (all replaceable local WebP) under `public/images/insights/`, with Pexels credits in `SOURCES.md`.
 - `src/styles/` and `src/app/globals.css`: visual styles.
 

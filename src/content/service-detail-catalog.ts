@@ -368,7 +368,6 @@ const common = {
   },
 } as const;
 
-type OtherSlug = Exclude<ServiceSlug, 'businessmen-services'>;
 const combined = { ...otherServices, ...remainingServices };
 
 export const serviceDetailContent = {

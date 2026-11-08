@@ -464,7 +464,6 @@ await test('about orbit dots stay on drawn geometry through their cycles',async(
  const result=await page.locator('.inbs-story-hero-art svg').evaluate(svg=>{
   const movers=[...svg.querySelectorAll('.inbs-story-traveler')];
   const samples=[];
-  const cos=Math.cos(Math.PI/5),sin=Math.sin(Math.PI/5);
   // Ellipse is rotated -36 degrees, so convert points into ellipse coordinates.
   const c36=Math.cos(Math.PI/5),s36=Math.sin(Math.PI/5);
   for(let t=0;t<=24;t+=.3){

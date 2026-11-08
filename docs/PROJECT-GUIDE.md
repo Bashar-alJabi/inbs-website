@@ -38,14 +38,14 @@ The `[locale]` URL segment is either `en` or `ar`; `/en` and `/ar` are the imple
 
 Known page slugs and bilingual labels live in `src/lib/site.ts`; service slugs come from the canonical `src/content/services.ts` catalog and are re-exported by `site.ts`. Localized URL helpers are in `src/lib/routes.ts` and shared menu selections in `src/content/navigation.ts` (PR #22). Existing service URLs remain unchanged. The old privacy-policy and terms URLs redirect to the single legal landing route; see `next.config.ts`. The dedicated `src/app/[locale]/about/page.tsx` owns About. The dedicated `src/app/[locale]/services/[slug]/page.tsx` renders all ten recognized service detail pages. The dedicated `src/app/[locale]/contact/page.tsx` replaces Contact's placeholder; `src/content/contact-page.ts` owns localized copy, while `src/content/contact.ts` owns official contact details. The fallback `src/app/[locale]/[...slug]/page.tsx` returns 404 for unknown routes; all catalog pages now have dedicated routes. Contact uses direct telephone, email, map and social links, without a form, submission endpoint or message persistence. Unknown paths are 404. A `why-inbs` page was mentioned in the earlier roadmap but is **not** a recognized route in the current `pages` array; explicitly decide whether to add it before documenting it as available.
 
-When a page is developed, give it its own Next.js route and replace the Coming Soon rendering. Link to the actual route, not to a homepage anchor as a substitute.
+Give new pages their own Next.js routes and link to those routes. Unknown URLs remain genuine 404s; the unused Coming Soon component has been removed.
 
 ## Current project layout
 
 ```text
 .github/workflows/        CI: validate, homepage browser audit, image preparation
 docs/                     developer guide and recurring checklists
-messages/                 next-intl translations (currently Coming Soon)
+messages/                 runtime-loaded next-intl bundles (legacy Coming Soon copy retained)
 public/brand/             official logo
 public/images/            homepage hero and service photography
 scripts/                  smoke, browser audit and image preparation
@@ -55,7 +55,7 @@ src/
   components/
     home/                 homepage sections
     about/                standalone About story sections\n    services/             Services landing page (feature branch)
-    layout/               header, footer, Coming Soon, language and cursor UI
+    layout/               header, footer, language and cursor UI
     shared/               reusable Reveal and SmoothScroll
   content/                bilingual copy, service catalog, shared layout and contact data
   i18n/                   next-intl request configuration
@@ -85,7 +85,7 @@ src/
 | Page slugs and titles | `src/lib/site.ts` | Service names and slugs are re-exported from the service catalog |
 | Service slugs, EN/AR names and image paths | `src/content/services.ts` | Single slug-keyed catalog and display order |
 | Shared header/footer copy | `src/content/layout.ts` | Localized UI labels and descriptions |
-| Coming Soon UI messages | `messages/en.json`, `messages/ar.json` | Loaded with `next-intl` |
+| Locale message bundles | `messages/en.json`, `messages/ar.json` | Still dynamically loaded with `next-intl`; legacy Coming Soon messages retained |
 | Achievement figures and captions | `src/components/home/home-achievements.tsx` | Currently embedded in UI; keep values unchanged unless owner approves |
 | Institution names and icons | `src/components/home/home-institutions.tsx` | Currently embedded in UI; keep unchanged unless owner approves |
 | Contact, map and social links | `src/content/contact.ts` | Reused by footer and future contact sections |
