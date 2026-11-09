@@ -12,8 +12,10 @@ This document defines **where to edit content** in the INBS bilingual site. Keep
 | Service URL slugs, order, EN/AR names, and images | `src/content/services.ts` | **One catalog, keyed by slug.** Do not create aligned arrays for these values. |
 | Home page marketing copy and About preview | `src/content/home.ts` | `homeContent.en/ar` and `aboutDetails.en/ar`. |
 | About hero photo, source and regeneration | `public/images/about/hero-about.webp`, `public/images/about/SOURCE.json`, `scripts/prepare-about-image.mjs` | Dedicated Pexels skyline photo; no coupling to service-image catalog. |
-| Full About page copy and principles | `src/content/about.ts` | `aboutPageContent.en/ar`; reuse the canonical service names from `src/content/services.ts`. |\n| Services landing page headings and editorial copy | `src/content/services-page.ts` | Landing page only; never duplicate names, slugs or images from `src/content/services.ts`. |
+| Full About page copy and principles | `src/content/about.ts` | `aboutPageContent.en/ar`; reuse the canonical service names from `src/content/services.ts`. |
+| Services landing page headings and editorial copy | `src/content/services-page.ts` | Landing page only; never duplicate names, slugs or images from `src/content/services.ts`. |
 | Service detail editorial photos | `public/images/services/editorial/` | Replace a `*-01.webp` or `*-02.webp` file with the same name to change a photo without changing code. Source IDs: `public/images/services/EDITORIAL-PHOTO-SOURCES.md`. |
+| Service detail photo placement, captions and alt text | `src/content/service-editorial-photos.ts` | Slug-keyed photo records, offering insertion positions and bilingual captions/alt text. |
 | Individual service detail copy and offering groups | `src/content/service-details.ts` and `src/content/service-detail-catalog.ts` | Bilingual detail copy for all ten services. Keep canonical names/images in `src/content/services.ts`. |
 | Team landing copy (no unverified staff names/photos) | `src/content/team-page.ts` | People-first editorial introduction; approved real team profiles are a separate content requirement. |
 | Services landing hero photos | `public/images/services/HERO-SOURCES.json` and `hero-services-{1,2}.webp` | Two independently sourced Pexels photos; convert with `scripts/prepare-services-hero-images.mjs`. Not service catalog previews. |
@@ -41,7 +43,7 @@ In `src/content/services.ts`, one record owns the route, two display names and p
 The key is the stable public URL slug. Its position determines display order. The services showcase chooses the icon **by slug**, never by parallel array index. Routes and footer links use the same catalog. The hero uses those slugs for its related links, while its shorter promotional labels remain in `hero.ts`.
 
 - Change a service **name or image** in this catalog only; preserve the slug unless redirects are planned.
-- To add a service, add the catalog record and its icon mapping in `src/components/home/services-showcase.tsx`, then provide the preview asset. TypeScript checks for an icon matching every slug.
+- To add an approved service, add the canonical record and preview asset, then update the icon mapping in `src/components/home/services-showcase.tsx` and any other exhaustive slug maps identified by TypeScript. Add its EN/AR detail record and section content using the existing `src/content/service-detail-catalog.ts` pattern; the Businessmen reference remains in `service-details.ts`. Add its editorial image/placement/caption/alt records in `service-editorial-photos.ts`, approved local assets and source/licence notes. The existing dynamic route, metadata and sitemap derive the slug automatically. Update the explicit route/image/count fixtures in `scripts/smoke.mjs`, `scripts/homepage-e2e.mjs` and `scripts/seo-regression.mjs`, then run lint, TypeScript, build and browser/SEO checks. This procedure does not authorize changing existing slugs or enabling indexing.
 - The hero's `image` property is a **hero slide background**, not a service preview. Maintain it separately.
 - Keep each translation equivalent in meaning, not necessarily word-for-word.
 - Do not modify company achievements or institution names as part of content restructuring.
@@ -52,7 +54,7 @@ The key is the stable public URL slug. Its position determines display order. Th
 - Use `routes.home(locale)`, `routes.page(locale, slug)`, and `routes.service(locale, slug)` from `src/lib/routes.ts` for navigation and CTAs. Do not duplicate URL strings in components.
 - Edit **which pages are visible** in each menu and **which services the footer lists** in `src/content/navigation.ts`. The service catalog still controls the names and order.
 - Footer Quick Links include Home plus the six nonlegal pages; the Services column lists the first six services in canonical catalog order and a localized link to the full directory. Labels for Home and the directory CTA live in `src/content/layout.ts`.
-- Privacy Policy and Terms & Conditions will be sections of **one future legal page**, `/[locale]/legal`. The footer has one localized "Legal Information" link; historic `/[locale]/privacy-policy` and `/[locale]/terms` URLs permanently redirect to it via `next.config.ts`. Legal copy is not yet approved or published.
+- Privacy Policy and Terms & Conditions are sections of the implemented `/[locale]/legal` page. The footer has one localized "Legal Information" link; historic `/[locale]/privacy-policy` and `/[locale]/terms` URLs permanently redirect to it via `next.config.ts`. Company legal review remains required; Legal stays permanently `noindex`.
 - Existing links are preserved. Changing a slug is a public URL change and needs a redirect and link/SEO audit, not just a content edit.
 - The language switcher intentionally preserves the current path while replacing the locale segment.
 
@@ -92,6 +94,7 @@ The Team page is now strictly **Hero → TeamStory → CTA**. The previous place
 - Six bilingual published guides, article slugs, summaries, body sections and official sources: `src/content/insights.ts`.
 - Article list and detail pages use a single catalog; update both English and Modern Standard Arabic together. Do not change a published slug without redirect planning.
 - Article photography: `public/images/insights/<slug>.webp` (1200×800 WebP); the separate landing Hero is `public/images/insights/insights-hero.webp` (1920×1080 WebP). Replace the file with the same name and preserve Pexels provenance in `public/images/insights/SOURCES.md`; cards and featured article resolve these paths directly.
+- To add an approved article, add one `insightArticles` record with a unique stable slug, existing category, EN/AR titles, summaries, category labels and structured sections, plus a verified official `sourceUrl`. Provide the matching local WebP and source note. Keep one intended `featured: true` entry; the featured component selects the first matching article. The article route and gated sitemap derive entries from this catalog. Update explicit article/count/section fixtures in smoke, browser and SEO tests before accepting the new article.
 - Government procedures change. Verify each claim against the linked authority before publishing updates. No external CMS, author profile, image service or article API is used.
 
 ## Legal Information page

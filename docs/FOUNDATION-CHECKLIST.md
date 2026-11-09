@@ -2,11 +2,13 @@
 
 **How to use this document:** Update it **after every completed page or feature**, when requirements change, **before every PR merge**, and again **before each release to `main` and final company handoff**. A checked box means the work was actually verified, not simply planned. Record evidence in the PR (CI link, preview, screenshots, test summary). Keep unfinished work unchecked. This checklist describes current evidence as of **November 2026**.
 
+Milestone sections retain historical CI/approval records. Current audit results are recorded at the end; use [`HOSTINGER-LAUNCH-CHECKLIST.md`](HOSTINGER-LAUNCH-CHECKLIST.md) for future publication. Historical page-development TODOs do not imply that their implemented routes are still placeholders.
+
 ## A. Baseline / completed homepage milestone
 
 - [x] Two locale-prefixed homepages (`/en` and `/ar`) with proper `lang` and RTL/LTR handling.
 - [x] Shared header, navigation, footer, language switching, light/dark theme and responsive homepage implementation.
-- [x] Branded Coming Soon fallback for recognized but unfinished routes.
+- [x] Historical Coming Soon fallback was implemented for the original milestone; its unused component/styles were removed during the final audit. All catalog routes now have dedicated pages; unknown paths return 404.
 - [x] Official company logo asset and service/hero images committed locally.
 - [x] Central `SITE_URL` and opt-in `SITE_INDEXABLE=true` in `src/lib/seo.ts`; indexing disabled by default.
 - [x] Homepage canonical/hreflang/Open Graph metadata, robots and sitemap for home locales only.
@@ -101,8 +103,9 @@
 - [x] Replace the prior Services-like split hero with a centered, three-image editorial gallery and copy underneath.
 - [x] Use the three owner-supplied WebP images directly at `public/images/team/hero-01.webp` through `hero-03.webp`, without SVG mockups.
 - [x] Use responsive tilted side frames, a dominant central frame, and separate curved-trail traveling dots; support reduced motion and RTL.
-- [ ] Owner uploaded all ten Team WebP images and approved final visual placement; three Hero images have localized accessible descriptions.
-- [ ] After Hero approval, replace the draft middle sections with the approved integrated Team Story.
+- [x] All ten Team WebP files are present and pass asset checks; three Hero images have localized accessible descriptions.
+- [x] Integrated TeamStory replaces the draft middle sections and keeps seven editorial photo frames.
+- [ ] Retain company sign-off for final photo placement and publication permissions; file presence does not establish rights.
 
 ## Team page — feature/team-page (initial draft)
 
@@ -119,13 +122,14 @@
 - [x] **No contact form**: no inputs, submission endpoint, data collection, new dependencies or messaging backend.
 - [x] Centralize displayed phone, email, office address, map destination and official social destinations in `src/content/contact.ts`; page-local EN/AR copy lives in `src/content/contact-page.ts`.
 - [x] Configure stable public WebP paths for the real building, office interior and office door photos; preserve the building as the dominant Hero background, with three compact square clickable/focusable photos (building, office, door) in the lower building area and a moving border dot on each (disabled for reduced motion). Click opens a full-screen viewer with Escape, backdrop and close control.
-- [ ] Owner uploads all three WebPs to `public/images/contact/` and reviews real image crops on desktop/mobile, Arabic/English and light/dark. Do not treat missing photo files as QA-complete.
+- [x] All three Contact WebPs are tracked and displayed by the implemented gallery/viewer.
+- [ ] Company confirms final image crops and publication permissions on both locales/themes and device classes.
 - [x] Remove Contact from Coming Soon fallback and add opt-in SEO metadata, localized canonical/hreflang and sitemap entries.
 - [x] Add HTTP smoke checks and browser checks for EN/AR, RTL, light/dark, mobile/tablet/desktop, no form, links, overflow and axe.
 - [x] Align internal-page Hero title, lead, kicker, and CTA dimensions with shared design tokens across About, Services, all service details, Team and Contact (Home slider excluded).
 - [ ] Verify exact-head lint, TypeScript, production build, HTTP smoke, Playwright and axe checks before merge, not after each visual tweak.
 - [ ] Owner visual approval and authorization for merge to `redesign` (and later `main`).
-- [ ] Confirm phone number supports WhatsApp **before** adding a WhatsApp link; it is intentionally omitted to avoid claiming an unverified messaging channel.
+- [ ] Confirm operational availability of the existing Careers WhatsApp destination before launch; it uses the shared mobile number. Contact remains a direct-link page without a form.
 - [ ] Obtain company confirmation of contact details and business hours if hours are added later.
 
 ## C. Repeat after **every page** (copy these tasks to the page PR)
@@ -161,13 +165,13 @@
 ### Company content and functionality
 - [ ] Company owner signs off on business identity, services, history, statistics, team, contact details and social URLs.
 - [ ] Every intended page/service is complete in both languages; remove or clearly exclude temporary Coming Soon destinations.
-- [ ] Contact form works end to end with validation, anti-spam, delivery confirmation, consent and error handling.
+- [ ] Verify the approved direct telephone/email/map/social links and Careers email/WhatsApp destinations. No Contact form, submission endpoint or recruitment backend is implemented or required by the current scope.
 - [ ] Privacy Policy, Terms and required legal/contact statements are approved.
 - [ ] Confirm photos, brand elements, icons and licenses; no unsupported affiliation or endorsement claims.
 
 ### SEO, security and performance
 - [ ] Confirm production domain and hosting support for the selected Next.js runtime.
-- [ ] Configure `SITE_URL`; enable `SITE_INDEXABLE=true` only after final content and crawl checks.
+- [ ] After launch approval, set `SITE_URL` to the official HTTPS origin and `SITE_INDEXABLE=true` in build/runtime **before the final Production build**; rebuild and verify deployed robots/sitemap. Follow the Hostinger checklist; test/preview indexing stays disabled.
 - [ ] Validate robots, sitemap, canonicals, hreflang, Open Graph/favicon, redirects and 404 on the production URL.
 - [ ] Add verified Organization/LocalBusiness structured data only from company-approved facts.
 - [ ] Verify HTTPS, security headers/CSP feasibility, dependency vulnerabilities and secret management.
@@ -360,3 +364,35 @@ eslint-config-next@16.4.3 (devDependency)
 - [x] Four additional EN/AR light/dark cases passed with Chromium mobile/touch emulation: real footer-link navigation to Team without a document reload, the section anchor, complete image decoding and scoped Team axe checks with no violations.
 - [x] Production build, ESLint, TypeScript, script syntax and `git diff --check` passed. ESLint retains the one existing ImageResponse `no-img-element` warning. Initial EN CLS medians stayed at approximately 0.00091/0.00096; existing initial AR font/layout shifts remain observable (390px: 0.02605 before / 0.02069 after). This is not a claim of zero whole-page CLS or measured INP.
 - [ ] Full browser/smoke/axe and physical-device checks remain for pre-merge validation. Owner authorized Commit/Push to the same feature branch only; no PR, merge, deployment or subsequent batch.
+
+## Final pre-merge verification — audit branch (9 November 2026)
+
+- [x] Verify ancestry of A01/A02, A03/A04, A05, A06/A09, the A07 deferral, TypeScript/CSS cleanup and Team performance commits through `daf93ce`. Dependencies/lockfile, hosting/SEO configuration, original image bytes and both independent map implementations match the pre-audit base. This verification changes documentation only, including the A08 handoff corrections and the Hostinger checklist.
+- [x] ESLint, TypeScript and Production build passed. One existing `src/app/icon.tsx` ImageResponse native-image warning remains. `npm audit` still reports eight Moderate development-package records from minimatch; production audit reports zero. No forced update, environment change or indexing activation.
+
+| Validation | Passed | Failed |
+| --- | ---: | ---: |
+| Existing HTTP Smoke | 96 | 0 |
+| Existing complete Browser E2E/axe suite | 407 | 10 |
+| Additional 48-route × theme × width × motion matrix | 384 | 0 |
+| Additional asset HTTP/format checks, including favicon | 27 | 0 |
+| Isolated enabled/disabled robots policies | 2 | 0 |
+| Total cases, excluding diagnostic reruns | 916 | 10 |
+
+- [x] Run the original browser assertions unchanged with external temporary Playwright 1.57.0 / `@axe-core/playwright` 4.14.0 tooling and available Brave Chromium. The matrix includes EN/AR, LTR/RTL, light/dark, 390/1440px and both motion preferences, 48 scoped main-content axe audits and 32 actual mouse/touch/reduced-motion map checks. Other existing tests cover 320/768px, Drawer/Lenis, Hero controls, viewer, navigation and delayed-image layout stability. Together Smoke and the extra asset checks cover all 57 public images and favicon.
+- [x] All 53 existing SEO cases passed, including actual HTTP metadata for all 48 routes and private unset/false/true simulations. Enabled simulation yields 46 sitemap URLs including all 20 service details; both Legal pages stay `noindex` and excluded. Supplemental simulations cover enabled/disabled robots output without changing process environment; the real server remains non-indexable.
+- [ ] **Merge gate remains blocked (Medium):** nine fresh-context 404 cases sample geometry before CSS is applied (`scripts/not-found-e2e.mjs`), and the About orbit case samples SMIL before initialization (`scripts/homepage-e2e.mjs`). A diagnostic cold 404 initially has browser-default margins/static positioning, then becomes the approved full-viewport layout after CSS activation. All ten original assertions pass diagnostically when load/CSS/fonts/SMIL readiness is awaited. These diagnostic reruns do not erase the original suite's ten failures. No application/test fix or weakened assertion was committed; review readiness and the cold 404 styling flash in a separate authorized batch, then rerun affected and required pre-merge checks.
+
+Lighthouse 13.6.0 completed seven standard local runs, one per listed page/profile, without concurrent browser tests or score tuning. These are lab results with Lighthouse's simulated mobile/desktop profiles, not field LCP/CLS/INP or a before/after regression claim.
+
+| Page | Performance mobile / desktop | LCP mobile / desktop (seconds) |
+| --- | --- | --- |
+| Home EN | 91 / 99 | 3.35 / 0.79 |
+| Home AR | 86 / not run | 4.02 / not run |
+| Team EN | 73 / 87 | 14.78 / 2.39 |
+| Contact EN | 74 / 95 | 8.03 / 1.49 |
+
+- [x] Accessibility and Best Practices scored 100 in all seven Lighthouse runs; SEO scored 69 because the tested pages intentionally block indexing through metadata/robots (the only failing SEO audit). Observed Lighthouse CLS ranged from 0 to approximately 0.00113. No Lighthouse runtime errors or warnings were reported.
+- [ ] **High before public launch:** review simulated mobile LCP, particularly Team (14.78s) and Contact (8.03s). Lighthouse identifies their CSS Hero backgrounds as LCP elements, with late request discovery and image-delivery opportunities. No image/quality, preload, animation or performance change was made in this verification phase.
+- [x] Correct obsolete branch/Coming Soon/Contact-form/legal/image instructions, content ownership and service/article editing guidance. Add `HOSTINGER-LAUNCH-CHECKLIST.md` requiring official `SITE_URL` and `SITE_INDEXABLE=true` before the final build and in runtime, rebuilding generated crawl endpoints and checking deployed robots/sitemap. This documents future actions only.
+- [ ] Obtain a green original browser suite and owner authorization before PR/merge. Hosting/domain/SSL work, activation of indexing, physical-device/screen-reader approval and final company launch acceptance remain separate; nothing was merged or deployed by this verification.
