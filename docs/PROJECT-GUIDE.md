@@ -155,6 +155,8 @@ Only check off completed work with evidence; keep the guide accurate to the chec
 
 Every page matches the Home/About composition pattern. `src/components/<page>/<page>-page.tsx` imports section components but contains no section JSX. Team sections: `team-hero.tsx`, `team-story.tsx` (integrates the approach, three principles and seven photo slots), and `team-cta.tsx`. Services sections: `services-hero.tsx`, `services-directory.tsx`, `services-cta.tsx`. Home and About CTAs are `home-cta.tsx` and `about-cta.tsx`. See `AGENTS.md` for mandatory architecture rules. Shared CSS for CTA consistency is a deliberate **style** abstraction, not a shared React component.
 
+Team story photo URLs live in `team-story.tsx`, using native lazy loading through `Image fill unoptimized` to preserve the original WebP quality. `team.css` owns the existing frames and centered cover crops; the three Hero photos remain CSS backgrounds. `scripts/team-images-e2e.mjs` checks deferred requests, delayed-image layout stability and decoding through the existing browser suite.
+
 
 ## Service-detail architecture — PR #29
 

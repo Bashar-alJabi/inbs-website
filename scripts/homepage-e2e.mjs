@@ -6,6 +6,7 @@ import { runHomeMotionTests } from './home-motion-e2e.mjs';
 import { runDrawerMotionTests } from './drawer-motion-e2e.mjs';
 import { runNotFoundTests } from './not-found-e2e.mjs';
 import { runSeoRegressionTests } from './seo-regression.mjs';
+import { runTeamImageTests } from './team-images-e2e.mjs';
 
 const origin=(process.env.E2E_BASE_URL||'http://127.0.0.1:3000').replace(/\/$/,'');
 const serviceSources=JSON.parse(
@@ -584,6 +585,7 @@ await test('footer navigation uses one legal page and a full-services link',asyn
  }
 });
 // Our Team: bilingual, responsive, accessible, no fictional employee profiles.
+await runTeamImageTests({ browser, origin, test });
 for(const locale of ['en','ar']){
  for(const size of sizes){
   for(const theme of ['light','dark']){
