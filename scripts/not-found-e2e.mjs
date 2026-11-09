@@ -1,5 +1,27 @@
 import assert from 'node:assert/strict';
 
+async function watchNotFoundPaints(context) {
+  await context.addInitScript(() => {
+    window.__notFoundPaints = { sampled: 0, unstyled: [] };
+    const sample = () => {
+      const node = document.querySelector('.inbs-not-found');
+      if (node) {
+        const style = getComputedStyle(node);
+        const bounds = node.getBoundingClientRect();
+        if (style.visibility !== 'hidden' && bounds.width > 0 && bounds.height > 0) {
+          window.__notFoundPaints.sampled++;
+          if ((style.position !== 'fixed' || style.backgroundImage === 'none') &&
+            window.__notFoundPaints.unstyled.length < 5) {
+            window.__notFoundPaints.unstyled.push({ position: style.position, background: style.backgroundImage });
+          }
+        }
+      }
+      requestAnimationFrame(sample);
+    };
+    requestAnimationFrame(sample);
+  });
+}
+
 async function assertDocument(page, locale) {
   await page.waitForFunction(value => document.documentElement.lang === value &&
     document.documentElement.dir === (value === 'ar' ? 'rtl' : 'ltr'), locale);
@@ -17,6 +39,16 @@ async function assertNotFound(page, locale) {
   await assertDocument(page, locale);
   // The overflow effect runs after the error component hydrates.
   await page.waitForFunction(() => document.body.style.overflow === 'hidden');
+  // Hydration/load do not guarantee that React's stylesheet links are active yet.
+  await page.waitForFunction(() => {
+    const active = [...document.styleSheets];
+    return active.length > 0 && [...document.querySelectorAll('link[rel="stylesheet"]')]
+      .every(link => link.sheet && active.includes(link.sheet));
+  });
+  await page.evaluate(() => document.fonts.ready);
+  await page.waitForFunction(() => window.__notFoundPaints.sampled > 0);
+  assert.deepEqual(await page.evaluate(() => window.__notFoundPaints.unstyled), [],
+    '404 must not paint browser-default styling before its CSS is ready');
   assert.equal(await notFound.getAttribute('lang'), locale);
   assert.equal(await notFound.getAttribute('dir'), locale === 'ar' ? 'rtl' : 'ltr');
   assert.equal(await notFound.locator('h1').innerText(), locale === 'ar'
@@ -64,6 +96,7 @@ async function navigateInternally(page, path) {
   // production content deliberately contains no links to nonexistent pages.
   await page.evaluate(target => {
     window.__notFoundDocument = true;
+    window.__notFoundPaints = { sampled: 0, unstyled: [] };
     window.next.router.push(target);
   }, path);
   await page.waitForURL(url => url.pathname === path);
@@ -81,6 +114,7 @@ export async function runNotFoundTests({ browser, origin, test }) {
             viewport: { width, height: 844 }, reducedMotion: 'reduce', colorScheme: theme,
           });
           try {
+            await watchNotFoundPaints(context);
             await context.addInitScript(value => localStorage.setItem('inbs-theme', value), theme);
             const page = await context.newPage();
             const paths = ['/missing-route', '/services/unknown-service', '/insights/unknown-article'].map(suffix => `/${locale}${suffix}`);
@@ -109,6 +143,7 @@ export async function runNotFoundTests({ browser, origin, test }) {
   await test('404 document / unsupported and unprefixed locale fallback', async () => {
     const context = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
     try {
+      await watchNotFoundPaints(context);
       const page = await context.newPage();
       const paths = ['/fr/missing-route', '/missing-route', '/fr'];
       const errors = watchErrors(page, origin, paths);

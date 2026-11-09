@@ -462,6 +462,26 @@ await test('about orbit dots stay on drawn geometry through their cycles',async(
  const context=await browser.newContext({viewport:{width:1440,height:900},reducedMotion:'no-preference'});
  const page=await context.newPage();
  await page.goto(origin+'/en/about',{waitUntil:'domcontentloaded'});
+ await page.waitForFunction(()=>{
+  const active=[...document.styleSheets];
+  return active.length>0&&[...document.querySelectorAll('link[rel="stylesheet"]')]
+   .every(link=>link.sheet&&active.includes(link.sheet));
+ });
+ await page.evaluate(()=>document.fonts.ready);
+ // DOMContentLoaded can precede SMIL initialization; default circle coordinates are (0, 0).
+ await page.waitForFunction(()=>{
+  const svg=document.querySelector('.inbs-story-hero-art svg');
+  const movers=svg?.querySelectorAll('.inbs-story-traveler');
+  const matrix=svg?.getScreenCTM();
+  if(!matrix||svg.getCurrentTime()<=0||movers.length!==3)return false;
+  const inverse=matrix.inverse();
+  return [...movers].every(mover=>{
+   const transform=mover.getScreenCTM();
+   if(!transform)return false;
+   const point=new DOMPoint(0,0).matrixTransform(transform).matrixTransform(inverse);
+   return Number.isFinite(point.x)&&Number.isFinite(point.y)&&Math.hypot(point.x,point.y)>0;
+  });
+ });
  const result=await page.locator('.inbs-story-hero-art svg').evaluate(svg=>{
   const movers=[...svg.querySelectorAll('.inbs-story-traveler')];
   const samples=[];
