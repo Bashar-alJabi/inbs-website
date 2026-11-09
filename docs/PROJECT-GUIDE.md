@@ -162,6 +162,8 @@ Every page matches the Home/About composition pattern. `src/components/<page>/<p
 
 Team story photo URLs live in `team-story.tsx`, using native lazy loading through `Image fill unoptimized` to preserve the original WebP quality. `team.css` owns the existing frames and centered cover crops; the three Hero photos remain CSS backgrounds. `scripts/team-images-e2e.mjs` checks deferred requests, delayed-image layout stability and decoding through the existing browser suite.
 
+Team and Contact keep their approved Hero CSS backgrounds. Their server Hero components call React DOM `preload` for exactly one measured LCP asset each: Team `hero-02.webp` and Contact `contact-building.webp`. Next may emit these hints in the initial HTTP `Link` header rather than an HTML link. Preserve the matching original URLs; do not preload all gallery photos. `scripts/hero-lcp-e2e.mjs`, integrated into the browser suite, checks early hints, priority, request reuse, original crops, motion and Contact's three-photo viewer.
+
 
 ## Service-detail architecture — PR #29
 

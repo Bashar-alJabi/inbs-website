@@ -1,4 +1,5 @@
 import { ArrowDown } from 'lucide-react';
+import { preload } from 'react-dom';
 import { contactPageContent } from '@/content/contact-page';
 import { ContactHeroGallery } from './contact-hero-gallery';
 import type { Locale } from '@/lib/site';
@@ -9,6 +10,8 @@ import type { Locale } from '@/lib/site';
  * owner can supply/replace photographs without editing component code.
  */
 export function ContactHero({ locale }: { locale: Locale }) {
+  // Discover the measured LCP background before CSS without changing its rendering.
+  preload('/images/contact/contact-building.webp', { as: 'image', fetchPriority: 'high' });
   const t = contactPageContent[locale];
   return (
     <section className="inbs-contact-hero" aria-labelledby="inbs-contact-title">

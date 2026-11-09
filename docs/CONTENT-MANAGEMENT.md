@@ -23,7 +23,7 @@ This document defines **where to edit content** in the INBS bilingual site. Keep
 | Public contact details, map and social links | `src/content/contact.ts` | Canonical `companyContact.phones`, `companyContact.emails`, address/map and `socialLinks` feed Contact and footer. Existing single-value aliases use the first entry. Never duplicate contact values/URLs in UI components. |
 | Contact page localized editorial copy | `src/content/contact-page.ts` | EN/AR hero, photo descriptions, direct channels, location and closing CTA. No form; no backend. |
 | Careers page editorial copy and application instructions | `src/content/careers-page.ts` | EN/AR Careers hero, Why Join, email/WhatsApp application steps and standalone CTA. Contact destinations come from `src/content/contact.ts` (additional email first, official email second, mobile WhatsApp); no listed vacancies, form, applicant storage or recruitment backend. |
-| Contact Hero real office photos | `public/images/contact/` | Upload `contact-building.webp`, `contact-office.webp`, `contact-door.webp` once; CSS fixed paths render them automatically. See folder README. |
+| Contact Hero real office photos | `public/images/contact/` | Upload `contact-building.webp`, `contact-office.webp`, `contact-door.webp` once; CSS fixed paths render them automatically. `contact-hero.tsx` preloads only the building backdrop; retain its matching URL if renaming that asset. See folder README. |
 | Header, navigation and footer text | `src/content/layout.ts` | Shared bilingual labels and copy, without mixing into component markup. |
 | Message bundles loaded using `next-intl` | `messages/en.json`, `messages/ar.json` | Still loaded by the locale layout/request config; legacy Coming Soon messages retained. Add matching keys to both locales. |
 | Visual icons, layout and animation | `src/components/` and `src/styles/` | Not content or translation stores. |
@@ -83,6 +83,8 @@ Run lint, type checks, build and browser tests through the PR workflows. Check r
 ### Team Hero photos
 
 The three photo frames in `src/components/team/team-hero.tsx` load directly from `public/images/team/hero-01.webp`, `hero-02.webp`, and `hero-03.webp` through CSS backgrounds in `src/styles/team.css`. The three approved WebP files were added to the feature branch and load directly without SVG fallbacks. Replacing a photo with the same name requires no code changes. No fallback files, file checks, JavaScript logic or code changes are required. Crop is controlled by `background-size: cover`; review it after the real photos are added. Update accessible descriptions when images are confirmed.
+
+`team-hero.tsx` preloads only `hero-02.webp`, the measured LCP portrait. Retain the matching CSS/preload URL if renaming this asset; replacing it under the same filename still requires no code changes. Keep the other Hero images at normal priority.
 
 ### Team story — seven integrated photos
 
