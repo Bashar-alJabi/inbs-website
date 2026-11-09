@@ -22,3 +22,7 @@ All three photos are now independent small square thumbnail buttons (building fi
 4. Follow the repository's owner-authorized validation and commit/push workflow; do not push to a historic page-development branch.
 
 Copyright/permission: these must be photographs the company is entitled to publish. Avoid placing identifiable people or private information in the frame without approval.
+
+## Lossless container cleanup — 9 November 2026
+
+`contact-office.webp` was reduced from 227,632 to 180,112 bytes by removing nonvisual EXIF/XMP metadata and the now-unneeded extended container header. Its original VP8 image payload is byte-identical: no resizing, re-encoding or quality adjustment. Original orientation was 1, with no ICC profile; decoded RGB and browser RGBA comparisons confirm identical 1368×912 pixels. Building and door files, crops, overlays and the fullscreen viewer are unchanged. See `docs/FOUNDATION-CHECKLIST.md` for the measured, limited Contact LCP benefit.
