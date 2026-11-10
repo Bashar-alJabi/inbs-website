@@ -1,10 +1,10 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { ArrowUpRight, Menu, Moon, Sun, X, House, Building2, BriefcaseBusiness, Users, Newspaper, UserRoundSearch, Phone, FileText, type LucideIcon } from 'lucide-react';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import type { Locale } from '@/lib/site';
 import { routes, type PageSlug } from '@/lib/routes';
 import { primaryPages, drawerPages } from '@/content/navigation';
@@ -27,7 +27,12 @@ export function SiteHeader({locale}:{locale:Locale}){
  const menuButtonRef=useRef<HTMLButtonElement>(null);
  const drawerRef=useRef<HTMLElement>(null);
  const [scrolled,setScrolled]=useState(false);
- const [open,setOpen]=useState(false);
+ const [drawerState,setDrawerState]=useState({open:false,pathname});
+ const open=drawerState.open&&drawerState.pathname===pathname;
+ const setOpen=useCallback((open:boolean)=>setDrawerState({open,pathname}),[pathname]);
+ // Close on route changes, including browser history, without reopening on Back.
+ if(drawerState.pathname!==pathname)setDrawerState({open:false,pathname});
+ const reducedMotion=useReducedMotion();
  const t=layoutContent[locale];
  const home=t.home;
  useEffect(()=>{
@@ -41,8 +46,16 @@ export function SiteHeader({locale}:{locale:Locale}){
   const drawer=drawerRef.current;
   const previous=document.activeElement instanceof HTMLElement?document.activeElement:null;
   const menuButton=menuButtonRef.current;
+  const root=document.documentElement,body=document.body;
+  const {scrollX,scrollY}=window;
+  const rootStyles={overflow:root.style.overflow,scrollbarGutter:root.style.scrollbarGutter};
+  const bodyStyles={position:body.style.position,top:body.style.top,left:body.style.left,width:body.style.width};
+  // Fixed body also locks native touch scrolling; Lenis observes this attribute.
+  root.setAttribute('data-inbs-drawer-open','');
+  Object.assign(root.style,{overflow:'hidden',scrollbarGutter:window.innerWidth>root.clientWidth?'stable':rootStyles.scrollbarGutter});
+  Object.assign(body.style,{position:'fixed',top:`-${scrollY}px`,left:`-${scrollX}px`,width:'100%'});
   const focusable=()=>Array.from(drawer?.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')??[]);
-  focusable()[0]?.focus();
+  focusable()[0]?.focus({preventScroll:true});
   const key=(event:KeyboardEvent)=>{
    if(event.key==='Escape'){setOpen(false);return;}
    if(event.key!=='Tab')return;
@@ -52,8 +65,15 @@ export function SiteHeader({locale}:{locale:Locale}){
    else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
   };
   document.addEventListener('keydown',key);
-  return()=>{document.removeEventListener('keydown',key);(previous??menuButton)?.focus();};
- },[open]);
+  return()=>{
+   document.removeEventListener('keydown',key);
+   Object.assign(body.style,bodyStyles);
+   Object.assign(root.style,rootStyles);
+   window.scrollTo({left:scrollX,top:scrollY,behavior:'instant'});
+   root.removeAttribute('data-inbs-drawer-open');
+   (previous?.isConnected&&previous!==body?previous:menuButton)?.focus({preventScroll:true});
+  };
+ },[open,setOpen]);
  const toggleTheme=()=>{const current=document.documentElement.dataset.theme==='dark'?'dark':'light';const next=current==='dark'?'light':'dark';document.documentElement.dataset.theme=next;localStorage.setItem('inbs-theme',next)};
  const onHome=pathname===routes.home(locale);const transparent=onHome&&!scrolled&&!open;
  return <header className={`inbs-header ${transparent?'is-transparent':'is-solid'}`}><div className="site-shell inbs-header-inner">
@@ -69,7 +89,7 @@ export function SiteHeader({locale}:{locale:Locale}){
    <button type="button" ref={menuButtonRef} className="inbs-icon-button inbs-menu-trigger" onClick={()=>setOpen(!open)} aria-expanded={open} aria-controls="inbs-drawer" aria-label={open ? t.closeMenu : t.openMenu}>{open?<X size={23}/>:<Menu size={23}/>}</button>
   </div>
  </div>
- <AnimatePresence>{open&&<><motion.button className="inbs-drawer-backdrop" type="button" aria-label={t.closeMenu} onClick={()=>setOpen(false)} initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}/><motion.aside ref={drawerRef} id="inbs-drawer" className="inbs-drawer" role="dialog" aria-modal="true" aria-label={t.drawerAria} initial={{x:locale==='ar'?'-100%':'100%'}} animate={{x:0}} exit={{x:locale==='ar'?'-100%':'100%'}} transition={{duration:.38,ease:[.22,1,.36,1]}}>
+ <AnimatePresence>{open&&<><motion.button className="inbs-drawer-backdrop" type="button" aria-label={t.closeMenu} onClick={()=>setOpen(false)} initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={reducedMotion?{duration:0}:undefined}/><motion.aside ref={drawerRef} id="inbs-drawer" className="inbs-drawer" data-lenis-prevent role="dialog" aria-modal="true" aria-label={t.drawerAria} initial={reducedMotion?false:{x:locale==='ar'?'-100%':'100%'}} animate={{x:0}} exit={{x:reducedMotion?0:locale==='ar'?'-100%':'100%'}} transition={{duration:reducedMotion?0:.38,ease:[.22,1,.36,1]}}>
  <div className="inbs-drawer-top"><Link href={routes.home(locale)} onClick={()=>setOpen(false)} aria-label="INBS home"><Image src="/brand/inbs-logo.png" alt="INBS" width={142} height={72}/></Link><button className="inbs-drawer-close" onClick={()=>setOpen(false)} type="button" aria-label={t.close}><X size={22}/></button></div>
  <div className="inbs-drawer-network" aria-hidden="true"><svg viewBox="0 0 320 22" preserveAspectRatio="none" focusable="false"><path id="inbs-drawer-network-path" d="M 0 15 H 74 L 91 5 H 165 L 183 15 H 249 L 261 9 H 320" className="inbs-drawer-network-path"/><circle cx="91" cy="5" r="2" className="inbs-drawer-network-node"/><circle cx="261" cy="9" r="2" className="inbs-drawer-network-node"/><circle r="3.1" className="inbs-drawer-network-traveller"><animateMotion dur="8s" repeatCount="indefinite" path="M 0 15 H 74 L 91 5 H 165 L 183 15 H 249 L 261 9 H 320"/></circle></svg></div>
  <nav aria-label={t.allPagesAria}><Link className={onHome?'active':''} onClick={()=>setOpen(false)} href={routes.home(locale)}><House size={19}/>{home}</Link>{drawerPages.map((p)=>{const Icon=drawerIcons[p.slug];return <Link className={pathname===routes.page(locale,p.slug)?'active':''} onClick={()=>setOpen(false)} key={p.slug} href={routes.page(locale,p.slug)}><Icon size={19}/>{p[locale]}</Link>})}</nav>

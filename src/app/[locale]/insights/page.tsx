@@ -12,7 +12,7 @@ export async function generateMetadata({params}:{params:Promise<Params>}):Promis
  const title=locale==='ar'?'المقالات | INBS':'Insights | INBS';
  const description=insightsPageContent[locale].lead;
  const url=`${siteUrl}/${locale}/insights`;
- return {title,description,alternates:{canonical:url,languages:localeAlternates('/insights')},
+ return {title:{absolute:title},description,alternates:{canonical:url,languages:localeAlternates('/insights')},
  openGraph:{title,description,url,siteName:'INBS',type:'website',locale:locale==='ar'?'ar_AE':'en_US'},
  robots:{index:siteIndexable,follow:siteIndexable}};
 }

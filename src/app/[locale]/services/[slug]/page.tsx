@@ -5,7 +5,7 @@ import { serviceDetailContent } from '@/content/service-detail-catalog';
 import { serviceCatalog, serviceSlugs, type ServiceSlug } from '@/content/services';
 import { isLocale, locales } from '@/lib/site';
 import { routes } from '@/lib/routes';
-import { localeAlternates, siteUrl } from '@/lib/seo';
+import { localeAlternates, siteIndexable, siteUrl } from '@/lib/seo';
 import '@/styles/service-detail.css';
 
 type Params = { locale: string; slug: string };
@@ -25,8 +25,8 @@ export async function generateMetadata({params}: {params: Promise<Params>}): Pro
     title, description,
     alternates:{canonical:`${siteUrl}${path}`,languages:localeAlternates(`/services/${slug}`)},
     openGraph:{title,description,url:`${siteUrl}${path}`,siteName:'INBS',type:'website',locale:locale==='ar'?'ar_AE':'en_US'},
-    // All service detail pages remain unindexed until content and release approval.
-    robots:{index:false,follow:true},
+    // Public indexing remains gated by the central launch switch.
+    robots:{index:siteIndexable,follow:siteIndexable},
   };
 }
 

@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const description = careersPageContent[locale].heroLead;
   const url = `${siteUrl}${routes.page(locale,'careers')}`;
   return {
-    title, description,
+    title: { absolute: title }, description,
     alternates: { canonical:url, languages:localeAlternates('/careers') },
     openGraph: { title, description, url, siteName:'INBS', type:'website', locale:locale==='ar'?'ar_AE':'en_US' },
     robots: { index:siteIndexable, follow:siteIndexable },

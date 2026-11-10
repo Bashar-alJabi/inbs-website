@@ -2,6 +2,12 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 import AxeBuilder from '@axe-core/playwright';
+import { runHomeMotionTests } from './home-motion-e2e.mjs';
+import { runDrawerMotionTests } from './drawer-motion-e2e.mjs';
+import { runNotFoundTests } from './not-found-e2e.mjs';
+import { runSeoRegressionTests } from './seo-regression.mjs';
+import { runTeamImageTests } from './team-images-e2e.mjs';
+import { runHeroLcpTests } from './hero-lcp-e2e.mjs';
 
 const origin=(process.env.E2E_BASE_URL||'http://127.0.0.1:3000').replace(/\/$/,'');
 const serviceSources=JSON.parse(
@@ -160,6 +166,10 @@ for(const locale of ['en','ar']){
  });
  await context.close();
 }
+await runHomeMotionTests({ browser, origin, test });
+await runDrawerMotionTests({ browser, origin, test });
+await runNotFoundTests({ browser, origin, test });
+await runSeoRegressionTests({ origin, test });
 // Verify the shared language switch and full-viewport not-found experience.
 for(const locale of ['en','ar']){
  const alternate=locale==='en'?'ar':'en';
@@ -181,6 +191,8 @@ for(const locale of ['en','ar']){
   assert.equal(response?.status(),404);
   const notFound=page.locator('.inbs-not-found');
   await notFound.waitFor({state:'visible'});
+  assert.equal(await page.locator('html').getAttribute('lang'),locale);
+  assert.equal(await page.locator('html').getAttribute('dir'),locale==='ar'?'rtl':'ltr');
   assert.equal(await notFound.getAttribute('lang'),locale);
   assert.equal(await notFound.locator('h1').count(),1);
   assert.equal(await notFound.locator('.inbs-not-found-orbit').count(),3);
@@ -451,10 +463,29 @@ await test('about orbit dots stay on drawn geometry through their cycles',async(
  const context=await browser.newContext({viewport:{width:1440,height:900},reducedMotion:'no-preference'});
  const page=await context.newPage();
  await page.goto(origin+'/en/about',{waitUntil:'domcontentloaded'});
+ await page.waitForFunction(()=>{
+  const active=[...document.styleSheets];
+  return active.length>0&&[...document.querySelectorAll('link[rel="stylesheet"]')]
+   .every(link=>link.sheet&&active.includes(link.sheet));
+ });
+ await page.evaluate(()=>document.fonts.ready);
+ // DOMContentLoaded can precede SMIL initialization; default circle coordinates are (0, 0).
+ await page.waitForFunction(()=>{
+  const svg=document.querySelector('.inbs-story-hero-art svg');
+  const movers=svg?.querySelectorAll('.inbs-story-traveler');
+  const matrix=svg?.getScreenCTM();
+  if(!matrix||svg.getCurrentTime()<=0||movers.length!==3)return false;
+  const inverse=matrix.inverse();
+  return [...movers].every(mover=>{
+   const transform=mover.getScreenCTM();
+   if(!transform)return false;
+   const point=new DOMPoint(0,0).matrixTransform(transform).matrixTransform(inverse);
+   return Number.isFinite(point.x)&&Number.isFinite(point.y)&&Math.hypot(point.x,point.y)>0;
+  });
+ });
  const result=await page.locator('.inbs-story-hero-art svg').evaluate(svg=>{
   const movers=[...svg.querySelectorAll('.inbs-story-traveler')];
   const samples=[];
-  const cos=Math.cos(Math.PI/5),sin=Math.sin(Math.PI/5);
   // Ellipse is rotated -36 degrees, so convert points into ellipse coordinates.
   const c36=Math.cos(Math.PI/5),s36=Math.sin(Math.PI/5);
   for(let t=0;t<=24;t+=.3){
@@ -575,6 +606,8 @@ await test('footer navigation uses one legal page and a full-services link',asyn
  }
 });
 // Our Team: bilingual, responsive, accessible, no fictional employee profiles.
+await runTeamImageTests({ browser, origin, test });
+await runHeroLcpTests({ browser, origin, test });
 for(const locale of ['en','ar']){
  for(const size of sizes){
   for(const theme of ['light','dark']){

@@ -4,7 +4,7 @@ Official bilingual frontend website for **International Network Businessmen Serv
 
 ## Status and branches
 
-Home, About, Services, Team, Contact and ten service-detail pages are integrated in `main`. Careers is integrated in `main`. Insights comprises a complete bilingual article library with six guides and dedicated article routes, approved for integration. Legal Information is implemented on `feature/legal-page` with bilingual privacy, terms, notices and official legal references, pending company compliance review. A development milestone is **not** company-wide content or compliance approval for a public launch.
+The audited `feature/final-codebase-audit` branch implements Home, About, Services, Team, Contact, Careers, Insights, Legal, ten service-detail pages and six articles in both languages (48 localized routes). Legal remains permanently `noindex`; all other pages follow `SITE_INDEXABLE`, which is disabled for testing. Audit work on this branch is not yet merged or deployed. Company content, legal and publication approval remain separate from engineering validation.
 
 - `main`: company-facing approved milestone.
 - `redesign`: integration branch for accepted redesign work.
@@ -33,7 +33,11 @@ npx tsc --noEmit
 npm run build
 ```
 
-`npm run test:smoke` checks a **running** server (by default http://localhost:3000); run `npm run start` after building or set `SMOKE_BASE_URL`. Browser/accessibility testing runs in GitHub Actions via `scripts/homepage-e2e.mjs`.
+After building, start Production in a separate terminal with `npm run start`, then run `npm run test:smoke`. Its default origin is http://localhost:3000; `SMOKE_BASE_URL` overrides it. Run the complete browser/axe suite with `node scripts/homepage-e2e.mjs`; `E2E_BASE_URL` overrides its default http://127.0.0.1:3000.
+
+For local browser QA, temporarily install the tooling with `npm install --no-save --package-lock=false playwright @axe-core/playwright`, then download Chromium with `npx playwright install chromium`. The Linux CI workflow adds `--with-deps`; see `.github/workflows/homepage-e2e.yml`. These tools are not declared application dependencies. Do not run TypeScript concurrently with a build regenerating `.next/types`.
+
+Local/preview builds must remain non-indexable. Final publication requires the approved `SITE_URL` and `SITE_INDEXABLE=true` **before** the final Production build and in its runtime environment; follow [the Hostinger launch checklist](docs/HOSTINGER-LAUNCH-CHECKLIST.md). This is a future launch procedure, not authorization to deploy.
 
 ## Find the right file
 
@@ -42,7 +46,7 @@ npm run build
 - `src/content/`: bilingual content for home, About, shared layout, services, contact, Careers, Insights and Legal.
 - `src/lib/site.ts`: locales and bilingual page labels; `src/lib/routes.ts`: locale-aware URL builders.
 - `src/content/services.ts`: authoritative service catalog; `src/content/navigation.ts`: menu selections.
-- `messages/ar.json` / `messages/en.json`: Coming Soon UI translations.
+- `messages/ar.json` / `messages/en.json`: locale bundles still loaded by `next-intl`; legacy Coming Soon messages are retained.
 - `public/brand/` and `public/images/`: logo and image assets. Insights uses six article photos and a separate Hero image (all replaceable local WebP) under `public/images/insights/`, with Pexels credits in `SOURCES.md`.
 - `src/styles/` and `src/app/globals.css`: visual styles.
 
@@ -52,6 +56,7 @@ npm run build
 
 - [Project and handoff guide](docs/PROJECT-GUIDE.md): actual architecture, content ownership, localization, route map and maintenance procedures.
 - [Foundation, page and launch checklist](docs/FOUNDATION-CHECKLIST.md): recurring page reviews and pending launch work.
+- [Hostinger launch checklist](docs/HOSTINGER-LAUNCH-CHECKLIST.md): runtime, build-time indexing settings, post-publication checks and rollback prerequisites.
 - [Coding guidance](AGENTS.md): **mandatory page composition, section ownership, CTA and review rules**.
 
 **Documentation is part of every page/feature's definition of done.** Update these documents to reflect actual changes and check off only work that has been verified.

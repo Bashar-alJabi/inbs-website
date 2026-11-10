@@ -3,13 +3,15 @@ import { localeAlternates, siteIndexable, siteUrl } from '@/lib/seo';
 import { routes } from '@/lib/routes';
 import { locales } from '@/lib/site';
 import { insightArticles } from '@/content/insights';
+import { serviceSlugs } from '@/content/services';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   if (!siteIndexable) return [];
 
   // Only completed public pages belong here; unfinished routes remain noindex.
   const articlePaths = insightArticles.map(article => `/insights/${article.slug}`);
-  return ['', '/about', '/services', '/team', '/contact', '/careers', '/insights', ...articlePaths].flatMap(path =>
+  const servicePaths = serviceSlugs.map(slug => `/services/${slug}`);
+  return ['', '/about', '/services', '/team', '/contact', '/careers', '/insights', ...articlePaths, ...servicePaths].flatMap(path =>
     locales.map(locale => ({
       url: `${siteUrl}${path ? `/${locale}${path}` : routes.home(locale)}`,
       alternates: { languages: localeAlternates(path) },
