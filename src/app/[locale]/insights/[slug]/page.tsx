@@ -11,7 +11,7 @@ export async function generateMetadata({params}:{params:Promise<Params>}):Promis
  const {locale,slug}=await params;if(!isLocale(locale))return {};
  const a=findInsight(slug);if(!a)return {};
  const t=a.content[locale],url=`${siteUrl}/${locale}/insights/${slug}`;
- return {title:`${t.title} | INBS`,description:t.summary,
+ return {title:{absolute:`${t.title} | INBS`},description:t.summary,
  alternates:{canonical:url,languages:localeAlternates(`/insights/${slug}`)},
  openGraph:{title:t.title,description:t.summary,url,siteName:'INBS',type:'article',locale:locale==='ar'?'ar_AE':'en_US'},
  robots:{index:siteIndexable,follow:siteIndexable}};

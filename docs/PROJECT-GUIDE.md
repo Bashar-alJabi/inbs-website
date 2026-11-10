@@ -4,7 +4,7 @@
 
 INBS is a bilingual (English/Arabic) company website built with Next.js App Router, React and TypeScript. The goal is accessible, maintainable and performant presentation of verified company services.
 
-**As of 7 November 2026:** Home, About, Services landing, Team and all ten bilingual service-detail routes are merged into `main` (service milestone PR #29 → redesign, PR #31 → main). Contact is integrated into `main`. Careers is merged into `main`; applications use shared email and mobile WhatsApp details. Insights includes six bilingual editorial guides, official reference links, topic filters and article detail pages, approved for integration. Legal Information is implemented on `feature/legal-page`, with company compliance approval required before public indexing. Development releases are not company compliance, service-program or public indexing approval.
+**Audited branch state, 9 November 2026:** `feature/final-codebase-audit` implements all 48 localized routes listed below, including six Insights articles and ten service details per language. Legal is implemented and remains permanently `noindex` by owner decision; company legal/content review is still required before public handoff. The audit branch has not been merged or deployed. Earlier milestone/CI records in the checklist are historical evidence, not a statement about the current remote `main` deployment.
 
 Current maintenance work is tracked separately from page development. Do not merge or deploy an unfinished change without the owner's approval.
 
@@ -26,36 +26,37 @@ The `[locale]` URL segment is either `en` or `ar`; `/en` and `/ar` are the imple
 | Route (both languages) | Current state |
 | --- | --- |
 | `/[locale]` | **Implemented homepage** |
-| `/[locale]/about` | Implemented and promoted to `main` (PRs #21 and #23) |
-| `/[locale]/services` | Implemented on `main` |
-| `/[locale]/services/[slug]` | Ten bilingual service-detail pages implemented on `main`; detail routes remain `noindex` pending company-side content review |
-| `/[locale]/team` | Implemented on `main` |
-| `/[locale]/insights` | Dedicated bilingual Insights landing and six localized articles; approved for integration |
-| `/[locale]/careers` | Implemented on `main` |
-| `/[locale]/contact` | Implemented on `main` |
+| `/[locale]/about` | Implemented |
+| `/[locale]/services` | Implemented |
+| `/[locale]/services/[slug]` | Ten bilingual service-detail pages; metadata and all twenty sitemap entries follow `SITE_INDEXABLE`, which remains disabled |
+| `/[locale]/team` | Implemented |
+| `/[locale]/insights` | Implemented landing and six articles per locale |
+| `/[locale]/careers` | Implemented, with email/WhatsApp applications |
+| `/[locale]/contact` | Implemented, without a form |
 | `/[locale]/legal` | Dedicated bilingual legal information page (privacy, website terms, notices), under company compliance review |
 | `/[locale]/privacy-policy` and `/[locale]/terms` | Permanent redirects to `/[locale]/legal` |
 
 Known page slugs and bilingual labels live in `src/lib/site.ts`; service slugs come from the canonical `src/content/services.ts` catalog and are re-exported by `site.ts`. Localized URL helpers are in `src/lib/routes.ts` and shared menu selections in `src/content/navigation.ts` (PR #22). Existing service URLs remain unchanged. The old privacy-policy and terms URLs redirect to the single legal landing route; see `next.config.ts`. The dedicated `src/app/[locale]/about/page.tsx` owns About. The dedicated `src/app/[locale]/services/[slug]/page.tsx` renders all ten recognized service detail pages. The dedicated `src/app/[locale]/contact/page.tsx` replaces Contact's placeholder; `src/content/contact-page.ts` owns localized copy, while `src/content/contact.ts` owns official contact details. The fallback `src/app/[locale]/[...slug]/page.tsx` returns 404 for unknown routes; all catalog pages now have dedicated routes. Contact uses direct telephone, email, map and social links, without a form, submission endpoint or message persistence. Unknown paths are 404. A `why-inbs` page was mentioned in the earlier roadmap but is **not** a recognized route in the current `pages` array; explicitly decide whether to add it before documenting it as available.
 
-When a page is developed, give it its own Next.js route and replace the Coming Soon rendering. Link to the actual route, not to a homepage anchor as a substitute.
+Give new pages their own Next.js routes and link to those routes. Unknown URLs remain genuine 404s; the unused Coming Soon component has been removed.
 
 ## Current project layout
 
 ```text
 .github/workflows/        CI: validate, homepage browser audit, image preparation
 docs/                     developer guide and recurring checklists
-messages/                 next-intl translations (currently Coming Soon)
+messages/                 runtime-loaded next-intl bundles (legacy Coming Soon copy retained)
 public/brand/             official logo
 public/images/            homepage hero and service photography
 scripts/                  smoke, browser audit and image preparation
 src/
   app/                    root layout, SEO endpoints, global CSS
-    [locale]/             translated shell, home route, temporary fallback pages
+    [locale]/             locale document shell, page routes and unknown-route fallback
   components/
     home/                 homepage sections
-    about/                standalone About story sections\n    services/             Services landing page (feature branch)
-    layout/               header, footer, Coming Soon, language and cursor UI
+    about/                standalone About story sections
+    services/             Services landing sections
+    layout/               header, footer, language and cursor UI
     shared/               reusable Reveal and SmoothScroll
   content/                bilingual copy, service catalog, shared layout and contact data
   i18n/                   next-intl request configuration
@@ -65,15 +66,17 @@ src/
 
 ### Rendering and responsibility
 
-- `src/app/layout.tsx`: global styles and default metadata.
+- `src/app/layout.tsx`: global styles and default metadata; intentionally passes through `children` without a document shell.
 - `src/app/[locale]/layout.tsx`: validates locale, sets `html lang/dir`, provides messages and displays shared header/footer.
+- `src/app/not-found.tsx`: standalone 404 document. This root fallback replaces the locale layout, so it owns its own `html lang/dir` and `body`, using the existing pathname-based EN/AR selection (English fallback for unsupported locales). Keep exactly one document owner in each render path; adding a document shell to the pass-through root layout would require revisiting both owners. Copy and overflow cleanup remain here; styles live in `globals.css`. Its direct CSS import is intentional, even though Root Layout imports the same file: the standalone fallback needs its own stylesheet dependency to avoid an unstyled cold render.
 - `src/app/[locale]/page.tsx`: homepage route, locale validation and metadata; `src/components/home/homepage.tsx`: homepage section composition.
 - `src/components/home/`: Hero, About preview, Services showcase, Achievements and Institutions; client components are used only where interaction or animation requires them.
 - `src/app/[locale]/about/page.tsx`: About route and metadata; `src/components/about/about-page.tsx` only composes `AboutHero`, `AboutIntro`, `AboutPrinciples` and `AboutNetwork`. They share tiny presentational helpers in `src/components/about/about-ui.tsx`, bilingual content in `src/content/about.ts`, and scoped rules in `src/styles/about.css`.
-- `src/components/layout/`: shared chrome and temporary pages.
+- `src/components/layout/`: shared header, footer, navigation, language switching and cursor UI.
 - `src/styles/tokens.css`: design variables; `globals.css`, `site-layout.css`, `home.css`: other styles.
+- `src/styles/shared-links.css`: `.inbs-about-link` rules shared by Home and About, including hover, keyboard focus, RTL and reduced motion. The Root Layout imports this file before `home.css`; keep page overrides later to preserve the Home all-services link's hover color.
 
-**Known cleanup work:** some legacy CSS selectors and unused legacy images still exist; the duplicate language-switching and reveal components have been consolidated. Review their references before removing them; never change rendered appearance accidentally.
+**Cleanup status:** verified unused TypeScript/Coming Soon code and legacy CSS were removed in the audit batches. No unused public image was established; do not treat an asset as unused merely because its path is generated dynamically. Preserve both independent maps and review real references before further cleanup.
 
 ## Where content currently lives
 
@@ -84,10 +87,10 @@ src/
 | Page slugs and titles | `src/lib/site.ts` | Service names and slugs are re-exported from the service catalog |
 | Service slugs, EN/AR names and image paths | `src/content/services.ts` | Single slug-keyed catalog and display order |
 | Shared header/footer copy | `src/content/layout.ts` | Localized UI labels and descriptions |
-| Coming Soon UI messages | `messages/en.json`, `messages/ar.json` | Loaded with `next-intl` |
+| Locale message bundles | `messages/en.json`, `messages/ar.json` | Still dynamically loaded with `next-intl`; legacy Coming Soon messages retained |
 | Achievement figures and captions | `src/components/home/home-achievements.tsx` | Currently embedded in UI; keep values unchanged unless owner approves |
 | Institution names and icons | `src/components/home/home-institutions.tsx` | Currently embedded in UI; keep unchanged unless owner approves |
-| Contact, map and social links | `src/content/contact.ts` | Reused by footer and future contact sections |
+| Contact, map and social links | `src/content/contact.ts` | Shared by Contact, footer and Careers contact/application links |
 | Service image files and provenance | `public/images/services/` | Read `README.md` and `SOURCES.json` there |
 
 **Editing convention:** see [`CONTENT-MANAGEMENT.md`](CONTENT-MANAGEMENT.md) for the authoritative content ownership map, translation rules and service editing workflow. This is a structured TypeScript content layer, not a visual CMS. Nontechnical staff should still provide approved edits for developer review.
@@ -104,10 +107,14 @@ src/
 ## SEO, security and publication
 
 - `src/lib/seo.ts` centralizes `SITE_URL` and `SITE_INDEXABLE`. Indexing is off unless `SITE_INDEXABLE=true`.
-- `src/app/robots.ts`, `src/app/sitemap.ts`, and page metadata govern crawlers and canonical/alternate URLs. The sitemap includes only completed, implemented routes (Home, About, Services, Team) when indexing is enabled.
+- `src/app/robots.ts`, `src/app/sitemap.ts`, and page metadata govern crawlers and canonical/alternate URLs. When indexing is enabled, the sitemap includes Home, About, Services, Team, Contact, Careers, Insights, six articles and ten service details in both locales (46 URLs). It is empty while indexing is disabled. Legal remains permanently `noindex` and excluded by owner decision.
+- Pages that already include the INBS suffix use `title.absolute`; other pages use the root title template. Preserve Open Graph titles independently when changing document titles.
 - `next.config.ts` sets basic security response headers; this is not a substitute for deployment security testing.
 - No custom backend is currently implemented. Do not claim Contact forms, hosting migration, Search Console, structured data or analytics are complete unless verified.
 - Confirm final domain, hosting/runtime and environment variables before production launch. Never commit secrets.
+- For Hostinger, use [`HOSTINGER-LAUNCH-CHECKLIST.md`](HOSTINGER-LAUNCH-CHECKLIST.md). Set the company-approved `SITE_URL` and `SITE_INDEXABLE=true` before the final Production build and in runtime; robots/sitemap are generated during build. Rebuild after changing these values, and verify the deployed endpoints. Local/preview indexing remains disabled.
+
+Known non-blocking maintenance notes: ESLint reports one `@next/next/no-img-element` warning in `src/app/icon.tsx`; that native image is used by the existing `ImageResponse` logo rendering. The minimatch advisory affects eight Moderate development-package records through `typescript-eslint`; production audit is clean. Its compatible fix is deferred: do not force a major override or downgrade the Next 16 lint stack. See the dated A07 evidence in the checklist.
 
 ## Tests and evidence
 
@@ -122,7 +129,8 @@ npm run test:smoke
 
 - `.github/workflows/validate.yml` runs baseline validation and production HTTP smoke tests on relevant PRs.
 - `.github/workflows/homepage-e2e.yml` runs `scripts/homepage-e2e.mjs` using Playwright and axe; it tests bilingual homepage scenarios, responsive sizes, light/dark, reduced/normal motion, navigation, browser errors and key accessibility checks.
-- These automated homepage checks succeeded for the approved homepage milestone. **Manual real-device usability and dedicated Lighthouse/Core Web Vitals measurements are not documented as completed.**
+- Despite its historical name, the browser suite also covers About, Services, all service details, Team, Contact, Careers, Insights/articles and Legal, plus the drawer, motion, 404, SEO and Team-image regression modules. For a local run, start Production first and provide the same temporary browser tooling as the workflow; `E2E_BASE_URL` selects its origin. Do not run build and TypeScript concurrently.
+- Historical homepage milestone checks do not establish success on the current audit head. See the latest verification entry in `FOUNDATION-CHECKLIST.md` for actual full-suite and local Lighthouse results. Physical-device/screen-reader sign-off and real-user Core Web Vitals remain separate checks; Lighthouse is a lab measurement.
 - Record checks per PR and update `docs/FOUNDATION-CHECKLIST.md`; do not turn unchecked work into a completed claim based on unrelated checks.
 
 ## Every page / PR: required handoff notes
@@ -152,10 +160,14 @@ Only check off completed work with evidence; keep the guide accurate to the chec
 
 Every page matches the Home/About composition pattern. `src/components/<page>/<page>-page.tsx` imports section components but contains no section JSX. Team sections: `team-hero.tsx`, `team-story.tsx` (integrates the approach, three principles and seven photo slots), and `team-cta.tsx`. Services sections: `services-hero.tsx`, `services-directory.tsx`, `services-cta.tsx`. Home and About CTAs are `home-cta.tsx` and `about-cta.tsx`. See `AGENTS.md` for mandatory architecture rules. Shared CSS for CTA consistency is a deliberate **style** abstraction, not a shared React component.
 
+Team story photo URLs live in `team-story.tsx`, using native lazy loading through `Image fill unoptimized` to preserve the original WebP quality. `team.css` owns the existing frames and centered cover crops; the three Hero photos remain CSS backgrounds. `scripts/team-images-e2e.mjs` checks deferred requests, delayed-image layout stability and decoding through the existing browser suite.
+
+Team and Contact keep their approved Hero CSS backgrounds. Their server Hero components call React DOM `preload` for exactly one measured LCP asset each: Team `hero-02.webp` and Contact `contact-building.webp`. Next may emit these hints in the initial HTTP `Link` header rather than an HTML link. Preserve the matching original URLs; do not preload all gallery photos. `scripts/hero-lcp-e2e.mjs`, integrated into the browser suite, checks early hints, priority, request reuse, original crops, motion and Contact's three-photo viewer.
+
 
 ## Service-detail architecture — PR #29
 
-All ten bilingual service pages use `src/components/service-detail/service-detail-page.tsx` as a thin composition layer with separate Hero, Overview, Offerings, Process and CTA components. The owner-approved Businessmen Services layout is shared; offering group counts and copy vary per service. Bilingual descriptions are in `src/content/service-details.ts` (Businessmen reference) and `src/content/service-detail-catalog.ts` (all ten effective service records), while authoritative labels, slugs and images remain in `src/content/services.ts`. Content is still awaiting review; detail route indexing is disabled. See `docs/SERVICE-DETAIL-PAGES-PLAN.md`.
+All ten bilingual service pages use `src/components/service-detail/service-detail-page.tsx` as a thin composition layer with separate Hero, Overview, Offerings, Process and CTA components. The owner-approved Businessmen Services layout is shared; offering group counts and copy vary per service. Bilingual descriptions are in `src/content/service-details.ts` (Businessmen reference) and `src/content/service-detail-catalog.ts` (all ten effective service records), while authoritative labels, slugs and images remain in `src/content/services.ts`. Content still requires company review before launch; service indexing now follows the central `SITE_INDEXABLE` gate and remains disabled. See `docs/SERVICE-DETAIL-PAGES-PLAN.md`.
 
 ## Insights editorial content
 
@@ -163,7 +175,7 @@ Six bilingual articles live in `src/content/insights.ts`, with landing text in `
 
 ## Legal Information page — company review required
 
-Implemented in `src/app/[locale]/legal/page.tsx` with separate components in `src/components/legal/`, scoped styles in `src/styles/legal.css`, and bilingual content in `src/content/legal-page.ts`. Existing `/en|ar/privacy-policy` and `/en|ar/terms` permanent redirects are retained. The policy page uses `noindex` regardless of global `SITE_INDEXABLE` until company-specific operational disclosures are checked and approved. Privacy copy deliberately does **not** assert unverified cookie behavior, analytics, retention periods, processing locations, suppliers or data-sharing practices. Confirm these with INBS's legal/compliance owner and hosting/service providers, then revise the text and metadata before final public legal sign-off.
+Implemented in `src/app/[locale]/legal/page.tsx` with separate components in `src/components/legal/`, scoped styles in `src/styles/legal.css`, and bilingual content in `src/content/legal-page.ts`. Existing `/en|ar/privacy-policy` and `/en|ar/terms` permanent redirects are retained. The policy page stays permanently `noindex` regardless of global `SITE_INDEXABLE`, by owner decision. Privacy copy deliberately does **not** assert unverified cookie behavior, analytics, retention periods, processing locations, suppliers or data-sharing practices. Confirm these with INBS's legal/compliance owner and hosting/service providers before final public legal sign-off; that review does not authorize changing the indexing policy.
 
 ## Homepage UAE interactive map
 

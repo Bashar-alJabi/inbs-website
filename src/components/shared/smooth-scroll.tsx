@@ -17,7 +17,15 @@ export function SmoothScroll() {
     import('lenis').then(({ default: Lenis }) => {
       if (!active) return;
       const lenis = new Lenis({ duration: 1.1, autoRaf: false });
-      destroy = () => lenis.destroy();
+      const root = document.documentElement;
+      const syncDrawerLock = () => {
+        if (root.hasAttribute('data-inbs-drawer-open')) lenis.stop();
+        else lenis.start();
+      };
+      const observer = new MutationObserver(syncDrawerLock);
+      observer.observe(root, { attributes: true, attributeFilter: ['data-inbs-drawer-open'] });
+      syncDrawerLock();
+      destroy = () => { observer.disconnect(); lenis.destroy(); };
       const loop = (time: number) => {
         lenis.raf(time);
         frame = requestAnimationFrame(loop);

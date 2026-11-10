@@ -16,6 +16,6 @@ Read `README.md` and `docs/PROJECT-GUIDE.md` before editing. Follow these rules 
 - Work on `feature/*` from `redesign`. Never push directly to `redesign` or `main`, or merge without explicit owner authorization.
 - Keep both locales and RTL/LTR, mobile/responsive, light/dark, accessibility and reduced motion functional.
 - No fabricated staff names, photos, company metrics, testimonials or endorsements. Do not alter the official logo.
-- Use correct existing localized routes. Contact CTAs navigate to `/[locale]/contact` even while that page shows Coming Soon.
+- Use correct existing localized routes. Contact CTAs navigate to the implemented `/[locale]/contact` page, which provides direct contact links without a form.
 - For iterative visual changes, review changed files and use focused checks; batch edits to minimize Vercel deployment pressure. Do not poll CI repeatedly. Before merge, require full lint, TypeScript, production build, smoke and Playwright/axe checks.
 - Never report a check as passed unless it actually passed on the relevant commit. Correct failures and update docs/checklist when architecture or content ownership changes.

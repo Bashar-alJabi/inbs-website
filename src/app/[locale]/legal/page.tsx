@@ -15,9 +15,9 @@ export async function generateMetadata({params}:{params:Promise<Params>}):Promis
  const title=locale==='ar'?'المعلومات القانونية | INBS':'Legal Information | INBS';
  const description=legalPageContent[locale].heroLead;
  const url=`${siteUrl}${routes.page(locale,'legal')}`;
- return {title,description,alternates:{canonical:url,languages:localeAlternates('/legal')},
+ return {title:{absolute:title},description,alternates:{canonical:url,languages:localeAlternates('/legal')},
   openGraph:{title,description,url,siteName:'INBS',type:'website',locale:locale==='ar'?'ar_AE':'en_US'},
-  // Operational privacy and legal policies require company confirmation before indexing.
+  // Legal stays noindex by owner decision, independently of the launch switch.
   robots:{index:false,follow:true}};
 }
 export default async function Page({params}:{params:Promise<Params>}){

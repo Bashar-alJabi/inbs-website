@@ -236,6 +236,8 @@ html[data-theme=dark] .inbs-services-page{
 @media(prefers-reduced-motion:reduce){
   .inbs-services-hero-frame-dot{display:none;animation:none}
   .inbs-services-entry-image img,.inbs-services-hero-discover,
-  .inbs-services-entry-arrow,.inbs-services-entry-bottom>svg
-  .inbs-services-entry-link:hover .inbs-services-entry-image img{transform:none}
+  .inbs-services-entry-arrow,.inbs-services-entry-bottom>svg,
+  .inbs-services-entry-link:is(:hover,:focus-visible) .inbs-services-entry-image img,
+  [dir] .inbs-services-entry-link:hover .inbs-services-entry-arrow,
+  [dir] .inbs-services-entry-link:hover .inbs-services-entry-bottom>svg{transform:none}
 }

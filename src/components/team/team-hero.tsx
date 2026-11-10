@@ -1,8 +1,11 @@
 import { ArrowDown } from 'lucide-react';
+import { preload } from 'react-dom';
 import { teamPageContent } from '@/content/team-page';
 import type { Locale } from '@/lib/site';
 
 export function TeamHero({ locale }: { locale: Locale }) {
+  // Prioritize the measured LCP portrait only; keep the other photos at normal priority.
+  preload('/images/team/hero-02.webp', { as: 'image', fetchPriority: 'high' });
   const t = teamPageContent[locale];
   return (
     <section className="inbs-team-hero" aria-labelledby="inbs-team-title">
